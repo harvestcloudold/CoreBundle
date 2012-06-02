@@ -1,4 +1,4 @@
 CoreBundle
 ==========
 
-A bundle containing the core elements of the Harvest Cloud, such as User, Profile, Product, Order, etc
+This bundle is part of the Harvest Cloud project. It contains the core objects, such as User, Profile, Product, Order, etc.
