@@ -1,0 +1,7 @@
+parameters:
+#    harvest_cloud_core.example.class: HarvestCloud\CoreBundle\Example
+
+services:
+#    harvest_cloud_core.example:
+#        class: %harvest_cloud_core.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
