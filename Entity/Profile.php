@@ -52,17 +52,17 @@ class Profile implements Geolocatable
     protected $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="profiles")
+     * @ORM\ManyToMany(targetEntity="\HarvestCloud\UserBundle\Entity\User", mappedBy="profiles")
      */
     protected $users;
 
     /**
-     * @ORM\OneToMany(targetEntity="User", mappedBy="defaultProfile")
+     * @ORM\OneToMany(targetEntity="\HarvestCloud\UserBundle\Entity\User", mappedBy="defaultProfile")
      */
     protected $usersAsDefaultProfile;
 
     /**
-     * @ORM\OneToMany(targetEntity="User", mappedBy="currentProfile")
+     * @ORM\OneToMany(targetEntity="\HarvestCloud\UserBundle\Entity\User", mappedBy="currentProfile")
      */
     protected $usersAsCurrentProfile;
 
@@ -272,9 +272,9 @@ class Profile implements Geolocatable
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-04-07
      *
-     * @param HarvestCloud\CoreBundle\Entity\User $usersAsDefaultProfile
+     * @param HarvestCloud\UserBundle\Entity\User $usersAsDefaultProfile
      */
-    public function addUserAsDefaultProfile(\HarvestCloud\CoreBundle\Entity\User $usersAsDefaultProfile)
+    public function addUserAsDefaultProfile(\HarvestCloud\UserBundle\Entity\User $usersAsDefaultProfile)
     {
         $this->usersAsDefaultProfile[] = $usersAsDefaultProfile;
     }
@@ -311,9 +311,9 @@ class Profile implements Geolocatable
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-04-07
      *
-     * @param HarvestCloud\CoreBundle\Entity\User $users
+     * @param HarvestCloud\UserBundle\Entity\User $users
      */
-    public function addUser(\HarvestCloud\CoreBundle\Entity\User $users)
+    public function addUser(\HarvestCloud\UserBundle\Entity\User $users)
     {
         $this->users[] = $users;
     }
