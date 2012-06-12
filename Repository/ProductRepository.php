@@ -35,6 +35,7 @@ class ProductRepository extends EntityRepository
             ->setParameter('latitude', $filter->getLatitude())
             ->setParameter('longitude', $filter->getLongitude())
             ->orderBy('distance')
+            ->setMaxResults(20)
         ;
 
         if ($filter->getRange())
