@@ -30,7 +30,6 @@ class ProductType extends AbstractType
     {
         $builder
             ->add('location')
-            ->add('category')
             ->add('name')
             ->add('short_description')
             ->add('long_description')
