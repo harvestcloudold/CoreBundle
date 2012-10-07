@@ -61,7 +61,7 @@ class WindowMaker
     /**
      * getId()
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-01
      *
      * @return integer
@@ -74,7 +74,7 @@ class WindowMaker
     /**
      * setSellerHubRef()
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-01
      *
      * @param HarvestCloud\CoreBundle\Entity\SellerHubRef $sellerHubRef
@@ -87,7 +87,7 @@ class WindowMaker
     /**
      * getSellerHubRef()
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-01
      *
      * @return HarvestCloud\CoreBundle\Entity\SellerHubRef
@@ -100,7 +100,7 @@ class WindowMaker
     /**
      * Get daysOfWeek
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-02
      *
      * @return array of DayOfWeek objects
@@ -120,7 +120,7 @@ class WindowMaker
     /**
      * Set start_time
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-02
      *
      * @param string $startTime
@@ -133,7 +133,7 @@ class WindowMaker
     /**
      * Get start_time
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-02
      *
      * @return string
@@ -159,7 +159,7 @@ class WindowMaker
     /**
      * Get end_time
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-02
      *
      * @return string
@@ -172,7 +172,7 @@ class WindowMaker
     /**
      * Set dayOfWeekNumbers
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-02
      *
      * @param array $dayOfWeekNumbers
@@ -185,7 +185,7 @@ class WindowMaker
     /**
      * Get dayOfWeekNumbers
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-02
      *
      * @return array
