@@ -58,6 +58,28 @@ class DayOfWeek
     }
 
     /**
+     * getFirstLetter()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-03
+     *
+     * @return string
+     */
+    public function getFirstLetter()
+    {
+        switch ($this->day_of_week_number)
+        {
+            case self::MON: return 'M';
+            case self::TUE: return 'T';
+            case self::WED: return 'W';
+            case self::THU: return 'T';
+            case self::FRI: return 'F';
+            case self::SAT: return 'S';
+            case self::SUN: return 'S';
+        }
+    }
+
+    /**
      * getShortName()
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
