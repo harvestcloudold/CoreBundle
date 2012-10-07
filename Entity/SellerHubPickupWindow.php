@@ -21,7 +21,7 @@ use HarvestCloud\CoreBundle\Util\Windowable;
  *
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="HarvestCloud\CoreBundle\Repository\SellerHubPickupwindowRepository")
- * @ORM\Table(name="seller_hub_pickup_window")
+ * @ORM\Table(name="seller_hub_pickup_window",uniqueConstraints={@ORM\UniqueConstraint(name="seller_hub_ref_start_time_idx", columns={"seller_hub_ref_id", "start_time"})})
  */
 class SellerHubPickupWindow implements Windowable
 {
