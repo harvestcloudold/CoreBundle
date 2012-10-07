@@ -11,6 +11,7 @@ namespace HarvestCloud\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use HarvestCloud\CoreBundle\Util\Debug;
 
 /**
  * SellerHubRef Entity
@@ -74,9 +75,14 @@ class SellerHubRef
     protected $variable_fee = 5;
 
     /**
-     * @ORM\OneToMany(targetEntity="SellerHubPickupWindow", mappedBy="sellerHubRef")
+     * @ORM\OneToMany(targetEntity="SellerHubPickupWindow", mappedBy="sellerHubRef", cascade={"persist"})
      */
     protected $pickupWindows;
+
+    /**
+     * @ORM\OneToMany(targetEntity="WindowMaker", mappedBy="sellerHubRef", cascade={"persist"})
+     */
+    protected $windowMakers;
 
     /**
      * __construct
@@ -87,6 +93,7 @@ class SellerHubRef
     public function __construct()
     {
         $this->pickupWindows = new ArrayCollection();
+        $this->windowMakers  = new ArrayCollection();
     }
 
     /**
@@ -204,6 +211,8 @@ class SellerHubRef
     public function addSellerHubPickupWindow(SellerHubPickupWindow $pickupWindow)
     {
         $this->pickupWindows[] = $pickupWindow;
+
+        $pickupWindow->setSellerHubRef($this);
     }
 
     /**
@@ -217,6 +226,26 @@ class SellerHubRef
     public function getPickupWindows()
     {
         return $this->pickupWindows;
+    }
+
+    /**
+     * getPickupWindowsIndexedByStartTime()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-05
+     *
+     * @return array
+     */
+    public function getPickupWindowsIndexedByStartTime()
+    {
+        $windows = array();
+
+        foreach ($this->getPickupWindows() as $window)
+        {
+            $windows[$window->getStartTime()->format('Y-m-d H:i:s')] = $window;
+        }
+
+        return $windows;
     }
 
     /**
@@ -270,4 +299,50 @@ class SellerHubRef
     {
         return $this->variable_fee;
     }
+
+    /**
+     * addWindowMaker()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-04
+     *
+     * @param HarvestCloud\CoreBundle\Entity\WindowMaker $windowMakers
+     */
+    public function addWindowMaker(\HarvestCloud\CoreBundle\Entity\WindowMaker $windowMaker)
+    {
+        $this->windowMakers[] = $windowMaker;
+
+        $windowMaker->setSellerHubRef($this);
+    }
+
+    /**
+     * getWindowMakers()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-04
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getWindowMakers()
+    {
+        return $this->windowMakers;
+    }
+
+    /**
+     * hasWindowAtThisTime()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-07
+     *
+     * @param  string $date_time
+     */
+     public function hasWindowAtThisTime($date_time)
+     {
+        if (array_key_exists($date_time, $this->getPickupWindowsIndexedByStartTime()))
+        {
+            return true;
+        }
+
+        return false;
+     }
 }

@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use HarvestCloud\CoreBundle\Util\Windowable;
 use HarvestCloud\CoreBundle\Util\DayOfWeek;
+use HarvestCloud\CoreBundle\Util\Debug;
 
 /**
  * WindowMaker Entity
@@ -144,9 +145,44 @@ class WindowMaker
     }
 
     /**
+     * getStartTimeWithSeconds()
+     *
+     * e.g. 12:00:00
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-05
+     *
+     * @return string
+     */
+    public function getStartTimeWithSeconds()
+    {
+        return $this->getStartTime().':00';
+    }
+
+    /**
+     * getStartTimeObject
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-05
+     *
+     * @param  string  $date_string
+     *
+     * @return \DateTime
+     */
+    public function getStartTimeObject($date_string = null)
+    {
+        if (null == $date_string)
+        {
+            $date_string = date('Y-m-d');
+        }
+
+        return new \DateTime($date_string.' '.$this->getStartTimeWithSeconds());
+    }
+
+    /**
      * Set end_time
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-02
      *
      * @param string $endTime
@@ -193,5 +229,103 @@ class WindowMaker
     public function getDayOfWeekNumbers()
     {
         return $this->dayOfWeekNumbers;
+    }
+
+    /**
+     * getSeller()
+     *
+     * Proxy method
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-03
+     *
+     * @return \HarvestCloud\CoreBundle\Entity\Profile
+     */
+    public function getSeller()
+    {
+        return $this->getSellerHubRef()->getSeller();
+    }
+
+    /**
+     * getHub()
+     *
+     * Proxy method
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-03
+     *
+     * @return \HarvestCloud\CoreBundle\Entity\Profile
+     */
+    public function getHub()
+    {
+        return $this->getSellerHubRef()->getHub();
+    }
+
+    /**
+     * getDaysOfWeekAsString()
+     *
+     * e.g. M-T-FS-
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-03
+     *
+     * @return string
+     */
+    public function getDaysOfWeekAsString()
+    {
+        $string = '';
+
+        for ($i=1; $i<8; $i++)
+        {
+            if (in_array($i, $this->getDayOfWeekNumbers()))
+            {
+                $dayOfWeek = new DayOfWeek($i);
+                $string .= $dayOfWeek->getFirstLetter();
+            }
+            else
+            {
+                $string .= '-';
+            }
+        }
+
+        return $string;
+    }
+
+    /**
+     * getDateAdjustedStartTimes()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-03
+     *
+     * @param  \DateTime  $startDate
+     * @param  integer    $period
+     *
+     * @return array
+     */
+    public function getDateAdjustedStartTimes(\DateTime $startDate, $period)
+    {
+        $array = array();
+
+        for ($i=0; $i<$period; $i++)
+        {
+            $startDate->add(\DateInterval::createFromDateString('+1 day'));
+            if (in_array($startDate->format('N'), $this->getDayOfWeekNumbers()))
+            {
+                $dayOfWeek = new DayOfWeek($startDate->format('N'));
+
+                $startTime = $this->getStartTimeObject($startDate->format('Y-m-d'));
+
+                while ($startTime->format('H:i') < $this->getEndTime())
+                {
+                    $date_time_string  = $startTime->format('Y-m-d H:i:s');
+
+                    $array[] = $date_time_string;
+
+                    $startTime->add(\DateInterval::createFromDateString('+2 hours'));
+                }
+            }
+        }
+
+        return $array;
     }
 }
