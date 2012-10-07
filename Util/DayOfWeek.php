@@ -42,7 +42,7 @@ class DayOfWeek
     /**
      * __constuct()
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-02
      *
      * @param  integer  $day_of_week_number
@@ -60,7 +60,7 @@ class DayOfWeek
     /**
      * getShortName()
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-02
      *
      * @return string
@@ -82,7 +82,7 @@ class DayOfWeek
     /**
      * getLongName()
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-02
      *
      * @return string
