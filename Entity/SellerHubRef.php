@@ -201,6 +201,19 @@ class SellerHubRef
     }
 
     /**
+     * getHubName()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-09
+     *
+     * @return string
+     */
+    public function getHubName()
+    {
+        return $this->hub->getName();
+    }
+
+    /**
      * Add pickupWindow
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
