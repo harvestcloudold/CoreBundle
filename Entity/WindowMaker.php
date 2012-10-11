@@ -124,10 +124,15 @@ class WindowMaker
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-02
      *
-     * @param string $startTime
+     * @param  mixed $endTime string or \DateTime
      */
     public function setStartTime($startTime)
     {
+        if ($startTime instanceof \DateTime)
+        {
+            $startTime = $startTime->format('H:i');
+        }
+
         $this->start_time = $startTime;
     }
 
@@ -185,10 +190,15 @@ class WindowMaker
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-02
      *
-     * @param string $endTime
+     * @param  mixed $endTime string or \DateTime
      */
     public function setEndTime($endTime)
     {
+        if ($endTime instanceof \DateTime)
+        {
+            $endTime = $endTime->format('H:i');
+        }
+
         $this->end_time = $endTime;
     }
 
