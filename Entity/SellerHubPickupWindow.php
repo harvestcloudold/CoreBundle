@@ -180,4 +180,34 @@ class SellerHubPickupWindow implements Windowable
     {
         return $this->orders;
     }
+
+    /**
+     * getSeller()
+     *
+     * Proxy method
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-10
+     *
+     * @return \HarvestCloud\CoreBundle\Entity\Profile
+     */
+    public function getSeller()
+    {
+        return $this->getSellerHubRef()->getSeller();
+    }
+
+    /**
+     * getHub()
+     *
+     * Proxy method
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-10
+     *
+     * @return \HarvestCloud\CoreBundle\Entity\Profile
+     */
+    public function getHub()
+    {
+        return $this->getSellerHubRef()->getHub();
+    }
 }
