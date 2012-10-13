@@ -5,6 +5,7 @@ namespace HarvestCloud\CoreBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use HarvestCloud\CoreBundle\Entity\ProductFilter;
 use HarvestCloud\GeoBundle\Util\LatLng;
+use HarvestCloud\CoreBundle\Entity\Profile;
 
 /**
  * ProductRepository
@@ -72,5 +73,26 @@ class ProductRepository extends EntityRepository
             ->execute();
 
         return $products;
+    }
+
+    /**
+     * findOpenForSeller()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-11
+     *
+     * @param  Profile $seller
+     */
+    public function findOpenForSeller(Profile $seller)
+    {
+        $q  = $this->getEntityManager()->createQuery('
+                SELECT p
+                FROM HarvestCloudCoreBundle:Product p
+                WHERE p.seller = :seller
+            ')
+            ->setParameter('seller', $seller)
+        ;
+
+        return $q->getResult();
     }
 }
