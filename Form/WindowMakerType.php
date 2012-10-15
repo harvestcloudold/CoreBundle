@@ -30,8 +30,9 @@ class WindowMakerType extends AbstractType
     {
         $builder
             ->add('sellerHubRef', 'entity', array(
-                'class' => 'HarvestCloudCoreBundle:SellerHubRef',
+                'class'    => 'HarvestCloudCoreBundle:SellerHubRef',
                 'property' => 'hubName',
+                'label'    => 'Hub',
             ))
             ->add('day_of_week_numbers', 'choice', array(
                 'choices'   => array(
@@ -45,9 +46,30 @@ class WindowMakerType extends AbstractType
                 ),
                 'multiple'  => true,
                 'expanded'  => true,
+                'label'     => 'Days of Week',
             ))
-            ->add('start_time', 'time')
-            ->add('end_time', 'time')
+            ->add('start_time', 'choice', array(
+                'choices'   => array(
+                    '07' => '7am',
+                    '09' => '9am',
+                    '11' => '11am',
+                    '13' => '1pm',
+                    '15' => '3pm',
+                    '17' => '5pm',
+                    '19' => '7pm',
+                ),
+            ))
+            ->add('end_time', 'choice', array(
+                'choices'   => array(
+                    '09' => '9am',
+                    '11' => '11am',
+                    '13' => '1pm',
+                    '15' => '3pm',
+                    '17' => '5pm',
+                    '19' => '7pm',
+                    '21' => '9pm',
+                ),
+            ))
         ;
     }
 
