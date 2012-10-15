@@ -121,6 +121,12 @@ class WindowMaker
     /**
      * Set start_time
      *
+     * We accept the following:
+     *
+     *   * \DateTime object
+     *   * 07:00
+     *   * 07
+     *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-02
      *
@@ -131,6 +137,12 @@ class WindowMaker
         if ($startTime instanceof \DateTime)
         {
             $startTime = $startTime->format('H:i');
+        }
+
+        // deal with "hour-only" input
+        if (2 == strlen($startTime))
+        {
+            $startTime .= ':00';
         }
 
         $this->start_time = $startTime;
@@ -187,6 +199,12 @@ class WindowMaker
     /**
      * Set end_time
      *
+     * We accept the following:
+     *
+     *   * \DateTime object
+     *   * 07:00
+     *   * 07
+     *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-02
      *
@@ -197,6 +215,12 @@ class WindowMaker
         if ($endTime instanceof \DateTime)
         {
             $endTime = $endTime->format('H:i');
+        }
+
+        // deal with "hour-only" input
+        if (2 == strlen($endTime))
+        {
+            $endTime .= ':00';
         }
 
         $this->end_time = $endTime;
