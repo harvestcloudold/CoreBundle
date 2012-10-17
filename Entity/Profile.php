@@ -1080,4 +1080,40 @@ class Profile implements Geolocatable
     {
         return $this->getAsSellerDisplayOnMap();
     }
+
+    /**
+     * hasActiveSellerStatus()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-17
+     *
+     * @return bool
+     */
+    public function hasActiveSellerStatus()
+    {
+        if (Profile::STATUS_ACTIVE == $this->getSellerStatus())
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * hasActiveHubStatus()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-17
+     *
+     * @return bool
+     */
+    public function hasActiveHubStatus()
+    {
+        if (Profile::STATUS_ACTIVE == $this->getHubStatus())
+        {
+            return true;
+        }
+
+        return false;
+    }
 }
