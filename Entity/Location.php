@@ -484,6 +484,19 @@ class Location implements Geolocatable, Geocodable
 
 
     /**
+     * getCityStateZip()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-20
+     *
+     * @return string
+     */
+    public function getCityStateZip()
+    {
+        return $this->getTown().', '.$this->getStateCode().' '.$this->getPostalCode();
+    }
+
+    /**
      * Get address string
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
@@ -499,7 +512,7 @@ class Location implements Geolocatable, Geocodable
         if ($v = $this->getAddressLine1()) $string .= $v.', ';
         if ($v = $this->getAddressLine2()) $string .= $v.', ';
         if ($v = $this->getAddressLine3()) $string .= $v.', ';
-        $string .= $this->getTown().', '.$this->getStateCode().' '.$this->getPostalCode();
+        $string .= $this->getCityStateZip();
 
         if ($include_country) $string .= $this->getCountryCode();
 
