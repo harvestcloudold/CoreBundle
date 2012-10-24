@@ -205,6 +205,11 @@ class Profile implements Geolocatable
     protected $as_seller_display_on_map = true;
 
     /**
+     * @ORM\OneToMany(targetEntity="HubWindow", mappedBy="hub", cascade={"persist"})
+     */
+    protected $hubWindows;
+
+    /**
      * __construct()
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
@@ -225,6 +230,7 @@ class Profile implements Geolocatable
         $this->orderCollectionsAsBuyer = new ArrayCollection();
         $this->productsAsSeller        = new ArrayCollection();
         $this->accounts                = new ArrayCollection();
+        $this->hubWindows              = new ArrayCollection();
     }
 
     /**
@@ -1115,5 +1121,33 @@ class Profile implements Geolocatable
         }
 
         return false;
+    }
+
+    /**
+     * Add hubWindows
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-24
+     *
+     * @param HarvestCloud\CoreBundle\Entity\HubWindow $hubWindow
+     */
+    public function addHubWindow(\HarvestCloud\CoreBundle\Entity\HubWindow $hubWindow)
+    {
+        $this->hubWindows[] = $hubWindow;
+
+        $hubWindow->setHub($this);
+    }
+
+    /**
+     * Get hubWindows
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-24
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getHubWindows()
+    {
+        return $this->hubWindows;
     }
 }
