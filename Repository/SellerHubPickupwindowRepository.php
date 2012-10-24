@@ -28,7 +28,9 @@ class SellerHubPickupwindowRepository extends EntityRepository
             ->from('HarvestCloudCoreBundle:SellerHubPickupWindow', 'pw')
             ->select('pw')
             ->where('pw.start_time = :start_time')
+            ->andWhere('pw.start_time > :now')
             ->setParameter('start_time', date('Y-m-d H:i:s', $start_time))
+            ->setParameter('now', date('Y-m-d H:i:s'))
         ;
 
         $q = $qb->getQuery();

@@ -219,6 +219,20 @@ class Order
         return round($amount, 2);
     }
 
+    /**
+     * getSubTotal()
+     *
+     * Sum of line items minus any discounts
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-23
+     *
+     * @return float
+     */
+    public function getSubTotal()
+    {
+        return $this->getSumOfLineItems();
+    }
 
     /**
      * Set buyer_profile_id

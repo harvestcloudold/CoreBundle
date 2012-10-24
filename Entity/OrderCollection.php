@@ -263,4 +263,27 @@ class OrderCollection
         $this->payPalPaymentCollection = $payPalPaymentCollection;
         $payPalPaymentCollection->setOrderCollection($this);
     }
+
+    /**
+     * getSubTotal()
+     *
+     * The sum of the Order sub_totals
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-23
+     *
+     * @return float
+     */
+    public function getSubTotal()
+    {
+        $sub_total = 0;
+
+        foreach ($this->getOrders() as $order)
+        {
+            $sub_total += $order->getSubTotal();
+        }
+
+        return $sub_total;
+    }
+
 }
