@@ -78,6 +78,11 @@ class WindowMaker
     protected $end_time;
 
     /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $last_run_at;
+
+    /**
      * getId()
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
@@ -357,5 +362,31 @@ class WindowMaker
     public function getDeliveryType()
     {
         return $this->delivery_type;
+    }
+
+    /**
+     * Set last_run_at
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-24
+     *
+     * @param datetime $lastRunAt
+     */
+    public function setLastRunAt($lastRunAt)
+    {
+        $this->last_run_at = $lastRunAt;
+    }
+
+    /**
+     * Get last_run_at
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-24
+     *
+     * @return datetime
+     */
+    public function getLastRunAt()
+    {
+        return $this->last_run_at;
     }
 }
