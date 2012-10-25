@@ -4,6 +4,7 @@ namespace HarvestCloud\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use HarvestCloud\CoreBundle\Entity\Profile;
+use HarvestCloud\CoreBundle\Util\Debug;
 
 /**
  * SellerHubPickupwindowRepository
@@ -11,7 +12,7 @@ use HarvestCloud\CoreBundle\Entity\Profile;
  * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
  * @since  2012-04-28
  */
-class SellerHubPickupwindowRepository extends EntityRepository
+class SellerHubPickupWindowRepository extends EntityRepository
 {
     /**
      * Find for hub_id and datetime
@@ -63,5 +64,38 @@ class SellerHubPickupwindowRepository extends EntityRepository
         ;
 
         return $q->getResult();
+    }
+
+    /**
+     * getWindowSlotsArray()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-23
+     *
+     * @param  int  $num_days
+     */
+    public function getWindowSlotsArray($num_days = 7)
+    {
+        $windowSlots = array();
+
+        for ($i=0; $i<$num_days; $i++)
+        {
+            $date_string = date('Y-m-d', strtotime('+'.$i.' days'));
+
+            $windowSlots[$date_string]['dateTime'] = new \DateTime($date_string);
+
+            for ($j=0; $j<7; $j++)
+            {
+                $time_string = str_pad(7+($j*2), 2, 0, STR_PAD_LEFT).':00';
+
+                $dateTime = new \DateTime($date_string.' '.$time_string);
+
+                $windowSlots[$date_string]['times'][$time_string] = $dateTime;
+            }
+        }
+
+#        Debug::show($windowSlots);
+
+        return $windowSlots;
     }
 }
