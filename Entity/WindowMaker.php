@@ -23,6 +23,12 @@ use HarvestCloud\CoreBundle\Util\Debug;
  *
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="HarvestCloud\CoreBundle\Repository\WindowMakerRepository")
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="window_type", type="string")
+ * @ORM\DiscriminatorMap({
+ *    "HUB"        = "HubWindowMaker",
+ *    "SELLER_HUB" = "SellerHubPickupWindowMaker"
+ * })
  * @ORM\Table(name="window_maker")
  */
 class WindowMaker
@@ -33,12 +39,6 @@ class WindowMaker
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="SellerHubRef", inversedBy="windowMakers")
-     * @ORM\JoinColumn(name="seller_hub_ref_id", referencedColumnName="id")
-     */
-    protected $sellerHubRef;
 
     /**
      * @ORM\Column(type="array", name="day_of_week_numbers")
@@ -70,32 +70,6 @@ class WindowMaker
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * setSellerHubRef()
-     *
-     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
-     * @since  2012-10-01
-     *
-     * @param HarvestCloud\CoreBundle\Entity\SellerHubRef $sellerHubRef
-     */
-    public function setSellerHubRef(\HarvestCloud\CoreBundle\Entity\SellerHubRef $sellerHubRef)
-    {
-        $this->sellerHubRef = $sellerHubRef;
-    }
-
-    /**
-     * getSellerHubRef()
-     *
-     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
-     * @since  2012-10-01
-     *
-     * @return HarvestCloud\CoreBundle\Entity\SellerHubRef
-     */
-    public function getSellerHubRef()
-    {
-        return $this->sellerHubRef;
     }
 
     /**
@@ -263,36 +237,6 @@ class WindowMaker
     public function getDayOfWeekNumbers()
     {
         return $this->dayOfWeekNumbers;
-    }
-
-    /**
-     * getSeller()
-     *
-     * Proxy method
-     *
-     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
-     * @since  2012-10-03
-     *
-     * @return \HarvestCloud\CoreBundle\Entity\Profile
-     */
-    public function getSeller()
-    {
-        return $this->getSellerHubRef()->getSeller();
-    }
-
-    /**
-     * getHub()
-     *
-     * Proxy method
-     *
-     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
-     * @since  2012-10-03
-     *
-     * @return \HarvestCloud\CoreBundle\Entity\Profile
-     */
-    public function getHub()
-    {
-        return $this->getSellerHubRef()->getHub();
     }
 
     /**

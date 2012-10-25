@@ -80,7 +80,7 @@ class SellerHubRef
     protected $pickupWindows;
 
     /**
-     * @ORM\OneToMany(targetEntity="WindowMaker", mappedBy="sellerHubRef", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="SellerHubPickupWindowMaker", mappedBy="sellerHubRef", cascade={"persist"})
      */
     protected $windowMakers;
 
@@ -319,9 +319,9 @@ class SellerHubRef
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-04
      *
-     * @param HarvestCloud\CoreBundle\Entity\WindowMaker $windowMakers
+     * @param HarvestCloud\CoreBundle\Entity\SellerHubPickupWindowMaker $windowMaker
      */
-    public function addWindowMaker(\HarvestCloud\CoreBundle\Entity\WindowMaker $windowMaker)
+    public function addWindowMaker(\HarvestCloud\CoreBundle\Entity\SellerHubPickupWindowMaker $windowMaker)
     {
         $this->windowMakers[] = $windowMaker;
 
@@ -334,7 +334,7 @@ class SellerHubRef
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-04
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getWindowMakers()
     {

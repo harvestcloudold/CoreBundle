@@ -27,7 +27,7 @@ class WindowMakerRepository extends EntityRepository
 
         $q  = $em->createQuery('
                 SELECT wm
-                FROM HarvestCloudCoreBundle:WindowMaker wm
+                FROM HarvestCloudCoreBundle:SellerHubPickupWindowMaker wm
                 LEFT JOIN wm.sellerHubRef shr
                 LEFT JOIN shr.hub h
                 WHERE shr.seller = :seller
