@@ -34,11 +34,29 @@ use HarvestCloud\CoreBundle\Util\Debug;
 class WindowMaker
 {
     /**
+     * delivery_type options
+     *
+     * @var string
+     */
+     const
+        DELIVERY_TYPE_DELIVERY = 'DELIVERY',
+        DELIVERY_TYPE_PICKUP   = 'PICKUP'
+    ;
+
+
+    /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * delivery_type
+     *
+     * @ORM\Column(type="string", length=8)
+     */
+    protected $delivery_type = self::DELIVERY_TYPE_PICKUP;
 
     /**
      * @ORM\Column(type="array", name="day_of_week_numbers")
@@ -305,5 +323,39 @@ class WindowMaker
         }
 
         return $array;
+    }
+
+    /**
+     * Set delivery_type
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-24
+     *
+     * @param string $deliveryType
+     */
+    public function setDeliveryType($deliveryType)
+    {
+        if (!in_array($deliveryType, array(
+            self::DELIVERY_TYPE_PICKUP,
+            self::DELIVERY_TYPE_DELIVERY,
+        )))
+        {
+            throw new \InvalidArgumentException('Invalid value for delivery_type');
+        }
+
+        $this->delivery_type = $deliveryType;
+    }
+
+    /**
+     * Get delivery_type
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-24
+     *
+     * @return string
+     */
+    public function getDeliveryType()
+    {
+        return $this->delivery_type;
     }
 }
