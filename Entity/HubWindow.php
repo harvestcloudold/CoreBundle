@@ -22,12 +22,12 @@ use HarvestCloud\CoreBundle\Util\Windowable;
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="HarvestCloud\CoreBundle\Repository\HubWindowRepository")
  * @ORM\InheritanceType("SINGLE_TABLE")
- * @ORM\DiscriminatorColumn(name="window_type", type="string")
+ * @ORM\DiscriminatorColumn(name="delivery_type", type="string")
  * @ORM\DiscriminatorMap({
  *    "PICKUP"   = "HubPickupWindow",
  *    "DELIVERY" = "HubDeliveryWindow"
  * })
- * @ORM\Table(name="hub_window",uniqueConstraints={@ORM\UniqueConstraint(name="hub_type_start_time_idx", columns={"hub_id", "window_type", "start_time"})})
+ * @ORM\Table(name="hub_window",uniqueConstraints={@ORM\UniqueConstraint(name="hub_delivery_type_start_time_idx", columns={"hub_id", "delivery_type", "start_time"})})
  */
 class HubWindow implements Windowable
 {
