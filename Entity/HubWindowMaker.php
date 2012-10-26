@@ -14,4 +14,29 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class HubWindowMaker extends WindowMaker
 {
+    /**
+     * @ORM\ManyToOne(targetEntity="Profile", inversedBy="hubWindowMakers")
+     * @ORM\JoinColumn(name="hub_id", referencedColumnName="id")
+     */
+    protected $hub;
+
+    /**
+     * Set hub
+     *
+     * @param HarvestCloud\CoreBundle\Entity\Profile $hub
+     */
+    public function setHub(\HarvestCloud\CoreBundle\Entity\Profile $hub)
+    {
+        $this->hub = $hub;
+    }
+
+    /**
+     * Get hub
+     *
+     * @return HarvestCloud\CoreBundle\Entity\Profile
+     */
+    public function getHub()
+    {
+        return $this->hub;
+    }
 }

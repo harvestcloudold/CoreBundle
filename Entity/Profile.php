@@ -205,6 +205,11 @@ class Profile implements Geolocatable
     protected $as_seller_display_on_map = true;
 
     /**
+     * @ORM\OneToMany(targetEntity="HubWindowMaker", mappedBy="hub", cascade={"persist"})
+     */
+    protected $hubWindowMakers;
+
+    /**
      * @ORM\OneToMany(targetEntity="HubWindow", mappedBy="hub", cascade={"persist"})
      */
     protected $hubWindows;
@@ -1149,5 +1154,33 @@ class Profile implements Geolocatable
     public function getHubWindows()
     {
         return $this->hubWindows;
+    }
+
+    /**
+     * Add hubWindowMaker
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-25
+     *
+     * @param HarvestCloud\CoreBundle\Entity\HubWindowMaker $hubWindowMaker
+     */
+    public function addHubWindowMaker(\HarvestCloud\CoreBundle\Entity\HubWindowMaker $hubWindowMaker)
+    {
+        $this->hubWindowMakers[] = $hubWindowMaker;
+
+        $hubWindowMaker->setHub($this);
+    }
+
+    /**
+     * Get hubWindowMakers
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-25
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getHubWindowMakers()
+    {
+        return $this->hubWindowMakers;
     }
 }
