@@ -13,6 +13,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 use HarvestCloud\CoreBundle\Entity\Profile;
 use HarvestCloud\CoreBundle\Repository\SellerHubRefRepository;
+use HarvestCloud\CoreBundle\Util\DayOfWeek;
 
 /**
  * WindowMakerType
@@ -65,40 +66,16 @@ class WindowMakerType extends AbstractType
                 },
             ))
             ->add('day_of_week_numbers', 'choice', array(
-                'choices'   => array(
-                    1 => 'Mon',
-                    2 => 'Tue',
-                    3 => 'Wed',
-                    4 => 'Thu',
-                    5 => 'Fri',
-                    6 => 'Sat',
-                    7 => 'Sun',
-                ),
+                'choices'   => DayOfWeek::getChoices(),
                 'multiple'  => true,
                 'expanded'  => true,
                 'label'     => 'Days of Week',
             ))
             ->add('start_time', 'choice', array(
-                'choices'   => array(
-                    '07' => '7am',
-                    '09' => '9am',
-                    '11' => '11am',
-                    '13' => '1pm',
-                    '15' => '3pm',
-                    '17' => '5pm',
-                    '19' => '7pm',
-                ),
+                'choices'   => WindowMaker::getStartTimeChoices(),
             ))
             ->add('end_time', 'choice', array(
-                'choices'   => array(
-                    '09' => '9am',
-                    '11' => '11am',
-                    '13' => '1pm',
-                    '15' => '3pm',
-                    '17' => '5pm',
-                    '19' => '7pm',
-                    '21' => '9pm',
-                ),
+                'choices'   => WindowMaker::getEndTimeChoices(),
             ))
         ;
     }

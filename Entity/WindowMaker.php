@@ -389,4 +389,46 @@ class WindowMaker
     {
         return $this->last_run_at;
     }
+
+    /**
+     * getStartTimeChoices()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-25
+     *
+     * @return array
+     */
+    public static function getStartTimeChoices()
+    {
+        return array(
+            '07' => '7am',
+            '09' => '9am',
+            '11' => '11am',
+            '13' => '1pm',
+            '15' => '3pm',
+            '17' => '5pm',
+            '19' => '7pm',
+        );
+    }
+
+    /**
+     * getEndTimeChoices()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-25
+     *
+     * @return array
+     */
+    public static function getEndTimeChoices()
+    {
+        return array(
+            '09' => '9am',
+            '11' => '11am',
+            '13' => '1pm',
+            '15' => '3pm',
+            '17' => '5pm',
+            '19' => '7pm',
+            '21' => '9pm',
+        );
+    }
 }

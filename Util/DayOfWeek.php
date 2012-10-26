@@ -122,4 +122,40 @@ class DayOfWeek
             case self::SUN: return 'Sunday';
         }
     }
+
+    /**
+     * getChoices()
+     *
+     * Used for FormTypes
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-25
+     *
+     * @param  $format  e.g. Mon or Monday or M
+     * @param  $day_of_week_numbers
+     *
+     * @return array
+     */
+    public static function getChoices($format = 'ShortName', $day_of_week_numbers = array(1,2,3,4,5,6,7))
+    {
+        switch ($format)
+        {
+            case 'ShortName':
+            case 'FirstLetter':
+            case 'LongName':
+
+                $method = 'get'.$format;
+        }
+
+        $choices = array();
+
+        foreach ($day_of_week_numbers as $day_of_week_number)
+        {
+            $dayOfWeek = new self($day_of_week_number);
+
+            $choices[$day_of_week_number] = $dayOfWeek->$method();
+        }
+
+        return $choices;
+    }
 }
