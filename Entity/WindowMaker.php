@@ -78,7 +78,7 @@ class WindowMaker
     protected $end_time;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     protected $last_run_at;
 

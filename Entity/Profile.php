@@ -239,6 +239,19 @@ class Profile implements Geolocatable
     }
 
     /**
+     * __toString()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-25
+     *
+     * @return string
+     */
+     public function __toString()
+     {
+        return $this->getName();
+     }
+
+    /**
      * Get id
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
