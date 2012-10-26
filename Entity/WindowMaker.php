@@ -237,6 +237,41 @@ class WindowMaker
     }
 
     /**
+     * getEndTimeWithSeconds()
+     *
+     * e.g. 12:00:00
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-05
+     *
+     * @return string
+     */
+    public function getEndTimeWithSeconds()
+    {
+        return $this->getEndTime().':00';
+    }
+
+    /**
+     * getEndTimeObject
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-05
+     *
+     * @param  string  $date_string
+     *
+     * @return \DateTime
+     */
+    public function getEndTimeObject($date_string = null)
+    {
+        if (null == $date_string)
+        {
+            $date_string = date('Y-m-d');
+        }
+
+        return new \DateTime($date_string.' '.$this->getEndTimeWithSeconds());
+    }
+
+    /**
      * Set dayOfWeekNumbers
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
@@ -430,5 +465,28 @@ class WindowMaker
             '19' => '7pm',
             '21' => '9pm',
         );
+    }
+
+    /**
+     * getSlots()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-25
+     *
+     * @return array
+     */
+    public static function getSlots()
+    {
+        $slots = array();
+
+        foreach (array_keys(self::getStartTimeChoices()) as $hour)
+        {
+            for ($i=1; $i<8; $i++)
+            {
+                $slots[$hour.':00'][$i] = null;
+            }
+        }
+
+        return $slots;
     }
 }
