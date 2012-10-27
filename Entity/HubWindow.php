@@ -70,6 +70,12 @@ class HubWindow implements Windowable
     protected $sellerHubPickupWindows;
 
     /**
+     * @ORM\ManyToOne(targetEntity="HubWindowMaker", inversedBy="windows")
+     * @ORM\JoinColumn(name="window_maker_id", referencedColumnName="id")
+     */
+    protected $windowMaker;
+
+    /**
      * __construct()
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
@@ -197,5 +203,31 @@ class HubWindow implements Windowable
     public function getSellerHubPickupWindows()
     {
         return $this->sellerHubPickupWindows;
+    }
+
+    /**
+     * Set windowMaker
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-27
+     *
+     * @param HarvestCloud\CoreBundle\Entity\HubWindowMaker $windowMaker
+     */
+    public function setWindowMaker(\HarvestCloud\CoreBundle\Entity\HubWindowMaker $windowMaker)
+    {
+        $this->windowMaker = $windowMaker;
+    }
+
+    /**
+     * Get windowMaker
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-27
+     *
+     * @return HarvestCloud\CoreBundle\Entity\HubWindowMaker
+     */
+    public function getWindowMaker()
+    {
+        return $this->windowMaker;
     }
 }
