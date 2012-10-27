@@ -14,6 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use HarvestCloud\CoreBundle\Util\Windowable;
 use HarvestCloud\CoreBundle\Util\DayOfWeek;
 use HarvestCloud\CoreBundle\Util\Debug;
+use HarvestCloud\CoreBundle\Entity\HubWindow;
 
 /**
  * WindowMaker Entity
@@ -34,17 +35,6 @@ use HarvestCloud\CoreBundle\Util\Debug;
 class WindowMaker
 {
     /**
-     * delivery_type options
-     *
-     * @var string
-     */
-     const
-        DELIVERY_TYPE_DELIVERY = 'DELIVERY',
-        DELIVERY_TYPE_PICKUP   = 'PICKUP'
-    ;
-
-
-    /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -56,7 +46,7 @@ class WindowMaker
      *
      * @ORM\Column(type="string", length=8)
      */
-    protected $delivery_type = self::DELIVERY_TYPE_PICKUP;
+    protected $delivery_type = HubWindow::DELIVERY_TYPE_PICKUP;
 
     /**
      * @ORM\Column(type="array", name="day_of_week_numbers")
@@ -376,8 +366,8 @@ class WindowMaker
     public function setDeliveryType($deliveryType)
     {
         if (!in_array($deliveryType, array(
-            self::DELIVERY_TYPE_PICKUP,
-            self::DELIVERY_TYPE_DELIVERY,
+            HubWindow::DELIVERY_TYPE_PICKUP,
+            HubWindow::DELIVERY_TYPE_DELIVERY,
         )))
         {
             throw new \InvalidArgumentException('Invalid value for delivery_type');
