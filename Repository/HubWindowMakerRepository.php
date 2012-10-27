@@ -70,6 +70,6 @@ class HubWindowMakerRepository extends WindowMakerRepository
             }
         }
 
-        return $calendarArray;
+        return $slots;
     }
 }
