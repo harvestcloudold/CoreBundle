@@ -32,6 +32,16 @@ use HarvestCloud\CoreBundle\Util\Windowable;
 class HubWindow implements Windowable
 {
     /**
+     * Delivery Types
+     *
+     * These should match the discriminators listed above
+     *
+     * @var string
+     */
+     const DELIVERY_TYPE_DELIVERY = 'DELIVERY';
+     const DELIVERY_TYPE_PICKUP   = 'PICKUP';
+
+    /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
