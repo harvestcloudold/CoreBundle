@@ -90,4 +90,89 @@ class HubWindowMaker extends WindowMaker
     {
         return $this->windows;
     }
+
+    /**
+     * makeWindows()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-27
+     *
+     * @param  int  $num_days from now
+     *
+     * @return array of newly created HubWindows
+     */
+    public function makeWindows($num_days = 14)
+    {
+        $newWindows = array();
+
+        foreach ($this->getDateAdjustedStartTimes(new \DateTime(), $num_days) as $startTime)
+        {
+            // If window doesn't already exist for this time
+            if (!$this->getHub()->getHubWindowAtThisTime($startTime, $this->getDeliveryType()))
+            {
+                // Create a new window
+                $window = $this->getNewWindow();
+                $window->setStartTime($startTime);
+                $window->setEndTime($this->getEndTimeFromStartTime($startTime));
+
+                // Add it to array of new windows
+                $newWindows[] = $window;
+
+                // Add it as a relation of this WindowMaker
+                $this->addHubWindow($window);
+            }
+        }
+
+        $this->setLastRunAt(new \DateTime());
+
+        return $newWindows;
+    }
+
+    /**
+     * getNewWindow()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-27
+     *
+     * @return HubWindow
+     */
+    public function getNewWindow()
+    {
+        switch ($this->getDeliveryType())
+        {
+            case HubWindow::DELIVERY_TYPE_PICKUP:
+
+              $window = new HubPickupWindow();
+
+              break;
+
+            case HubWindow::DELIVERY_TYPE_DELIVERY:
+
+              $window = new HubDeliveryWindow();
+
+              break;
+        }
+
+        $window->setHub($this->getHub());
+
+        return $window;
+    }
+
+    /**
+     * getEndTimeFromStartTime()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-27
+     *
+     * @param  \DateTime  $startTime
+     *
+     * @return \DateTime
+     */
+    public function getEndTimeFromStartTime(\DateTime $startTime)
+    {
+        $endTime  = clone $startTime;
+        $endTime->add(\DateInterval::createFromDateString('+2 hour'));
+
+        return $endTime;
+    }
 }

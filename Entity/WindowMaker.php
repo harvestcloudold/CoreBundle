@@ -343,9 +343,7 @@ class WindowMaker
 
                 while ($startTime->format('H:i') < $this->getEndTime())
                 {
-                    $date_time_string  = $startTime->format('Y-m-d H:i:s');
-
-                    $array[] = $date_time_string;
+                    $array[] = $startTime;
 
                     $startTime->add(\DateInterval::createFromDateString('+2 hours'));
                 }

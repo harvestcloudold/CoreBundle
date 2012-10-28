@@ -1196,4 +1196,50 @@ class Profile implements Geolocatable
     {
         return $this->hubWindowMakers;
     }
+
+    /**
+     * getHubWindowAtThisTime()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-27
+     *
+     * @param  \DateTime  $startTime
+     * @param  string     $delivery_type see HubWindow::DELIVERY_TYPE_*
+     *
+     * @return mixed      HubWindow or false
+     */
+    public function getHubWindowAtThisTime(\DateTime $startTime, $delivery_type)
+    {
+        $windows = $this->getHubPickupWindowsIndexedByStartTimeAndDeliveryType();
+
+        if (!empty($windows[$startTime->format(\DateTime::ATOM)][$delivery_type]))
+        {
+            return $windows[$startTime->format(\DateTime::ATOM)][$delivery_type];
+        }
+
+        return false;
+    }
+
+    /**
+     * getHubPickupWindowsIndexedByStartTimeAndDeliveryType()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-27
+     *
+     * @return array
+     */
+    public function getHubPickupWindowsIndexedByStartTimeAndDeliveryType()
+    {
+        $windows = array();
+
+        foreach ($this->getHubWindows() as $window)
+        {
+            $start_time    = $window->getStartTime()->format(\DateTime::ATOM);
+            $delivery_type = $window->getDeliveryType();
+
+            $windows[$start_time][$delivery_type] = $window;
+        }
+
+        return $windows;
+    }
 }
