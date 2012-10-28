@@ -324,15 +324,15 @@ class WindowMaker
      * @since  2012-10-03
      *
      * @param  \DateTime  $startDate
-     * @param  integer    $period
+     * @param  integer    $num_days
      *
      * @return array
      */
-    public function getDateAdjustedStartTimes(\DateTime $startDate, $period)
+    public function getDateAdjustedStartTimes(\DateTime $startDate, $num_days)
     {
         $array = array();
 
-        for ($i=0; $i<$period; $i++)
+        for ($i=0; $i<$num_days; $i++)
         {
             $startDate->add(\DateInterval::createFromDateString('+1 day'));
 
