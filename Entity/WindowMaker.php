@@ -335,6 +335,7 @@ class WindowMaker
         for ($i=0; $i<$period; $i++)
         {
             $startDate->add(\DateInterval::createFromDateString('+1 day'));
+
             if (in_array($startDate->format('N'), $this->getDayOfWeekNumbers()))
             {
                 $dayOfWeek = new DayOfWeek($startDate->format('N'));
@@ -343,7 +344,7 @@ class WindowMaker
 
                 while ($startTime->format('H:i') < $this->getEndTime())
                 {
-                    $array[] = $startTime;
+                    $array[] = clone $startTime;
 
                     $startTime->add(\DateInterval::createFromDateString('+2 hours'));
                 }
