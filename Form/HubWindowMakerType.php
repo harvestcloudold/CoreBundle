@@ -12,6 +12,7 @@ namespace HarvestCloud\CoreBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 use HarvestCloud\CoreBundle\Util\DayOfWeek;
+use HarvestCloud\CoreBundle\Entity\HubWindow;
 use HarvestCloud\CoreBundle\Entity\WindowMaker;
 
 /**
@@ -42,6 +43,14 @@ class HubWindowMakerType extends AbstractType
             ))
             ->add('end_time', 'choice', array(
                 'choices'   => WindowMaker::getEndTimeChoices(),
+            ))
+            ->add('delivery_type', 'choice', array(
+                'choices' => array(
+                  HubWindow::DELIVERY_TYPE_PICKUP   => 'Pickup',
+                  HubWindow::DELIVERY_TYPE_DELIVERY => 'Delivery',
+                ),
+                'multiple'  => false,
+                'expanded'  => true,
             ))
         ;
     }
