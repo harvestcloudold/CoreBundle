@@ -153,7 +153,7 @@ class HubWindowMaker extends WindowMaker
               break;
         }
 
-        $window->setHub($this->getHub());
+        $this->getHub()->addHubWindow($window);
 
         return $window;
     }
