@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @since  2012-10-24
  *
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="HarvestCloud\CoreBundle\Repository\SellerWindowMakerRepository")
  */
 class SellerWindowMaker extends WindowMaker
 {
