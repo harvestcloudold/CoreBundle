@@ -98,10 +98,10 @@ class Order
     protected $invoice;
 
     /**
-     * @ORM\ManyToOne(targetEntity="SellerHubPickupWindow", inversedBy="orders")
-     * @ORM\JoinColumn(name="pickup_window_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="SellerWindow", inversedBy="orders")
+     * @ORM\JoinColumn(name="seller_window_id", referencedColumnName="id")
      */
-    protected $pickupWindow;
+    protected $sellerWindow;
 
     /**
      * __construct()
@@ -887,30 +887,30 @@ class Order
     }
 
     /**
-     * Set pickupWindow
+     * Set sellerWindow
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-05-19
      *
-     * @param  SellerHubPickupWindow $pickupWindow
+     * @param  SellerWindow $sellerWindow
      */
-    public function setPickupWindow(SellerHubPickupWindow $pickupWindow)
+    public function setPickupWindow(SellerWindow $sellerWindow)
     {
-        $this->pickupWindow = $pickupWindow;
-        $this->setHub($pickupWindow->getSellerHubRef()->getHub());
+        $this->sellerWindow = $sellerWindow;
+        $this->setHub($sellerWindow->getSellerHubRef()->getHub());
     }
 
     /**
-     * Get pickupWindow
+     * Get sellerWindow
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-05-19
      *
-     * @return SellerHubPickupWindow
+     * @return SellerWindow
      */
     public function getPickupWindow()
     {
-        return $this->pickupWindow;
+        return $this->sellerWindow;
     }
 
     /**

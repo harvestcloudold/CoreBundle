@@ -65,9 +65,9 @@ class HubWindow implements Windowable
     protected $hub;
 
     /**
-     * @ORM\OneToMany(targetEntity="SellerHubPickupWindow", mappedBy="hubWindow")
+     * @ORM\OneToMany(targetEntity="SellerWindow", mappedBy="hubWindow")
      */
-    protected $sellerHubPickupWindows;
+    protected $sellerWindows;
 
     /**
      * @ORM\ManyToOne(targetEntity="HubWindowMaker", inversedBy="windows")
@@ -83,7 +83,7 @@ class HubWindow implements Windowable
      */
     public function __construct()
     {
-        $this->sellerHubPickupWindows = new ArrayCollection();
+        $this->sellerWindows = new ArrayCollection();
     }
 
     /**
@@ -178,31 +178,31 @@ class HubWindow implements Windowable
     }
 
     /**
-     * Add sellerHubPickupWindows
+     * Add sellerWindow
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-24
      *
-     * @param HarvestCloud\CoreBundle\Entity\SellerHubPickupWindow $sellerHubPickupWindow
+     * @param HarvestCloud\CoreBundle\Entity\SellerWindow $sellerWindow
      */
-    public function addSellerHubPickupWindow(\HarvestCloud\CoreBundle\Entity\SellerHubPickupWindow $sellerHubPickupWindow)
+    public function addSellerWindow(\HarvestCloud\CoreBundle\Entity\SellerWindow $sellerWindow)
     {
-        $this->sellerHubPickupWindows[] = $sellerHubPickupWindow;
+        $this->sellerWindows[] = $sellerWindow;
 
-        $sellerHubPickupWindow->setHubWindow($this);
+        $sellerWindow->setHubWindow($this);
     }
 
     /**
-     * Get sellerHubPickupWindows
+     * Get sellerWindows
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-24
      *
      * @return Doctrine\Common\Collections\Collection
      */
-    public function getSellerHubPickupWindows()
+    public function getSellerWindows()
     {
-        return $this->sellerHubPickupWindows;
+        return $this->sellerWindows;
     }
 
     /**
