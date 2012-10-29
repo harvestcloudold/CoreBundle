@@ -157,22 +157,4 @@ class HubWindowMaker extends WindowMaker
 
         return $window;
     }
-
-    /**
-     * getEndTimeFromStartTime()
-     *
-     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
-     * @since  2012-10-27
-     *
-     * @param  \DateTime  $startTime
-     *
-     * @return \DateTime
-     */
-    public function getEndTimeFromStartTime(\DateTime $startTime)
-    {
-        $endTime  = clone $startTime;
-        $endTime->add(\DateInterval::createFromDateString('+2 hour'));
-
-        return $endTime;
-    }
 }

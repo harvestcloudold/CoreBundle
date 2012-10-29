@@ -20,8 +20,14 @@ use HarvestCloud\CoreBundle\Util\Windowable;
  * @since  2012-04-28
  *
  * @ORM\Entity
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="delivery_type", type="string")
+ * @ORM\DiscriminatorMap({
+ *    "PICKUP"   = "SellerPickupWindow",
+ *    "DELIVERY" = "SellerDeliveryWindow"
+ * })
  * @ORM\Entity(repositoryClass="HarvestCloud\CoreBundle\Repository\SellerWindowRepository")
- * @ORM\Table(name="seller_hub_pickup_window",uniqueConstraints={@ORM\UniqueConstraint(name="seller_hub_ref_start_time_idx", columns={"seller_hub_ref_id", "start_time"})})
+ * @ORM\Table(name="seller_window",uniqueConstraints={@ORM\UniqueConstraint(name="seller_hub_ref_delivery_type_start_time_idx", columns={"seller_hub_ref_id", "delivery_type", "start_time"})})
  */
 class SellerWindow implements Windowable
 {
@@ -54,10 +60,16 @@ class SellerWindow implements Windowable
     protected $orders;
 
     /**
-     * @ORM\ManyToOne(targetEntity="HubWindow", inversedBy="sellerHubPickupWindows")
+     * @ORM\ManyToOne(targetEntity="HubWindow", inversedBy="sellerWindows")
      * @ORM\JoinColumn(name="hub_window_id", referencedColumnName="id")
      */
     protected $hubWindow;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="SellerWindowMaker", inversedBy="windows")
+     * @ORM\JoinColumn(name="window_maker_id", referencedColumnName="id")
+     */
+    protected $windowMaker;
 
     /**
      * __construct()
@@ -241,5 +253,31 @@ class SellerWindow implements Windowable
     public function getHubWindow()
     {
         return $this->hubWindow;
+    }
+
+    /**
+     * Set windowMaker
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-29
+     *
+     * @param HarvestCloud\CoreBundle\Entity\SellerWindowMaker $windowMaker
+     */
+    public function setWindowMaker(\HarvestCloud\CoreBundle\Entity\SellerWindowMaker $windowMaker)
+    {
+        $this->windowMaker = $windowMaker;
+    }
+
+    /**
+     * Get windowMaker
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-29
+     *
+     * @return HarvestCloud\CoreBundle\Entity\SellerWindowMaker
+     */
+    public function getWindowMaker()
+    {
+        return $this->windowMaker;
     }
 }

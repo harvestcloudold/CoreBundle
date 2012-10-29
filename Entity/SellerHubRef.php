@@ -358,4 +358,50 @@ class SellerHubRef
 
         return false;
      }
+
+    /**
+     * getSellerWindowAtThisTime()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-29
+     *
+     * @param  \DateTime  $startTime
+     * @param  string     $delivery_type see HubWindow::DELIVERY_TYPE_*
+     *
+     * @return mixed      SellerWindow or false
+     */
+    public function getSellerWindowAtThisTime(\DateTime $startTime, $delivery_type)
+    {
+        $windows = $this->getSellerWindowsIndexedByStartTimeAndDeliveryType();
+
+        if (!empty($windows[$startTime->format(\DateTime::ATOM)][$delivery_type]))
+        {
+            return $windows[$startTime->format(\DateTime::ATOM)][$delivery_type];
+        }
+
+        return false;
+    }
+
+    /**
+     * getSellerWindowsIndexedByStartTimeAndDeliveryType()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-29
+     *
+     * @return array
+     */
+    public function getSellerWindowsIndexedByStartTimeAndDeliveryType()
+    {
+        $windows = array();
+
+        foreach ($this->getSellerWindows() as $window)
+        {
+            $start_time    = $window->getStartTime()->format(\DateTime::ATOM);
+            $delivery_type = $window->getDeliveryType();
+
+            $windows[$start_time][$delivery_type] = $window;
+        }
+
+        return $windows;
+    }
 }

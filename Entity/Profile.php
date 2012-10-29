@@ -1210,7 +1210,7 @@ class Profile implements Geolocatable
      */
     public function getHubWindowAtThisTime(\DateTime $startTime, $delivery_type)
     {
-        $windows = $this->getHubPickupWindowsIndexedByStartTimeAndDeliveryType();
+        $windows = $this->getHubWindowsIndexedByStartTimeAndDeliveryType();
 
         if (!empty($windows[$startTime->format(\DateTime::ATOM)][$delivery_type]))
         {
@@ -1221,14 +1221,14 @@ class Profile implements Geolocatable
     }
 
     /**
-     * getHubPickupWindowsIndexedByStartTimeAndDeliveryType()
+     * getHubWindowsIndexedByStartTimeAndDeliveryType()
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-27
      *
      * @return array
      */
-    public function getHubPickupWindowsIndexedByStartTimeAndDeliveryType()
+    public function getHubWindowsIndexedByStartTimeAndDeliveryType()
     {
         $windows = array();
 
