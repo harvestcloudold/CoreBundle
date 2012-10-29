@@ -7,12 +7,12 @@ use HarvestCloud\CoreBundle\Entity\Profile;
 use HarvestCloud\CoreBundle\Util\Debug;
 
 /**
- * SellerHubPickupwindowRepository
+ * SellerWindowRepository
  *
  * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
  * @since  2012-04-28
  */
-class SellerHubPickupWindowRepository extends EntityRepository
+class SellerWindowRepository extends EntityRepository
 {
     /**
      * Find for hub_id and datetime
@@ -26,7 +26,7 @@ class SellerHubPickupWindowRepository extends EntityRepository
     public function findOneForHubIdAndStartTime($hub_id, $start_time)
     {
         $qb = $this->getEntityManager()->createQueryBuilder()
-            ->from('HarvestCloudCoreBundle:SellerHubPickupWindow', 'pw')
+            ->from('HarvestCloudCoreBundle:SellerWindow', 'pw')
             ->select('pw')
             ->where('pw.start_time = :start_time')
             ->andWhere('pw.start_time > :now')
@@ -53,7 +53,7 @@ class SellerHubPickupWindowRepository extends EntityRepository
 
         $q  = $em->createQuery('
                 SELECT w
-                FROM HarvestCloudCoreBundle:SellerHubPickupWindow w
+                FROM HarvestCloudCoreBundle:SellerWindow w
                 LEFT JOIN w.sellerHubRef shr
                 LEFT JOIN shr.hub h
                 WHERE shr.seller = :seller
