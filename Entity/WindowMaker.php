@@ -28,7 +28,7 @@ use HarvestCloud\CoreBundle\Entity\HubWindow;
  * @ORM\DiscriminatorColumn(name="window_type", type="string")
  * @ORM\DiscriminatorMap({
  *    "HUB"        = "HubWindowMaker",
- *    "SELLER_HUB" = "SellerHubPickupWindowMaker"
+ *    "SELLER_HUB" = "SellerWindowMaker"
  * })
  * @ORM\Table(name="window_maker")
  */
