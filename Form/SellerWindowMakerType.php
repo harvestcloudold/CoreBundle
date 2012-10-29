@@ -14,14 +14,15 @@ use Symfony\Component\Form\FormBuilder;
 use HarvestCloud\CoreBundle\Entity\Profile;
 use HarvestCloud\CoreBundle\Repository\SellerHubRefRepository;
 use HarvestCloud\CoreBundle\Util\DayOfWeek;
+use HarvestCloud\CoreBundle\Entity\WindowMaker;
 
 /**
- * WindowMakerType
+ * SellerWindowMakerType
  *
  * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
- * @since  2012-10-09
+ * @since  2012-10-28
  */
-class WindowMakerType extends AbstractType
+class SellerWindowMakerType extends AbstractType
 {
     /**
      * seller
@@ -34,7 +35,7 @@ class WindowMakerType extends AbstractType
      * __construct()
      *
      * @author Tom Haskins-Vaugha <tom@harvestcloud.com>
-     * @since  2012-10-15
+     * @since  2012-10-28
      *
      * @param  Profile  $seller
      */
@@ -47,7 +48,7 @@ class WindowMakerType extends AbstractType
      * buildForm
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
-     * @since  2012-10-09
+     * @since  2012-10-28
      */
     public function buildForm(FormBuilder $builder, array $options)
     {
@@ -84,10 +85,10 @@ class WindowMakerType extends AbstractType
      * getName
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
-     * @since  2012-10-09
+     * @since  2012-10-28
      */
     public function getName()
     {
-        return 'harvestcloud_corebundle_windowmakertype';
+        return 'harvestcloud_corebundle_sellerwindowmakertype';
     }
 }
