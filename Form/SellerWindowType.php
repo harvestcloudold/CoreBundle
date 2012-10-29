@@ -13,12 +13,12 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 
 /**
- * SellerHubPickupWindowType
+ * SellerWindowType
  *
  * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
  * @since  2012-04-29
  */
-class SellerHubPickupWindowType extends AbstractType
+class SellerWindowType extends AbstractType
 {
     /**
      * buildForm
@@ -42,6 +42,6 @@ class SellerHubPickupWindowType extends AbstractType
      */
     public function getName()
     {
-        return 'harvestcloud_corebundle_sellerhubpickupwindowtype';
+        return 'harvestcloud_corebundle_sellerwindowtype';
     }
 }

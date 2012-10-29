@@ -75,9 +75,9 @@ class SellerHubRef
     protected $variable_fee = 5;
 
     /**
-     * @ORM\OneToMany(targetEntity="SellerHubPickupWindow", mappedBy="sellerHubRef", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="SellerWindow", mappedBy="sellerHubRef", cascade={"persist"})
      */
-    protected $pickupWindows;
+    protected $sellerWindows;
 
     /**
      * @ORM\OneToMany(targetEntity="SellerWindowMaker", mappedBy="sellerHubRef", cascade={"persist"})
@@ -92,7 +92,7 @@ class SellerHubRef
      */
     public function __construct()
     {
-        $this->pickupWindows = new ArrayCollection();
+        $this->sellerWindows = new ArrayCollection();
         $this->windowMakers  = new ArrayCollection();
     }
 
@@ -214,46 +214,46 @@ class SellerHubRef
     }
 
     /**
-     * Add pickupWindow
+     * Add sellerWindow
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-04-28
      *
-     * @param SellerHubPickupWindow $pickupWindow
+     * @param SellerWindow $sellerWindow
      */
-    public function addSellerHubPickupWindow(SellerHubPickupWindow $pickupWindow)
+    public function addSellerWindow(SellerWindow $sellerWindow)
     {
-        $this->pickupWindows[] = $pickupWindow;
+        $this->sellerWindows[] = $sellerWindow;
 
-        $pickupWindow->setSellerHubRef($this);
+        $sellerWindow->setSellerHubRef($this);
     }
 
     /**
-     * Get pickupWindows
+     * Get sellerWindows
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-04-28
      *
      * @return Doctrine\Common\Collections\Collection
      */
-    public function getPickupWindows()
+    public function getSellerWindows()
     {
-        return $this->pickupWindows;
+        return $this->sellerWindows;
     }
 
     /**
-     * getPickupWindowsIndexedByStartTime()
+     * getSellerWindowsIndexedByStartTime()
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-05
      *
      * @return array
      */
-    public function getPickupWindowsIndexedByStartTime()
+    public function getSellerWindowsIndexedByStartTime()
     {
         $windows = array();
 
-        foreach ($this->getPickupWindows() as $window)
+        foreach ($this->getSellerWindows() as $window)
         {
             $windows[$window->getStartTime()->format('Y-m-d H:i:s')] = $window;
         }
@@ -351,7 +351,7 @@ class SellerHubRef
      */
      public function hasWindowAtThisTime($date_time)
      {
-        if (array_key_exists($date_time, $this->getPickupWindowsIndexedByStartTime()))
+        if (array_key_exists($date_time, $this->getSellerWindowsIndexedByStartTime()))
         {
             return true;
         }

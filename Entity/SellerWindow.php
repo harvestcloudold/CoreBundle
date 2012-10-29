@@ -14,16 +14,16 @@ use Doctrine\Common\Collections\ArrayCollection;
 use HarvestCloud\CoreBundle\Util\Windowable;
 
 /**
- * SellerHubPickupWindow Entity
+ * SellerWindow Entity
  *
  * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
  * @since  2012-04-28
  *
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="HarvestCloud\CoreBundle\Repository\SellerHubPickupWindowRepository")
+ * @ORM\Entity(repositoryClass="HarvestCloud\CoreBundle\Repository\SellerWindowRepository")
  * @ORM\Table(name="seller_hub_pickup_window",uniqueConstraints={@ORM\UniqueConstraint(name="seller_hub_ref_start_time_idx", columns={"seller_hub_ref_id", "start_time"})})
  */
-class SellerHubPickupWindow implements Windowable
+class SellerWindow implements Windowable
 {
     /**
      * @ORM\Id
