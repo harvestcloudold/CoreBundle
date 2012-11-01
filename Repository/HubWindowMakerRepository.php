@@ -72,4 +72,32 @@ class HubWindowMakerRepository extends WindowMakerRepository
 
         return $slots;
     }
+
+    /**
+     * findForWindowMakerCommand()
+     *
+     * We simply get the WindowMakers that have not run
+     * for the longest time
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-30
+     *
+     * @param  integer  $limit  The max number of WindowMakers
+     *
+     * @return array
+     */
+     public function findForWindowMakerCommand($limit = 10)
+     {
+        $qb = $this->getEntityManager()->createQueryBuilder()
+            ->from('HarvestCloudCoreBundle:HubWindowMaker', 'wm')
+            ->select('wm')
+            ->leftJoin('wm.hub', 'h')
+            ->orderBy('wm.last_run_at', 'DESC')
+            ->setMaxResults($limit)
+        ;
+
+        $q = $qb->getQuery();
+
+        return $q->execute();
+     }
 }
