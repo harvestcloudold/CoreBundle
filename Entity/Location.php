@@ -493,7 +493,20 @@ class Location implements Geolocatable, Geocodable
      */
     public function getCityStateZip()
     {
-        return $this->getTown().', '.$this->getStateCode().' '.$this->getPostalCode();
+        return $this->getCityState().' '.$this->getPostalCode();
+    }
+
+    /**
+     * getCityState()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-11-01
+     *
+     * @return string
+     */
+    public function getCityState()
+    {
+        return $this->getTown().', '.$this->getStateCode();
     }
 
     /**
