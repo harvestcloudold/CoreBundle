@@ -36,17 +36,22 @@ class HubWindowRepository extends EntityRepository
      */
     public function findForSelectWindowForOrderCollection(OrderCollection $orderCollection)
     {
-        $qb = $this->getEntityManager()->createQueryBuilder();
-        $qb->from('HarvestCloudCoreBundle:HubWindow', 'hw')
-            ->select('hw')
-            ->leftJoin('hw.sellerWindows', 'sw')
-            ->leftJoin('sw.sellerHubRef', 'shr')
-            ->leftJoin('shr.seller', 's')
-            ->where($qb->expr()->in('s.id', $orderCollection->getSellerIds()))
+        $em = $this->getEntityManager();
+
+        $q  = $em->createQuery('
+                SELECT   hw
+                FROM     HarvestCloudCoreBundle:HubWindow hw
+                JOIN     hw.sellerWindows sw
+                JOIN     sw.sellerHubRef  shr
+                JOIN     shr.seller       s
+                WHERE    s.id IN (:seller_ids)
+                GROUP BY hw.start_time
+                HAVING   COUNT(sw.id) = :num_sellers
+            ')
+            ->setParameter('seller_ids', $orderCollection->getSellerIds())
+            ->setParameter('num_sellers', count($orderCollection->getSellerIds()))
         ;
 
-        $q = $qb->getQuery();
-
-        return $q->execute();
+        return $q->getResult();
     }
 }
