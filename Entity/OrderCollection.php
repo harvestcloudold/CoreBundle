@@ -286,4 +286,61 @@ class OrderCollection
         return $sub_total;
     }
 
+    /**
+     * getSellerIds()
+     *
+     * Get an array of the ids for all of the Sellers in this OrderCollection
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-11-02
+     *
+     * @return array
+     */
+    public function getSellerIds()
+    {
+        $sellerIds = array();
+
+        foreach ($this->getOrders() as $order)
+        {
+            $sellerIds[] = $order->getSeller()->getId();
+        }
+
+        return $sellerIds;
+    }
+
+    /**
+     * setHubWindow()
+     *
+     * Sets the SellerWindows for each Order
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-11-03
+     *
+     * @param  HubWindow  $hubWindow
+     */
+    public function setHubWindow(HubWindow $hubWindow)
+    {
+        // Apply the appropriate SellerWindow for each Order
+        foreach ($hubWindow->getSellerWindows() as $sellerWindow)
+        {
+            foreach ($this->getOrders() as $order)
+            {
+                if ($sellerWindow->getSeller()->getId() == $order->getSeller()->getId())
+                {
+                    $order->setSellerWindow($sellerWindow);
+
+                    break;
+                }
+            }
+        }
+
+        // Now make sure every Order has a SellerWindow
+        foreach ($this->getOrders() as $order)
+        {
+            if (!$order->getSellerWindow()->getId())
+            {
+                throw new \Exception('Order #'.$order->getId().' has no SellerWindow');
+            }
+        }
+    }
 }
