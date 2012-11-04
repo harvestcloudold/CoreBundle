@@ -10,6 +10,7 @@
 namespace HarvestCloud\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use HarvestCloud\CoreBundle\Entity\OrderCollection;
 
 /**
  * HubWindowRepository
@@ -22,4 +23,30 @@ use Doctrine\ORM\EntityRepository;
  */
 class HubWindowRepository extends EntityRepository
 {
+    /**
+     * findForSelectWindowForOrderCollection()
+     *
+     * Find all HubWindows that have associated SellerWindows that match
+     * all of the Sellers in the given OrderCollection
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-11-02
+     *
+     * @return array
+     */
+    public function findForSelectWindowForOrderCollection(OrderCollection $orderCollection)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb->from('HarvestCloudCoreBundle:HubWindow', 'hw')
+            ->select('hw')
+            ->leftJoin('hw.sellerWindows', 'sw')
+            ->leftJoin('sw.sellerHubRef', 'shr')
+            ->leftJoin('shr.seller', 's')
+            ->where($qb->expr()->in('s.id', $orderCollection->getSellerIds()))
+        ;
+
+        $q = $qb->getQuery();
+
+        return $q->execute();
+    }
 }
