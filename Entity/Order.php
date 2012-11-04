@@ -894,7 +894,7 @@ class Order
      *
      * @param  SellerWindow $sellerWindow
      */
-    public function setPickupWindow(SellerWindow $sellerWindow)
+    public function setSellerWindow(SellerWindow $sellerWindow)
     {
         $this->sellerWindow = $sellerWindow;
         $this->setHub($sellerWindow->getSellerHubRef()->getHub());
@@ -908,7 +908,7 @@ class Order
      *
      * @return SellerWindow
      */
-    public function getPickupWindow()
+    public function getSellerWindow()
     {
         return $this->sellerWindow;
     }
