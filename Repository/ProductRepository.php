@@ -45,6 +45,8 @@ class ProductRepository extends EntityRepository
             $qb->setParameter('range', $filter->getRange());
         }
 
+        $qb->andWhere('p.quantity_available > 0');
+
         $q = $qb->getQuery();
 
         return $q->execute();
