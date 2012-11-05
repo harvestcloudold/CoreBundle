@@ -1242,4 +1242,17 @@ class Profile implements Geolocatable
 
         return $windows;
     }
+
+    /**
+     * getAvatarName()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @sicne  2012-11-04
+     *
+     * @return string
+     */
+    public function getAvatarName()
+    {
+        return (string) $this->getId()%16;
+    }
 }
