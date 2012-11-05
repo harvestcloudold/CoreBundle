@@ -1255,4 +1255,19 @@ class Profile implements Geolocatable
     {
         return (string) $this->getId()%16;
     }
+
+    /**
+     * getProductLocations()
+     *
+     * Locations that this Seller can use as Product Locations
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-11-04
+     *
+     * @return array
+     */
+    public function getProductLocations()
+    {
+        return $this->getLocations();
+    }
 }

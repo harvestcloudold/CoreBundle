@@ -11,6 +11,8 @@ namespace HarvestCloud\CoreBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
+use HarvestCloud\CoreBundle\Entity\Profile;
+use HarvestCloud\CoreBundle\Repository\LocationRepository;
 
 /**
  * ProductType
@@ -21,6 +23,26 @@ use Symfony\Component\Form\FormBuilder;
 class ProductType extends AbstractType
 {
     /**
+     * seller
+     *
+     * @var Profile
+     */
+    protected $seller;
+
+    /**
+     * __construct()
+     *
+     * @author Tom Haskins-Vaugha <tom@harvestcloud.com>
+     * @since  2012-11-04
+     *
+     * @param  Profile  $seller
+     */
+    public function __construct(Profile $seller)
+    {
+        $this->seller = $seller;
+    }
+
+    /**
      * buildForm
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
@@ -28,11 +50,32 @@ class ProductType extends AbstractType
      */
     public function buildForm(FormBuilder $builder, array $options)
     {
+        $seller = $this->seller;
+
+        // Only display Locations select box if we have more than one
+        // Location for this Seller
+        if (count($seller->getProductLocations()) > 1)
+        {
+            $builder
+                ->add('location', 'entity', array(
+                    'class'    => 'HarvestCloudCoreBundle:Location',
+                    'query_builder' => function(LocationRepository $er) use ($seller) {
+                        return $er->createQueryBuilder('l')
+                            ->where('l.profile = :seller')
+                            ->setParameter('seller', $seller)
+                        ;
+                    },
+                ))
+            ;
+        }
+
         $builder
-            ->add('location')
             ->add('name')
             ->add('short_description')
-            ->add('long_description')
+
+            // Hide this for now
+            //->add('long_description')
+
             ->add('initial_quantity')
             ->add('price')
         ;
