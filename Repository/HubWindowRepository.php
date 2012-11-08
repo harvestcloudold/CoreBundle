@@ -57,7 +57,7 @@ class HubWindowRepository extends EntityRepository
         // Calculate hub fees
         foreach ($windows as $window)
         {
-            $window->setTotalFeeForOrderCollection($orderCollection);
+            $window->setTotalHubFeeForOrderCollection($orderCollection);
         }
 
         return $windows;
