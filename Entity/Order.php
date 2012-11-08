@@ -957,4 +957,24 @@ class Order
     {
         $this->setRating($rating);
     }
+
+    /**
+     * getLineItemTotal()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-05-01
+     *
+     * @return float
+     */
+    public function getLineItemTotal()
+    {
+        $amount = 0;
+
+        foreach ($this->getLineItems() as $lineItem)
+        {
+            $amount += $lineItem->getPrice()*$lineItem->getQuantity();
+        }
+
+        return $amount;
+    }
 }

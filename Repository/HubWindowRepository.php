@@ -52,6 +52,14 @@ class HubWindowRepository extends EntityRepository
             ->setParameter('num_sellers', count($orderCollection->getSellerIds()))
         ;
 
-        return $q->getResult();
+        $windows = $q->getResult();
+
+        // Calculate hub fees
+        foreach ($windows as $window)
+        {
+            $window->setTotalFeeForOrderCollection($orderCollection);
+        }
+
+        return $windows;
     }
 }

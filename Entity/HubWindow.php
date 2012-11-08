@@ -76,6 +76,16 @@ class HubWindow implements Windowable
     protected $windowMaker;
 
     /**
+     * total_hub_fee_for_order_collection
+     *
+     * This field is not persisted to the database. It is only used as a way
+     * of storing the total fee for the Buyer window selector
+     *
+     * @var float
+     */
+    protected $total_hub_fee_for_order_collection;
+
+    /**
      * __construct()
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
@@ -229,5 +239,44 @@ class HubWindow implements Windowable
     public function getWindowMaker()
     {
         return $this->windowMaker;
+    }
+
+    /**
+     * getTotalHubFeeForOrderCollection()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-11-07
+     *
+     * @return float
+     */
+    public function getTotalHubFeeForOrderCollection()
+    {
+        if (!$this->total_hub_fee_for_order_collection)
+        {
+            throw new \Exception('total_hub_fee_for_order_collection for HubWindow #'.$this->getId().' has not been set yet');
+        }
+
+        return $this->total_hub_fee_for_order_collection;
+    }
+
+    /**
+     * setTotalHubFeeForOrderCollection()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-11-07
+     *
+     * @param  OrderCollection
+     */
+    public function setTotalHubFeeForOrderCollection(OrderCollection $orderCollection)
+    {
+        foreach ($this->getSellerWindows() as $window)
+        {
+            $order = $orderCollection->getOrderForSeller($window->getSeller());
+
+            if ($order)
+            {
+                $this->total_hub_fee_for_order_collection += $window->getTotalHubFeeForOrder($order);
+            }
+        }
     }
 }
