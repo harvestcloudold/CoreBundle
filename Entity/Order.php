@@ -104,6 +104,16 @@ class Order
     protected $sellerWindow;
 
     /**
+     * @ORM\Column(type="decimal", scale="2", nullable=true)
+     */
+    protected $sub_total;
+
+    /**
+     * @ORM\Column(type="decimal", scale="2", nullable=true)
+     */
+    protected $total;
+
+    /**
      * __construct()
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
@@ -217,21 +227,6 @@ class Order
         }
 
         return round($amount, 2);
-    }
-
-    /**
-     * getSubTotal()
-     *
-     * Sum of line items minus any discounts
-     *
-     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
-     * @since  2012-10-23
-     *
-     * @return float
-     */
-    public function getSubTotal()
-    {
-        return $this->getSumOfLineItems();
     }
 
     /**
@@ -976,5 +971,57 @@ class Order
         }
 
         return $amount;
+    }
+
+    /**
+     * Set sub_total
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-11-08
+     *
+     * @param decimal $subTotal
+     */
+    public function setSubTotal($subTotal)
+    {
+        $this->sub_total = $subTotal;
+    }
+
+    /**
+     * Get sub_total
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-11-08
+     *
+     * @return decimal
+     */
+    public function getSubTotal()
+    {
+        return $this->sub_total;
+    }
+
+    /**
+     * Set total
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-11-08
+     *
+     * @param decimal $total
+     */
+    public function setTotal($total)
+    {
+        $this->total = $total;
+    }
+
+    /**
+     * Get total
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-11-08
+     *
+     * @return decimal
+     */
+    public function getTotal()
+    {
+        return $this->total;
     }
 }
