@@ -967,7 +967,7 @@ class Order
 
         foreach ($this->getLineItems() as $lineItem)
         {
-            $amount += $lineItem->getPrice()*$lineItem->getQuantity();
+            $amount += ($lineItem->getPrice()*$lineItem->getQuantity());
         }
 
         return $amount;
@@ -1023,5 +1023,17 @@ class Order
     public function getTotal()
     {
         return $this->total;
+    }
+
+    /**
+     * updateTotals()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-11-15
+     */
+    public function updateTotals()
+    {
+        $this->setSubTotal($this->getLineItemTotal());
+        $this->setTotal($this->getLineItemTotal());
     }
 }
