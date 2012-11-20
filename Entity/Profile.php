@@ -1247,7 +1247,7 @@ class Profile implements Geolocatable
      * getAvatarName()
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
-     * @sicne  2012-11-04
+     * @since  2012-11-04
      *
      * @return string
      */
