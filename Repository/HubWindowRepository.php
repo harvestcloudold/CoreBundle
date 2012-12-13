@@ -55,9 +55,16 @@ class HubWindowRepository extends EntityRepository
         $windows = $q->getResult();
 
         // Calculate hub fees
-        foreach ($windows as $window)
+        foreach ($windows as $i => $window)
         {
-            $window->setTotalHubFeeForOrderCollection($orderCollection);
+            if ($window->getStartTime()->format(\DateTime::ATOM) < date(\DateTime::ATOM))
+            {
+                unset($windows[$i]);
+            }
+            else
+            {
+                $window->setTotalHubFeeForOrderCollection($orderCollection);
+            }
         }
 
         return $windows;
