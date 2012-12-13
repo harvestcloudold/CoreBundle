@@ -32,6 +32,8 @@ class HubWindowRepository extends EntityRepository
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-11-02
      *
+     * @todo   Need to add some DQL date functions to find only future windows
+     *
      * @return array
      */
     public function findForSelectWindowForOrderCollection(OrderCollection $orderCollection)
