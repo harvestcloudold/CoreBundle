@@ -47,9 +47,11 @@ class HubWindowRepository extends EntityRepository
                 JOIN     sw.sellerHubRef  shr
                 JOIN     shr.seller       s
                 WHERE    s.id IN (:seller_ids)
+                AND      UNIX_TIMESTAMP(sw.start_time) > :now
                 GROUP BY hw.start_time
                 HAVING   COUNT(sw.id) = :num_sellers
             ')
+            ->setParameter('now', time())
             ->setParameter('seller_ids', $orderCollection->getSellerIds())
             ->setParameter('num_sellers', count($orderCollection->getSellerIds()))
         ;
@@ -59,14 +61,7 @@ class HubWindowRepository extends EntityRepository
         // Calculate hub fees
         foreach ($windows as $i => $window)
         {
-            if ($window->getStartTime()->format(\DateTime::ATOM) < date(\DateTime::ATOM))
-            {
-                unset($windows[$i]);
-            }
-            else
-            {
-                $window->setTotalHubFeeForOrderCollection($orderCollection);
-            }
+            $window->setTotalHubFeeForOrderCollection($orderCollection);
         }
 
         return $windows;
