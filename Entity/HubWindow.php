@@ -279,4 +279,29 @@ class HubWindow implements Windowable
             }
         }
     }
+
+    /**
+     * getSlots()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-12-22
+     *
+     * @return array
+     */
+    public static function getSlots()
+    {
+        $slots = array();
+
+        foreach (array_keys(WindowMaker::getStartTimeChoices()) as $hour)
+        {
+            for ($i=0; $i<14; $i++)
+            {
+                $date = new \DateTime('+'.$i.' days');
+
+                $slots[$hour.':00'][$date->format('Y-m-d')] = null;
+            }
+        }
+
+        return $slots;
+    }
 }

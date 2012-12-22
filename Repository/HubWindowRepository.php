@@ -11,6 +11,7 @@ namespace HarvestCloud\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use HarvestCloud\CoreBundle\Entity\OrderCollection;
+use HarvestCloud\CoreBundle\Entity\HubWindow;
 
 /**
  * HubWindowRepository
@@ -65,5 +66,34 @@ class HubWindowRepository extends EntityRepository
         }
 
         return $windows;
+    }
+
+    /**
+     * getCalendarViewArray()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-10-25
+     *
+     * @param  HarvestCloud\CoreBundle\Entity\Profile $hub
+     */
+    public function getCalendarViewArray(OrderCollection $orderCollection)
+    {
+        $windows  = $this->findForSelectWindowForOrderCollection($orderCollection);
+        $slots     = HubWindow::getSlots();
+
+        foreach ($windows as $window)
+        {
+            $hour = $window->getStartTime()->format('H:i');
+            $date = $window->getStartTime()->format('Y-m-d');
+
+            if (array_key_exists($hour, $slots) && array_key_exists($date, $slots[$hour]))
+            {
+                $slots[$hour][$date] = $window; //->getStartTime()->format(\DateTime::ATOM);
+            }
+        }
+
+        // \HarvestCloud\CoreBundle\Util\Debug::show($slots);
+
+        return $slots;
     }
 }
