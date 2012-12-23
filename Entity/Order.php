@@ -64,7 +64,7 @@ class Order
     protected $status_code;
 
     /**
-     * @ORM\ManyToOne(targetEntity="OrderCollection", inversedBy="orders")
+     * @ORM\ManyToOne(targetEntity="OrderCollection", inversedBy="orders", cascade={"persist"})
      * @ORM\JoinColumn(name="collection_id", referencedColumnName="id")
      */
     protected $collection;
@@ -303,7 +303,7 @@ class Order
             }
         }
 
-        return null;
+        return $this->createLineItemForProduct($product);
     }
 
     /**
@@ -322,9 +322,39 @@ class Order
     {
         $lineItem = new OrderLineItem();
         $lineItem->setProduct($product);
-        $lineItem->setQuantity(1);
+
+        // Don't assume any quantity here
+        // We will add it later
+        $lineItem->setQuantity(0);
 
         $this->addLineItem($lineItem);
+
+        return $lineItem;
+    }
+
+    /**
+     * addProduct()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-12-22
+     *
+     * @param  Product  $product
+     * @param  int      $quantity
+     *
+     * @return LineItem
+     */
+    public function addProduct(Product $product, $quantity)
+    {
+        $lineItem = $this->getLineItemForProduct($product);
+
+        // Update quantity
+        $lineItem->setQuantity($lineItem->getQuantity() + $quantity);
+
+        // Whenever we add new items, we update the price to the most recent
+        $lineItem->setPrice($product->getPrice());
+
+        // Update Order totals
+        $this->updateTotals();
 
         return $lineItem;
     }

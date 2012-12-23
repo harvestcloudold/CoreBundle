@@ -196,7 +196,7 @@ class OrderCollection
             }
         }
 
-        return null;
+        return $this->createOrderForSeller($seller);
     }
 
     /**
@@ -218,6 +218,28 @@ class OrderCollection
         $this->addOrder($order);
 
         return $order;
+    }
+
+    /**
+     * addProduct()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-12-22
+     *
+     * @param  Product  $product
+     * @param  int      $quantity
+     *
+     * @retutn LineItem
+     */
+    public function addProduct(Product $product, $quantity)
+    {
+        // Find the Order within this OrderCollection for the Product's Seller
+        $order = $this->getOrderForSeller($product->getSeller());
+
+        // Add the Product to the Order
+        $lineItem = $order->addProduct($product, $quantity);
+
+        return $lineItem;
     }
 
     /**

@@ -40,7 +40,7 @@ class OrderLineItem
     protected $price;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Order", inversedBy="lineItems")
+     * @ORM\ManyToOne(targetEntity="Order", inversedBy="lineItems", cascade={"persist"})
      * @ORM\JoinColumn(name="order_id", referencedColumnName="id")
      */
     protected $order;
