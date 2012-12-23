@@ -365,4 +365,65 @@ class OrderCollection
             }
         }
     }
+
+    /**
+     * getLineItemForProduct()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-12-23
+     *
+     * @param  Product  $product
+     *
+     * @return LineItem
+     */
+    public function getLineItemForProduct(Product $product)
+    {
+        // Find the Order within this OrderCollection for the Product's Seller
+        $order = $this->getOrderForSeller($product->getSeller());
+
+        $lineItem = $order->getLineItemForProduct($product);
+
+        return $lineItem;
+    }
+
+    /**
+     * getQuantity()
+     *
+     * Get quantity of given product in this cart/OrderCollection
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-12-23
+     *
+     * @param  Product  $product
+     *
+     * @return int
+     */
+    public function getQuantity(Product $product)
+    {
+        return $this->getLineItemForProduct($product)->getQuantity();
+    }
+
+    /**
+     * getLineItemQuantitiesIndexedByProductId()
+     *
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-12-23
+     *
+     * @return array
+     */
+    public function getLineItemQuantitiesIndexedByProductId()
+    {
+        $lineItems = array();
+
+        foreach ($this->getOrders() as $order)
+        {
+            foreach ($order->getLineItems() as $lineItem)
+            {
+                $lineItems[$lineItem->getProduct()->getId()] = $lineItem->getQuantity();
+            }
+        }
+
+        return $lineItems;
+    }
 }

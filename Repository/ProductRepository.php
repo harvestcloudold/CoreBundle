@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityRepository;
 use HarvestCloud\CoreBundle\Entity\ProductFilter;
 use HarvestCloud\GeoBundle\Util\LatLng;
 use HarvestCloud\CoreBundle\Entity\Profile;
+use HarvestCloud\CoreBundle\Entity\OrderCollection;
 
 /**
  * ProductRepository
@@ -25,9 +26,10 @@ class ProductRepository extends EntityRepository
      * @since  2012-04-15
      * @todo   Create SearchFilter class
      *
-     * @param  ProductFilter $filter
+     * @param  ProductFilter    $filter
+     * @param  OrderCollection  $orderCollection
      */
-    public function findForSearchFilter(ProductFilter $filter)
+    public function findForSearchFilter(ProductFilter $filter, OrderCollection $orderCollection = null)
     {
         $qb = $this->getEntityManager()->createQueryBuilder()
             ->from('HarvestCloudCoreBundle:Product', 'p')
@@ -49,7 +51,26 @@ class ProductRepository extends EntityRepository
 
         $q = $qb->getQuery();
 
-        return $q->execute();
+        $products =  $q->execute();
+
+
+        if ($orderCollection)
+        {
+            // Set quantity in cart
+            $lineItemQuantities = $orderCollection->getLineItemQuantitiesIndexedByProductId();
+
+            foreach ($products as $product)
+            {
+                $id = $product[0]->getId();
+
+                if (array_key_exists($id, $lineItemQuantities))
+                {
+                    $product[0]->setQuantityInCart($lineItemQuantities[$id]);
+                }
+            }
+        }
+
+        return $products;
     }
 
     /**

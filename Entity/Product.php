@@ -125,6 +125,15 @@ class Product implements Geolocatable
     protected $category_path;
 
     /**
+     * quantity_in_cart
+     *
+     * This is not persisted to the database
+     *
+     * @param integer
+     */
+    protected $quantity_in_cart = 0;
+
+    /**
      * __construct()
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
@@ -627,5 +636,31 @@ class Product implements Geolocatable
     public function getSeller()
     {
         return $this->seller;
+    }
+
+    /**
+     * setQuantityInCart()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-12-23
+     *
+     * @param  int  $quantity_in_cart
+     */
+    public function setQuantityInCart($quantity_in_cart)
+    {
+        $this->quantity_in_cart = (int) $quantity_in_cart;
+    }
+
+    /**
+     * getQuantityInCart()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-12-23
+     *
+     * @return int
+     */
+    public function getQuantityInCart()
+    {
+        return $this->quantity_in_cart;
     }
 }
