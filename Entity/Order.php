@@ -347,6 +347,18 @@ class Order
     {
         $lineItem = $this->getLineItemForProduct($product);
 
+        // Check if there is enough product available
+        if ($lineItem->getQuantity() + $quantity > $product->getQuantityAvailable())
+        {
+            throw new \Exception('Not enough product available');
+        }
+
+        // Don't remove more than is in cart
+        if ($lineItem->getQuantity() + $quantity < 0)
+        {
+            throw new \Exception('Cannot have negative quantity');
+        }
+
         // Update quantity
         $lineItem->setQuantity($lineItem->getQuantity() + $quantity);
 
