@@ -114,6 +114,27 @@ class Order
     protected $total;
 
     /**
+     * The fixed part (in dollars) of the fee that a Buyer is charged by a
+     * Seller for an Order to be delivered to a Hub
+     *
+     * @see HubWindow::$fixed_fee
+     *
+     * @ORM\Column(type="decimal", scale="2")
+     */
+    protected $fixed_hub_fee = 0.25;
+
+    /**
+     * The variable part (%) of the fee that a Buyer is charged by a Seller
+     * for an Order to be delivered to a Hub
+     *
+     * @see HubWindow::$variabl_fee
+     *
+     * @ORM\Column(type="decimal", scale="3")
+     */
+    protected $variable_hub_fee = 5;
+
+
+    /**
      * __construct()
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
@@ -268,6 +289,19 @@ class Order
         $this->lineItems[] = $lineItem;
 
         $lineItem->setOrder($this);
+    }
+
+    /**
+     * addOrderLineItem()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-01-10
+     *
+     * @param HarvestCloud\CoreBundle\Entity\OrderLineItem $lineItem
+     */
+    public function addOrderLineItem(\HarvestCloud\CoreBundle\Entity\OrderLineItem $lineItem)
+    {
+        throw new \Exception('Do not use this method. Please use addLineItem() instead.');
     }
 
     /**
@@ -1077,5 +1111,57 @@ class Order
     {
         $this->setSubTotal($this->getLineItemTotal());
         $this->setTotal($this->getLineItemTotal());
+    }
+
+    /**
+     * Set fixed_hub_fee
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-01-10
+     *
+     * @param decimal $fixedHubFee
+     */
+    public function setFixedHubFee($fixedHubFee)
+    {
+        $this->fixed_hub_fee = $fixedHubFee;
+    }
+
+    /**
+     * Get fixed_hub_fee
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-01-10
+     *
+     * @return decimal
+     */
+    public function getFixedHubFee()
+    {
+        return $this->fixed_hub_fee;
+    }
+
+    /**
+     * Set variable_hub_fee
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-01-10
+     *
+     * @param decimal $variableHubFee
+     */
+    public function setVariableHubFee($variableHubFee)
+    {
+        $this->variable_hub_fee = $variableHubFee;
+    }
+
+    /**
+     * Get variable_hub_fee
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-01-10
+     *
+     * @return decimal
+     */
+    public function getVariableHubFee()
+    {
+        return $this->variable_hub_fee;
     }
 }
