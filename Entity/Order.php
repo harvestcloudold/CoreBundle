@@ -965,10 +965,14 @@ class Order
      *
      * @param  SellerWindow $sellerWindow
      */
-    public function setSellerWindow(SellerWindow $sellerWindow)
+    public function setSellerWindow(\HarvestCloud\CoreBundle\Entity\SellerWindow $sellerWindow)
     {
         $this->sellerWindow = $sellerWindow;
         $this->setHub($sellerWindow->getSellerHubRef()->getHub());
+
+        // add fees
+        $this->setFixedHubFee($sellerWindow->getSellerHubRef()->getFixedFee());
+        $this->setVariableHubFee($sellerWindow->getSellerHubRef()->getVariableFee());
     }
 
     /**
