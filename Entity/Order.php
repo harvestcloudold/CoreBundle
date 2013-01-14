@@ -121,7 +121,7 @@ class Order
      *
      * @ORM\Column(type="decimal", scale="2")
      */
-    protected $fixed_hub_fee = 0.25;
+    protected $fixed_hub_fee = 0;
 
     /**
      * The variable part (%) of the fee that a Buyer is charged by a Seller
@@ -131,7 +131,7 @@ class Order
      *
      * @ORM\Column(type="decimal", scale="3")
      */
-    protected $variable_hub_fee = 5;
+    protected $variable_hub_fee = 0;
 
 
     /**
