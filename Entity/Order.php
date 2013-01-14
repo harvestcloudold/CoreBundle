@@ -133,6 +133,13 @@ class Order
      */
     protected $variable_hub_fee = 0;
 
+    /**
+     * The actual hub fee charged on an Order
+     *
+     * @ORM\Column(type="decimal", scale="2")
+     */
+    protected $hub_fee = 0;
+
 
     /**
      * __construct()
@@ -1167,5 +1174,31 @@ class Order
     public function getVariableHubFee()
     {
         return $this->variable_hub_fee;
+    }
+
+    /**
+     * Set hub_fee
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-01-13
+     *
+     * @param decimal $hubFee
+     */
+    public function setHubFee($hubFee)
+    {
+        $this->hub_fee = $hubFee;
+    }
+
+    /**
+     * Get hub_fee
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-01-13
+     *
+     * @return decimal
+     */
+    public function getHubFee()
+    {
+        return $this->hub_fee;
     }
 }
