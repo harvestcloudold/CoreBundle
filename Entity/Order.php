@@ -980,6 +980,9 @@ class Order
         // add fees
         $this->setFixedHubFee($sellerWindow->getSellerHubRef()->getFixedFee());
         $this->setVariableHubFee($sellerWindow->getSellerHubRef()->getVariableFee());
+
+        // calculate the actual fee
+        $this->setHubFee($sellerWindow->getTotalHubFeeForOrder($this));
     }
 
     /**
