@@ -22,7 +22,11 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="discr", type="string")
- * @ORM\DiscriminatorMap({"line_item" = "OrderStockTransaction", "initial" = "InitialStockTransaction"})
+ * @ORM\DiscriminatorMap({
+ *    "line_item" = "OrderStockTransaction",
+ *    "initial"   = "InitialStockTransaction",
+ *    "restock"   = "RestockTransaction"
+ * })
  * @ORM\Table(name="stock_transaction")
  */
 abstract class BaseStockTransaction
@@ -55,7 +59,7 @@ abstract class BaseStockTransaction
     protected $status_code = self::STATUS_PENDING;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Product", inversedBy="stockTransactions")
+     * @ORM\ManyToOne(targetEntity="Product", inversedBy="stockTransactions", cascade={"persist"})
      * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
      */
     protected $product;

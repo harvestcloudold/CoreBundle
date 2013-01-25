@@ -663,4 +663,17 @@ class Product implements Geolocatable
     {
         return $this->quantity_in_cart;
     }
+
+    /**
+     * adjustQuantity()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-01-21
+     *
+     * @param  integer $quantity
+     */
+    public function adjustQuantity($quantity)
+    {
+      $this->setQuantityAvailable($this->getQuantityAvailable()+$quantity);
+    }
 }
