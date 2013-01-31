@@ -83,6 +83,42 @@ class Profile implements Geolocatable
     private $defaultLocation;
 
     /**
+     * @ORM\OneToOne(targetEntity="\HarvestCloud\DoubleEntryBundle\Entity\Account", cascade={"persist"})
+     * @ORM\JoinColumn(name="root_account_id", referencedColumnName="id")
+     */
+    private $rootAccount;
+
+    /**
+     * @ORM\OneToOne(targetEntity="\HarvestCloud\DoubleEntryBundle\Entity\Account", cascade={"persist"})
+     * @ORM\JoinColumn(name="cost_of_goods_sold_account_id", referencedColumnName="id")
+     */
+    private $costOfGoodsSoldAccount;
+
+    /**
+     * @ORM\OneToOne(targetEntity="\HarvestCloud\DoubleEntryBundle\Entity\Account", cascade={"persist"})
+     * @ORM\JoinColumn(name="sales_account_id", referencedColumnName="id")
+     */
+    private $salesAccount;
+
+    /**
+     * @ORM\OneToOne(targetEntity="\HarvestCloud\DoubleEntryBundle\Entity\Account", cascade={"persist"})
+     * @ORM\JoinColumn(name="expense_account_id", referencedColumnName="id")
+     */
+    private $expenseAccount;
+
+    /**
+     * @ORM\OneToOne(targetEntity="\HarvestCloud\DoubleEntryBundle\Entity\Account", cascade={"persist"})
+     * @ORM\JoinColumn(name="ar_account_id", referencedColumnName="id")
+     */
+    private $accountsReceivableAccount;
+
+    /**
+     * @ORM\OneToOne(targetEntity="\HarvestCloud\DoubleEntryBundle\Entity\Account", cascade={"persist"})
+     * @ORM\JoinColumn(name="ap_account_id", referencedColumnName="id")
+     */
+    private $accountsPayableAccount;
+
+    /**
      * @ORM\Column(type="decimal", scale="7", nullable=true)
      */
     protected $latitude;
@@ -1269,5 +1305,216 @@ class Profile implements Geolocatable
     public function getProductLocations()
     {
         return $this->getLocations();
+    }
+
+    /**
+     * createSetOfAccounts()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-01-27
+     *
+     * @return Account
+     */
+    public function createSetOfAccounts()
+    {
+        $account = new \HarvestCloud\DoubleEntryBundle\Entity\Account('Accounts for '.$this->getName());
+        $account->setProfile($this);
+
+        $this->setRootAccount($account);
+
+        // Assets
+        $asset = new \HarvestCloud\DoubleEntryBundle\Entity\Asset('Assets');
+        $ar    = new \HarvestCloud\DoubleEntryBundle\Entity\AccountsReceivable('Accounts Receivable');
+
+        $this->setAccountsReceivableAccount($ar);
+
+        $account->addAccount($asset);
+        $asset->addAccount($ar);
+
+        // Liability
+        $liability = new \HarvestCloud\DoubleEntryBundle\Entity\Liability('Liabilities');
+        $ap        = new \HarvestCloud\DoubleEntryBundle\Entity\AccountsPayable('Accounts Payable');
+
+        $this->setAccountsPayableAccount($ap);
+
+        $account->addAccount($liability);
+        $liability->addAccount($ap);
+
+        // Income
+        $income = new \HarvestCloud\DoubleEntryBundle\Entity\Income('Income');
+        $sales  = new \HarvestCloud\DoubleEntryBundle\Entity\Sales('Sales');
+
+        $this->setSalesAccount($sales);
+
+        $account->addAccount($income);
+        $income->addAccount($sales);
+
+        // Expenses
+        $expenses        = new \HarvestCloud\DoubleEntryBundle\Entity\Expense('Expenses');
+        $costOfGoodsSold = new \HarvestCloud\DoubleEntryBundle\Entity\CostOfGoodsSold('Cost of Goods Sold');
+
+        $this->setExpenseAccount($expenses);
+        $this->setCostOfGoodsSoldAccount($costOfGoodsSold);
+
+        $account->addAccount($expenses);
+        $expenses->addAccount($costOfGoodsSold);
+
+        return $account;
+    }
+
+    /**
+     * Set costOfGoodsSoldAccount
+     *
+     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @since  2013-01-30
+     *
+     * @param HarvestCloud\CoreBundle\Entity\Account $costOfGoodsSoldAccount
+     */
+    public function setCostOfGoodsSoldAccount(\HarvestCloud\DoubleEntryBundle\Entity\Account $costOfGoodsSoldAccount)
+    {
+        $this->costOfGoodsSoldAccount = $costOfGoodsSoldAccount;
+    }
+
+    /**
+     * Get costOfGoodsSoldAccount
+     *
+     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @since  2013-01-30
+     *
+     * @return HarvestCloud\CoreBundle\Entity\Account
+     */
+    public function getCostOfGoodsSoldAccount()
+    {
+        return $this->costOfGoodsSoldAccount;
+    }
+
+    /**
+     * Set salesAccount
+     *
+     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @since  2013-01-30
+     *
+     * @param HarvestCloud\CoreBundle\Entity\Account $salesAccount
+     */
+    public function setSalesAccount(\HarvestCloud\DoubleEntryBundle\Entity\Account $salesAccount)
+    {
+        $this->salesAccount = $salesAccount;
+    }
+
+    /**
+     * Get salesAccount
+     *
+     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @since  2013-01-30
+     *
+     * @return HarvestCloud\CoreBundle\Entity\Account
+     */
+    public function getSalesAccount()
+    {
+        return $this->salesAccount;
+    }
+
+    /**
+     * Set expenseAccount
+     *
+     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @since  2013-01-30
+     *
+     * @param HarvestCloud\CoreBundle\Entity\Account $expenseAccount
+     */
+    public function setExpenseAccount(\HarvestCloud\DoubleEntryBundle\Entity\Account $expenseAccount)
+    {
+        $this->expenseAccount = $expenseAccount;
+    }
+
+    /**
+     * Get expenseAccount
+     *
+     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @since  2013-01-30
+     *
+     * @return HarvestCloud\CoreBundle\Entity\Account
+     */
+    public function getExpenseAccount()
+    {
+        return $this->expenseAccount;
+    }
+
+    /**
+     * Set accountsReceivableAccount
+     *
+     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @since  2013-01-30
+     *
+     * @param HarvestCloud\CoreBundle\Entity\Account $accountsReceivableAccount
+     */
+    public function setAccountsReceivableAccount(\HarvestCloud\DoubleEntryBundle\Entity\Account $accountsReceivableAccount)
+    {
+        $this->accountsReceivableAccount = $accountsReceivableAccount;
+    }
+
+    /**
+     * Get accountsReceivableAccount
+     *
+     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @since  2013-01-30
+     *
+     * @return HarvestCloud\CoreBundle\Entity\Account
+     */
+    public function getAccountsReceivableAccount()
+    {
+        return $this->accountsReceivableAccount;
+    }
+
+    /**
+     * Set accountsPayableAccount
+     *
+     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @since  2013-01-30
+     *
+     * @param HarvestCloud\CoreBundle\Entity\Account $accountsPayableAccount
+     */
+    public function setAccountsPayableAccount(\HarvestCloud\DoubleEntryBundle\Entity\Account $accountsPayableAccount)
+    {
+        $this->accountsPayableAccount = $accountsPayableAccount;
+    }
+
+    /**
+     * Get accountsPayableAccount
+     *
+     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @since  2013-01-30
+     *
+     * @return HarvestCloud\CoreBundle\Entity\Account
+     */
+    public function getAccountsPayableAccount()
+    {
+        return $this->accountsPayableAccount;
+    }
+
+    /**
+     * Set rootAccount
+     *
+     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @since  2013-01-30
+     *
+     * @param HarvestCloud\DoubleEntryBundle\Entity\Account $rootAccount
+     */
+    public function setRootAccount(\HarvestCloud\DoubleEntryBundle\Entity\Account $rootAccount)
+    {
+        $this->rootAccount = $rootAccount;
+    }
+
+    /**
+     * Get rootAccount
+     *
+     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @since  2013-01-30
+     *
+     * @return HarvestCloud\DoubleEntryBundle\Entity\Account
+     */
+    public function getRootAccount()
+    {
+        return $this->rootAccount;
     }
 }
