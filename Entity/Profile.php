@@ -1317,6 +1317,11 @@ class Profile implements Geolocatable
      */
     public function createSetOfAccounts()
     {
+        if ($this->getRootAccount())
+        {
+            throw new \Exception('Profile already has a set of accounts');
+        }
+
         $account = new \HarvestCloud\DoubleEntryBundle\Entity\Account('Accounts for '.$this->getName());
         $account->setProfile($this);
 
