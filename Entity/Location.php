@@ -22,6 +22,7 @@ use HarvestCloud\GeoBundle\Util\Geocodable;
  *
  * @ORM\Entity
  * @ORM\Table(name="location")
+ * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="HarvestCloud\CoreBundle\Repository\LocationRepository")
  */
 class Location implements Geolocatable, Geocodable
@@ -530,5 +531,20 @@ class Location implements Geolocatable, Geocodable
         if ($include_country) $string .= $this->getCountryCode();
 
         return $string;
+    }
+
+    /**
+     * preSave
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-01-30
+     *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function preSave()
+    {
+        $geocoder = new \HarvestCloud\GeoBundle\Util\GoogleGeocoder();
+        $geocoder->geocode($this);
     }
 }
