@@ -5,7 +5,7 @@
     },
     "autoload": {
         "psr-0": { "HarvestCloud\\CoreBundle": "" }
-    }
+    },
     "target-dir": "HarvestCloud/CoreBundle",
     "license": "MIT"
 }
