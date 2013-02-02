@@ -75,12 +75,12 @@ class Location implements Geolocatable, Geocodable
     protected $country_code = 'US';
 
     /**
-     * @ORM\Column(type="decimal", scale="7", nullable=true)
+     * @ORM\Column(type="decimal", scale=7, nullable=true)
      */
     protected $latitude;
 
     /**
-     * @ORM\Column(type="decimal", scale="7", nullable=true)
+     * @ORM\Column(type="decimal", scale=7, nullable=true)
      */
     protected $longitude;
 

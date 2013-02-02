@@ -119,12 +119,12 @@ class Profile implements Geolocatable
     private $accountsPayableAccount;
 
     /**
-     * @ORM\Column(type="decimal", scale="7", nullable=true)
+     * @ORM\Column(type="decimal", scale=7, nullable=true)
      */
     protected $latitude;
 
     /**
-     * @ORM\Column(type="decimal", scale="7", nullable=true)
+     * @ORM\Column(type="decimal", scale=7, nullable=true)
      */
     protected $longitude;
 
@@ -214,7 +214,7 @@ class Profile implements Geolocatable
      *
      *   e.g. $0.10 per order (see caculation below)
      *
-     * @ORM\Column(type="decimal", scale="2")
+     * @ORM\Column(type="decimal", scale=2)
      */
     protected $fixed_order_fee = 0.25;
 
@@ -229,7 +229,7 @@ class Profile implements Geolocatable
      *                            -----
      *     Total fee              $2.00
      *
-     * @ORM\Column(type="decimal", scale="3")
+     * @ORM\Column(type="decimal", scale=3)
      */
     protected $variable_order_fee = 5;
 

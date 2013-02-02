@@ -21,12 +21,12 @@ use HarvestCloud\GeoBundle\Util\LatLng;
 class ProductFilter
 {
     /**
-     * @ORM\Column(type="decimal", scale="7", nullable=true)
+     * @ORM\Column(type="decimal", scale=7, nullable=true)
      */
     protected $latitude;
 
     /**
-     * @ORM\Column(type="decimal", scale="7", nullable=true)
+     * @ORM\Column(type="decimal", scale=7, nullable=true)
      */
     protected $longitude;
 

@@ -68,22 +68,22 @@ class Product implements Geolocatable
     protected $quantity_available = 0;
 
     /**
-     * @ORM\Column(type="decimal", scale="2", nullable=true)
+     * @ORM\Column(type="decimal", scale=2, nullable=true)
      */
     protected $price;
 
     /**
-     * @ORM\Column(type="decimal", scale="2", nullable=true)
+     * @ORM\Column(type="decimal", scale=2, nullable=true)
      */
     protected $initial_price;
 
     /**
-     * @ORM\Column(type="decimal", scale="7", nullable=true)
+     * @ORM\Column(type="decimal", scale=7, nullable=true)
      */
     protected $latitude;
 
     /**
-     * @ORM\Column(type="decimal", scale="7", nullable=true)
+     * @ORM\Column(type="decimal", scale=7, nullable=true)
      */
     protected $longitude;
 

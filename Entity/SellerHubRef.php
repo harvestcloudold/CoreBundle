@@ -55,7 +55,7 @@ class SellerHubRef
      *
      *   e.g. $0.10 per order (see caculation below)
      *
-     * @ORM\Column(type="decimal", scale="2")
+     * @ORM\Column(type="decimal", scale=2)
      */
     protected $fixed_fee = 0.25;
 
@@ -70,7 +70,7 @@ class SellerHubRef
      *                            -----
      *     Total fee              $1.00
      *
-     * @ORM\Column(type="decimal", scale="3")
+     * @ORM\Column(type="decimal", scale=3)
      */
     protected $variable_fee = 5;
 

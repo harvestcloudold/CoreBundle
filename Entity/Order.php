@@ -104,12 +104,12 @@ class Order
     protected $sellerWindow;
 
     /**
-     * @ORM\Column(type="decimal", scale="2", nullable=true)
+     * @ORM\Column(type="decimal", scale=2, nullable=true)
      */
     protected $sub_total;
 
     /**
-     * @ORM\Column(type="decimal", scale="2", nullable=true)
+     * @ORM\Column(type="decimal", scale=2, nullable=true)
      */
     protected $total;
 
@@ -119,7 +119,7 @@ class Order
      *
      * @see HubWindow::$fixed_fee
      *
-     * @ORM\Column(type="decimal", scale="2")
+     * @ORM\Column(type="decimal", scale=2)
      */
     protected $fixed_hub_fee = 0;
 
@@ -129,14 +129,14 @@ class Order
      *
      * @see HubWindow::$variabl_fee
      *
-     * @ORM\Column(type="decimal", scale="3")
+     * @ORM\Column(type="decimal", scale=3)
      */
     protected $variable_hub_fee = 0;
 
     /**
      * The actual hub fee charged on an Order
      *
-     * @ORM\Column(type="decimal", scale="2")
+     * @ORM\Column(type="decimal", scale=2)
      */
     protected $hub_fee = 0;
 
