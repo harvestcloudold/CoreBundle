@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="HarvestCloud\CoreBundle\Repository\BuyerHubRefRepository")
- * @ORM\Table(name="buyer_hub_ref",indexes={@ORM\index(name="buyer_hub_idx", columns={"buyer_id", "hub_id"})})
+ * @ORM\Table(name="buyer_hub_ref",indexes={@ORM\Index(name="buyer_hub_idx", columns={"buyer_id", "hub_id"})})
  */
 class BuyerHubRef
 {
