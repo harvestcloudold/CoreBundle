@@ -10,7 +10,7 @@
 namespace HarvestCloud\CoreBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 use HarvestCloud\CoreBundle\Entity\Profile;
 use HarvestCloud\CoreBundle\Repository\SellerHubRefRepository;
 use HarvestCloud\CoreBundle\Util\DayOfWeek;
@@ -51,7 +51,7 @@ class SellerWindowMakerType extends AbstractType
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-28
      */
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $seller = $this->seller;
 

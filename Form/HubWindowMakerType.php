@@ -10,7 +10,7 @@
 namespace HarvestCloud\CoreBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 use HarvestCloud\CoreBundle\Util\DayOfWeek;
 use HarvestCloud\CoreBundle\Entity\HubWindow;
 use HarvestCloud\CoreBundle\Entity\WindowMaker;
@@ -29,7 +29,7 @@ class HubWindowMakerType extends AbstractType
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-25
      */
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('day_of_week_numbers', 'choice', array(

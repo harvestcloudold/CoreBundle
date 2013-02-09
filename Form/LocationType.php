@@ -10,7 +10,7 @@
 namespace HarvestCloud\CoreBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 use HarvestCloud\CoreBundle\Entity\Profile;
 
 /**
@@ -27,7 +27,7 @@ class LocationType extends AbstractType
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-11-18
      */
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('name')
