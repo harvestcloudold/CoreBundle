@@ -21,7 +21,7 @@ use HarvestCloud\CoreBundle\Util\Debug;
  *
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="HarvestCloud\CoreBundle\Repository\SellerHubRefRepository")
- * @ORM\Table(name="seller_hub_ref",indexes={@ORM\index(name="seller_hub_idx", columns={"seller_id", "hub_id"})})
+ * @ORM\Table(name="seller_hub_ref",indexes={@ORM\Index(name="seller_hub_idx", columns={"seller_id", "hub_id"})})
  */
 class SellerHubRef
 {
