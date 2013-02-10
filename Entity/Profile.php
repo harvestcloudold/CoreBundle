@@ -108,6 +108,12 @@ class Profile implements Geolocatable
 
     /**
      * @ORM\OneToOne(targetEntity="\HarvestCloud\DoubleEntryBundle\Entity\Account", cascade={"persist"})
+     * @ORM\JoinColumn(name="purchases_account_id", referencedColumnName="id")
+     */
+    private $purchasesAccount;
+
+    /**
+     * @ORM\OneToOne(targetEntity="\HarvestCloud\DoubleEntryBundle\Entity\Account", cascade={"persist"})
      * @ORM\JoinColumn(name="ar_account_id", referencedColumnName="id")
      */
     private $accountsReceivableAccount;
@@ -117,6 +123,24 @@ class Profile implements Geolocatable
      * @ORM\JoinColumn(name="ap_account_id", referencedColumnName="id")
      */
     private $accountsPayableAccount;
+
+    /**
+     * @ORM\OneToOne(targetEntity="\HarvestCloud\DoubleEntryBundle\Entity\Account", cascade={"persist"})
+     * @ORM\JoinColumn(name="paypal_account_id", referencedColumnName="id")
+     */
+    private $payPalAccount;
+
+    /**
+     * @ORM\OneToOne(targetEntity="\HarvestCloud\DoubleEntryBundle\Entity\Account", cascade={"persist"})
+     * @ORM\JoinColumn(name="ar_prepay_account_id", referencedColumnName="id")
+     */
+    private $arPrePaymentAccount;
+
+    /**
+     * @ORM\OneToOne(targetEntity="\HarvestCloud\DoubleEntryBundle\Entity\Account", cascade={"persist"})
+     * @ORM\JoinColumn(name="ap_prepay_account_id", referencedColumnName="id")
+     */
+    private $apPrePaymentAccount;
 
     /**
      * @ORM\Column(type="decimal", scale=7, nullable=true)
@@ -181,7 +205,7 @@ class Profile implements Geolocatable
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    protected $pay_pal_account;
+    protected $pay_pal_account_email;
 
     /**
      * @ORM\OneToMany(targetEntity="OrderCollection", mappedBy="buyer")
@@ -818,29 +842,29 @@ class Profile implements Geolocatable
     }
 
     /**
-     * Set pay_pal_account
+     * Set pay_pal_account_email
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-04-29
      *
-     * @param string $payPalAccount
+     * @param string $payPalAccountEmail
      */
-    public function setPayPalAccount($payPalAccount)
+    public function setPayPalAccountEmail($payPalAccountEmail)
     {
-        $this->pay_pal_account = $payPalAccount;
+        $this->pay_pal_account_email = $payPalAccountEmail;
     }
 
     /**
-     * Get pay_pal_account
+     * Get pay_pal_account_email
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-04-29
      *
      * @return string
      */
-    public function getPayPalAccount()
+    public function getPayPalAccountEmail()
     {
-        return $this->pay_pal_account;
+        return $this->pay_pal_account_email;
     }
 
     /**
@@ -1328,22 +1352,37 @@ class Profile implements Geolocatable
         $this->setRootAccount($account);
 
         // Assets
-        $asset = new \HarvestCloud\DoubleEntryBundle\Entity\Asset('Assets');
-        $ar    = new \HarvestCloud\DoubleEntryBundle\Entity\AccountsReceivable('Accounts Receivable');
+        $asset    = new \HarvestCloud\DoubleEntryBundle\Entity\Asset('Assets');
+        $ar       = new \HarvestCloud\DoubleEntryBundle\Entity\AccountsReceivable('Accounts Receivable');
+        $current  = new \HarvestCloud\DoubleEntryBundle\Entity\CurrentAsset('Current Assets');
+        $arPrePay = new \HarvestCloud\DoubleEntryBundle\Entity\ARPrePayment('AR Pre-Payments');
+        $cash     = new \HarvestCloud\DoubleEntryBundle\Entity\Cash('Cash');
+        $bank     = new \HarvestCloud\DoubleEntryBundle\Entity\Bank('Bank');
+        $payPal   = new \HarvestCloud\DoubleEntryBundle\Entity\PayPal('PayPal');
 
         $this->setAccountsReceivableAccount($ar);
+        $this->setPayPalAccount($payPal);
+        $this->setArPrePaymentAccount($arPrePay);
 
         $account->addAccount($asset);
         $asset->addAccount($ar);
+        $ar->addAccount($arPrePay);
+        $asset->addAccount($current);
+        $current->addAccount($bank);
+        $current->addAccount($cash);
+        $current->addAccount($payPal);
 
         // Liability
         $liability = new \HarvestCloud\DoubleEntryBundle\Entity\Liability('Liabilities');
         $ap        = new \HarvestCloud\DoubleEntryBundle\Entity\AccountsPayable('Accounts Payable');
+        $apPrePay  = new \HarvestCloud\DoubleEntryBundle\Entity\APPrePayment('AP Pre-Payment');
 
         $this->setAccountsPayableAccount($ap);
+        $this->setApPrePaymentAccount($apPrePay);
 
         $account->addAccount($liability);
         $liability->addAccount($ap);
+        $ap->addAccount($apPrePay);
 
         // Income
         $income = new \HarvestCloud\DoubleEntryBundle\Entity\Income('Income');
@@ -1356,12 +1395,15 @@ class Profile implements Geolocatable
 
         // Expenses
         $expenses        = new \HarvestCloud\DoubleEntryBundle\Entity\Expense('Expenses');
+        $purchases       = new \HarvestCloud\DoubleEntryBundle\Entity\Purchases('Purchases');
         $costOfGoodsSold = new \HarvestCloud\DoubleEntryBundle\Entity\CostOfGoodsSold('Cost of Goods Sold');
 
         $this->setExpenseAccount($expenses);
+        $this->setPurchasesAccount($purchases);
         $this->setCostOfGoodsSoldAccount($costOfGoodsSold);
 
         $account->addAccount($expenses);
+        $expenses->addAccount($purchases);
         $expenses->addAccount($costOfGoodsSold);
 
         return $account;
@@ -1521,5 +1563,125 @@ class Profile implements Geolocatable
     public function getRootAccount()
     {
         return $this->rootAccount;
+    }
+
+    /**
+     * Set purchasesAccount
+     *
+     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @since  2013-02-09
+     *
+     * @param  \HarvestCloud\DoubleEntryBundle\Entity\Account $purchasesAccount
+     *
+     * @return Profile
+     */
+    public function setPurchasesAccount(\HarvestCloud\DoubleEntryBundle\Entity\Account $purchasesAccount = null)
+    {
+        $this->purchasesAccount = $purchasesAccount;
+
+        return $this;
+    }
+
+    /**
+     * Get purchasesAccount
+     *
+     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @since  2013-02-09
+     *
+     * @return \HarvestCloud\DoubleEntryBundle\Entity\Account
+     */
+    public function getPurchasesAccount()
+    {
+        return $this->purchasesAccount;
+    }
+
+    /**
+     * Set arPrePaymentAccount
+     *
+     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @since  2013-02-09
+     *
+     * @param \HarvestCloud\DoubleEntryBundle\Entity\Account $arPrePaymentAccount
+     *
+     * @return Profile
+     */
+    public function setArPrePaymentAccount(\HarvestCloud\DoubleEntryBundle\Entity\Account $arPrePaymentAccount = null)
+    {
+        $this->arPrePaymentAccount = $arPrePaymentAccount;
+
+        return $this;
+    }
+
+    /**
+     * Get arPrePaymentAccount
+     *
+     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @since  2013-02-09
+     *
+     * @return \HarvestCloud\DoubleEntryBundle\Entity\Account
+     */
+    public function getArPrePaymentAccount()
+    {
+        return $this->arPrePaymentAccount;
+    }
+
+    /**
+     * Set apPrePaymentAccount
+     *
+     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @since  2013-02-09
+     *
+     * @param  \HarvestCloud\DoubleEntryBundle\Entity\Account $apPrePaymentAccount
+     *
+     * @return Profile
+     */
+    public function setApPrePaymentAccount(\HarvestCloud\DoubleEntryBundle\Entity\Account $apPrePaymentAccount = null)
+    {
+        $this->apPrePaymentAccount = $apPrePaymentAccount;
+
+        return $this;
+    }
+
+    /**
+     * Get apPrePaymentAccount
+     *
+     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @since  2013-02-09
+     *
+     * @return \HarvestCloud\DoubleEntryBundle\Entity\Account
+     */
+    public function getApPrePaymentAccount()
+    {
+        return $this->apPrePaymentAccount;
+    }
+
+    /**
+     * Set payPalAccount
+     *
+     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @since  2013-02-09
+     *
+     * @param  \HarvestCloud\DoubleEntryBundle\Entity\Account $payPalAccount
+     *
+     * @return Profile
+     */
+    public function setPayPalAccount(\HarvestCloud\DoubleEntryBundle\Entity\Account $payPalAccount = null)
+    {
+        $this->payPalAccount = $payPalAccount;
+
+        return $this;
+    }
+
+    /**
+     * Get payPalAccount
+     *
+     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @since  2013-02-09
+     *
+     * @return \HarvestCloud\DoubleEntryBundle\Entity\Account
+     */
+    public function getPayPalAccount()
+    {
+        return $this->payPalAccount;
     }
 }
