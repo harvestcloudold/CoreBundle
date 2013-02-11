@@ -23,6 +23,7 @@ use HarvestCloud\DoubleEntryBundle\Entity\Account;
  * @ORM\Entity
  * @ORM\Table(name="profile")
  * @ORM\Entity(repositoryClass="HarvestCloud\CoreBundle\Repository\ProfileRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Profile implements Geolocatable
 {
@@ -1683,5 +1684,22 @@ class Profile implements Geolocatable
     public function getPayPalAccount()
     {
         return $this->payPalAccount;
+    }
+
+    /**
+     * prePersist
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-02-10
+     *
+     * @ORM\PrePersist
+     */
+    public function prePersist()
+    {
+        if (!$this->getRootAccount())
+        {
+            // Create set of accounts
+            $this->createSetOfAccounts();
+        }
     }
 }
