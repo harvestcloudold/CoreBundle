@@ -18,12 +18,12 @@ use HarvestCloud\CoreBundle\Entity\Profile;
 use HarvestCloud\CoreBundle\Entity\Location;
 
 /**
- * LoadUserData
+ * LoadBuyerData
  *
  * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
  * @since  2013-02-10
  */
-class LoadUserData implements FixtureInterface, ContainerAwareInterface
+class LoadBuyerData implements FixtureInterface, ContainerAwareInterface
 {
     /**
      * @var ContainerInterface
@@ -49,10 +49,9 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
     public function load(ObjectManager $manager)
     {
         $buyer = new User();
-        $buyer->setUsername('buyer@example.com');
-        $buyer->setFirstname('Test');
+        $buyer->setEmail('craig.buyer@example.com');
+        $buyer->setFirstname('Craig');
         $buyer->setLastname('Buyer');
-        $buyer->setEmail('buyer@example.com');
         $buyer->setEnabled(true);
 
         $encoder = $this->container
@@ -73,6 +72,68 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
         $location->setTown('Great Barrington');
         $location->setStateCode('MA');
         $location->setPostalCode('01230');
+
+        $buyerProfile->addLocation($location);
+
+        $manager->persist($buyer);
+        $manager->flush();
+
+
+        $buyer = new User();
+        $buyer->setEmail('peter.buyer@example.com');
+        $buyer->setFirstname('Peter');
+        $buyer->setLastname('Buyer');
+        $buyer->setEnabled(true);
+
+        $encoder = $this->container
+            ->get('security.encoder_factory')
+            ->getEncoder($buyer)
+        ;
+
+        $buyer->setPassword($encoder->encodePassword('buyer', $buyer->getSalt()));
+
+        $buyerProfile = new Profile();
+        $buyerProfile->setName($buyer->getFullname());
+
+        $buyer->addProfile($buyerProfile);
+
+        $location = new Location();
+        $location->setName('Default');
+        $location->setAddressLine1('1 Main Street');
+        $location->setTown('Sheffield');
+        $location->setStateCode('MA');
+        $location->setPostalCode('01257');
+
+        $buyerProfile->addLocation($location);
+
+        $manager->persist($buyer);
+        $manager->flush();
+
+
+        $buyer = new User();
+        $buyer->setEmail('michael.buyer@example.com');
+        $buyer->setFirstname('Michael');
+        $buyer->setLastname('Buyer');
+        $buyer->setEnabled(true);
+
+        $encoder = $this->container
+            ->get('security.encoder_factory')
+            ->getEncoder($buyer)
+        ;
+
+        $buyer->setPassword($encoder->encodePassword('buyer', $buyer->getSalt()));
+
+        $buyerProfile = new Profile();
+        $buyerProfile->setName($buyer->getFullname());
+
+        $buyer->addProfile($buyerProfile);
+
+        $location = new Location();
+        $location->setName('Default');
+        $location->setAddressLine1('1 Main Street');
+        $location->setTown('Lee');
+        $location->setStateCode('MA');
+        $location->setPostalCode('01238');
 
         $buyerProfile->addLocation($location);
 
