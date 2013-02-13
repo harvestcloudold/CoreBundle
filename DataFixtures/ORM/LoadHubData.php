@@ -85,6 +85,8 @@ class LoadHubData extends AbstractFixture implements OrderedFixtureInterface, Fi
         $manager->persist($user);
         $manager->flush();
 
+        $this->addReference('sam-hub', $profile);
+
 
         $user = new User();
         $user->setEmail('nick.hub@example.com');
@@ -121,6 +123,8 @@ class LoadHubData extends AbstractFixture implements OrderedFixtureInterface, Fi
         $manager->persist($user);
         $manager->flush();
 
+        $this->addReference('nick-hub', $profile);
+
 
         $user = new User();
         $user->setEmail('ramon.hub@example.com');
@@ -156,6 +160,8 @@ class LoadHubData extends AbstractFixture implements OrderedFixtureInterface, Fi
 
         $manager->persist($user);
         $manager->flush();
+
+        $this->addReference('ramon-hub', $profile);
     }
 
     /**
