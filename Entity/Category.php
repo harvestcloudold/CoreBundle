@@ -71,7 +71,7 @@ class Category
     private $parent;
 
     /**
-     * @ORM\OneToMany(targetEntity="Category", mappedBy="parent")
+     * @ORM\OneToMany(targetEntity="Category", mappedBy="parent", cascade={"persist"})
      * @ORM\OrderBy({"lft" = "ASC"})
      */
     private $children;
@@ -110,10 +110,12 @@ class Category
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-04-16
      */
-    public function __construct()
+    public function __construct($title = null)
     {
         $this->children = new ArrayCollection();
         $this->products = new ArrayCollection();
+
+        if ($title) $this->setTitle($title);
     }
 
     /**
@@ -289,11 +291,13 @@ class Category
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-04-16
      *
-     * @param HarvestCloud\CoreBundle\Entity\Category $children
+     * @param HarvestCloud\CoreBundle\Entity\Category $child
      */
-    public function addCategory(\HarvestCloud\CoreBundle\Entity\Category $children)
+    public function addCategory(\HarvestCloud\CoreBundle\Entity\Category $child)
     {
-        $this->children[] = $children;
+        $this->children[] = $child;
+
+        $child->setParent($this);
     }
 
     /**
