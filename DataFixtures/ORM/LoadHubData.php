@@ -9,8 +9,10 @@
 
 namespace HarvestCloud\CoreBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use HarvestCloud\UserBundle\Entity\User;
@@ -23,7 +25,7 @@ use HarvestCloud\CoreBundle\Entity\Location;
  * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
  * @since  2013-02-11
  */
-class LoadHubData implements FixtureInterface, ContainerAwareInterface
+class LoadHubData extends AbstractFixture implements OrderedFixtureInterface, FixtureInterface, ContainerAwareInterface
 {
     /**
      * @var ContainerInterface
@@ -154,5 +156,18 @@ class LoadHubData implements FixtureInterface, ContainerAwareInterface
 
         $manager->persist($user);
         $manager->flush();
+    }
+
+    /**
+     * getOrder()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-02-12
+     *
+     * @return int
+     */
+    public function getOrder()
+    {
+        return 3;
     }
 }
