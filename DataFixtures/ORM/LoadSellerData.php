@@ -80,6 +80,8 @@ class LoadSellerData extends AbstractFixture implements OrderedFixtureInterface,
         $manager->persist($user);
         $manager->flush();
 
+        $this->addReference('jon-seller', $profile);
+
 
         $user = new User();
         $user->setEmail('tom.seller@example.com');
@@ -111,6 +113,8 @@ class LoadSellerData extends AbstractFixture implements OrderedFixtureInterface,
         $manager->persist($user);
         $manager->flush();
 
+        $this->addReference('tom-seller', $profile);
+
 
         $user = new User();
         $user->setEmail('stephen.seller@example.com');
@@ -141,6 +145,8 @@ class LoadSellerData extends AbstractFixture implements OrderedFixtureInterface,
 
         $manager->persist($user);
         $manager->flush();
+
+        $this->addReference('stephen-seller', $profile);
     }
 
     /**

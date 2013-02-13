@@ -299,7 +299,6 @@ class Product implements Geolocatable
     public function setLocation(\HarvestCloud\CoreBundle\Entity\Location $location)
     {
         $this->location = $location;
-        $this->setSeller($location->getProfile());
     }
 
     /**
@@ -623,6 +622,7 @@ class Product implements Geolocatable
     public function setSeller(Profile $seller)
     {
         $this->seller = $seller;
+        $this->setLocation($seller->getDefaultLocation());
     }
 
     /**

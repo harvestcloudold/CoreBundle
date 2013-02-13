@@ -15,15 +15,15 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use HarvestCloud\CoreBundle\Entity\Category;
+use HarvestCloud\CoreBundle\Entity\Product;
 
 /**
- * LoadCategoryData
+ * LoadProductData
  *
  * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
  * @since  2013-02-12
  */
-class LoadCategoryData extends AbstractFixture implements OrderedFixtureInterface, FixtureInterface, ContainerAwareInterface
+class LoadProductData extends AbstractFixture implements OrderedFixtureInterface, FixtureInterface, ContainerAwareInterface
 {
     /**
      * @var ContainerInterface
@@ -48,31 +48,37 @@ class LoadCategoryData extends AbstractFixture implements OrderedFixtureInterfac
      */
     public function load(ObjectManager $manager)
     {
-        $food       = new Category('Food');
-        $fruit      = new Category('Fruit');
-        $apples     = new Category('Apples');
-        $vegetables = new Category('Vegetables');
-        $tomatoes   = new Category('Tomatoes');
-        $carrots    = new Category('Carrots');
-        $meat       = new Category('Meat');
-        $dairy      = new Category('Dairy');
-        $milk       = new Category('Milk');
-        $eggs       = new Category('Eggs');
+        $product = new Product();
+        $product->setName('Lovely Eggs');
+        $product->setCategory($this->getReference('eggs-category'));
+        $product->setSeller($this->getReference('jon-seller'));
+        $product->setInitialQuantity(10);
+        $product->setPrice('5.00');
 
-        $food->addCategory($fruit);
-          $fruit->addCategory($apples);
-        $food->addCategory($vegetables);
-          $vegetables->addCategory($tomatoes);
-          $vegetables->addCategory($carrots);
-        $food->addCategory($meat);
-        $food->addCategory($dairy);
-          $dairy->addCategory($milk);
-          $dairy->addCategory($eggs);
-
-        $manager->persist($food);
+        $manager->persist($product);
         $manager->flush();
 
-        $this->addReference('eggs-category', $eggs);
+
+        $product = new Product();
+        $product->setName('Delicious Eggs');
+        $product->setCategory($this->getReference('eggs-category'));
+        $product->setSeller($this->getReference('tom-seller'));
+        $product->setInitialQuantity(8);
+        $product->setPrice('5.25');
+
+        $manager->persist($product);
+        $manager->flush();
+
+
+        $product = new Product();
+        $product->setName('Yummy Eggs');
+        $product->setCategory($this->getReference('eggs-category'));
+        $product->setSeller($this->getReference('stephen-seller'));
+        $product->setInitialQuantity(11);
+        $product->setPrice('4.95');
+
+        $manager->persist($product);
+        $manager->flush();
     }
 
     /**
@@ -85,6 +91,6 @@ class LoadCategoryData extends AbstractFixture implements OrderedFixtureInterfac
      */
     public function getOrder()
     {
-        return 1;
+        return 5;
     }
 }
