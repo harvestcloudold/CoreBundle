@@ -55,7 +55,7 @@ class SellerWindow implements Windowable
     protected $sellerHubRef;
 
     /**
-     * @ORM\OneToMany(targetEntity="Order", mappedBy="pickupWindow")
+     * @ORM\OneToMany(targetEntity="Order", mappedBy="sellerWindow")
      */
     protected $orders;
 
