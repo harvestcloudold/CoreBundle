@@ -49,7 +49,7 @@ class SellerWindow implements Windowable
     protected $end_time;
 
     /**
-     * @ORM\ManyToOne(targetEntity="SellerHubRef", inversedBy="pickupWindows")
+     * @ORM\ManyToOne(targetEntity="SellerHubRef", inversedBy="sellerWindows")
      * @ORM\JoinColumn(name="seller_hub_ref_id", referencedColumnName="id")
      */
     protected $sellerHubRef;
