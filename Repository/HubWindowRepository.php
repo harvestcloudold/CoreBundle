@@ -33,8 +33,6 @@ class HubWindowRepository extends EntityRepository
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-11-02
      *
-     * @todo   Need to add some DQL date functions to find only future windows
-     *
      * @return array
      */
     public function findForSelectWindowForOrderCollection(OrderCollection $orderCollection)
@@ -47,9 +45,10 @@ class HubWindowRepository extends EntityRepository
                 JOIN     hw.sellerWindows sw
                 JOIN     sw.sellerHubRef  shr
                 JOIN     shr.seller       s
+                JOIN     hw.hub           h
                 WHERE    s.id IN (:seller_ids)
                 AND      UNIX_TIMESTAMP(sw.start_time) > :now
-                GROUP BY hw.start_time
+                GROUP BY hw.start_time, h.id
                 HAVING   COUNT(sw.id) = :num_sellers
             ')
             ->setParameter('now', time())
