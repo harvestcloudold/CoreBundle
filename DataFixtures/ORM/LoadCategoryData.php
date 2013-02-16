@@ -50,16 +50,39 @@ class LoadCategoryData extends AbstractFixture implements OrderedFixtureInterfac
     {
         $food          = new Category('Food');
         $fruit         = new Category('Fruit');
+
         $apples        = new Category('Apples');
+        $apples->setUnitDescriptionSingular('lb');
+        $apples->setUnitDescriptionPlural('lbs');
+
         $vegetables    = new Category('Vegetables');
+
         $tomatoes      = new Category('Tomatoes');
+        $tomatoes->setUnitDescriptionSingular('lb');
+        $tomatoes->setUnitDescriptionPlural('lbs');
+
         $carrots       = new Category('Carrots');
+        $carrots->setUnitDescriptionSingular('lb');
+        $carrots->setUnitDescriptionPlural('lbs');
+
         $sweetPotatoes = new Category('Sweet Potatoes');
+        $sweetPotatoes->setUnitDescriptionSingular('lb');
+        $sweetPotatoes->setUnitDescriptionPlural('lbs');
+
         $onions        = new Category('Onions');
+        $onions->setUnitDescriptionSingular('lb');
+        $onions->setUnitDescriptionPlural('lbs');
+
         $meat          = new Category('Meat');
         $dairy         = new Category('Dairy');
+
         $milk          = new Category('Milk');
+        $milk->setUnitDescriptionSingular('quart');
+        $milk->setUnitDescriptionPlural('quarts');
+
         $eggs          = new Category('Eggs');
+        $eggs->setUnitDescriptionSingular('dozen');
+        $eggs->setUnitDescriptionPlural('dozen');
 
         $food->addCategory($fruit);
           $fruit->addCategory($apples);

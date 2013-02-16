@@ -92,6 +92,16 @@ class Category
     protected $path;
 
     /**
+     * @Doctrine\ORM\Mapping\Column(length=255, nullable=true)
+     */
+    protected $unit_description_singular;
+
+    /**
+     * @Doctrine\ORM\Mapping\Column(length=255, nullable=true)
+     */
+    protected $unit_description_plural;
+
+    /**
      * Set parent
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
@@ -411,5 +421,65 @@ class Category
     public function getPath()
     {
         return $this->path;
+    }
+
+    /**
+     * Set unit_description_singular
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-02-16
+     *
+     * @param  string $unitDescriptionSingular
+     *
+     * @return Category
+     */
+    public function setUnitDescriptionSingular($unitDescriptionSingular)
+    {
+        $this->unit_description_singular = $unitDescriptionSingular;
+
+        return $this;
+    }
+
+    /**
+     * Get unit_description_singular
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-02-16
+     *
+     * @return string
+     */
+    public function getUnitDescriptionSingular()
+    {
+        return $this->unit_description_singular;
+    }
+
+    /**
+     * Set unit_description_plural
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-02-16
+     *
+     * @param  string $unitDescriptionPlural
+     *
+     * @return Category
+     */
+    public function setUnitDescriptionPlural($unitDescriptionPlural)
+    {
+        $this->unit_description_plural = $unitDescriptionPlural;
+
+        return $this;
+    }
+
+    /**
+     * Get unit_description_plural
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-02-16
+     *
+     * @return string
+     */
+    public function getUnitDescriptionPlural()
+    {
+        return $this->unit_description_plural;
     }
 }

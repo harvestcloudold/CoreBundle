@@ -140,7 +140,7 @@ class LoadProductData extends AbstractFixture implements OrderedFixtureInterface
         $product->setName('Ca-ca-carrots');
         $product->setCategory($this->getReference('carrots-category'));
         $product->setSeller($this->getReference('sterling-seller'));
-        $product->setInitialQuantity(11);
+        $product->setInitialQuantity(1);
         $product->setPrice('2.90');
 
         $manager->persist($product);

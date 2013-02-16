@@ -676,4 +676,82 @@ class Product implements Geolocatable
     {
       $this->setQuantityAvailable($this->getQuantityAvailable()+$quantity);
     }
+
+    /**
+     * getUnitForNumber()
+     *
+     * Get unit description based on wether number is singluar or plural
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-02-16
+     *
+     * @param  decimal
+     *
+     * @return string
+     */
+    public function getUnitForNumber($number)
+    {
+      if (1 == $number)
+      {
+        return $this->getCategory()->getUnitDescriptionSingular();
+      }
+      else
+      {
+        return $this->getCategory()->getUnitDescriptionPlural();
+      }
+    }
+
+    /**
+     * getUnitAvailable()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-02-16
+     *
+     * @return string
+     */
+    public function getUnitAvailable()
+    {
+      return $this->getUnitForNumber($this->getQuantityAvailable());
+    }
+
+    /**
+     * getUnitInCart()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-02-16
+     *
+     * @return string
+     */
+    public function getUnitInCart()
+    {
+      return $this->getUnitForNumber($this->getQuantityInCart());
+    }
+
+    /**
+     * getUnitAvailableForCart()
+     *
+     * The quantity available to add to cart
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-02-16
+     *
+     * @return string
+     */
+    public function getUnitAvailableForCart()
+    {
+      return $this->getUnitForNumber($this->getQuantityAvailableForCart());
+    }
+
+    /**
+     * getQuantityAvailableForCart()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-02-16
+     *
+     * @return int
+     */
+    public function getQuantityAvailableForCart()
+    {
+        return $this->getQuantityAvailable() - $this->getQuantityInCart();
+    }
 }
