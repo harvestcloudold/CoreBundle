@@ -48,22 +48,26 @@ class LoadCategoryData extends AbstractFixture implements OrderedFixtureInterfac
      */
     public function load(ObjectManager $manager)
     {
-        $food       = new Category('Food');
-        $fruit      = new Category('Fruit');
-        $apples     = new Category('Apples');
-        $vegetables = new Category('Vegetables');
-        $tomatoes   = new Category('Tomatoes');
-        $carrots    = new Category('Carrots');
-        $meat       = new Category('Meat');
-        $dairy      = new Category('Dairy');
-        $milk       = new Category('Milk');
-        $eggs       = new Category('Eggs');
+        $food          = new Category('Food');
+        $fruit         = new Category('Fruit');
+        $apples        = new Category('Apples');
+        $vegetables    = new Category('Vegetables');
+        $tomatoes      = new Category('Tomatoes');
+        $carrots       = new Category('Carrots');
+        $sweetPotatoes = new Category('Sweet Potatoes');
+        $onions        = new Category('Onions');
+        $meat          = new Category('Meat');
+        $dairy         = new Category('Dairy');
+        $milk          = new Category('Milk');
+        $eggs          = new Category('Eggs');
 
         $food->addCategory($fruit);
           $fruit->addCategory($apples);
         $food->addCategory($vegetables);
           $vegetables->addCategory($tomatoes);
           $vegetables->addCategory($carrots);
+          $vegetables->addCategory($sweetPotatoes);
+          $vegetables->addCategory($onions);
         $food->addCategory($meat);
         $food->addCategory($dairy);
           $dairy->addCategory($milk);
@@ -77,6 +81,8 @@ class LoadCategoryData extends AbstractFixture implements OrderedFixtureInterfac
         $this->addReference('milk-category', $milk);
         $this->addReference('apples-category', $apples);
         $this->addReference('carrots-category', $carrots);
+        $this->addReference('onions-category', $onions);
+        $this->addReference('sweet-potatoes-category', $sweetPotatoes);
     }
 
     /**

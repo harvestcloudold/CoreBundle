@@ -71,11 +71,11 @@ class LoadProductData extends AbstractFixture implements OrderedFixtureInterface
 
 
         $product = new Product();
-        $product->setName('Crazy Carrots');
-        $product->setCategory($this->getReference('carrots-category'));
+        $product->setName('Suh-weet Potatoes');
+        $product->setCategory($this->getReference('sweet-potatoes-category'));
         $product->setSeller($this->getReference('tom-seller'));
         $product->setInitialQuantity(12);
-        $product->setPrice('2.95');
+        $product->setPrice('2.75');
 
         $manager->persist($product);
         $manager->flush();
@@ -87,6 +87,50 @@ class LoadProductData extends AbstractFixture implements OrderedFixtureInterface
         $product->setSeller($this->getReference('tom-seller'));
         $product->setInitialQuantity(8);
         $product->setPrice('4.75');
+
+        $manager->persist($product);
+        $manager->flush();
+
+
+        $product = new Product();
+        $product->setName('Apples');
+        $product->setCategory($this->getReference('apples-category'));
+        $product->setSeller($this->getReference('jo-seller'));
+        $product->setInitialQuantity(13);
+        $product->setPrice('5.05');
+
+        $manager->persist($product);
+        $manager->flush();
+
+
+        $product = new Product();
+        $product->setName('Sweet Potatoes');
+        $product->setCategory($this->getReference('sweet-potatoes-category'));
+        $product->setSeller($this->getReference('jo-seller'));
+        $product->setInitialQuantity(13);
+        $product->setPrice('2.65');
+
+        $manager->persist($product);
+        $manager->flush();
+
+
+        $product = new Product();
+        $product->setName('Carrots');
+        $product->setCategory($this->getReference('carrots-category'));
+        $product->setSeller($this->getReference('jo-seller'));
+        $product->setInitialQuantity(15);
+        $product->setPrice('2.95');
+
+        $manager->persist($product);
+        $manager->flush();
+
+
+        $product = new Product();
+        $product->setName('Onions');
+        $product->setCategory($this->getReference('onions-category'));
+        $product->setSeller($this->getReference('sterling-seller'));
+        $product->setInitialQuantity(11);
+        $product->setPrice('2.95');
 
         $manager->persist($product);
         $manager->flush();
