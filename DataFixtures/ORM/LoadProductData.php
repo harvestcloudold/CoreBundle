@@ -60,6 +60,72 @@ class LoadProductData extends AbstractFixture implements OrderedFixtureInterface
 
 
         $product = new Product();
+        $product->setName('Tomatoes');
+        $product->setCategory($this->getReference('tomatoes-category'));
+        $product->setSeller($this->getReference('jon-seller'));
+        $product->setInitialQuantity(7);
+        $product->setPrice('3.85');
+
+        $manager->persist($product);
+        $manager->flush();
+
+
+        $product = new Product();
+        $product->setName('Crazy Carrots');
+        $product->setCategory($this->getReference('carrots-category'));
+        $product->setSeller($this->getReference('tom-seller'));
+        $product->setInitialQuantity(12);
+        $product->setPrice('2.95');
+
+        $manager->persist($product);
+        $manager->flush();
+
+
+        $product = new Product();
+        $product->setName('Tom\'s Toms');
+        $product->setCategory($this->getReference('tomatoes-category'));
+        $product->setSeller($this->getReference('tom-seller'));
+        $product->setInitialQuantity(8);
+        $product->setPrice('4.75');
+
+        $manager->persist($product);
+        $manager->flush();
+
+
+        $product = new Product();
+        $product->setName('Ca-ca-carrots');
+        $product->setCategory($this->getReference('carrots-category'));
+        $product->setSeller($this->getReference('sterling-seller'));
+        $product->setInitialQuantity(11);
+        $product->setPrice('2.90');
+
+        $manager->persist($product);
+        $manager->flush();
+
+
+        $product = new Product();
+        $product->setName('Apples');
+        $product->setCategory($this->getReference('apples-category'));
+        $product->setSeller($this->getReference('sterling-seller'));
+        $product->setInitialQuantity(11);
+        $product->setPrice('4.15');
+
+        $manager->persist($product);
+        $manager->flush();
+
+
+        $product = new Product();
+        $product->setName('Them Apples');
+        $product->setCategory($this->getReference('apples-category'));
+        $product->setSeller($this->getReference('tom-seller'));
+        $product->setInitialQuantity(11);
+        $product->setPrice('4.25');
+
+        $manager->persist($product);
+        $manager->flush();
+
+
+        $product = new Product();
         $product->setName('Delicious Eggs');
         $product->setCategory($this->getReference('eggs-category'));
         $product->setSeller($this->getReference('tom-seller'));
@@ -76,6 +142,28 @@ class LoadProductData extends AbstractFixture implements OrderedFixtureInterface
         $product->setSeller($this->getReference('stephen-seller'));
         $product->setInitialQuantity(11);
         $product->setPrice('4.95');
+
+        $manager->persist($product);
+        $manager->flush();
+
+
+        $product = new Product();
+        $product->setName('Milk');
+        $product->setCategory($this->getReference('milk-category'));
+        $product->setSeller($this->getReference('jon-seller'));
+        $product->setInitialQuantity(8);
+        $product->setPrice('3.55');
+
+        $manager->persist($product);
+        $manager->flush();
+
+
+        $product = new Product();
+        $product->setName('Milk');
+        $product->setCategory($this->getReference('milk-category'));
+        $product->setSeller($this->getReference('stephen-seller'));
+        $product->setInitialQuantity(10);
+        $product->setPrice('3.45');
 
         $manager->persist($product);
         $manager->flush();

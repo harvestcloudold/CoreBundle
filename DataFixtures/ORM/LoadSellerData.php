@@ -147,6 +147,105 @@ class LoadSellerData extends AbstractFixture implements OrderedFixtureInterface,
         $manager->flush();
 
         $this->addReference('stephen-seller', $profile);
+
+
+        $user = new User();
+        $user->setEmail('jo.seller@example.com');
+        $user->setFirstname('Jo');
+        $user->setLastname('Seller');
+        $user->setEnabled(true);
+
+        $encoder = $this->container
+            ->get('security.encoder_factory')
+            ->getEncoder($user)
+        ;
+
+        $user->setPassword($encoder->encodePassword('seller', $user->getSalt()));
+
+        $profile = new Profile();
+        $profile->setName($user->getFullname());
+
+        $user->addProfile($profile);
+
+        $location = new Location();
+        $location->setName('Default');
+        $location->setAddressLine1('50 Main Street');
+        $location->setTown('Lenox');
+        $location->setStateCode('MA');
+        $location->setPostalCode('01240');
+
+        $profile->addLocation($location);
+
+        $manager->persist($user);
+        $manager->flush();
+
+        $this->addReference('jo-seller', $profile);
+
+
+        $user = new User();
+        $user->setEmail('mike.seller@example.com');
+        $user->setFirstname('Mike');
+        $user->setLastname('Seller');
+        $user->setEnabled(true);
+
+        $encoder = $this->container
+            ->get('security.encoder_factory')
+            ->getEncoder($user)
+        ;
+
+        $user->setPassword($encoder->encodePassword('seller', $user->getSalt()));
+
+        $profile = new Profile();
+        $profile->setName($user->getFullname());
+
+        $user->addProfile($profile);
+
+        $location = new Location();
+        $location->setName('Default');
+        $location->setAddressLine1('1 East Street');
+        $location->setTown('Great Barrington');
+        $location->setStateCode('MA');
+        $location->setPostalCode('01240');
+
+        $profile->addLocation($location);
+
+        $manager->persist($user);
+        $manager->flush();
+
+        $this->addReference('mike-seller', $profile);
+
+
+        $user = new User();
+        $user->setEmail('sterling.seller@example.com');
+        $user->setFirstname('Sterling');
+        $user->setLastname('Seller');
+        $user->setEnabled(true);
+
+        $encoder = $this->container
+            ->get('security.encoder_factory')
+            ->getEncoder($user)
+        ;
+
+        $user->setPassword($encoder->encodePassword('seller', $user->getSalt()));
+
+        $profile = new Profile();
+        $profile->setName($user->getFullname());
+
+        $user->addProfile($profile);
+
+        $location = new Location();
+        $location->setName('Default');
+        $location->setAddressLine1('1 East Street');
+        $location->setTown('Lee');
+        $location->setStateCode('MA');
+        $location->setPostalCode('01238');
+
+        $profile->addLocation($location);
+
+        $manager->persist($user);
+        $manager->flush();
+
+        $this->addReference('sterling-seller', $profile);
     }
 
     /**

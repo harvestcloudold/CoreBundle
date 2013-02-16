@@ -73,6 +73,10 @@ class LoadCategoryData extends AbstractFixture implements OrderedFixtureInterfac
         $manager->flush();
 
         $this->addReference('eggs-category', $eggs);
+        $this->addReference('tomatoes-category', $tomatoes);
+        $this->addReference('milk-category', $milk);
+        $this->addReference('apples-category', $apples);
+        $this->addReference('carrots-category', $carrots);
     }
 
     /**
