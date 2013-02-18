@@ -61,8 +61,11 @@ class OrderRepository extends EntityRepository
 
         $qb->from('HarvestCloudCoreBundle:Order', 'o')
             ->select('o')
+            ->join('o.seller', 's')
             ->orderBy('o.id', 'DESC')
             ->where($qb->expr()->in('o.status_code', Order::getOpenStatusCodes()))
+            ->andWhere('s.id = :seller_id')
+            ->setParameter('seller_id', $seller->getId())
         ;
 
         $q = $qb->getQuery();
