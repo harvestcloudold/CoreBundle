@@ -38,6 +38,15 @@ class ProductFilter
     protected $range;
 
     /**
+     * Category
+     *
+     * Not persisted
+     *
+     * @var Category
+     */
+    protected $category;
+
+    /**
      * Set latitude
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
@@ -126,5 +135,35 @@ class ProductFilter
     public function getRange()
     {
         return $this->range;
+    }
+
+    /**
+     * Set category
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-02-17
+     *
+     * @param  Category $category
+     *
+     * @return ProductFilter
+     */
+    public function setCategory(\HarvestCloud\CoreBundle\Entity\Category $category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-02-17
+     *
+     * @return Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }

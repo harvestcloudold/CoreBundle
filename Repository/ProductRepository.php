@@ -47,6 +47,15 @@ class ProductRepository extends EntityRepository
             $qb->setParameter('range', $filter->getRange());
         }
 
+        if ($filter->getCategory())
+        {
+            $qb->join('p.category', 'c');
+            $qb->andWhere('c.lft >= :lft');
+            $qb->andWhere('c.rgt <= :rgt');
+            $qb->setParameter('lft', $filter->getCategory()->getLft());
+            $qb->setParameter('rgt', $filter->getCategory()->getRgt());
+        }
+
         $qb->andWhere('p.quantity_available > 0');
 
         $q = $qb->getQuery();
