@@ -65,6 +65,8 @@ class LoadSellerData extends AbstractFixture implements OrderedFixtureInterface,
 
         $profile = new Profile();
         $profile->setName($user->getFullname());
+        $profile->setSystemSellerStatus(Profile::STATUS_ENABLED);
+        $profile->setSellerStatus(Profile::STATUS_ACTIVE);
 
         $user->addProfile($profile);
 
@@ -98,6 +100,8 @@ class LoadSellerData extends AbstractFixture implements OrderedFixtureInterface,
 
         $profile = new Profile();
         $profile->setName($user->getFullname());
+        $profile->setSystemSellerStatus(Profile::STATUS_ENABLED);
+        $profile->setSellerStatus(Profile::STATUS_ACTIVE);
 
         $user->addProfile($profile);
 
@@ -131,6 +135,8 @@ class LoadSellerData extends AbstractFixture implements OrderedFixtureInterface,
 
         $profile = new Profile();
         $profile->setName($user->getFullname());
+        $profile->setSystemSellerStatus(Profile::STATUS_ENABLED);
+        $profile->setSellerStatus(Profile::STATUS_ACTIVE);
 
         $user->addProfile($profile);
 
@@ -164,6 +170,8 @@ class LoadSellerData extends AbstractFixture implements OrderedFixtureInterface,
 
         $profile = new Profile();
         $profile->setName($user->getFullname());
+        $profile->setSystemSellerStatus(Profile::STATUS_ENABLED);
+        $profile->setSellerStatus(Profile::STATUS_ACTIVE);
 
         $user->addProfile($profile);
 
@@ -197,6 +205,8 @@ class LoadSellerData extends AbstractFixture implements OrderedFixtureInterface,
 
         $profile = new Profile();
         $profile->setName($user->getFullname());
+        $profile->setSystemSellerStatus(Profile::STATUS_ENABLED);
+        $profile->setSellerStatus(Profile::STATUS_ACTIVE);
 
         $user->addProfile($profile);
 
@@ -230,6 +240,8 @@ class LoadSellerData extends AbstractFixture implements OrderedFixtureInterface,
 
         $profile = new Profile();
         $profile->setName($user->getFullname());
+        $profile->setSystemSellerStatus(Profile::STATUS_ENABLED);
+        $profile->setSellerStatus(Profile::STATUS_ACTIVE);
 
         $user->addProfile($profile);
 
