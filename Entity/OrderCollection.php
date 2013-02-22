@@ -309,6 +309,28 @@ class OrderCollection
     }
 
     /**
+     * getTotal()
+     *
+     * The sum of the Order totals
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-02-20
+     *
+     * @return decimal
+     */
+    public function getTotal()
+    {
+        $total = 0;
+
+        foreach ($this->getOrders() as $order)
+        {
+            $total += $order->getTotal();
+        }
+
+        return $total;
+    }
+
+    /**
      * getSellerIds()
      *
      * Get an array of the ids for all of the Sellers in this OrderCollection

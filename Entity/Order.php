@@ -648,14 +648,7 @@ class Order
      */
     public function getAmountForPaymentGateway()
     {
-        $amount = 0;
-
-        foreach ($this->getLineItems() as $lineItem)
-        {
-            $amount += $lineItem->getPrice()*$lineItem->getQuantity();
-        }
-
-        return round($amount, 2);
+        return round($this->getTotal(), 2);
     }
 
     /**
@@ -994,6 +987,9 @@ class Order
 
         // calculate the actual fee
         $this->setHubFee($sellerWindow->getTotalHubFeeForOrder($this));
+
+        // Now recaculate the total
+        $this->recalculateTotal();
     }
 
     /**
@@ -1272,4 +1268,18 @@ class Order
     {
         return $this->prePaymentJournals;
     }
+
+     /**
+      * recalculateTotal()
+      *
+      * Recalculates Order Total as Sub Total + Hub Fee
+      *
+      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+      * @since  2013-02-20
+      */
+     public function recalculateTotal()
+     {
+       $this->setTotal($this->getSubTotal() + $this->getHubFee());
+     }
+
 }

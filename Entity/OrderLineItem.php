@@ -194,4 +194,30 @@ class OrderLineItem
     {
         return $this->price;
     }
+
+    /**
+     * getSubTotal()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-02-20
+     *
+     * @return decimal
+     */
+    public function getSubTotal()
+    {
+      return $this->getQuantity() * $this->getPrice();
+    }
+
+    /**
+     * getUnit()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-02-21
+     *
+     * @return string
+     */
+    public function getUnit()
+    {
+        return $this->getProduct()->getUnitForNumber($this->getQuantity());
+    }
 }
