@@ -551,6 +551,7 @@ class Order
         $invoice->setHub($this->getHub());
         $invoice->setSeller($this->getSeller());
         $invoice->setAmount($this->getHubFee());
+        $invoice->post();
 
         $this->setHubFeeInvoice($invoice);
     }
