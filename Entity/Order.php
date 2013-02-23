@@ -547,10 +547,7 @@ class Order
         $this->setStatusCode(self::STATUS_IN_TRANSIT_TO_HUB);
 
         // Create the HubFeeInvoice
-        $invoice = new \HarvestCloud\InvoiceBundle\Entity\HubFeeInvoice();
-        $invoice->setHub($this->getHub());
-        $invoice->setSeller($this->getSeller());
-        $invoice->setAmount($this->getHubFee());
+        $invoice = new \HarvestCloud\InvoiceBundle\Entity\HubFeeInvoice($this->getHub(), $this->getSeller(), $this->getHubFee());
         $invoice->post();
 
         $this->setHubFeeInvoice($invoice);
