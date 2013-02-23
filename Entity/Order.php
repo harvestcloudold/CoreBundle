@@ -145,6 +145,12 @@ class Order
      */
     protected $prePaymentJournals;
 
+    /**
+     * @ORM\OneToOne(targetEntity="HarvestCloud\InvoiceBundle\Entity\HubFeeInvoice", mappedBy="order", cascade={"persist"})
+     * @ORM\JoinColumn(name="hub_fee_invoice_id", referencedColumnName="id")
+     */
+    protected $hubFeeInvoice;
+
 
     /**
      * __construct()
@@ -539,6 +545,14 @@ class Order
     public function dispatchBySeller()
     {
         $this->setStatusCode(self::STATUS_IN_TRANSIT_TO_HUB);
+
+        // Create the HubFeeInvoice
+        $invoice = new \HarvestCloud\InvoiceBundle\Entity\HubFeeInvoice();
+        $invoice->setHub($this->getHub());
+        $invoice->setSeller($this->getSeller());
+        $invoice->setAmount($this->getHubFee());
+
+        $this->setHubFeeInvoice($invoice);
     }
 
 
@@ -1282,4 +1296,33 @@ class Order
        $this->setTotal($this->getSubTotal() + $this->getHubFee());
      }
 
+    /**
+     * Set hubFeeInvoice
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-02-22
+     *
+     * @param  \HarvestCloud\InvoiceBundle\Entity\HubFeeInvoice $hubFeeInvoice
+     *
+     * @return Order
+     */
+    public function setHubFeeInvoice(\HarvestCloud\InvoiceBundle\Entity\HubFeeInvoice $hubFeeInvoice = null)
+    {
+        $this->hubFeeInvoice = $hubFeeInvoice;
+
+        return $this;
+    }
+
+    /**
+     * Get hubFeeInvoice
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-02-22
+     *
+     * @return \HarvestCloud\InvoiceBundle\Entity\HubFeeInvoice
+     */
+    public function getHubFeeInvoice()
+    {
+        return $this->hubFeeInvoice;
+    }
 }

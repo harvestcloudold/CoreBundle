@@ -276,6 +276,16 @@ class Profile implements Geolocatable
     protected $hubWindows;
 
     /**
+     * @ORM\OneToMany(targetEntity="\HarvestCloud\InvoiceBundle\Entity\HubFeeInvoice", mappedBy="seller")
+     */
+    protected $hubFeeInvoicesAsSeller;
+
+    /**
+     * @ORM\OneToMany(targetEntity="\HarvestCloud\InvoiceBundle\Entity\HubFeeInvoice", mappedBy="hub")
+     */
+    protected $hubFeeInvoicesAsHub;
+
+    /**
      * __construct()
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
@@ -297,6 +307,8 @@ class Profile implements Geolocatable
         $this->productsAsSeller        = new ArrayCollection();
         $this->accounts                = new ArrayCollection();
         $this->hubWindows              = new ArrayCollection();
+        $this->hubFeeInvoicesAsHub     = new ArrayCollection();
+        $this->hubFeeInvoicesAsSeller  = new ArrayCollection();
     }
 
     /**
@@ -1701,5 +1713,95 @@ class Profile implements Geolocatable
             // Create set of accounts
             $this->createSetOfAccounts();
         }
+    }
+
+    /**
+     * Add hubFeeInvoiceAsSeller
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-02-22
+     *
+     * @param  \HarvestCloud\InvoiceBundle\Entity\HubFeeInvoice $hubFeeInvoice
+     *
+     * @return Profile
+     */
+    public function addHubFeeInvoiceAsSeller(\HarvestCloud\InvoiceBundle\Entity\HubFeeInvoice $hubFeeInvoices)
+    {
+        $this->hubFeeInvoicesAsSeller[] = $hubFeeInvoice;
+
+        $hubFeeInvoice->setSeller($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove hubFeeInvoiceAsSeller
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-02-22
+     *
+     * @param  \HarvestCloud\InvoiceBundle\Entity\HubFeeInvoice $hubFeeInvoice
+     */
+    public function removeHubFeeInvoiceAsSeller(\HarvestCloud\InvoiceBundle\Entity\HubFeeInvoice $hubFeeInvoice)
+    {
+        $this->hubFeeInvoicesAsSeller->removeElement($hubFeeInvoice);
+    }
+
+    /**
+     * Get hubFeeInvoicesAsSeller
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-02-22
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getHubFeeInvoicesAsSeller()
+    {
+        return $this->hubFeeInvoicesAsSeller;
+    }
+
+    /**
+     * Add hubFeeInvoiceAsHub
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-02-22
+     *
+     * @param  \HarvestCloud\InvoiceBundle\Entity\HubFeeInvoice $hubFeeInvoice
+     *
+     * @return Profile
+     */
+    public function addHubFeeInvoiceAsHub(\HarvestCloud\InvoiceBundle\Entity\HubFeeInvoice $hubFeeInvoice)
+    {
+        $this->hubFeeInvoicesAsHub[] = $hubFeeInvoice;
+
+        $hubFeeInvoice->setHub($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove hubFeeInvoiceAsHub
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-02-22
+     *
+     * @param \HarvestCloud\InvoiceBundle\Entity\HubFeeInvoice $hubFeeInvoice
+     */
+    public function removeHubFeeInvoiceAsHub(\HarvestCloud\InvoiceBundle\Entity\HubFeeInvoice $hubFeeInvoice)
+    {
+        $this->hubFeeInvoicesAsHub->removeElement($hubFeeInvoice);
+    }
+
+    /**
+     * Get hubFeeInvoicesAsHub
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-02-22
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getHubFeeInvoicesAsHub()
+    {
+        return $this->hubFeeInvoicesAsHub;
     }
 }
