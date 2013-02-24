@@ -11,7 +11,6 @@ namespace HarvestCloud\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use HarvestCloud\ProfileFinancialBundle\Entity\ProfileInvoice as Invoice;
 
 /**
  * Order Entity
