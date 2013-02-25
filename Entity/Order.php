@@ -92,11 +92,6 @@ class Order
     protected $lineItems;
 
     /**
-     * @ORM\OneToOne(targetEntity="HarvestCloud\ProfileFinancialBundle\Entity\ProfileOrderInvoice", mappedBy="order")
-     */
-    protected $invoice;
-
-    /**
      * @ORM\ManyToOne(targetEntity="SellerWindow", inversedBy="orders")
      * @ORM\JoinColumn(name="seller_window_id", referencedColumnName="id")
      */
@@ -143,6 +138,12 @@ class Order
      * @ORM\OneToMany(targetEntity="\HarvestCloud\DoubleEntryBundle\Entity\Journal\OrderPrePaymentJournal", mappedBy="order", cascade={"persist"})
      */
     protected $prePaymentJournals;
+
+    /**
+     * @ORM\OneToOne(targetEntity="HarvestCloud\InvoiceBundle\Entity\OrderInvoice", mappedBy="order", cascade={"persist"})
+     * @ORM\JoinColumn(name="invoice_id", referencedColumnName="id")
+     */
+    protected $invoice;
 
     /**
      * @ORM\OneToOne(targetEntity="HarvestCloud\InvoiceBundle\Entity\HubFeeInvoice", mappedBy="order", cascade={"persist"})
@@ -546,10 +547,15 @@ class Order
         $this->setStatusCode(self::STATUS_IN_TRANSIT_TO_HUB);
 
         // Create the HubFeeInvoice
-        $invoice = new \HarvestCloud\InvoiceBundle\Entity\HubFeeInvoice($this->getHub(), $this->getSeller(), $this->getHubFee());
-        $invoice->post();
+        $hubFeeInvoice = new \HarvestCloud\InvoiceBundle\Entity\HubFeeInvoice($this->getHub(), $this->getSeller(), $this->getHubFee());
+        $hubFeeInvoice->post();
+        $this->setHubFeeInvoice($hubFeeInvoice);
 
-        $this->setHubFeeInvoice($invoice);
+        // Create Order Invoice
+        $invoice = new \HarvestCloud\InvoiceBundle\Entity\OrderInvoice($this);
+        $invoice->setAmount($this->getTotal());
+        $invoice->post();
+        $this->setInvoice($invoice);
     }
 
 
@@ -1292,6 +1298,36 @@ class Order
      {
        $this->setTotal($this->getSubTotal() + $this->getHubFee());
      }
+
+    /**
+     * Set invoice
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-02-23
+     *
+     * @param  \HarvestCloud\InvoiceBundle\Entity\OrderInvoice $invoice
+     *
+     * @return Order
+     */
+    public function setInvoice(\HarvestCloud\InvoiceBundle\Entity\OrderInvoice $invoice = null)
+    {
+        $this->invoice = $invoice;
+
+        return $this;
+    }
+
+    /**
+     * Get invoice
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-02-23
+     *
+     * @return \HarvestCloud\InvoiceBundle\Entity\OrderInvoice
+     */
+    public function getInvoice()
+    {
+        return $this->invoice;
+    }
 
     /**
      * Set hubFeeInvoice
