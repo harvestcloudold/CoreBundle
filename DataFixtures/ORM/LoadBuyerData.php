@@ -51,6 +51,36 @@ class LoadBuyerData extends AbstractFixture implements OrderedFixtureInterface, 
     public function load(ObjectManager $manager)
     {
         $buyer = new User();
+        $buyer->setEmail('harvest.cloud@example.com');
+        $buyer->setFirstname('Harvest');
+        $buyer->setLastname('Cloud');
+        $buyer->setEnabled(false);
+        $buyer->setPassword('');
+
+        $buyerProfile = new Profile();
+        $buyerProfile->setName($buyer->getFullname());
+
+        $buyer->addProfile($buyerProfile);
+
+        $location = new Location();
+        $location->setName('Default');
+        $location->setAddressLine1('150 Main Street');
+        $location->setTown('Great Barrington');
+        $location->setStateCode('MA');
+        $location->setPostalCode('01230');
+
+        $buyerProfile->addLocation($location);
+
+        $exchange = $this->container->get('exchange_manager')->getExchange();
+
+        $exchange->setProfile($buyerProfile);
+
+        $manager->persist($exchange);
+        $manager->persist($buyer);
+        $manager->flush();
+
+
+        $buyer = new User();
         $buyer->setEmail('craig.buyer@example.com');
         $buyer->setFirstname('Craig');
         $buyer->setLastname('Buyer');

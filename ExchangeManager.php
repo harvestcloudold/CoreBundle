@@ -57,7 +57,7 @@ class ExchangeManager
     {
         if (!$this->exchange)
         {
-            $this->exhange = $this->doctrine->getRepository('HarvestCloudCoreBundle:Exchange')->find(1);
+            $this->exchange = $this->doctrine->getRepository('HarvestCloudCoreBundle:Exchange')->find(1);
         }
 
         return $this->exchange;

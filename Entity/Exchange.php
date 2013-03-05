@@ -39,6 +39,12 @@ class Exchange
     protected $name;
 
     /**
+     * @ORM\OneToOne(targetEntity="HarvestCloud\CoreBundle\Entity\Profile", cascade={"persist"})
+     * @ORM\JoinColumn(name="profile_id", referencedColumnName="id")
+     */
+    protected $profile;
+
+    /**
      * Get id
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
@@ -49,6 +55,19 @@ class Exchange
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * __toString()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-03-03
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getName();
     }
 
     /**
@@ -79,5 +98,35 @@ class Exchange
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set profile
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-03-03
+     *
+     * @param  \HarvestCloud\CoreBundle\Entity\Profile $profile
+     *
+     * @return Exchange
+     */
+    public function setProfile(\HarvestCloud\CoreBundle\Entity\Profile $profile = null)
+    {
+        $this->profile = $profile;
+
+        return $this;
+    }
+
+    /**
+     * Get profile
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-03-03
+     *
+     * @return \HarvestCloud\CoreBundle\Entity\Profile
+     */
+    public function getProfile()
+    {
+        return $this->profile;
     }
 }
