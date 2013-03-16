@@ -448,4 +448,19 @@ class OrderCollection
 
         return $lineItems;
     }
+
+    /**
+     * place()
+     *
+     * Place each Order within the collection
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-03-15
+     */
+    public function place()
+    {
+        foreach ($this->getOrders() as $order) {
+            $order->place();
+        }
+    }
 }
