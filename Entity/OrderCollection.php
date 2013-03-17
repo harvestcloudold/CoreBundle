@@ -213,7 +213,12 @@ class OrderCollection
     {
         $order = new Order();
         $order->setSeller($seller);
-        $order->setBuyer($this->getBuyer());
+
+        // If a Buyer has been assigned to this OrderCollection, then set it on
+        // this new Order too
+        if ($this->getBuyer()) {
+            $order->setBuyer($this->getBuyer());
+        }
 
         $this->addOrder($order);
 
