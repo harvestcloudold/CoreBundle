@@ -161,6 +161,11 @@ class OrderCollection
     public function setBuyer(Profile $buyer)
     {
         $this->buyer = $buyer;
+
+        // Let's also set the Buyer on each Order within this collection
+        foreach ($this->getOrders() as $order) {
+            $order->setBuyer($buyer);
+        }
     }
 
     /**

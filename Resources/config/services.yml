@@ -1,6 +1,7 @@
 parameters:
 #    harvest_cloud_core.example.class: HarvestCloud\CoreBundle\Example
     harvest_cloud_core.exchange_manager.class: HarvestCloud\CoreBundle\ExchangeManager
+    harvest_cloud_core.login_listener.class:   HarvestCloud\CoreBundle\Listener\LoginListener
 
 services:
 #    harvest_cloud_core.example:
@@ -10,3 +11,10 @@ services:
     exchange_manager:
         class:     %harvest_cloud_core.exchange_manager.class%
         arguments: [@doctrine]
+
+    login_listener:
+        class:     %harvest_cloud_core.login_listener.class%
+        arguments: [@doctrine, @session]
+        tags:
+            - { name: kernel.event_listener, event: security.interactive_login, method: postLogin }
+
