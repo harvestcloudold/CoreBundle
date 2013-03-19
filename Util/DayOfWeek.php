@@ -49,9 +49,9 @@ class DayOfWeek
      */
     public function __construct($day_of_week_number)
     {
-        if (!in_array((int) $day_of_week_number, range(1,7)))
+        if (!in_array($day_of_week_number, range(1,7)))
         {
-            throw new Exception('Incorrect parameter');
+            throw new \InvalidArgumentException('Incorrect parameter');
         }
 
         $this->day_of_week_number = $day_of_week_number;
