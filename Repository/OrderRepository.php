@@ -15,7 +15,7 @@ use HarvestCloud\CoreBundle\Entity\Order;
 class OrderRepository extends EntityRepository
 {
     /**
-     * Get open orders for Seller
+     * Get open orders for Buyer
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-05-11
@@ -38,7 +38,33 @@ class OrderRepository extends EntityRepository
             ->select('o')
             ->orderBy('o.id', 'DESC')
             ->where($qb->expr()->in('o.status_code', $orderStatuses))
-            ->andWhere('o.rating = 0')
+#            ->andWhere('o.rating = 0')
+        ;
+
+        $q = $qb->getQuery();
+
+        return $q->execute();
+    }
+
+    /**
+     * Get orders for Buyer
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-03-19
+     *
+     * @param  Profile  $buyer
+     */
+    public function findForBuyer(Profile $buyer)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+
+        $qb->from('HarvestCloudCoreBundle:Order', 'o')
+            ->select('o')
+            ->where('o.buyer = :buyer')
+            ->andWhere('o.status_code != :cart')
+            ->orderBy('o.id', 'DESC')
+            ->setParameter('buyer', $buyer)
+            ->setParameter('cart', Order::STATUS_CART)
         ;
 
         $q = $qb->getQuery();
