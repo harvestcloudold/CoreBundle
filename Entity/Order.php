@@ -1415,4 +1415,24 @@ class Order
     {
         return 0.04 * $this->getSubTotal();
     }
+
+    /**
+     * getNumber()
+     *
+     * Like the id, but longer
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-03-19
+     *
+     * @return string
+     */
+    public function getNumber()
+    {
+        // Make 9 chars long
+        $number  = (string) str_pad($this->getId(), 9, '0', STR_PAD_LEFT);
+        $numbers = str_split($number, 3);
+        $number  = implode('-', $numbers);
+
+        return $number;
+    }
 }
