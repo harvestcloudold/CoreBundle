@@ -286,6 +286,16 @@ class Profile implements Geolocatable
     protected $hubFeeInvoicesAsHub;
 
     /**
+     * @ORM\OneToMany(targetEntity="\HarvestCloud\InvoiceBundle\Entity\Invoice", mappedBy="vendor")
+     */
+    protected $invoicesAsVendor;
+
+    /**
+     * @ORM\OneToMany(targetEntity="\HarvestCloud\InvoiceBundle\Entity\Invoice", mappedBy="customer")
+     */
+    protected $invoicesAsCustomer;
+
+    /**
      * __construct()
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
@@ -1803,5 +1813,91 @@ class Profile implements Geolocatable
     public function getHubFeeInvoicesAsHub()
     {
         return $this->hubFeeInvoicesAsHub;
+    }
+
+    /**
+     * Add invoiceAsVendor
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-03-19
+     *
+     * @param  \HarvestCloud\InvoiceBundle\Entity\Invoice $invoiceAsVendor
+     *
+     * @return Profile
+     */
+    public function addInvoiceAsVendor(\HarvestCloud\InvoiceBundle\Entity\Invoice $invoiceAsVendor)
+    {
+        $this->invoicesAsVendor[] = $invoiceAsVendor;
+
+        return $this;
+    }
+
+    /**
+     * Remove invoiceAsVendor
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-03-19
+     *
+     * @param  \HarvestCloud\InvoiceBundle\Entity\Invoice $invoiceAsVendor
+     */
+    public function removeInvoiceAsVendor(\HarvestCloud\InvoiceBundle\Entity\Invoice $invoiceAsVendor)
+    {
+        $this->invoicesAsVendor->removeElement($invoiceAsVendor);
+    }
+
+    /**
+     * Get invoicesAsVendor
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-03-19
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getInvoicesAsVendor()
+    {
+        return $this->invoicesAsVendor;
+    }
+
+    /**
+     * Add invoicesAsCustomer
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-03-19
+     *
+     * @param  \HarvestCloud\InvoiceBundle\Entity\Invoice $invoiceAsCustomer
+     *
+     * @return Profile
+     */
+    public function addInvoiceAsCustomer(\HarvestCloud\InvoiceBundle\Entity\Invoice $invoiceAsCustomer)
+    {
+        $this->invoicesAsCustomer[] = $invoiceAsCustomer;
+
+        return $this;
+    }
+
+    /**
+     * Remove invoiceAsCustomer
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-03-19
+     *
+     * @param  \HarvestCloud\InvoiceBundle\Entity\Invoice $invoiceAsCustomer
+     */
+    public function removeInvoiceAsCustomer(\HarvestCloud\InvoiceBundle\Entity\Invoice $invoiceAsCustomer)
+    {
+        $this->invoicesAsCustomer->removeElement($invoiceAsCustomer);
+    }
+
+    /**
+     * Get invoicesAsCustomer
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-03-19
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getInvoicesAsCustomer()
+    {
+        return $this->invoicesAsCustomer;
     }
 }

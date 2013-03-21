@@ -141,21 +141,21 @@ class Order
 
     /**
      * @ORM\OneToOne(targetEntity="\HarvestCloud\InvoiceBundle\Entity\OrderInvoice", inversedBy="order", cascade={"persist"})
-     * @ORM\JoinColumn(name="invoice_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="order_invoice_id", referencedColumnName="id")
      */
-    protected $invoice;
+    protected $orderInvoice;
 
     /**
-     * @ORM\OneToOne(targetEntity="\HarvestCloud\InvoiceBundle\Entity\HubFeeInvoice", inversedBy="orderAsHubFeeInvoice", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="\HarvestCloud\InvoiceBundle\Entity\HubFeeInvoice", inversedBy="order", cascade={"persist"})
      * @ORM\JoinColumn(name="hub_fee_invoice_id", referencedColumnName="id")
      */
     protected $hubFeeInvoice;
 
     /**
-     * @ORM\OneToOne(targetEntity="\HarvestCloud\InvoiceBundle\Entity\ProductPostingFeeInvoice", inversedBy="order", cascade={"persist"})
-     * @ORM\JoinColumn(name="product_posting_fee_invoice_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="\HarvestCloud\InvoiceBundle\Entity\PostingFeeInvoice", inversedBy="order", cascade={"persist"})
+     * @ORM\JoinColumn(name="posting_fee_invoice_id", referencedColumnName="id")
      */
-    protected $productPostingFeeInvoice;
+    protected $postingFeeInvoice;
 
 
     /**
@@ -554,22 +554,20 @@ class Order
     {
         $this->setStatusCode(self::STATUS_IN_TRANSIT_TO_HUB);
 
-        // Create the HubFeeInvoice
-        $hubFeeInvoice = new \HarvestCloud\InvoiceBundle\Entity\HubFeeInvoice($this->getHub(), $this->getSeller(), $this->getHubFee());
+        // Create Hub Fee Invoice
+        $hubFeeInvoice = new \HarvestCloud\InvoiceBundle\Entity\HubFeeInvoice($this);
         $hubFeeInvoice->post();
         $this->setHubFeeInvoice($hubFeeInvoice);
 
         // Create Order Invoice
         $invoice = new \HarvestCloud\InvoiceBundle\Entity\OrderInvoice($this);
-        $invoice->setAmount($this->getTotal());
         $invoice->post();
-        $this->setInvoice($invoice);
+        $this->setOrderInvoice($invoice);
 
-        // Create Product Posting Fee Invoice
-        $postingFeeInvoice = new \HarvestCloud\InvoiceBundle\Entity\ProductPostingFeeInvoice($this, $exchange);
-        $postingFeeInvoice->setAmount($this->getPostingFee());
+        // Create Posting Fee Invoice
+        $postingFeeInvoice = new \HarvestCloud\InvoiceBundle\Entity\PostingFeeInvoice($this, $exchange);
         $postingFeeInvoice->post();
-        $this->setProductPostingFeeInvoice($postingFeeInvoice);
+        $this->setPostingFeeInvoice($postingFeeInvoice);
     }
 
 
@@ -1314,7 +1312,7 @@ class Order
      }
 
     /**
-     * Set invoice
+     * Set orderInvoice
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-02-23
@@ -1323,24 +1321,24 @@ class Order
      *
      * @return Order
      */
-    public function setInvoice(\HarvestCloud\InvoiceBundle\Entity\OrderInvoice $invoice = null)
+    public function setOrderInvoice(\HarvestCloud\InvoiceBundle\Entity\OrderInvoice $invoice = null)
     {
-        $this->invoice = $invoice;
+        $this->orderInvoice = $invoice;
 
         return $this;
     }
 
     /**
-     * Get invoice
+     * Get orderInvoice
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-02-23
      *
      * @return \HarvestCloud\InvoiceBundle\Entity\OrderInvoice
      */
-    public function getInvoice()
+    public function getOrderInvoice()
     {
-        return $this->invoice;
+        return $this->orderInvoice;
     }
 
     /**
@@ -1379,13 +1377,13 @@ class Order
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-02-22
      *
-     * @param  \HarvestCloud\InvoiceBundle\Entity\ProductPostingFeeInvoice $productPostingFeeInvoice
+     * @param  \HarvestCloud\InvoiceBundle\Entity\PostingFeeInvoice $productPostingFeeInvoice
      *
      * @return Order
      */
-    public function setProductPostingFeeInvoice(\HarvestCloud\InvoiceBundle\Entity\ProductPostingFeeInvoice $productPostingFeeInvoice = null)
+    public function setPostingFeeInvoice(\HarvestCloud\InvoiceBundle\Entity\PostingFeeInvoice $postingFeeInvoice = null)
     {
-        $this->productPostingFeeInvoice = $productPostingFeeInvoice;
+        $this->postingFeeInvoice = $postingFeeInvoice;
 
         return $this;
     }
@@ -1396,11 +1394,11 @@ class Order
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-02-22
      *
-     * @return \HarvestCloud\InvoiceBundle\Entity\ProductPostingFeeInvoice
+     * @return \HarvestCloud\InvoiceBundle\Entity\PostingFeeInvoice
      */
-    public function getProductPostingFeeInvoice()
+    public function getPostingFeeInvoice()
     {
-        return $this->productPostingFeeInvoice;
+        return $this->postingFeeInvoice;
     }
 
     /**
