@@ -1369,19 +1369,19 @@ class Profile implements Geolocatable
             throw new \Exception('Profile already has a set of accounts');
         }
 
-        $account = new \HarvestCloud\DoubleEntryBundle\Entity\Account('Accounts for '.$this->getName());
+        $account = new \HarvestCloud\DoubleEntryBundle\Entity\RootAccount('Root Account for '.$this->getName());
         $account->setProfile($this);
 
         $this->setRootAccount($account);
 
         // Assets
-        $asset    = new \HarvestCloud\DoubleEntryBundle\Entity\Asset('Assets');
-        $ar       = new \HarvestCloud\DoubleEntryBundle\Entity\AccountsReceivable('Accounts Receivable');
-        $current  = new \HarvestCloud\DoubleEntryBundle\Entity\CurrentAsset('Current Assets');
-        $arPrePay = new \HarvestCloud\DoubleEntryBundle\Entity\ARPrePayment('AR Pre-Payments');
-        $cash     = new \HarvestCloud\DoubleEntryBundle\Entity\Cash('Cash');
-        $bank     = new \HarvestCloud\DoubleEntryBundle\Entity\Bank('Bank');
-        $payPal   = new \HarvestCloud\DoubleEntryBundle\Entity\PayPal('PayPal');
+        $asset    = new \HarvestCloud\DoubleEntryBundle\Entity\AssetAccount('Assets');
+        $ar       = new \HarvestCloud\DoubleEntryBundle\Entity\AssetAccount('Accounts Receivable');
+        $current  = new \HarvestCloud\DoubleEntryBundle\Entity\AssetAccount('Current Assets');
+        $arPrePay = new \HarvestCloud\DoubleEntryBundle\Entity\AssetAccount('AR Pre-Payments');
+        $cash     = new \HarvestCloud\DoubleEntryBundle\Entity\AssetAccount('Cash');
+        $bank     = new \HarvestCloud\DoubleEntryBundle\Entity\AssetAccount('Bank');
+        $payPal   = new \HarvestCloud\DoubleEntryBundle\Entity\AssetAccount('PayPal');
 
         $this->setAccountsReceivableAccount($ar);
         $this->setPayPalAccount($payPal);
@@ -1396,9 +1396,9 @@ class Profile implements Geolocatable
         $current->addAccount($payPal);
 
         // Liability
-        $liability = new \HarvestCloud\DoubleEntryBundle\Entity\Liability('Liabilities');
-        $ap        = new \HarvestCloud\DoubleEntryBundle\Entity\AccountsPayable('Accounts Payable');
-        $apPrePay  = new \HarvestCloud\DoubleEntryBundle\Entity\APPrePayment('AP Pre-Payment');
+        $liability = new \HarvestCloud\DoubleEntryBundle\Entity\LiabilityAccount('Liabilities');
+        $ap        = new \HarvestCloud\DoubleEntryBundle\Entity\LiabilityAccount('Accounts Payable');
+        $apPrePay  = new \HarvestCloud\DoubleEntryBundle\Entity\LiabilityAccount('AP Pre-Payment');
 
         $this->setAccountsPayableAccount($ap);
         $this->setApPrePaymentAccount($apPrePay);
@@ -1408,8 +1408,8 @@ class Profile implements Geolocatable
         $ap->addAccount($apPrePay);
 
         // Income
-        $income = new \HarvestCloud\DoubleEntryBundle\Entity\Income('Income');
-        $sales  = new \HarvestCloud\DoubleEntryBundle\Entity\Sales('Sales');
+        $income = new \HarvestCloud\DoubleEntryBundle\Entity\IncomeAccount('Income');
+        $sales  = new \HarvestCloud\DoubleEntryBundle\Entity\IncomeAccount('Sales');
 
         $this->setSalesAccount($sales);
 
@@ -1417,9 +1417,9 @@ class Profile implements Geolocatable
         $income->addAccount($sales);
 
         // Expenses
-        $expenses        = new \HarvestCloud\DoubleEntryBundle\Entity\Expense('Expenses');
-        $purchases       = new \HarvestCloud\DoubleEntryBundle\Entity\Purchases('Purchases');
-        $costOfGoodsSold = new \HarvestCloud\DoubleEntryBundle\Entity\CostOfGoodsSold('Cost of Goods Sold');
+        $expenses        = new \HarvestCloud\DoubleEntryBundle\Entity\ExpenseAccount('Expenses');
+        $purchases       = new \HarvestCloud\DoubleEntryBundle\Entity\ExpenseAccount('Purchases');
+        $costOfGoodsSold = new \HarvestCloud\DoubleEntryBundle\Entity\ExpenseAccount('Cost of Goods Sold');
 
         $this->setExpenseAccount($expenses);
         $this->setPurchasesAccount($purchases);
