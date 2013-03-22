@@ -135,11 +135,6 @@ class Order
     protected $hub_fee = 0;
 
     /**
-     * @ORM\OneToMany(targetEntity="\HarvestCloud\DoubleEntryBundle\Entity\Journal\OrderPrePaymentJournal", mappedBy="order", cascade={"persist"})
-     */
-    protected $prePaymentJournals;
-
-    /**
      * @ORM\OneToOne(targetEntity="\HarvestCloud\InvoiceBundle\Entity\OrderInvoice", inversedBy="order", cascade={"persist"})
      * @ORM\JoinColumn(name="order_invoice_id", referencedColumnName="id")
      */
@@ -1252,50 +1247,6 @@ class Order
     public function removeLineItem(\HarvestCloud\CoreBundle\Entity\OrderLineItem $lineItem)
     {
         $this->lineItems->removeElement($lineItem);
-    }
-
-    /**
-     * Add prePaymentJournals
-     *
-     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
-     * @since  2013-02-10
-     *
-     * @param \HarvestCloud\DoubleEntryBundle\Entity\Journal\OrderPrePaymentJournal $prePaymentJournal
-     *
-     * @return Order
-     */
-    public function addPrePaymentJournal(\HarvestCloud\DoubleEntryBundle\Entity\Journal\OrderPrePaymentJournal $prePaymentJournal)
-    {
-        $this->prePaymentJournals[] = $prePaymentJournal;
-        $prePaymentJournal->setOrder($this);
-
-        return $this;
-    }
-
-    /**
-     * Remove prePaymentJournals
-     *
-     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
-     * @since  2013-02-10
-     *
-     * @param \HarvestCloud\DoubleEntryBundle\Entity\Journal\OrderPrePaymentJournal $prePaymentJournal
-     */
-    public function removePrePaymentJournal(\HarvestCloud\DoubleEntryBundle\Entity\Journal\OrderPrePaymentJournal $prePaymentJournal)
-    {
-        $this->prePaymentJournals->removeElement($prePaymentJournal);
-    }
-
-    /**
-     * Get prePaymentJournals
-     *
-     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
-     * @since  2013-02-10
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPrePaymentJournals()
-    {
-        return $this->prePaymentJournals;
     }
 
      /**
