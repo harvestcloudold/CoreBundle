@@ -504,6 +504,25 @@ class Order
     public function cancelByBuyer()
     {
         $this->setStatusCode(self::STATUS_CANCELED_BY_BUYER);
+
+        // Replace stock
+        foreach ($this->getLineItems() as $lineItem)
+        {
+            $quantity = $lineItem->getQuantity();
+
+            // Increment stock from Product
+            $product = $lineItem->getProduct();
+            $product->setQuantityOnHold($product->getQuantityOnHold()-$quantity);
+            $product->setQuantityAvailable($product->getQuantityAvailable()+$quantity);
+
+            // Create stock transaction for each line item
+            $stockTransaction = new OrderStockTransaction();
+            $stockTransaction->setQuantity($quantity);
+            $stockTransaction->setProduct($product);
+            $stockTransaction->setStatusCode(OrderStockTransaction::STATUS_PENDING);
+
+            $lineItem->setStockTransaction($stockTransaction);
+        }
     }
 
 
