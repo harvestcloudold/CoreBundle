@@ -12,8 +12,6 @@ namespace HarvestCloud\CoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use HarvestCloud\CoreBundle\Entity\Order;
-use HarvestCloud\PayPalBundle\Entity\PayPalPaymentCollection;
-use HarvestCloud\PaymentBundle\Entity\PayPalPayment;
 
 /**
  * OrderCollection Entity
@@ -58,11 +56,6 @@ class OrderCollection
      * @ORM\OneToMany(targetEntity="Order", mappedBy="collection")
      */
     protected $orders;
-
-    /**
-     * @ORM\OneToOne(targetEntity="HarvestCloud\PayPalBundle\Entity\PayPalPaymentCollection", mappedBy="orderCollection")
-     */
-    protected $payPalPaymentCollection;
 
     /**
      * __construct()
@@ -250,50 +243,6 @@ class OrderCollection
         $lineItem = $order->addProduct($product, $quantity);
 
         return $lineItem;
-    }
-
-    /**
-     * Get PayPalPaymentCollection
-     *
-     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
-     * @since  2012-05-07
-     *
-     * @return PayPalPaymentCollection
-     */
-    public function getPayPalPaymentCollection()
-    {
-        if (!$this->payPalPaymentCollection)
-        {
-            $payPalPaymentCollection = new PayPalPaymentCollection();
-
-            foreach ($this->getOrders() as $order)
-            {
-                $payment = new PayPalPayment();
-                $payment->setAmount($order->getAmountForPaymentGateway());
-                $payment->setPayPalAccount($order->getSeller()->getPayPalAccount());
-                $payment->setInvoiceIdForGateway($order->getInvoiceIdForPaymentGateway());
-
-                $payPalPaymentCollection->addPayPalPayment($payment);
-            }
-
-            $this->setPayPalPaymentCollection($payPalPaymentCollection);
-        }
-
-        return $this->payPalPaymentCollection;
-    }
-
-    /**
-     * Set payPalPaymentCollection
-     *
-     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
-     * @since  2012-05-07
-     *
-     * @param  PayPalPaymentCollection $payPalPaymentCollection
-     */
-    public function setPayPalPaymentCollection(PayPalPaymentCollection $payPalPaymentCollection)
-    {
-        $this->payPalPaymentCollection = $payPalPaymentCollection;
-        $payPalPaymentCollection->setOrderCollection($this);
     }
 
     /**
