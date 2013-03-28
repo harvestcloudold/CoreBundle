@@ -234,6 +234,16 @@ class Profile implements Geolocatable
     protected $accounts;
 
     /**
+     * @ORM\OneToMany(targetEntity="HarvestCloud\DoubleEntryBundle\Entity\Journal", mappedBy="profile")
+     */
+    protected $journals;
+
+    /**
+     * @ORM\OneToMany(targetEntity="HarvestCloud\DoubleEntryBundle\Entity\Posting", mappedBy="profile")
+     */
+    protected $postings;
+
+    /**
      * The fixed part (in dollars) of the fee that a Seller is charged by the
      * system for each Order that is completed
      *
@@ -1799,5 +1809,91 @@ class Profile implements Geolocatable
     public function getInvoicesAsCustomer()
     {
         return $this->invoicesAsCustomer;
+    }
+
+    /**
+     * Add journal
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-03-27
+     *
+     * @param  \HarvestCloud\DoubleEntryBundle\Entity\Journal $journal
+     *
+     * @return Profile
+     */
+    public function addJournal(\HarvestCloud\DoubleEntryBundle\Entity\Journal $journal)
+    {
+        $this->journals[] = $journal;
+
+        return $this;
+    }
+
+    /**
+     * Remove journals
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-03-27
+     *
+     * @param \HarvestCloud\DoubleEntryBundle\Entity\Journal $journal
+     */
+    public function removeJournal(\HarvestCloud\DoubleEntryBundle\Entity\Journal $journal)
+    {
+        $this->journals->removeElement($journal);
+    }
+
+    /**
+     * Get journals
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-03-27
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getJournals()
+    {
+        return $this->journals;
+    }
+
+    /**
+     * Add postings
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-03-27
+     *
+     * @param  \HarvestCloud\DoubleEntryBundle\Entity\Posting $postings
+     *
+     * @return Profile
+     */
+    public function addPosting(\HarvestCloud\DoubleEntryBundle\Entity\Posting $posting)
+    {
+        $this->postings[] = $posting;
+
+        return $this;
+    }
+
+    /**
+     * Remove postings
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-03-27
+     *
+     * @param \HarvestCloud\DoubleEntryBundle\Entity\Posting $posting
+     */
+    public function removePosting(\HarvestCloud\DoubleEntryBundle\Entity\Posting $posting)
+    {
+        $this->postings->removeElement($posting);
+    }
+
+    /**
+     * Get postings
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-03-27
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPostings()
+    {
+        return $this->postings;
     }
 }
