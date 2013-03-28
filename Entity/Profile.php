@@ -244,6 +244,21 @@ class Profile implements Geolocatable
     protected $postings;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $stripe_user_id;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $stripe_access_token;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $stripe_publishable_key;
+
+    /**
      * The fixed part (in dollars) of the fee that a Seller is charged by the
      * system for each Order that is completed
      *
@@ -1895,5 +1910,95 @@ class Profile implements Geolocatable
     public function getPostings()
     {
         return $this->postings;
+    }
+
+    /**
+     * Set stripe_user_id
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-03-27
+     *
+     * @param  string $stripeUserId
+     *
+     * @return Profile
+     */
+    public function setStripeUserId($stripeUserId)
+    {
+        $this->stripe_user_id = $stripeUserId;
+
+        return $this;
+    }
+
+    /**
+     * Get stripe_user_id
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-03-27
+     *
+     * @return string
+     */
+    public function getStripeUserId()
+    {
+        return $this->stripe_user_id;
+    }
+
+    /**
+     * Set stripe_access_token
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-03-27
+     *
+     * @param  string $stripeAccessToken
+     *
+     * @return Profile
+     */
+    public function setStripeAccessToken($stripeAccessToken)
+    {
+        $this->stripe_access_token = $stripeAccessToken;
+
+        return $this;
+    }
+
+    /**
+     * Get stripe_access_token
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-03-27
+     *
+     * @return string
+     */
+    public function getStripeAccessToken()
+    {
+        return $this->stripe_access_token;
+    }
+
+    /**
+     * Set stripe_publishable_key
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-03-27
+     *
+     * @param  string $stripePublishableKey
+     *
+     * @return Profile
+     */
+    public function setStripePublishableKey($stripePublishableKey)
+    {
+        $this->stripe_publishable_key = $stripePublishableKey;
+
+        return $this;
+    }
+
+    /**
+     * Get stripe_publishable_key
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-03-27
+     *
+     * @return string
+     */
+    public function getStripePublishableKey()
+    {
+        return $this->stripe_publishable_key;
     }
 }
