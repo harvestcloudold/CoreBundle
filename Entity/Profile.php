@@ -311,6 +311,11 @@ class Profile implements Geolocatable
     protected $invoicesAsCustomer;
 
     /**
+     * @ORM\OneToMany(targetEntity="\HarvestCloud\PaymentBundle\Entity\SavedCreditCard", mappedBy="profile", cascade={"persist"})
+     */
+    protected $savedCreditCards;
+
+    /**
      * __construct()
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
@@ -2000,5 +2005,65 @@ class Profile implements Geolocatable
     public function getStripePublishableKey()
     {
         return $this->stripe_publishable_key;
+    }
+
+    /**
+     * Add savedCreditCards
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-03-27
+     *
+     * @param  \HarvestCloud\PaymentBundle\Entity\SavedCreditCard $savedCreditCard
+     *
+     * @return Profile
+     */
+    public function addSavedCreditCard(\HarvestCloud\PaymentBundle\Entity\SavedCreditCard $savedCreditCard)
+    {
+        $this->savedCreditCards[] = $savedCreditCard;
+
+        $savedCreditCard->setProfile($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove savedCreditCards
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-03-27
+     *
+     * @param  \HarvestCloud\PaymentBundle\Entity\SavedCreditCard $savedCreditCard
+     */
+    public function removeSavedCreditCard(\HarvestCloud\PaymentBundle\Entity\SavedCreditCard $savedCreditCard)
+    {
+        $this->savedCreditCards->removeElement($savedCreditCard);
+    }
+
+    /**
+     * Get savedCreditCards
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-03-27
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSavedCreditCards()
+    {
+        return $this->savedCreditCards;
+    }
+
+    /**
+     * Get active savedCreditCards
+     *
+     * Get cards that can be used for a new charge
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-03-27
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getActiveSavedCreditCards()
+    {
+        return $this->savedCreditCards;
     }
 }
