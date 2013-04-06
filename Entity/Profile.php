@@ -311,7 +311,7 @@ class Profile implements Geolocatable
     protected $invoicesAsCustomer;
 
     /**
-     * @ORM\OneToMany(targetEntity="\HarvestCloud\PaymentBundle\Entity\SavedCreditCard", mappedBy="profile", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="\HarvestCloud\CoreBundle\Entity\Payment\SavedCreditCard", mappedBy="profile", cascade={"persist"})
      */
     protected $savedCreditCards;
 
@@ -2013,11 +2013,11 @@ class Profile implements Geolocatable
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-03-27
      *
-     * @param  \HarvestCloud\PaymentBundle\Entity\SavedCreditCard $savedCreditCard
+     * @param  \HarvestCloud\CoreBundle\Entity\Payment\SavedCreditCard $savedCreditCard
      *
      * @return Profile
      */
-    public function addSavedCreditCard(\HarvestCloud\PaymentBundle\Entity\SavedCreditCard $savedCreditCard)
+    public function addSavedCreditCard(\HarvestCloud\CoreBundle\Entity\Payment\SavedCreditCard $savedCreditCard)
     {
         $this->savedCreditCards[] = $savedCreditCard;
 
@@ -2032,9 +2032,9 @@ class Profile implements Geolocatable
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-03-27
      *
-     * @param  \HarvestCloud\PaymentBundle\Entity\SavedCreditCard $savedCreditCard
+     * @param  \HarvestCloud\CoreBundle\Entity\Payment\SavedCreditCard $savedCreditCard
      */
-    public function removeSavedCreditCard(\HarvestCloud\PaymentBundle\Entity\SavedCreditCard $savedCreditCard)
+    public function removeSavedCreditCard(\HarvestCloud\CoreBundle\Entity\Payment\SavedCreditCard $savedCreditCard)
     {
         $this->savedCreditCards->removeElement($savedCreditCard);
     }
