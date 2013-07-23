@@ -301,12 +301,12 @@ class Profile implements Geolocatable
     protected $hubWindows;
 
     /**
-     * @ORM\OneToMany(targetEntity="\HarvestCloud\InvoiceBundle\Entity\Invoice", mappedBy="vendor")
+     * @ORM\OneToMany(targetEntity="\HarvestCloud\CoreBundle\Entity\Invoice\Invoice", mappedBy="vendor")
      */
     protected $invoicesAsVendor;
 
     /**
-     * @ORM\OneToMany(targetEntity="\HarvestCloud\InvoiceBundle\Entity\Invoice", mappedBy="customer")
+     * @ORM\OneToMany(targetEntity="\HarvestCloud\CoreBundle\Entity\Invoice\Invoice", mappedBy="customer")
      */
     protected $invoicesAsCustomer;
 
@@ -1751,11 +1751,11 @@ class Profile implements Geolocatable
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-03-19
      *
-     * @param  \HarvestCloud\InvoiceBundle\Entity\Invoice $invoiceAsVendor
+     * @param  \HarvestCloud\CoreBundle\Entity\Invoice\Invoice $invoiceAsVendor
      *
      * @return Profile
      */
-    public function addInvoiceAsVendor(\HarvestCloud\InvoiceBundle\Entity\Invoice $invoiceAsVendor)
+    public function addInvoiceAsVendor(\HarvestCloud\CoreBundle\Entity\Invoice\Invoice $invoiceAsVendor)
     {
         $this->invoicesAsVendor[] = $invoiceAsVendor;
 
@@ -1768,9 +1768,9 @@ class Profile implements Geolocatable
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-03-19
      *
-     * @param  \HarvestCloud\InvoiceBundle\Entity\Invoice $invoiceAsVendor
+     * @param  \HarvestCloud\CoreBundle\Entity\Invoice\Invoice $invoiceAsVendor
      */
-    public function removeInvoiceAsVendor(\HarvestCloud\InvoiceBundle\Entity\Invoice $invoiceAsVendor)
+    public function removeInvoiceAsVendor(\HarvestCloud\CoreBundle\Entity\Invoice\Invoice $invoiceAsVendor)
     {
         $this->invoicesAsVendor->removeElement($invoiceAsVendor);
     }
@@ -1794,11 +1794,11 @@ class Profile implements Geolocatable
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-03-19
      *
-     * @param  \HarvestCloud\InvoiceBundle\Entity\Invoice $invoiceAsCustomer
+     * @param  \HarvestCloud\CoreBundle\Entity\Invoice\Invoice $invoiceAsCustomer
      *
      * @return Profile
      */
-    public function addInvoiceAsCustomer(\HarvestCloud\InvoiceBundle\Entity\Invoice $invoiceAsCustomer)
+    public function addInvoiceAsCustomer(\HarvestCloud\CoreBundle\Entity\Invoice\Invoice $invoiceAsCustomer)
     {
         $this->invoicesAsCustomer[] = $invoiceAsCustomer;
 
@@ -1811,9 +1811,9 @@ class Profile implements Geolocatable
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-03-19
      *
-     * @param  \HarvestCloud\InvoiceBundle\Entity\Invoice $invoiceAsCustomer
+     * @param  \HarvestCloud\CoreBundle\Entity\Invoice\Invoice $invoiceAsCustomer
      */
-    public function removeInvoiceAsCustomer(\HarvestCloud\InvoiceBundle\Entity\Invoice $invoiceAsCustomer)
+    public function removeInvoiceAsCustomer(\HarvestCloud\CoreBundle\Entity\Invoice\Invoice $invoiceAsCustomer)
     {
         $this->invoicesAsCustomer->removeElement($invoiceAsCustomer);
     }

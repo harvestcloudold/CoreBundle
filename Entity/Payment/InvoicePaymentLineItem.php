@@ -10,7 +10,7 @@
 namespace HarvestCloud\CoreBundle\Entity\Payment;
 
 use Doctrine\ORM\Mapping as ORM;
-use HarvestCloud\InvoiceBundle\Entity\Invoice;
+use HarvestCloud\CoreBundle\Entity\Invoice\Invoice;
 
 /**
  * InvoicePaymentLineItem Entity
@@ -23,7 +23,7 @@ use HarvestCloud\InvoiceBundle\Entity\Invoice;
 class InvoicePaymentLineItem extends PaymentLineItem
 {
     /**
-     * @ORM\ManyToOne(targetEntity="HarvestCloud\InvoiceBundle\Entity\Invoice", inversedBy="invoicePaymentLineItems", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="HarvestCloud\CoreBundle\Entity\Invoice\Invoice", inversedBy="invoicePaymentLineItems", cascade={"persist"})
      * @ORM\JoinColumn(name="invoice_id", referencedColumnName="id")
      */
     protected $invoice;
@@ -48,11 +48,11 @@ class InvoicePaymentLineItem extends PaymentLineItem
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-03-24
      *
-     * @param  \HarvestCloud\InvoiceBundle\Entity\Invoice $invoice
+     * @param  \HarvestCloud\CoreBundle\Entity\Invoice\Invoice $invoice
      *
      * @return InvoicePaymentLineItem
      */
-    public function setInvoice(\HarvestCloud\InvoiceBundle\Entity\Invoice $invoice = null)
+    public function setInvoice(\HarvestCloud\CoreBundle\Entity\Invoice\Invoice $invoice = null)
     {
         $this->invoice = $invoice;
 
@@ -65,7 +65,7 @@ class InvoicePaymentLineItem extends PaymentLineItem
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-03-24
      *
-     * @return \HarvestCloud\InvoiceBundle\Entity\Invoice
+     * @return \HarvestCloud\CoreBundle\Entity\Invoice\Invoice
      */
     public function getInvoice()
     {
