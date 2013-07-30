@@ -11,10 +11,10 @@ namespace HarvestCloud\CoreBundle\Tests\Entity\Invoice;
 
 use HarvestCloud\CoreBundle\Entity\Invoice\Invoice;
 use HarvestCloud\CoreBundle\Entity\Invoice\PostingFeeInvoice;
-use HarvestCloud\DoubleEntryBundle\Entity\Asset;
-use HarvestCloud\DoubleEntryBundle\Entity\Liability;
-use HarvestCloud\DoubleEntryBundle\Entity\Income;
-use HarvestCloud\DoubleEntryBundle\Entity\Expense;
+use HarvestCloud\CoreBundle\Entity\Asset;
+use HarvestCloud\CoreBundle\Entity\Liability;
+use HarvestCloud\CoreBundle\Entity\Income;
+use HarvestCloud\CoreBundle\Entity\Expense;
 
 /**
  * Tests for PostingFeeInvoice
