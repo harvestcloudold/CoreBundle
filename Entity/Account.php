@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-namespace HarvestCloud\DoubleEntryBundle\Entity;
+namespace HarvestCloud\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -33,7 +33,7 @@ use HarvestCloud\CoreBundle\Entity\Profile;
  *    "equity"    = "EquityAccount"
  * })
  * @ORM\Table(name="double_entry_account")
- * @ORM\Entity(repositoryClass="HarvestCloud\DoubleEntryBundle\Repository\AccountRepository")
+ * @ORM\Entity(repositoryClass="HarvestCloud\CoreBundle\Repository\AccountRepository")
  */
 abstract class Account
 {
@@ -374,9 +374,9 @@ abstract class Account
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-01-27
      *
-     * @param HarvestCloud\DoubleEntryBundle\Entity\Account $parent
+     * @param HarvestCloud\CoreBundle\Entity\Account $parent
      */
-    public function setParent(\HarvestCloud\DoubleEntryBundle\Entity\Account $parent)
+    public function setParent(\HarvestCloud\CoreBundle\Entity\Account $parent)
     {
         $this->parent = $parent;
     }
@@ -387,7 +387,7 @@ abstract class Account
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-01-27
      *
-     * @return HarvestCloud\DoubleEntryBundle\Entity\Account
+     * @return HarvestCloud\CoreBundle\Entity\Account
      */
     public function getParent()
     {
@@ -400,9 +400,9 @@ abstract class Account
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-01-27
      *
-     * @param HarvestCloud\DoubleEntryBundle\Entity\Account $children
+     * @param HarvestCloud\CoreBundle\Entity\Account $children
      */
-    public function addAccount(\HarvestCloud\DoubleEntryBundle\Entity\Account $child)
+    public function addAccount(\HarvestCloud\CoreBundle\Entity\Account $child)
     {
         $this->children[] = $child;
         $child->setParent($this);

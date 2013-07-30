@@ -12,7 +12,7 @@ namespace HarvestCloud\CoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use HarvestCloud\GeoBundle\Util\Geolocatable;
-use HarvestCloud\DoubleEntryBundle\Entity\Account;
+use HarvestCloud\CoreBundle\Entity\Account;
 
 /**
  * Profile Entity
@@ -84,61 +84,61 @@ class Profile implements Geolocatable
     private $defaultLocation;
 
     /**
-     * @ORM\OneToOne(targetEntity="\HarvestCloud\DoubleEntryBundle\Entity\Account", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="\HarvestCloud\CoreBundle\Entity\Account", cascade={"persist"})
      * @ORM\JoinColumn(name="root_account_id", referencedColumnName="id")
      */
     private $rootAccount;
 
     /**
-     * @ORM\OneToOne(targetEntity="\HarvestCloud\DoubleEntryBundle\Entity\Account", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="\HarvestCloud\CoreBundle\Entity\Account", cascade={"persist"})
      * @ORM\JoinColumn(name="cost_of_goods_sold_account_id", referencedColumnName="id")
      */
     private $costOfGoodsSoldAccount;
 
     /**
-     * @ORM\OneToOne(targetEntity="\HarvestCloud\DoubleEntryBundle\Entity\Account", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="\HarvestCloud\CoreBundle\Entity\Account", cascade={"persist"})
      * @ORM\JoinColumn(name="sales_account_id", referencedColumnName="id")
      */
     private $salesAccount;
 
     /**
-     * @ORM\OneToOne(targetEntity="\HarvestCloud\DoubleEntryBundle\Entity\Account", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="\HarvestCloud\CoreBundle\Entity\Account", cascade={"persist"})
      * @ORM\JoinColumn(name="expense_account_id", referencedColumnName="id")
      */
     private $expenseAccount;
 
     /**
-     * @ORM\OneToOne(targetEntity="\HarvestCloud\DoubleEntryBundle\Entity\Account", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="\HarvestCloud\CoreBundle\Entity\Account", cascade={"persist"})
      * @ORM\JoinColumn(name="purchases_account_id", referencedColumnName="id")
      */
     private $purchasesAccount;
 
     /**
-     * @ORM\OneToOne(targetEntity="\HarvestCloud\DoubleEntryBundle\Entity\Account", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="\HarvestCloud\CoreBundle\Entity\Account", cascade={"persist"})
      * @ORM\JoinColumn(name="ar_account_id", referencedColumnName="id")
      */
     private $accountsReceivableAccount;
 
     /**
-     * @ORM\OneToOne(targetEntity="\HarvestCloud\DoubleEntryBundle\Entity\Account", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="\HarvestCloud\CoreBundle\Entity\Account", cascade={"persist"})
      * @ORM\JoinColumn(name="ap_account_id", referencedColumnName="id")
      */
     private $accountsPayableAccount;
 
     /**
-     * @ORM\OneToOne(targetEntity="\HarvestCloud\DoubleEntryBundle\Entity\Account", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="\HarvestCloud\CoreBundle\Entity\Account", cascade={"persist"})
      * @ORM\JoinColumn(name="paypal_account_id", referencedColumnName="id")
      */
     private $payPalAccount;
 
     /**
-     * @ORM\OneToOne(targetEntity="\HarvestCloud\DoubleEntryBundle\Entity\Account", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="\HarvestCloud\CoreBundle\Entity\Account", cascade={"persist"})
      * @ORM\JoinColumn(name="ar_prepay_account_id", referencedColumnName="id")
      */
     private $arPrePaymentAccount;
 
     /**
-     * @ORM\OneToOne(targetEntity="\HarvestCloud\DoubleEntryBundle\Entity\Account", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="\HarvestCloud\CoreBundle\Entity\Account", cascade={"persist"})
      * @ORM\JoinColumn(name="ap_prepay_account_id", referencedColumnName="id")
      */
     private $apPrePaymentAccount;
@@ -229,17 +229,17 @@ class Profile implements Geolocatable
     protected $ordersAsHub;
 
     /**
-     * @ORM\OneToMany(targetEntity="HarvestCloud\DoubleEntryBundle\Entity\Account", mappedBy="profile")
+     * @ORM\OneToMany(targetEntity="HarvestCloud\CoreBundle\Entity\Account", mappedBy="profile")
      */
     protected $accounts;
 
     /**
-     * @ORM\OneToMany(targetEntity="HarvestCloud\DoubleEntryBundle\Entity\Journal", mappedBy="profile")
+     * @ORM\OneToMany(targetEntity="HarvestCloud\CoreBundle\Entity\Journal", mappedBy="profile")
      */
     protected $journals;
 
     /**
-     * @ORM\OneToMany(targetEntity="HarvestCloud\DoubleEntryBundle\Entity\Posting", mappedBy="profile")
+     * @ORM\OneToMany(targetEntity="HarvestCloud\CoreBundle\Entity\Posting", mappedBy="profile")
      */
     protected $postings;
 
@@ -1106,7 +1106,7 @@ class Profile implements Geolocatable
      *
      * @param  string  $type_code
      *
-     * @return \HarvestCloud\DoubleEntryBundle\Entity\Account
+     * @return \HarvestCloud\CoreBundle\Entity\Account
      */
     public function getAccountByCode($type_code)
     {
@@ -1148,7 +1148,7 @@ class Profile implements Geolocatable
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-05-21
      *
-     * @return \HarvestCloud\DoubleEntryBundle\Entity\Account
+     * @return \HarvestCloud\CoreBundle\Entity\Account
      */
     public function getAPAccount()
     {
@@ -1162,7 +1162,7 @@ class Profile implements Geolocatable
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-05-21
      *
-     * @return \HarvestCloud\DoubleEntryBundle\Entity\Account
+     * @return \HarvestCloud\CoreBundle\Entity\Account
      */
     public function getBankAccount()
     {
@@ -1389,19 +1389,19 @@ class Profile implements Geolocatable
             throw new \Exception('Profile already has a set of accounts');
         }
 
-        $account = new \HarvestCloud\DoubleEntryBundle\Entity\RootAccount('Root Account for '.$this->getName());
+        $account = new \HarvestCloud\CoreBundle\Entity\RootAccount('Root Account for '.$this->getName());
         $account->setProfile($this);
 
         $this->setRootAccount($account);
 
         // Assets
-        $asset    = new \HarvestCloud\DoubleEntryBundle\Entity\AssetAccount('Assets');
-        $ar       = new \HarvestCloud\DoubleEntryBundle\Entity\AssetAccount('Accounts Receivable');
-        $current  = new \HarvestCloud\DoubleEntryBundle\Entity\AssetAccount('Current Assets');
-        $arPrePay = new \HarvestCloud\DoubleEntryBundle\Entity\AssetAccount('AR Pre-Payments');
-        $cash     = new \HarvestCloud\DoubleEntryBundle\Entity\AssetAccount('Cash');
-        $bank     = new \HarvestCloud\DoubleEntryBundle\Entity\AssetAccount('Bank');
-        $payPal   = new \HarvestCloud\DoubleEntryBundle\Entity\AssetAccount('PayPal');
+        $asset    = new \HarvestCloud\CoreBundle\Entity\AssetAccount('Assets');
+        $ar       = new \HarvestCloud\CoreBundle\Entity\AssetAccount('Accounts Receivable');
+        $current  = new \HarvestCloud\CoreBundle\Entity\AssetAccount('Current Assets');
+        $arPrePay = new \HarvestCloud\CoreBundle\Entity\AssetAccount('AR Pre-Payments');
+        $cash     = new \HarvestCloud\CoreBundle\Entity\AssetAccount('Cash');
+        $bank     = new \HarvestCloud\CoreBundle\Entity\AssetAccount('Bank');
+        $payPal   = new \HarvestCloud\CoreBundle\Entity\AssetAccount('PayPal');
 
         $this->setAccountsReceivableAccount($ar);
         $this->setPayPalAccount($payPal);
@@ -1416,9 +1416,9 @@ class Profile implements Geolocatable
         $current->addAccount($payPal);
 
         // Liability
-        $liability = new \HarvestCloud\DoubleEntryBundle\Entity\LiabilityAccount('Liabilities');
-        $ap        = new \HarvestCloud\DoubleEntryBundle\Entity\LiabilityAccount('Accounts Payable');
-        $apPrePay  = new \HarvestCloud\DoubleEntryBundle\Entity\LiabilityAccount('AP Pre-Payment');
+        $liability = new \HarvestCloud\CoreBundle\Entity\LiabilityAccount('Liabilities');
+        $ap        = new \HarvestCloud\CoreBundle\Entity\LiabilityAccount('Accounts Payable');
+        $apPrePay  = new \HarvestCloud\CoreBundle\Entity\LiabilityAccount('AP Pre-Payment');
 
         $this->setAccountsPayableAccount($ap);
         $this->setApPrePaymentAccount($apPrePay);
@@ -1428,8 +1428,8 @@ class Profile implements Geolocatable
         $ap->addAccount($apPrePay);
 
         // Income
-        $income = new \HarvestCloud\DoubleEntryBundle\Entity\IncomeAccount('Income');
-        $sales  = new \HarvestCloud\DoubleEntryBundle\Entity\IncomeAccount('Sales');
+        $income = new \HarvestCloud\CoreBundle\Entity\IncomeAccount('Income');
+        $sales  = new \HarvestCloud\CoreBundle\Entity\IncomeAccount('Sales');
 
         $this->setSalesAccount($sales);
 
@@ -1437,9 +1437,9 @@ class Profile implements Geolocatable
         $income->addAccount($sales);
 
         // Expenses
-        $expenses        = new \HarvestCloud\DoubleEntryBundle\Entity\ExpenseAccount('Expenses');
-        $purchases       = new \HarvestCloud\DoubleEntryBundle\Entity\ExpenseAccount('Purchases');
-        $costOfGoodsSold = new \HarvestCloud\DoubleEntryBundle\Entity\ExpenseAccount('Cost of Goods Sold');
+        $expenses        = new \HarvestCloud\CoreBundle\Entity\ExpenseAccount('Expenses');
+        $purchases       = new \HarvestCloud\CoreBundle\Entity\ExpenseAccount('Purchases');
+        $costOfGoodsSold = new \HarvestCloud\CoreBundle\Entity\ExpenseAccount('Cost of Goods Sold');
 
         $this->setExpenseAccount($expenses);
         $this->setPurchasesAccount($purchases);
@@ -1460,7 +1460,7 @@ class Profile implements Geolocatable
      *
      * @param HarvestCloud\CoreBundle\Entity\Account $costOfGoodsSoldAccount
      */
-    public function setCostOfGoodsSoldAccount(\HarvestCloud\DoubleEntryBundle\Entity\Account $costOfGoodsSoldAccount)
+    public function setCostOfGoodsSoldAccount(\HarvestCloud\CoreBundle\Entity\Account $costOfGoodsSoldAccount)
     {
         $this->costOfGoodsSoldAccount = $costOfGoodsSoldAccount;
     }
@@ -1486,7 +1486,7 @@ class Profile implements Geolocatable
      *
      * @param HarvestCloud\CoreBundle\Entity\Account $salesAccount
      */
-    public function setSalesAccount(\HarvestCloud\DoubleEntryBundle\Entity\Account $salesAccount)
+    public function setSalesAccount(\HarvestCloud\CoreBundle\Entity\Account $salesAccount)
     {
         $this->salesAccount = $salesAccount;
     }
@@ -1512,7 +1512,7 @@ class Profile implements Geolocatable
      *
      * @param HarvestCloud\CoreBundle\Entity\Account $expenseAccount
      */
-    public function setExpenseAccount(\HarvestCloud\DoubleEntryBundle\Entity\Account $expenseAccount)
+    public function setExpenseAccount(\HarvestCloud\CoreBundle\Entity\Account $expenseAccount)
     {
         $this->expenseAccount = $expenseAccount;
     }
@@ -1538,7 +1538,7 @@ class Profile implements Geolocatable
      *
      * @param HarvestCloud\CoreBundle\Entity\Account $accountsReceivableAccount
      */
-    public function setAccountsReceivableAccount(\HarvestCloud\DoubleEntryBundle\Entity\Account $accountsReceivableAccount)
+    public function setAccountsReceivableAccount(\HarvestCloud\CoreBundle\Entity\Account $accountsReceivableAccount)
     {
         $this->accountsReceivableAccount = $accountsReceivableAccount;
     }
@@ -1564,7 +1564,7 @@ class Profile implements Geolocatable
      *
      * @param HarvestCloud\CoreBundle\Entity\Account $accountsPayableAccount
      */
-    public function setAccountsPayableAccount(\HarvestCloud\DoubleEntryBundle\Entity\Account $accountsPayableAccount)
+    public function setAccountsPayableAccount(\HarvestCloud\CoreBundle\Entity\Account $accountsPayableAccount)
     {
         $this->accountsPayableAccount = $accountsPayableAccount;
     }
@@ -1588,9 +1588,9 @@ class Profile implements Geolocatable
      * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
      * @since  2013-01-30
      *
-     * @param HarvestCloud\DoubleEntryBundle\Entity\Account $rootAccount
+     * @param HarvestCloud\CoreBundle\Entity\Account $rootAccount
      */
-    public function setRootAccount(\HarvestCloud\DoubleEntryBundle\Entity\Account $rootAccount)
+    public function setRootAccount(\HarvestCloud\CoreBundle\Entity\Account $rootAccount)
     {
         $this->rootAccount = $rootAccount;
     }
@@ -1601,7 +1601,7 @@ class Profile implements Geolocatable
      * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
      * @since  2013-01-30
      *
-     * @return HarvestCloud\DoubleEntryBundle\Entity\Account
+     * @return HarvestCloud\CoreBundle\Entity\Account
      */
     public function getRootAccount()
     {
@@ -1614,11 +1614,11 @@ class Profile implements Geolocatable
      * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
      * @since  2013-02-09
      *
-     * @param  \HarvestCloud\DoubleEntryBundle\Entity\Account $purchasesAccount
+     * @param  \HarvestCloud\CoreBundle\Entity\Account $purchasesAccount
      *
      * @return Profile
      */
-    public function setPurchasesAccount(\HarvestCloud\DoubleEntryBundle\Entity\Account $purchasesAccount = null)
+    public function setPurchasesAccount(\HarvestCloud\CoreBundle\Entity\Account $purchasesAccount = null)
     {
         $this->purchasesAccount = $purchasesAccount;
 
@@ -1631,7 +1631,7 @@ class Profile implements Geolocatable
      * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
      * @since  2013-02-09
      *
-     * @return \HarvestCloud\DoubleEntryBundle\Entity\Account
+     * @return \HarvestCloud\CoreBundle\Entity\Account
      */
     public function getPurchasesAccount()
     {
@@ -1644,11 +1644,11 @@ class Profile implements Geolocatable
      * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
      * @since  2013-02-09
      *
-     * @param \HarvestCloud\DoubleEntryBundle\Entity\Account $arPrePaymentAccount
+     * @param \HarvestCloud\CoreBundle\Entity\Account $arPrePaymentAccount
      *
      * @return Profile
      */
-    public function setArPrePaymentAccount(\HarvestCloud\DoubleEntryBundle\Entity\Account $arPrePaymentAccount = null)
+    public function setArPrePaymentAccount(\HarvestCloud\CoreBundle\Entity\Account $arPrePaymentAccount = null)
     {
         $this->arPrePaymentAccount = $arPrePaymentAccount;
 
@@ -1661,7 +1661,7 @@ class Profile implements Geolocatable
      * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
      * @since  2013-02-09
      *
-     * @return \HarvestCloud\DoubleEntryBundle\Entity\Account
+     * @return \HarvestCloud\CoreBundle\Entity\Account
      */
     public function getArPrePaymentAccount()
     {
@@ -1674,11 +1674,11 @@ class Profile implements Geolocatable
      * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
      * @since  2013-02-09
      *
-     * @param  \HarvestCloud\DoubleEntryBundle\Entity\Account $apPrePaymentAccount
+     * @param  \HarvestCloud\CoreBundle\Entity\Account $apPrePaymentAccount
      *
      * @return Profile
      */
-    public function setApPrePaymentAccount(\HarvestCloud\DoubleEntryBundle\Entity\Account $apPrePaymentAccount = null)
+    public function setApPrePaymentAccount(\HarvestCloud\CoreBundle\Entity\Account $apPrePaymentAccount = null)
     {
         $this->apPrePaymentAccount = $apPrePaymentAccount;
 
@@ -1691,7 +1691,7 @@ class Profile implements Geolocatable
      * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
      * @since  2013-02-09
      *
-     * @return \HarvestCloud\DoubleEntryBundle\Entity\Account
+     * @return \HarvestCloud\CoreBundle\Entity\Account
      */
     public function getApPrePaymentAccount()
     {
@@ -1704,11 +1704,11 @@ class Profile implements Geolocatable
      * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
      * @since  2013-02-09
      *
-     * @param  \HarvestCloud\DoubleEntryBundle\Entity\Account $payPalAccount
+     * @param  \HarvestCloud\CoreBundle\Entity\Account $payPalAccount
      *
      * @return Profile
      */
-    public function setPayPalAccount(\HarvestCloud\DoubleEntryBundle\Entity\Account $payPalAccount = null)
+    public function setPayPalAccount(\HarvestCloud\CoreBundle\Entity\Account $payPalAccount = null)
     {
         $this->payPalAccount = $payPalAccount;
 
@@ -1721,7 +1721,7 @@ class Profile implements Geolocatable
      * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
      * @since  2013-02-09
      *
-     * @return \HarvestCloud\DoubleEntryBundle\Entity\Account
+     * @return \HarvestCloud\CoreBundle\Entity\Account
      */
     public function getPayPalAccount()
     {
@@ -1837,11 +1837,11 @@ class Profile implements Geolocatable
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-03-27
      *
-     * @param  \HarvestCloud\DoubleEntryBundle\Entity\Journal $journal
+     * @param  \HarvestCloud\CoreBundle\Entity\Journal $journal
      *
      * @return Profile
      */
-    public function addJournal(\HarvestCloud\DoubleEntryBundle\Entity\Journal $journal)
+    public function addJournal(\HarvestCloud\CoreBundle\Entity\Journal $journal)
     {
         $this->journals[] = $journal;
 
@@ -1854,9 +1854,9 @@ class Profile implements Geolocatable
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-03-27
      *
-     * @param \HarvestCloud\DoubleEntryBundle\Entity\Journal $journal
+     * @param \HarvestCloud\CoreBundle\Entity\Journal $journal
      */
-    public function removeJournal(\HarvestCloud\DoubleEntryBundle\Entity\Journal $journal)
+    public function removeJournal(\HarvestCloud\CoreBundle\Entity\Journal $journal)
     {
         $this->journals->removeElement($journal);
     }
@@ -1880,11 +1880,11 @@ class Profile implements Geolocatable
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-03-27
      *
-     * @param  \HarvestCloud\DoubleEntryBundle\Entity\Posting $postings
+     * @param  \HarvestCloud\CoreBundle\Entity\Posting $postings
      *
      * @return Profile
      */
-    public function addPosting(\HarvestCloud\DoubleEntryBundle\Entity\Posting $posting)
+    public function addPosting(\HarvestCloud\CoreBundle\Entity\Posting $posting)
     {
         $this->postings[] = $posting;
 
@@ -1897,9 +1897,9 @@ class Profile implements Geolocatable
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-03-27
      *
-     * @param \HarvestCloud\DoubleEntryBundle\Entity\Posting $posting
+     * @param \HarvestCloud\CoreBundle\Entity\Posting $posting
      */
-    public function removePosting(\HarvestCloud\DoubleEntryBundle\Entity\Posting $posting)
+    public function removePosting(\HarvestCloud\CoreBundle\Entity\Posting $posting)
     {
         $this->postings->removeElement($posting);
     }

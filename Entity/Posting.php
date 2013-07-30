@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-namespace HarvestCloud\DoubleEntryBundle\Entity;
+namespace HarvestCloud\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -21,7 +21,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Entity
  * @ORM\Table(name="double_entry_posting")
  * @ORM\HasLifecycleCallbacks()
- * @ORM\Entity(repositoryClass="HarvestCloud\DoubleEntryBundle\Repository\PostingRepository")
+ * @ORM\Entity(repositoryClass="HarvestCloud\CoreBundle\Repository\PostingRepository")
  */
 class Posting
 {
@@ -45,7 +45,7 @@ class Posting
     protected $profile;
 
     /**
-     * @ORM\ManyToOne(targetEntity="\HarvestCloud\DoubleEntryBundle\Entity\Journal", inversedBy="postings")
+     * @ORM\ManyToOne(targetEntity="\HarvestCloud\CoreBundle\Entity\Journal", inversedBy="postings")
      * @ORM\JoinColumn(name="journal_id", referencedColumnName="id")
      */
     protected $journal;
@@ -136,9 +136,9 @@ class Posting
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-05-03
      *
-     * @param  \HarvestCloud\DoubleEntryBundle\Entity\Journal $journal
+     * @param  \HarvestCloud\CoreBundle\Entity\Journal $journal
      */
-    public function setJournal(\HarvestCloud\DoubleEntryBundle\Entity\Journal $journal)
+    public function setJournal(\HarvestCloud\CoreBundle\Entity\Journal $journal)
     {
         $this->journal = $journal;
     }

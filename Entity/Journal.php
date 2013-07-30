@@ -7,12 +7,12 @@
  * file that was distributed with this source code.
  */
 
-namespace HarvestCloud\DoubleEntryBundle\Entity;
+namespace HarvestCloud\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use HarvestCloud\DoubleEntryBundle\Entity\Account;
-use HarvestCloud\DoubleEntryBundle\Entity\Posting;
+use HarvestCloud\CoreBundle\Entity\Account;
+use HarvestCloud\CoreBundle\Entity\Posting;
 
 /**
  * Journal Entity
@@ -29,7 +29,7 @@ use HarvestCloud\DoubleEntryBundle\Entity\Posting;
  * })
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(name="double_entry_journal")
- * @ORM\Entity(repositoryClass="HarvestCloud\DoubleEntryBundle\Repository\JournalRepository")
+ * @ORM\Entity(repositoryClass="HarvestCloud\CoreBundle\Repository\JournalRepository")
  */
 abstract class Journal
 {
@@ -41,7 +41,7 @@ abstract class Journal
     protected $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="\HarvestCloud\DoubleEntryBundle\Entity\Posting", mappedBy="journal", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="\HarvestCloud\CoreBundle\Entity\Posting", mappedBy="journal", cascade={"persist"})
      */
     protected $postings;
 
@@ -102,9 +102,9 @@ abstract class Journal
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-05-03
      *
-     * @param  \HarvestCloud\DoubleEntryBundle\Entity\Posting $posting
+     * @param  \HarvestCloud\CoreBundle\Entity\Posting $posting
      */
-    public function addPosting(\HarvestCloud\DoubleEntryBundle\Entity\Posting $posting)
+    public function addPosting(\HarvestCloud\CoreBundle\Entity\Posting $posting)
     {
         $this->postings[] = $posting;
         $posting->setJournal($this);
@@ -166,9 +166,9 @@ abstract class Journal
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-02-09
      *
-     * @param \HarvestCloud\DoubleEntryBundle\Entity\Posting $posting
+     * @param \HarvestCloud\CoreBundle\Entity\Posting $posting
      */
-    public function removePosting(\HarvestCloud\DoubleEntryBundle\Entity\Posting $posting)
+    public function removePosting(\HarvestCloud\CoreBundle\Entity\Posting $posting)
     {
         $this->postings->removeElement($posting);
     }
@@ -291,10 +291,10 @@ abstract class Journal
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-03-20
      *
-     * @param  \HarvestCloud\DoubleEntryBundle\Entity\Account $account
+     * @param  \HarvestCloud\CoreBundle\Entity\Account $account
      * @param  decimal $amount
      *
-     * @return \HarvestCloud\DoubleEntryBundle\Entity\Posting
+     * @return \HarvestCloud\CoreBundle\Entity\Posting
      */
     public function debit(Account $account, $amount)
     {
@@ -321,10 +321,10 @@ abstract class Journal
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-03-20
      *
-     * @param  \HarvestCloud\DoubleEntryBundle\Entity\Account $account
+     * @param  \HarvestCloud\CoreBundle\Entity\Account $account
      * @param  decimal $amount
      *
-     * @return \HarvestCloud\DoubleEntryBundle\Entity\Posting
+     * @return \HarvestCloud\CoreBundle\Entity\Posting
      */
     public function credit(Account $account, $amount)
     {

@@ -71,7 +71,7 @@ abstract class Payment
     protected $lineItems;
 
     /**
-     * @ORM\OneToMany(targetEntity="\HarvestCloud\DoubleEntryBundle\Entity\PaymentJournal", mappedBy="payment", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="\HarvestCloud\CoreBundle\Entity\PaymentJournal", mappedBy="payment", cascade={"persist"})
      */
     protected $journals;
 
@@ -260,11 +260,11 @@ abstract class Payment
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-03-24
      *
-     * @param  \HarvestCloud\DoubleEntryBundle\Entity\PaymentJournal $journal
+     * @param  \HarvestCloud\CoreBundle\Entity\PaymentJournal $journal
      *
      * @return Payment
      */
-    public function addJournal(\HarvestCloud\DoubleEntryBundle\Entity\PaymentJournal $journal)
+    public function addJournal(\HarvestCloud\CoreBundle\Entity\PaymentJournal $journal)
     {
         $this->journals[] = $journal;
 
@@ -277,9 +277,9 @@ abstract class Payment
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-03-24
      *
-     * @param  \HarvestCloud\DoubleEntryBundle\Entity\PaymentJournal $journal
+     * @param  \HarvestCloud\CoreBundle\Entity\PaymentJournal $journal
      */
-    public function removeJournal(\HarvestCloud\DoubleEntryBundle\Entity\PaymentJournal $journal)
+    public function removeJournal(\HarvestCloud\CoreBundle\Entity\PaymentJournal $journal)
     {
         $this->journals->removeElement($journal);
     }
