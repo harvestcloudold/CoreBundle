@@ -51,22 +51,22 @@ Buyer_order_rate:
 
 Buyer_invoice:
     pattern:  /invoice
-    defaults: { _controller: HarvestCloudMarketPlaceBuyerBundle:Invoice:index }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\InvoiceController::indexAction }
 
 Buyer_invoice_show:
     pattern:  /invoice/{id}
-    defaults: { _controller: HarvestCloudMarketPlaceBuyerBundle:Invoice:show }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\InvoiceController::showAction }
 
 Buyer_invoice_pay_with_stripe:
     pattern:  /invoice/{id}/pay/stripe
-    defaults: { _controller: HarvestCloudMarketPlaceBuyerBundle:Invoice:payWithStripe }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\InvoiceController::payWithStripeAction }
     requirements:
         id: \d+
         _method: POST
 
 Buyer_invoice_pay_with_saved_credit_card:
     pattern:  /invoice/{id}/pay/saved-credit-card/{saved_credit_card_id}
-    defaults: { _controller: HarvestCloudMarketPlaceBuyerBundle:Invoice:payWithSavedCreditCard }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\InvoiceController::payWithSavedCreditCardAction }
     requirements:
         id: \d+
         saved_credit_card_id: \d+

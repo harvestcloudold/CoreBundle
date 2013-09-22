@@ -41,11 +41,11 @@ class InvoiceController extends Controller
         ;
 
         $invoices = $this->get('doctrine')
-            ->getRepository('\HarvestCloud\CoreBundle\Entity\Invoice')
+            ->getRepository('\HarvestCloud\CoreBundle\Entity\Invoice\Invoice')
             ->findByCustomer($buyer)
         ;
 
-        return $this->render('HarvestCloudMarketPlaceBuyerBundle:Invoice:index.html.twig', array(
+        return $this->render('HarvestCloudCoreBundle:Buyer/Invoice:index.html.twig', array(
           'invoices' => $invoices,
         ));
     }
@@ -71,7 +71,7 @@ class InvoiceController extends Controller
 
         // $savedCreditCards = $buyer->getSavedCreditCards();
 
-        return $this->render('HarvestCloudMarketPlaceBuyerBundle:Invoice:show.html.twig', array(
+        return $this->render('HarvestCloudCoreBundle:Buyer/Invoice:show.html.twig', array(
             'invoice' => $invoice,
         ));
     }
