@@ -1,0 +1,9 @@
+{% extends 'HarvestCloudMarketPlaceSellerBundle::layout.html.twig' %}
+
+{% block seller_content %}
+    <h1>New Pickup Window for {{ hub.name }}</h1>
+    <form action="{{ path('Seller_hub_pickup_window_create', { 'id': hub.id }) }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <input type="submit" class="submit" value="Save" />
+    </form>
+{% endblock %}

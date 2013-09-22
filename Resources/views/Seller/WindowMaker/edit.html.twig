@@ -1,0 +1,12 @@
+{% extends 'HarvestCloudMarketPlaceSellerBundle::layout.html.twig' %}
+{% form_theme form 'HarvestCloudMarketPlaceCoreBundle:Form:fields.html.twig' %}
+
+{% block content %}
+    <h1>Edit Window Maker #{{ windowMaker.id }}</h1>
+    <form action="{{ path('Seller_window_maker_update', { 'id' : windowMaker.id }) }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <div class="form row">
+            <input type="submit" class="submit button" value="Save" />
+        </div><!-- .form.row -->
+    </form>
+{% endblock %}

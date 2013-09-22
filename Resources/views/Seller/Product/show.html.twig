@@ -1,0 +1,73 @@
+{% extends 'HarvestCloudMarketPlaceSellerBundle::layout.html.twig' %}
+
+{% block seller_content %}
+    <h1>{{ product.name }} (#{{ product.id }})</h1>
+    <div class="two_equal_columns">
+        <div class="left column">
+            <h4>Product Info</h4>
+            <table class="nvp">
+                <tr>
+                    <th>Name</th>
+                    <td>{{ product.name }}</td>
+                </tr>
+                <tr>
+                    <th>Category</th>
+                    <td>{{ product.category }}</td>
+                </tr>
+                <tr>
+                    <th>Location</th>
+                    <td>{{ product.location.name }}</td>
+                </tr>
+                <tr>
+                    <th>Initial <abbr title="quantity">qty</abbr></th>
+                    <td>{{ product.initialQuantity }}</td>
+                </tr>
+                <tr>
+                    <th><abbr title="Quantity">Qty</abbr> available</th>
+                    <td>{{ product.quantityAvailable }}</td>
+                </tr>
+                <tr>
+                    <th>Current price</th>
+                    <td>${{ product.price }}</td>
+                </tr>
+                <tr>
+                    <th>Initial price</th>
+                    <td>${{ product.initialPrice }}</td>
+                </tr>
+                <tr>
+                    <th>Latitude</th>
+                    <td>{{ product.latitude }}</td>
+                </tr>
+                <tr>
+                    <th>Longitude</th>
+                    <td>{{ product.longitude }}</td>
+                </tr>
+            </table><!-- .nvp -->
+        </div><!-- .left.column -->
+        <div class="right column">
+            <h4>Stock Transactions</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stockTransaction in product.stockTransactions %}
+                        <tr>
+                            <td>{{ stockTransaction.typeLabel }}</td>
+                            <td>{{ stockTransaction.quantity }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <form action="{{ path('Seller_restock_transaction_new', { 'id' : product.id }) }}" method="get" />
+                <div class="form row">
+                    <input type="submit" class="submit button" value="Restock" />
+                </div><!-- .form.row -->
+            </form>
+        </div><!-- .right.column -->
+        <div class="clear"></div>
+    </div><!-- .two_equal_columns -->
+{% endblock %}

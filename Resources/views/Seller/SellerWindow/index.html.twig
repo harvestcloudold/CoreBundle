@@ -1,0 +1,32 @@
+{% extends 'HarvestCloudMarketPlaceSellerBundle::layout.html.twig' %}
+
+{% block content %}
+    <h1>Upcoming Seller Windows</h1>
+
+    <table class="standard">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Hub</th>
+                <th colspan="2">Date</th>
+                <th>Time</th>
+                <th>Fixed Fee</th>
+                <th>Variable Fee</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for window in windows %}
+                <tr>
+                  <td>{{ window.id }}</td>
+                  <td><a href="{{ path('Seller_hub_show', { 'id': window.hub.id }) }}">{{ window.hub.name }}</a></td>
+                  <td>{{ window.startTime|date('D') }}</td>
+                  <td>{{ window.startTime|date('j M Y') }}</td>
+                  <td>{{ window.startTime|date('H:i') }} - {{ window.endTime|date('H:i') }}</td>
+                  <td>${{ window.sellerHubRef.fixedFee|number_format(2) }}</td>
+                  <td>${{ window.sellerHubRef.variableFee|number_format(2) }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table><!-- .standard -->
+    <div class="clear"></div>
+{% endblock %}

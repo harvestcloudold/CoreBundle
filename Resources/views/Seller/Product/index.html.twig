@@ -1,0 +1,32 @@
+{% extends 'HarvestCloudMarketPlaceSellerBundle::layout.html.twig' %}
+
+{% block content %}
+    <h1>Open Products</h1>
+
+    <table class="standard">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity Available</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+                <tr>
+                  <td><a href="{{ path('Seller_product_show', { 'id': product.id }) }}">{{ product.id }}</a></td>
+                  <td><a href="{{ path('Seller_product_show', { 'id': product.id }) }}">{{ product.name }}</a></td>
+                  <td>{{ product.price }}</td>
+                  <td>{{ product.quantityAvailable }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table><!-- .standard -->
+    <div class="clear"></div>
+    <form action="{{ path('Seller_product_new') }}">
+        <div class="form row">
+            <input type="submit" class="submit button" value="Add new Product" />
+        </div><!-- .form.row -->
+    </form>
+{% endblock %}

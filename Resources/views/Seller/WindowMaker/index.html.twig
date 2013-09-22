@@ -1,0 +1,34 @@
+{% extends 'HarvestCloudMarketPlaceSellerBundle::layout.html.twig' %}
+
+{% block content %}
+    <h1>My Window Makers</h1>
+
+    <table class="standard">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Hub</th>
+                <th>Days of Week</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for windowMaker in windowMakers %}
+                <tr>
+                  <td><a href="{{ path('Seller_window_maker_show', { 'id': windowMaker.id }) }}">{{ windowMaker.id }}</a></td>
+                  <td><a href="{{ path('Seller_hub_show', { 'id': windowMaker.hub.id }) }}">{{ windowMaker.hub.name }}</a></td>
+                  <td>{{ windowMaker.daysOfWeekAsString }}</td>
+                  <td>{{ windowMaker.startTime }}</td>
+                  <td>{{ windowMaker.endTime }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table><!-- .standard -->
+    <div class="clear"></div>
+    <form action="{{ path('Seller_window_maker_new') }}">
+      <div class="form row">
+        <input type="submit" class="submit button" value="Add new Window Maker" />
+      </div><!-- .form.row -->
+    </form>
+{% endblock %}

@@ -1,6 +1,6 @@
 Seller_homepage:
     pattern:  /
-    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Default:index }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Seller\DefaultController::indexAction }
 
 Seller_hub_nearby:
     pattern:  /hubs/nearby
@@ -15,7 +15,7 @@ Seller_hub_show:
 
 Seller_register_landing:
     pattern:  /register/landing
-    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Register:landing }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Seller\RegisterController::landingAction }
 
 
 Seller_order:

@@ -1,0 +1,47 @@
+{% extends 'HarvestCloudMarketPlaceSellerBundle::layout.html.twig' %}
+
+{% block seller_content %}
+    <h1>{{ hub.name }}</h1>
+    <div class="two_equal_columns">
+        <div class="left column">
+            <table class="nvp">
+                <tr>
+                    <th>Name</th>
+                    <td>{{ hub.name }}</td>
+                </tr>
+                <tr>
+                    <th>Address</th>
+                    <td>{{ hub.defaultLocation.address }}</td>
+                </tr>
+            </table><!-- .nvp -->
+            {% if sellerHubRef is null %}
+                <p>
+                    <form method="post" action="{{ path('Seller_hub_add', { 'id': hub.id }) }}">
+                      <input type="submit" class="submit" value="Add" />
+                    </form>
+                </p>
+            {% else %}
+                {% if sellerHubRef.sellerWindows %}
+                    <h2>Pickup Windows</h2>
+                    <table class="standard">
+                        <thead>
+                            <tr>
+                                <th>Start</th>
+                                <th>End</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for window in sellerHubRef.sellerWindows %}
+                                <tr>
+                                  <td>{{ window.startTime|date('Y-m-d H:i:s') }}</td>
+                                  <td>{{ window.endTime|date('Y-m-d H:i:s') }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table><!-- .standard -->
+                {% endif %}
+            {% endif %}
+        </div><!-- .left.column -->
+        <div class="clear"></div>
+    </div><!-- .two_equal_columns -->
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'HarvestCloudMarketPlaceSellerBundle::layout.html.twig' %}
+{% form_theme form 'HarvestCloudMarketPlaceCoreBundle:Form:fields.html.twig' %}
+
+{% block seller_content %}
+    <h1>Restock Product</h1>
+    <form action="{{ path('Seller_restock_transaction_create', { 'id' : product.id }) }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <div class="form row">
+            <input type="submit" class="submit button" value="Save" />
+        </div><!-- .form.row -->
+    </form>
+{% endblock %}
