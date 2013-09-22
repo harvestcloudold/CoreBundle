@@ -103,7 +103,7 @@ Buyer_checkout_select_pickup_windows_for_collection:
 
 Buyer_checkout_pickup_windows:
     pattern:  /checkout/pickup-windows
-    defaults: { _controller: HarvestCloudMarketPlaceBuyerBundle:Checkout:pickup_windows_for_collection }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\CheckoutController::pickup_windows_for_collectionAction }
     requirements:
         _method: GET
 
