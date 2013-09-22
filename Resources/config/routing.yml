@@ -97,7 +97,7 @@ Buyer_cart_add_product:
 
 Buyer_checkout_select_pickup_windows_for_collection:
     pattern:  /checkout/select-window/{id}
-    defaults: { _controller: HarvestCloudMarketPlaceBuyerBundle:Checkout:select_pickup_window_for_collection }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\CheckoutController::select_pickup_window_for_collectionAction }
     requirements:
         _method: POST
 
@@ -109,11 +109,11 @@ Buyer_checkout_pickup_windows:
 
 Buyer_checkout_review:
     pattern:  /checkout/review
-    defaults: { _controller: HarvestCloudMarketPlaceBuyerBundle:Checkout:review }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\CheckoutController::reviewAction }
 
 Buyer_checkout_place_order:
     pattern:  /checkout/place-order
-    defaults: { _controller: HarvestCloudMarketPlaceBuyerBundle:Checkout:place_order }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\CheckoutController::place_orderAction }
     requirements:
         _method: POST
 
@@ -123,7 +123,7 @@ Buyer_checkout_complete_paypal:
 
 Buyer_checkout_receipt:
     pattern:  /checkout/thank-you
-    defaults: { _controller: HarvestCloudMarketPlaceBuyerBundle:Checkout:receipt }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\CheckoutController::receiptAction }
 
 Buyer_product_show:
     pattern:  /{path}/{id}
