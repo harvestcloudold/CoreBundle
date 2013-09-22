@@ -36,7 +36,7 @@ class OrderController extends Controller
             ->findForBuyer($buyer)
         ;
 
-        return $this->render('HarvestCloudMarketPlaceBuyerBundle:Order:index.html.twig', array(
+        return $this->render('HarvestCloudCoreBundle:Buyer/Order:index.html.twig', array(
           'orders' => $orders,
         ));
     }
@@ -54,7 +54,7 @@ class OrderController extends Controller
      */
     public function showAction(Order $order)
     {
-        return $this->render('HarvestCloudMarketPlaceBuyerBundle:Order:show.html.twig', array(
+        return $this->render('HarvestCloudCoreBundle:Buyer/Order:show.html.twig', array(
           'order' => $order,
         ));
     }
