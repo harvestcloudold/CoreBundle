@@ -38,7 +38,7 @@ class ProductController extends Controller
      */
     public function showAction(Product $product)
     {
-        return $this->render('HarvestCloudMarketPlaceBuyerBundle:Product:show.html.twig', array(
+        return $this->render('HarvestCloudCoreBundle:Buyer/Product:show.html.twig', array(
           'product'          => $product,
           'quantity_in_cart' => $this->getCurrentCart()->getQuantity($product),
         ));

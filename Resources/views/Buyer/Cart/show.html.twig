@@ -1,0 +1,37 @@
+{% extends 'HarvestCloudMarketPlaceBuyerBundle::layout.html.twig' %}
+
+{% block content %}
+    <h1>What's in my Cart</h1>
+
+    <table class="standard">
+      <thead>
+          <tr>
+              <th>Item</th>
+              <th>Seller</th>
+              <th>Quantity</th>
+              <th>Price</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for order in orderCollection.orders %}
+              {% for lineItem in order.lineItems %}
+                  <tr>
+                    <td>{{ lineItem.product.name }}</td>
+                    <td>{{ lineItem.product.seller.name }}</td>
+                    <td>{{ lineItem.quantity }}</td>
+                    <td class="price">${{ lineItem.price }}</td>
+                  </tr>
+              {% endfor %}
+          {% endfor %}
+      </tbody>
+    </table>
+    {% if orderCollection.orders %}
+        <p>
+            <form method="get" action="{{ path('Buyer_checkout_pickup_windows') }}">
+                <div class="form row">
+                    <input type="submit" class="submit button" value="Check out" />
+                </div><!-- .form.row -->
+            </form>
+        </p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'HarvestCloudMarketPlaceSellerBundle::layout.html.twig' %}
+
+{% block content %}
+    <h1>Invoice #{{ invoice.id }}</h1>
+
+    <div class="two_equal_columns">
+        <div class="left column">
+            <h4>Order Details</h4>
+            <table class="nvp">
+                <tr>
+                    <th>Invoice Number</th>
+                    <td>{{ invoice.id }}</td>
+                </tr>
+                <tr>
+                    <th>Order</th>
+                    <td>{{ invoice.order.number }}</td>
+                </tr>
+                <tr>
+                    <th>Amount</th>
+                    <td>${{ invoice.amount }}</td>
+                </tr>
+                {% if invoice.hasBeenSettled %}
+                    <tr>
+                        <th>Settled</th>
+                        <td>{{ invoice.settledAt|date('Y-m-d') }}</td>
+                    </tr>
+                {% endif %}
+            </table><!-- .nvp -->
+        </div><!-- .left.column -->
+        <div class="right column">
+            {% if invoice.hasBeenSettled == false %}
+                <h4>Pay Now With a New Card</h4>
+                <form method="post" action="{{ path('Buyer_invoice_pay_with_stripe', { 'id' : invoice.id }) }}">
+                    <script
+                      src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button"
+                      data-key="{{ stripe_publishable_key }}"
+                      data-amount="{{ invoice.amount * 100 }}"
+                      data-name="{{ invoice.vendor.name }}"
+                      data-description="Invoice #{{ invoice.id }} (${{ invoice.amount }})"
+                      data-image="/images/sandbox/avatars/{{ invoice.vendor.avatarName }}.png">
+                    </script>
+                </form>
+                {% if invoice.customer.activeSavedCreditCards %}
+                    <h4>Or Pay Now With a Saved Card</h4>
+                    <div>
+                        {% for creditCard in invoice.customer.activeSavedCreditCards %}
+                            <p>
+                                <form method="post" action="{{ path('Buyer_invoice_pay_with_saved_credit_card', { 'id' : invoice.id, 'saved_credit_card_id' : creditCard.id }) }}">
+                                    {{ creditCard }}
+                                    <input type="submit" class="submit button" value="Pay" />
+                                </form>
+                            </p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div><!-- .right.column -->
+        <div class="clear"></div>
+    </div><!-- .two_equal_columns -->
+{% endblock %}

@@ -127,7 +127,7 @@ Buyer_checkout_receipt:
 
 Buyer_product_show:
     pattern:  /{path}/{id}
-    defaults: { _controller: HarvestCloudMarketPlaceBuyerBundle:Product:show }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\ProductController::showAction }
     requirements:
         path: ".*"
         id: \d+

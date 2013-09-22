@@ -1,0 +1,25 @@
+{% extends 'HarvestCloudMarketPlaceBuyerBundle::layout.html.twig' %}
+
+{% block buyer_content %}
+    <h1>Select Delivery/Pickup</h1>
+    <table class="standard">
+        {% for hubWindow in hubWindows %}
+            <tr>
+                <td>{{ hubWindow.hub.name }}</td>
+                <td>{{ hubWindow.startTime|date('D') }}</td>
+                <td>{{ hubWindow.startTime|date('j F') }}</td>
+                <td>
+                  {{ hubWindow.startTime|date('H:i') }}
+                  -
+                  {{ hubWindow.endTime|date('H:i') }}
+                </td>
+                <td>${{ hubWindow.totalHubFeeForOrderCollection|number_format(2) }}</td>
+                <td>
+                    <form method="post" action="{{ path('Buyer_checkout_select_pickup_windows_for_collection', { 'id': hubWindow.id }) }}">
+                      <input type="submit" class="submit" value="Select" />
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </table><!-- .standard -->
+{% endblock %}

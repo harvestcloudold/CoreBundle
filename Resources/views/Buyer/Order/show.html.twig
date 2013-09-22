@@ -1,0 +1,81 @@
+{% extends 'HarvestCloudMarketPlaceSellerBundle::layout.html.twig' %}
+
+{% block content %}
+    <h1>Order {{ order.number }}</h1>
+
+    <div class="two_equal_columns">
+        <div class="left column">
+            <h4>Order Details</h4>
+            <table class="nvp">
+                <tr>
+                    <th>Order Number</th>
+                    <td>{{ order.id }}</td>
+                </tr>
+                <tr>
+                    <th>Status</th>
+                    <td>{{ order.status }}</td>
+                </tr>
+                <tr>
+                    <th>Seller</th>
+                    <td>{{ order.seller.name }}</td>
+                </tr>
+                <tr>
+                    <th>Hub</th>
+                    <td>{{ order.hub.name }}</td>
+                </tr>
+                <tr>
+                    <th>Window</th>
+                    <td>{{ order.sellerWindow.startTime|date('g:ia') }} - {{ order.sellerWindow.endTime|date('g:ia D j M') }}</td>
+                </tr>
+                <tr>
+                    <th>Sub Total</th>
+                    <td>${{ order.subTotal }}</td>
+                </tr>
+                <tr>
+                    <th>Hub Fee</th>
+                    <td>${{ order.hubFee }}</td>
+                </tr>
+                <tr>
+                    <th>Total</th>
+                    <td>${{ order.total }}</td>
+                </tr>
+            </table><!-- .nvp -->
+            <div class="actions">
+                <h4>Actions</h4>
+                {% if order.canBeCanceledByBuyer %}
+                    <form action="{{ path('Buyer_order_cancel', { 'id': order.id }) }}" method="post">
+                        <input type="submit" class="submit" value="Cancel Order"
+                            onclick="return confirm('Are you sure you want to cancel this order?');" />
+                    </form>
+                {% endif %}
+                <div class="clear"></div>
+            </div><!-- .actions -->
+        </div><!-- .left.column -->
+        <div class="right column">
+
+            <h4>Line Items</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th class="center">Quantity</th>
+                        <th class="center">Price</th>
+                        <th class="center">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for lineItem in order.lineItems %}
+                        <tr>
+                            <td>{{ lineItem.product.name }}</td>
+                            <td class="center">{{ lineItem.quantity }} {{ lineItem.unit }}</td>
+                            <td class="center">${{ lineItem.price|number_format(2) }}/{{lineItem.product.category.unitDescriptionSingular }}</td>
+                            <td class="currency">${{ lineItem.subTotal|number_format(2) }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div><!-- .right.column -->
+        <div class="clear"></div>
+    </div><!-- .two_equal_columns -->
+{% endblock %}

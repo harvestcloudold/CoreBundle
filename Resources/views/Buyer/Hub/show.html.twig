@@ -1,0 +1,115 @@
+{% extends 'HarvestCloudMarketPlaceBuyerBundle::layout.html.twig' %}
+
+{% block content %}
+    <h1>Hub: {{ hub.name }}</h1>
+    <div class="two_equal_columns">
+        <div class="left column">
+            <table class="nvp">
+                <tr>
+                    <th>Name</th>
+                    <td>{{ hub.name }}</td>
+                </tr>
+                <tr>
+                    <th>Address</th>
+                    <td>{{ hub.defaultLocation.address }}</td>
+                </tr>
+            </table><!-- .nvp -->
+            {% if buyerHubRef is null %}
+                <p>
+                    <form method="post" action="{{ path('Buyer_hub_add', { 'id': hub.id }) }}">
+                      <input type="submit" class="submit" value="Add to favorite Hubs" />
+                    </form>
+                </p>
+            {% endif %}
+            <h3>Sellers that deliver to this Hub</h3>
+        </div><!-- .left.column -->
+        <div class="right column">
+            <div class="map_canvas" id="mapCanvas"></div>
+        </div><!-- .right.column -->
+        <div class="left column">
+            <table class="standard">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Address</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for sellerHubRef in hub.sellerHubRefsAsHub %}
+                        <tr>
+                          <td><a href="{{ path('Buyer_seller_show', { 'id': sellerHubRef.seller.id }) }}">{{ sellerHubRef.seller.name }}</a></td>
+                          <td>{{ sellerHubRef.seller.defaultLocation.address }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table><!-- .standard -->
+        </div><!-- .left.column -->
+        <div class="clear"></div>
+    </div><!-- .two_equal_columns -->
+{% endblock %}
+
+{% block map_js %}
+    <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript">
+        var origin = new google.maps.LatLng({{ origin.latitude}},{{ origin.longitude }});
+
+        // Create an array of locations
+        var locations = [];
+
+        {% for sellerHubRef in hub.sellerHubRefsAsHub %}
+            locations.push(new google.maps.LatLng({{ sellerHubRef.seller.defaultLocation.latitude}},{{ sellerHubRef.seller.defaultLocation.longitude }}));
+        {% endfor %}
+
+        function initialize()
+        {
+            // Set up options
+            var myOptions = {
+                center:    new google.maps.LatLng(0,0),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            // Create map
+            var map = new google.maps.Map(
+                document.getElementById("mapCanvas"),
+                myOptions);
+
+            // Get the original bounds of the map
+            var bounds = new google.maps.LatLngBounds();
+
+            // Place origin
+            var marker = new google.maps.Marker({
+                  position: origin,
+                  animation: google.maps.Animation.DROP,
+                  icon:     "https://chart.googleapis.com/chart?chst=d_map_pin_letter_withshadow&chld=0|000099|000000"
+              });
+
+            // Extend the bounds for the locations
+            bounds.extend(origin);
+
+            // place the marker on the map
+            marker.setMap(map);
+
+            // Place markers
+            for (var i=0; i < locations.length; i++)
+            {
+                var marker = new google.maps.Marker({
+                    position: locations[i],
+                    animation: google.maps.Animation.DROP,
+                    icon:     "https://chart.googleapis.com/chart?chst=d_map_pin_letter_withshadow&chld="+(i+1)+"|990000|000000"
+                });
+
+                // Extend the bounds for the locations
+                bounds.extend(locations[i]);
+
+                // place the marker on the map
+                marker.setMap(map);
+            }
+
+            // Reset the bounds of the map
+            map.fitBounds(bounds);
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+{% endblock %}

@@ -1,0 +1,24 @@
+<p>Cart ID: {{ orderCollection.id }} </p>
+<table>
+    <tr>
+        <th>Product</th>
+        <th><abbr title="Quantity">Qty</abbr></th>
+        <th>Price</th>
+    </tr>
+    {% for order in orderCollection.orders %}
+        {% for lineItem in order.lineItems %}
+            <tr>
+              <td>{{ lineItem.product.name }}</td>
+              <td>{{ lineItem.quantity }}</td>
+              <td>${{ lineItem.price }}</td>
+            </tr>
+        {% endfor %}
+    {% endfor %}
+</table>
+{% if orderCollection.orders %}
+    <p>
+        <form method="get" action="{{ path('Buyer_checkout_pickup_windows') }}">
+            <input type="submit" class="submit" value="Check out &#187;" />
+        </form>
+    </p>
+{% endif %}

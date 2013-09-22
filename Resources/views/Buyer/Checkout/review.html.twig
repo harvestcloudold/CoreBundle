@@ -1,0 +1,53 @@
+{% extends 'HarvestCloudMarketPlaceBuyerBundle::layout.html.twig' %}
+
+{% block buyer_content %}
+    <h1>Review Order</h1>
+    <p>Alright, we're almost there! Time to make one last pre-flight check and then hit that big ol' button</p>
+
+    <table>
+        <tbody>
+            {% for order in orderCollection.orders %}
+                <tr>
+                    <td colspan="4"><strong>{{ order.seller.name }}</strong></td>
+                </tr>
+                {% for lineItem in order.lineItems %}
+                    <tr>
+                        <td>{{ lineItem.quantity }}</td>
+                        <td>{{ lineItem.product.name }}</td>
+                        <td class="currency">${{ lineItem.price|number_format(2) }}</td>
+                        <td class="currency">${{ lineItem.subTotal|number_format(2) }}</td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td>{{ order.hub.name }}</td>
+                    <td colspan="2">{{ order.sellerWindow.startTime|date('g:ia') }} - {{ order.sellerWindow.endTime|date('g:ia D j M') }}</td>
+                    <td class="currency">${{ order.hubFee|number_format(2) }}</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><strong>Order Total</strong></td>
+                    <td class="currency"><strong>${{ order.total|number_format(2) }}</strong></td>
+                </tr>
+                <tr>
+                  <td colspan="4">&nbsp;</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br />
+
+    <table>
+      <tr>
+        <td><strong>Grand total</strong></td>
+        <td class="currency"><strong>${{ orderCollection.total|number_format(2) }}</strong></td>
+      </tr>
+    </table>
+
+    <p>
+        <form method="post" action="{{ path('Buyer_checkout_place_order') }}">
+            <div class="form row">
+                <input type="submit" class="submit button" value="Place order" />
+            </div><!-- .form.row -->
+        </form>
+    </p>
+{% endblock %}

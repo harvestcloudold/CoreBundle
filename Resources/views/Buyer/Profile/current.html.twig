@@ -1,0 +1,19 @@
+{% extends 'HarvestCloudMarketPlaceBuyerBundle::layout.html.twig' %}
+
+{% block buyer_content %}
+    <h1>{{ profile.name }}</h1>
+    <table class="nvp">
+        <tr>
+            <th>Name</th>
+            <td>{{ profile.name }}</td>
+        </tr>
+        <tr>
+            <th>Address</th>
+            <td>{{ profile.defaultLocation.address }}</td>
+        </tr>
+        <tr>
+            <th>Location</th>
+            <td>{{ profile.defaultLocation.latitude }}, {{ profile.defaultLocation.longitude }}</td>
+        </tr>
+    </table><!-- .nvp -->
+{% endblock %}

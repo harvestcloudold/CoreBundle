@@ -1,0 +1,56 @@
+{% extends 'HarvestCloudMarketPlaceBuyerBundle::layout.html.twig' %}
+
+{% block map_js %}
+    <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript">
+        // Create an array of locations
+        var locations = [];
+
+        {% for profile in profiles %}
+            locations.push(new google.maps.LatLng({{ profile.latitude}},{{ profile.longitude }}));
+        {% endfor %}
+
+        function initialize()
+        {
+            // Set up options
+            var myOptions = {
+                center:    new google.maps.LatLng(0,0),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            // Create map
+            var map = new google.maps.Map(
+                document.getElementById("mapCanvas"),
+                myOptions);
+
+            // Get the original bounds of the map
+            var bounds = new google.maps.LatLngBounds();
+
+            // Place markers
+            for (var i=0; i < locations.length; i++)
+            {
+                var marker = new google.maps.Marker({
+                    position: locations[i],
+                    animation: google.maps.Animation.DROP,
+                    icon:     "https://chart.googleapis.com/chart?chst=d_map_pin_letter_withshadow&chld="+(i+1)+"|FF0000|000000"
+                });
+
+                // Extend the bounds for the locations
+                bounds.extend(locations[i]);
+
+                // place the marker on the map
+                marker.setMap(map);
+            }
+
+            // Reset the bounds of the map
+            map.fitBounds(bounds);
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+{% endblock %}
+
+{% block buyer_content %}
+    <div id="mapCanvas"></div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'HarvestCloudCoreBundle:Buyer:layout.html.twig' %}
+
+{% block body_class %}buyer_product_show{% endblock %}
+{% block buyer_content %}
+    <h1>{{ product.name }}</h1>
+    <div class="two_equal_columns">
+        <div class="left column">
+            <table class="nvp">
+                <tr>
+                    <th>Name</th>
+                    <td>{{ product.name }}</td>
+                </tr>
+                {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+                    <tr>
+                        <th>Seller</th>
+                        <td>{{ product.seller.name }}</td>
+                    </tr>
+                {% endif %}
+                <tr>
+                    <th>Location</th>
+                    <td>{{ product.location.cityStateZip }}</td>
+                </tr>
+                {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+                    <tr>
+                        <th>Price</th>
+                        <td>${{ product.price }}</td>
+                    </tr>
+                {% endif %}
+                <tr>
+                    <th><abbr title="Quantity">Qty</abbr> available</th>
+                    <td>{{ product.quantityAvailable }}</td>
+                </tr>
+                <tr>
+                    <th><abbr title="Quantity">Qty</abbr> in cart</th>
+                    <td>{{ quantity_in_cart }}</td>
+                </tr>
+            </table><!-- .nvp -->
+            <form class="add_to_cart" action="{{ path('Buyer_cart_add_product', { 'id': product.id }) }}" method="post">
+                <div class="form row">
+                    <input type="text" size="3" name="quantity"  value="1"/><input type="submit"  class="submit button" value="Add to cart" />
+                </div><!-- .form.row -->
+            </form>
+            <form action="{{ path('Buyer_cart_add_product', { 'id': product.id, 'quantity': -1 }) }}" method="post">
+                <div class="form row">
+                    <input type="submit"  class="submit button" value="Remove from cart" />
+                </div><!-- .form.row -->
+            </form>
+            <form method="get" action="{{ path('Buyer_checkout_pickup_windows') }}">
+                <div class="form row">
+                    <input type="submit" class="submit button" value="Check out &#187;" />
+                </div><!-- .form.row -->
+            </form>
+        </div><!-- .left.column -->
+        <div class="clear"></div>
+    </div><!-- .two_equal_columns -->
+{% endblock %}
