@@ -31,7 +31,7 @@ class HubController extends Controller
         $origin = $this->getUser()->getCurrentProfile()->getDefaultLocation();
         $hubs   = $this->getRepo('Profile')->findNearbyHubs($origin);
 
-        return $this->render('HarvestCloudMarketPlaceBuyerBundle:Hub:nearby.html.twig', array(
+        return $this->render('HarvestCloudCoreBundle:Buyer/Hub:nearby.html.twig', array(
           'hubs'   => $hubs,
           'origin' => $origin,
         ));
@@ -59,7 +59,7 @@ class HubController extends Controller
 
         $buyerHubRef = $this->getRepo('BuyerHubRef')->findOneByBuyerAndHub($buyer, $hub);
 
-        return $this->render('HarvestCloudMarketPlaceBuyerBundle:Hub:show.html.twig', array(
+        return $this->render('HarvestCloudCoreBundle:Buyer/Hub:show.html.twig', array(
           'hub'         => $hub,
           'buyerHubRef' => $buyerHubRef,
           'origin'      => $origin,

@@ -4,17 +4,17 @@ Buyer_homepage:
 
 Buyer_hub_nearby:
     pattern:  /hub/nearby
-    defaults: { _controller: HarvestCloudMarketPlaceBuyerBundle:Hub:nearby }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\HubController::nearbyAction }
 
 Buyer_hub_show:
     pattern:  /hub/{id}
-    defaults: { _controller: HarvestCloudMarketPlaceBuyerBundle:Hub:show }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\HubController::showAction }
     requirements:
         id: \d+
 
 Buyer_hub_add:
     pattern:  /hub/{id}/add
-    defaults: { _controller: HarvestCloudMarketPlaceBuyerBundle:Hub:add }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\HubController::addAction }
     requirements:
         id: \d+
         _method: POST
