@@ -1,0 +1,86 @@
+Profile_homepage:
+    pattern:  /
+    defaults: { _controller: HarvestCloudMarketPlaceProfileBundle:Default:index }
+
+
+
+
+Profile_stripe_connect:
+    pattern:  /stripe/connect
+    defaults: { _controller: HarvestCloudMarketPlaceProfileBundle:Stripe:connect }
+    requirements:
+        _method: GET
+
+
+
+Profile_update:
+    pattern:  /edit
+    defaults: { _controller: HarvestCloudMarketPlaceProfileBundle:Default:edit }
+    requirements:
+        _method: POST
+
+Profile_edit:
+    pattern:  /edit
+    defaults: { _controller: HarvestCloudMarketPlaceProfileBundle:Default:edit }
+    requirements:
+        _method: GET
+
+
+
+
+Profile_account:
+    pattern:  /account
+    defaults: { _controller: HarvestCloudMarketPlaceProfileBundle:Account:index }
+    requirements:
+        _method: GET
+
+Profile_account_show:
+    pattern:  /account/{slug}
+    defaults: { _controller: HarvestCloudMarketPlaceProfileBundle:Account:show }
+    requirements:
+        slug:    "[a-z0-9-]+"
+        _method: GET
+
+Profile_account_create_set:
+    pattern:  /account/create-set
+    defaults: { _controller: HarvestCloudMarketPlaceProfileBundle:Account:create_set }
+    requirements:
+        _method: POST
+
+
+
+
+
+Profile_location:
+    pattern:  /location
+    defaults: { _controller: HarvestCloudMarketPlaceProfileBundle:Location:index }
+
+Profile_location_show:
+    pattern:  /location/{id}
+    defaults: { _controller: HarvestCloudMarketPlaceProfileBundle:Location:show }
+    requirements:
+        id: \d+
+
+Profile_location_create:
+    pattern:  /location/new
+    defaults: { _controller: HarvestCloudMarketPlaceProfileBundle:Location:new }
+    requirements:
+        _method: POST
+
+Profile_location_new:
+    pattern:  /location/new
+    defaults: { _controller: HarvestCloudMarketPlaceProfileBundle:Location:new }
+    requirements:
+        _method: GET
+
+Profile_location_update:
+    pattern:  /location/{id}/edit
+    defaults: { _controller: HarvestCloudMarketPlaceProfileBundle:Location:edit }
+    requirements:
+        _method: POST
+
+Profile_location_edit:
+    pattern:  /location/{id}/edit
+    defaults: { _controller: HarvestCloudMarketPlaceProfileBundle:Location:edit }
+    requirements:
+        _method: GET

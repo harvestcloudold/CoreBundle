@@ -1,0 +1,111 @@
+/*
+ * This file is part of the Harvest Cloud package.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+a
+{
+    color: #677586;
+    font-weight: bold;
+}
+
+/******************************************************************************
+
+table
+
+******************************************************************************/
+
+table thead tr th
+{
+    background: rgba(0,0,0, 0.15);
+}
+
+table.nvp tr:nth-of-type(even) th
+{
+    background: rgba(0,0,0, 0.17);
+}
+
+table.nvp tr:nth-of-type(odd) th
+{
+    background: rgba(0,0,0, 0.13);
+}
+
+table tbody tr td
+{
+    background: rgba(0,0,0, 0.1);
+}
+
+table tbody tr:nth-of-type(odd) td
+{
+    background: rgba(0,0,0, 0.06);
+}
+
+
+/******************************************************************************
+
+logo and main nav
+
+******************************************************************************/
+
+body.buy div.main.nav a.buy,
+body.sell div.main.nav a.sell,
+body.hub div.main.nav a.hub,
+body.settings div.main.nav a.settings,
+body.settings div.main.nav a.cart
+{
+/*    background: rgba(149,135,112, 0.4); */
+}
+
+body div.main.nav a.buy:hover,
+body div.main.nav a.sell:hover,
+body div.main.nav a.hub:hover,
+body div.main.nav a.settings:hover,
+body div.main.nav a.cart:hover
+{
+/*    background: rgba(149,135,112, 0.8); */
+}
+
+/******************************************************************************
+
+forms
+
+******************************************************************************/
+
+form div.form.row
+{
+}
+
+form div.buttons.form.row
+{
+    background: none;
+}
+
+form div.form.row label
+{
+    font-weight: bold;
+    text-shadow: 0 1px 1px rgba(255,255,255, 0.7);
+}
+
+select,
+input[type="number"],
+input[type="text"],
+input[type="email"],
+input[type="password"]
+{
+    color: rgba(0,0,0, 0.6);
+    background: rgba(255,255,255, 0.6);
+    border: 1px solid rgba(0,0,0, 0.2);
+    font-weight: bold;
+}
+
+/******************************************************************************
+
+footer
+
+******************************************************************************/
+
+#footer
+{
+}

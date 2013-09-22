@@ -9,7 +9,7 @@
 
 namespace HarvestCloud\CoreBundle\Controller\Buyer;
 
-use HarvestCloud\MarketPlace\CoreBundle\Controller\CoreController as Controller;
+use HarvestCloud\CoreBundle\Controller\Core\CoreController as Controller;
 use HarvestCloud\CoreBundle\Entity\OrderCollection;
 
 /**

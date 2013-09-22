@@ -1,0 +1,92 @@
+/*
+ * This file is part of the Harvest Cloud package.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+/******************************************************************************
+
+general
+
+******************************************************************************/
+
+.currency
+{
+    text-align: right;
+}
+
+.center
+{
+    text-align: center;
+}
+
+h4
+{
+    font-size: 1.6em;
+    font-weight: normal;
+    margin: 1em 0 0.5em 0;
+}
+
+/******************************************************************************
+
+table
+
+******************************************************************************/
+
+th,
+td
+{
+    font-size: 120%;
+}
+
+/******************************************************************************
+
+logo and main nav
+
+******************************************************************************/
+
+/******************************************************************************
+
+forms
+
+******************************************************************************/
+
+form div.form.row
+{
+    border-radius: 5px;
+}
+
+form div.form.row label,
+form div.form.row input
+{
+    font-size: 1.4em;
+    line-height: 1.5;
+    font-weight: bold;
+}
+
+form div.form.row h4
+{
+    font-size: 1em;
+}
+
+form div.form.row label
+{
+    text-transform: uppercase;
+}
+
+/******************************************************************************
+
+footer
+
+******************************************************************************/
+
+#footer
+{
+    border-radius: 5px;
+}
+
+#footer p
+{
+    font-size: 120%;
+}

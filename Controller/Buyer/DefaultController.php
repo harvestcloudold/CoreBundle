@@ -52,7 +52,7 @@ class DefaultController extends Controller
             ->findForSearchFilter($filter, $this->getCurrentCart())
         ;
 
-        return $this->render('HarvestCloudMarketPlaceBuyerBundle:Default:index.html.twig', array(
+        return $this->render('HarvestCloudCoreBundle:Buyer/Default:index.html.twig', array(
           'products' => $products,
         ));
     }

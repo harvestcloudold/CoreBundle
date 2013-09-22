@@ -1,0 +1,305 @@
+/*
+ * This file is part of the Harvest Cloud package.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+/******************************************************************************
+
+table
+
+******************************************************************************/
+
+table
+{
+    width: 100%;
+    border-spacing: 1px;
+}
+
+table th,
+table td
+{
+    padding: 0.833333333em;
+}
+
+table th
+{
+    text-align: left;
+}
+
+.actions form
+{
+    float: left;
+}
+
+table.standard tr:nth-of-type(odd) td {
+}
+
+
+table.nvp tr th
+{
+    width: 30%;
+}
+
+table.nvp tr td
+{
+    width: 70%;
+}
+
+/******************************************************************************
+
+forms
+
+******************************************************************************/
+
+form div.form.row
+{
+    margin: 1.5em 0;
+}
+
+form div.form.row span.input.holder
+{
+    display: block;
+}
+
+form div.form.row div label /* e.g. checkbox label */
+{
+  margin-right: 1em;
+  font-weight: normal;
+}
+
+form div.form.row h4
+{
+    margin-bottom: 0.3em;
+}
+
+form div.buttons.form.row
+{
+    background: none;
+}
+
+select,
+input[type="number"],
+input[type="text"],
+input[type="email"],
+input[type="password"]
+{
+    max-width: 100%;
+    padding: 1em;
+}
+
+/******************************************************************************
+
+columns
+
+******************************************************************************/
+
+div.two_equal_columns div.column
+{
+    width: 49%;
+}
+
+div.two_equal_columns div.left.column
+{
+    float: left;
+}
+
+div.two_equal_columns div.right.column
+{
+    float: right;
+}
+
+/*
+* Tablets portrait
+*/
+@media
+only screen and (max-width: 820px)
+{
+    .show_sub_tablet_portrait
+    {
+      display: block;
+    }
+
+    span.show_sub_tablet_portrait
+    {
+      display: inline;
+    }
+
+    .hide_sub_tablet_portrait,
+    .sf-toolbarreset
+    {
+        display: none;
+    }
+
+    /* Force table to not be like tables anymore */
+    /*
+    table.standard,
+    table.standard thead,
+    table.standard tbody,
+    table.standard th,
+    table.standard td,
+    table.standard tr
+    {
+        display: block;
+    }
+
+    table.standard
+    {
+      border: none;
+    }
+    */
+
+    div.map_canvas
+    {
+        margin: 1em 0;
+    }
+
+    /* Collapse two_equal_columns */
+    div.two_equal_columns div.left.column,
+    div.two_equal_columns div.right.column
+    {
+        float: none;
+        width: 100%;
+    }
+
+    div.two_equal_columns div.left.column
+    {
+        margin-bottom: 1em;
+    }
+
+    /* Hide table headers (but not display: none;, for accessibility) */
+    /*
+    table.standard thead tr
+    {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    table.standard tr
+    {
+        float: left;
+        width: 23.8%;
+        margin: 1.333333% 0 1.333333% 1.333333%;
+        border: 1px solid rgba(0,0,0,0.1);
+        border-radius: 5px;
+    }
+
+    table.standard tr:nth-of-type(1),
+    table.standard tr:nth-of-type(4n+1)
+    {
+      margin-left: 0;
+    }
+
+
+    table.standard tr td
+    {
+        border: none;
+        border-top: 1px solid rgba(0,0,0,0.1);
+    }
+
+    table.standard td:nth-of-type(1)
+    {
+        border: none;
+    }
+    */
+}
+
+/*
+* Phones portrait
+*/
+@media
+only screen and (max-width: 360px)
+{
+    body
+    {
+        margin: 0;
+        padding: 0;
+    }
+
+    #content,
+    #subnav,
+    #footer
+    {
+      margin-left: 1em;
+      margin-right: 1em;
+    }
+
+    .show_sub_phone_portrait
+    {
+        display: block;
+    }
+
+    span.show_sub_phone_portrait
+    {
+        display: inline;
+    }
+
+    .hide_sub_tablet_portrait
+    {
+        display: none;
+    }
+
+    /******************************************************************************
+
+    logo and main nav
+
+    ******************************************************************************/
+
+    div.logo_and_main_nav div.main.nav
+    {
+        margin: 0;
+    }
+
+    div.logo_and_main_nav div.main_logo
+    {
+    }
+
+    div.main.nav
+    {
+        border-radius: 0;
+    }
+
+    div.main.nav a
+    {
+        padding: 1.5em 0;
+        width: 5em;
+    }
+
+    div.main.nav a:first-of-type
+    {
+      -webkit-border-top-left-radius: 0;
+      -webkit-border-bottom-left-radius: 0;
+      -moz-border-radius-topleft: 0;
+      -moz-border-radius-bottomleft: 0;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    div.main.nav a.settings
+    {
+      -webkit-border-top-right-radius: 0;
+      -webkit-border-bottom-right-radius: 0;
+      -moz-border-radius-topright: 0;
+      -moz-border-radius-bottomright: 0;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+
+    div.main.nav a.settings
+    {
+        padding: 1.22em 0 1.02em 0;
+    }
+
+    #footer ul#mainNav > li
+    {
+        float: none;
+    }
+
+    #footer ul#mainNav > li ul li
+    {
+        margin-left: 2em;
+    }
+}

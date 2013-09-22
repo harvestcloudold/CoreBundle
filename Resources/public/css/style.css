@@ -1,0 +1,323 @@
+/*
+ * This file is part of the Harvest Cloud package.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+
+/******************************************************************************
+
+general
+
+******************************************************************************/
+
+.clear
+{
+    display: block;
+    clear: both;
+}
+
+.show_sub_tablet_portrait,
+.show_sub_phone_portrait
+{
+  display: none;
+}
+
+body
+{
+    font-size: 62.5%;
+    font-family: sans-serif;
+    line-height: 1.5em;
+    margin: 0;
+    padding: 0;
+    color: #958770;
+    background: #ddd2c3;
+}
+
+a
+{
+    text-decoration: inherit;
+}
+
+h1
+{
+    font-weight: normal;
+    font-size: 3em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+h3
+{
+    font-weight: normal;
+    font-size: 1.4em;
+    color: #555;
+}
+
+/******************************************************************************
+
+main containers
+
+******************************************************************************/
+
+#page
+{
+}
+
+#header,
+#content,
+#footer
+{
+    max-width: 96em;
+    margin: 0 auto;
+    padding: 0 1em;
+}
+
+#headerWrapper
+{
+    background: rgba(149,135,112, 0.7);
+}
+
+#contentWrapper
+{
+    background: #fff3e0 url(/bundles/harvestcloudcore/images/bg_body.png) scroll repeat center top;
+}
+
+#content
+{
+    min-height: 40em;
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+
+/******************************************************************************
+
+header
+
+******************************************************************************/
+
+#header
+{
+}
+
+#header div.main_logo
+{
+    width: 50%;
+    float: left;
+}
+
+#header div.main_logo a
+{
+    background: transparent url(/bundles/harvestcloudcore/images/header_logo.png) scroll no-repeat left 1px;
+    display: block;
+    height: 4.8em;
+}
+
+#header div.main_logo a span
+{
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    display: block;
+}
+
+#header div.main.nav
+{
+    text-transform: uppercase;
+    width: 50%;
+    float: left;
+}
+
+#header div.main.nav a
+{
+    display: block;
+    padding: 1.8em 0 1.2em 0;
+    width: 25%;
+    float: left;
+    text-align: center;
+    line-height: 100%;
+    font-size: 120%;
+    font-weight: bold;
+    text-shadow: 0 1px 1px rgba(255,255,255, 0.4);
+    color: rgba(0,0,0, 0.6);
+}
+
+#header div.main.nav a:first-of-type
+{
+}
+
+#header div.main.nav a.settings
+{
+    border-radius: 5px;
+    max-width: 15%;
+    padding: 0.66666666em 0 0.5em 0;
+}
+
+body.buy #header div.main.nav a.buy,
+body.sell #header div.main.nav a.sell,
+body.hub #header div.main.nav a.hub,
+body.settings #header div.main.nav a.settings,
+body.settings #header div.main.nav a.cart
+{
+    background: transparent  url(/bundles/harvestcloudcore/images/bg_tab.png) scroll no-repeat center bottom;
+}
+
+body #header div.main.nav a.buy:hover,
+body #header div.main.nav a.sell:hover,
+body #header div.main.nav a.hub:hover,
+body #header div.main.nav a.settings:hover,
+body #header div.main.nav a.cart:hover
+{
+    background: rgba(149,135,112, 0.8)  url(/bundles/harvestcloudcore/images/bg_tab.png) scroll no-repeat center bottom;
+}
+
+#header div.main.nav a.cart,
+#header div.main.nav a.settings
+{
+    float: right;
+}
+
+#header div.main.nav a.cart
+{
+    margin-right: 0;
+}
+
+#header div.main.nav a.settings img
+{
+    width: 10px;
+    height: 10px;
+}
+
+
+
+@media only screen and (max-width: 555px) /* below which logo would break */
+{
+    #header div.main_logo
+    {
+        width: 20%;
+        max-width: 47px;
+    }
+
+    #header div.main.nav
+    {
+        width: 80%;
+    }
+
+    #header div.main.nav a
+    {
+        background: none !important;
+    }
+}
+
+body.buyer_product_show .add_to_cart input[type="text"]
+{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    height: 2.357142857em;
+}
+
+body.buyer_product_show .add_to_cart input[type="submit"]
+{
+    margin: 0;
+}
+
+/******************************************************************************
+
+form
+
+******************************************************************************/
+
+input.submit.button
+{
+    color: rgba(255,255,255, 1);
+    background: #8bb4e5;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 0.5em 2em;
+    border: none;
+}
+
+input.small.submit.button
+{
+    padding: 0.3em 0.5em;
+    font-size: 1em;
+}
+
+/******************************************************************************
+
+flash
+
+******************************************************************************/
+
+div.flash div.notice
+{
+    background: #8bb4e5;
+    padding: 1.2em 1em;
+    color: #fff;
+    font-size: 2em;
+}
+
+div.flash div.notice strong.ok
+{
+    font-size: 2.5em;
+    vertical-align: -0.22em;
+}
+
+/******************************************************************************
+
+footer
+
+******************************************************************************/
+
+#footer
+{
+    padding-top: 1em;
+}
+
+#footer ul#mainNav
+{
+    margin: 0;
+    padding: 0;
+}
+
+#footer ul#mainNav li,
+#footer ul#mainNav li ul
+{
+    list-style: none;
+    margin: 2em 0;
+    padding: 0;
+}
+
+#footer #mainNav > li a
+{
+    color: inherit;
+}
+
+#footer #mainNav li ul li a
+{
+    text-transform: uppercase;
+    color: inherit;
+    font-weight: normal;
+}
+
+#footer ul#mainNav li h3,
+#footer ul#mainNav li ul
+{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#footer ul#mainNav > li
+{
+    float: left;
+    width: 19%;
+    margin-top: 0;
+    margin-right: 1.25%;
+}
+
+#footer ul#mainNav > li:nth-of-type(5n+0)
+{
+    margin-right: 0;
+}

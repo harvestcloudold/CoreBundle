@@ -1,0 +1,169 @@
+Seller_homepage:
+    pattern:  /
+    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Default:index }
+
+Seller_hub_nearby:
+    pattern:  /hubs/nearby
+    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Hub:nearby }
+
+Seller_hub_show:
+    pattern:  /hubs/{id}
+    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Hub:show }
+    requirements:
+        id: \d+
+
+
+Seller_register_landing:
+    pattern:  /register/landing
+    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Register:landing }
+
+
+Seller_order:
+    pattern:  /orders
+    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Order:index }
+
+Seller_order_accept:
+    pattern:  /order/{id}/accept
+    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Order:accept }
+    requirements:
+        id: \d+
+        _method: POST
+
+Seller_order_reject:
+    pattern:  /order/{id}/reject
+    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Order:reject }
+    requirements:
+        id: \d+
+        _method: POST
+
+Seller_order_pick:
+    pattern:  /order/{id}/pick
+    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Order:pick }
+    requirements:
+        id: \d+
+        _method: POST
+
+Seller_order_mark_ready_for_dispatch:
+    pattern:  /order/{id}/mark-ready-for-dispatch
+    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Order:mark_ready_for_dispatch }
+    requirements:
+        id: \d+
+        _method: POST
+
+Seller_order_dispatch:
+    pattern:  /order/{id}/dispatch
+    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Order:dispatch }
+    requirements:
+        id: \d+
+        _method: POST
+
+
+Seller_hub_add:
+    pattern:  /hub/{id}/add
+    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Hub:add }
+    requirements:
+        id: \d+
+        _method: POST
+
+
+Seller_product:
+    pattern:  /product
+    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Product:index }
+
+Seller_product_show:
+    pattern:  /product/{id}
+    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Product:show }
+    requirements:
+        id: \d+
+
+Seller_product_new:
+    pattern:  /product/new
+    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Product:new }
+    requirements:
+        _method: GET
+
+Seller_product_create:
+    pattern:  /product/new
+    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Product:new }
+    requirements:
+        _method: POST
+
+
+Seller_restock_transaction_new:
+    pattern:  /product/{id}/restock
+    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:RestockTransaction:new }
+    requirements:
+        _method: GET
+        id: \d+
+
+Seller_restock_transaction_create:
+    pattern:  /product/{id}/restock
+    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:RestockTransaction:new }
+    requirements:
+        _method: POST
+        id: \d+
+
+
+Seller_seller_window:
+    pattern:  /seller-window
+    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:SellerWindow:index }
+    requirements:
+        _method: GET
+
+
+Seller_seller_window_new:
+    pattern:  /hubs/{id}/seller-window/new
+    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:SellerHubRef:add_seller_window }
+    requirements:
+        _method: GET
+
+Seller_seller_window_create:
+    pattern:  /hubs/{id}/new-seller-window
+    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:SellerHubRef:add_seller_window }
+    requirements:
+        _method: POST
+
+
+Seller_window_maker:
+    pattern:  /window-maker
+    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:WindowMaker:index }
+    requirements:
+        _method: GET
+
+Seller_window_maker_create:
+    pattern:  /window-maker/new
+    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:WindowMaker:new }
+    requirements:
+        _method: POST
+
+Seller_window_maker_new:
+    pattern:  /window-maker/new
+    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:WindowMaker:new }
+    requirements:
+        _method: GET
+
+Seller_window_maker_update:
+    pattern:  /window-maker/{id}/edit
+    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:WindowMaker:edit }
+    requirements:
+        _method: POST
+
+Seller_window_maker_edit:
+    pattern:  /window-maker/{id}/edit
+    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:WindowMaker:edit }
+    requirements:
+        _method: GET
+
+Seller_window_maker_show:
+    pattern:  /window-maker/{id}
+    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:WindowMaker:show }
+    requirements:
+        id: \d+
+        _method: GET
+
+Seller_window_maker_make:
+    pattern:  /window-maker/{id}/make
+    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:WindowMaker:make }
+    requirements:
+        id: \d+
+        _method: POST

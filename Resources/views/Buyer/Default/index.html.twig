@@ -1,0 +1,44 @@
+{% extends 'HarvestCloudCoreBundle:Buyer:layout.html.twig' %}
+
+{% block content %}
+    <h1>Products nearby</h1>
+
+    <div class="tile container">
+        {% for product in products %}
+            <div class="product tile">
+                <h3><a href="{{ path('Buyer_product_show', { 'id': product.0.id, 'path': product.0.category.path }) }}">{{ product.0.name }}</a></h3>
+                <div class="product_picture">
+                    <a href="{{ path('Buyer_product_show', { 'id': product.0.id, 'path': product.0.category.path }) }}">
+                        <img src="/images/sandbox/products/{{ product.0.category.slug }}.jpg" alt="{{ product.0.name }}" title="{{ product.0.name }}" /></a>
+                </div><!-- .product_picture -->
+                <div class="seller">
+                    <div class="profile_picture">
+                        <img src="/images/sandbox/avatars/{{ product.0.seller.avatarName }}.png" alt="{{ product.0.seller.name }}" title="{{ product.0.seller.name }}" />
+                    </div><!-- .profile_picture -->
+                    <div class="info">
+                        <h4 class="seller">{{ product.0.seller.name }}</h4>
+                        <div class="location_and_distance">
+                            <span class="location">{{ product.0.location.cityState }}</span>
+                            <span class="distance">{{ product.distance|number_format(1) }} miles</span>
+                        </div><!-- .location_and_distance -->
+                    </div><!-- .info -->
+                    <div class="clear"></div>
+                </div><!-- .seller -->
+                <div class="price_and_quantity">
+                    <strong class="price">${{ product.0.price }}</strong>
+                    <span class="quantity">{{ product.0.quantityAvailableForCart }} {{ product.0.unitAvailableForCart }} available</span>
+                </div>
+                <div class="quantity_in_cart">
+                    {{ product.0.quantityInCart }} {{ product.0.unitInCart }} in cart
+                </div><!-- .quantity_in_cart -->
+                <div class="add_to_cart">
+                    <form action="{{ path('Buyer_cart_add_product', { 'id': product.0.id }) }}" method="post">
+                            <input type="hidden" name="referer" value="{{ app.request.attributes.get('_route') }}" />
+                            <input type="text" size="3" name="quantity"  value="1"/><input type="submit" name="remove" class="small submit button" value="Add to cart" />
+                    </form>
+                </div><!-- .add_to_cart -->
+            </div><!-- .product.tile -->
+        {% endfor %}
+        <div class="clear"></div>
+    </div><!-- .tile_container.container -->
+{% endblock %}

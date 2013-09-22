@@ -1,0 +1,80 @@
+Hub_homepage:
+    pattern:  /
+    defaults: { _controller: HarvestCloudMarketPlaceHubBundle:Default:index }
+
+
+Hub_register_landing:
+    pattern:  /register/landing
+    defaults: { _controller: HarvestCloudMarketPlaceHubBundle:Register:landing }
+
+
+Hub_order:
+    pattern:  /orders
+    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Order:index }
+
+Hub_order_receive:
+    pattern:  /order/{id}/receive
+    defaults: { _controller: HarvestCloudMarketPlaceHubBundle:Order:receive }
+    requirements:
+        id: \d+
+        _method: POST
+
+Hub_order_mark_as_ready_to_pickup:
+    pattern:  /order/{id}/mark-as-ready-to-pickup
+    defaults: { _controller: HarvestCloudMarketPlaceHubBundle:Order:mark_as_ready_to_pickup }
+    requirements:
+        id: \d+
+        _method: POST
+
+Hub_order_release:
+    pattern:  /order/{id}/release
+    defaults: { _controller: HarvestCloudMarketPlaceHubBundle:Order:release }
+    requirements:
+        id: \d+
+        _method: POST
+
+
+
+Hub_window_maker:
+    pattern:  /window-maker
+    defaults: { _controller: HarvestCloudMarketPlaceHubBundle:WindowMaker:index }
+    requirements:
+        _method: GET
+
+Hub_window_maker_create:
+    pattern:  /window-maker/new
+    defaults: { _controller: HarvestCloudMarketPlaceHubBundle:WindowMaker:new }
+    requirements:
+        _method: POST
+
+Hub_window_maker_new:
+    pattern:  /window-maker/new
+    defaults: { _controller: HarvestCloudMarketPlaceHubBundle:WindowMaker:new }
+    requirements:
+        _method: GET
+
+Hub_window_maker_update:
+    pattern:  /window-maker/{id}/edit
+    defaults: { _controller: HarvestCloudMarketPlaceHubBundle:WindowMaker:edit }
+    requirements:
+        _method: POST
+
+Hub_window_maker_edit:
+    pattern:  /window-maker/{id}/edit
+    defaults: { _controller: HarvestCloudMarketPlaceHubBundle:WindowMaker:edit }
+    requirements:
+        _method: GET
+
+Hub_window_maker_show:
+    pattern:  /window-maker/{id}
+    defaults: { _controller: HarvestCloudMarketPlaceHubBundle:WindowMaker:show }
+    requirements:
+        id: \d+
+        _method: GET
+
+Hub_window_maker_make:
+    pattern:  /window-maker/{id}/make
+    defaults: { _controller: HarvestCloudMarketPlaceHubBundle:WindowMaker:make }
+    requirements:
+        id: \d+
+        _method: POST
