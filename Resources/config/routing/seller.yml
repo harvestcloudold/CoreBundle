@@ -20,39 +20,39 @@ Seller_register_landing:
 
 Seller_order:
     pattern:  /orders
-    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Order:index }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Seller\OrderController::indexAction }
 
 Seller_order_accept:
     pattern:  /order/{id}/accept
-    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Order:accept }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Seller\OrderController::acceptAction }
     requirements:
         id: \d+
         _method: POST
 
 Seller_order_reject:
     pattern:  /order/{id}/reject
-    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Order:reject }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Seller\OrderController::rejectAction }
     requirements:
         id: \d+
         _method: POST
 
 Seller_order_pick:
     pattern:  /order/{id}/pick
-    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Order:pick }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Seller\OrderController::pickAction }
     requirements:
         id: \d+
         _method: POST
 
 Seller_order_mark_ready_for_dispatch:
     pattern:  /order/{id}/mark-ready-for-dispatch
-    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Order:mark_ready_for_dispatch }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Seller\OrderController::mark_ready_for_dispatchAction }
     requirements:
         id: \d+
         _method: POST
 
 Seller_order_dispatch:
     pattern:  /order/{id}/dispatch
-    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Order:dispatch }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Seller\OrderController::dispatchAction }
     requirements:
         id: \d+
         _method: POST
