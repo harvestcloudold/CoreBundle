@@ -77,6 +77,7 @@ class ProductController extends Controller
     public function newAction(Request $request)
     {
         $product = new Product();
+        $product->setSeller($this->getCurrentProfile());
         $form = $this->createForm(new ProductType($this->getCurrentProfile()), $product);
 
         // During the Eggbox stage, we'll hard code the Category
