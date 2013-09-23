@@ -7,9 +7,9 @@
  * file that was distributed with this source code.
  */
 
-namespace HarvestCloud\MarketPlace\SellerBundle\Controller;
+namespace HarvestCloud\CoreBundle\Controller\Seller;
 
-use HarvestCloud\MarketPlace\SellerBundle\Controller\SellerController as Controller;
+use HarvestCloud\CoreBundle\Controller\Seller\SellerController as Controller;
 use Symfony\Component\HttpFoundation\Request;
 use HarvestCloud\CoreBundle\Entity\SellerHubPickupWindow;
 use HarvestCloud\CoreBundle\Form\SellerHubPickupWindowType;
@@ -73,7 +73,7 @@ class SellerHubRefController extends Controller
             }
         }
 
-        return $this->render('HarvestCloudMarketPlaceSellerBundle:SellerHubRef:add_pickup_window.html.twig', array(
+        return $this->render('HarvestCloudCoreBundle:Seller/SellerHubRef:add_pickup_window.html.twig', array(
             'hub'  => $hub,
             'form' => $form->createView(),
         ));

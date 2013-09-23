@@ -4,11 +4,11 @@ Seller_homepage:
 
 Seller_hub_nearby:
     pattern:  /hubs/nearby
-    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Hub:nearby }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Seller\HubController::nearbyAction }
 
 Seller_hub_show:
     pattern:  /hubs/{id}
-    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Hub:show }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Seller\HubController::showAction }
     requirements:
         id: \d+
 
@@ -60,7 +60,7 @@ Seller_order_dispatch:
 
 Seller_hub_add:
     pattern:  /hub/{id}/add
-    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Hub:add }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Seller\HubController::addAction }
     requirements:
         id: \d+
         _method: POST
@@ -91,14 +91,14 @@ Seller_product_create:
 
 Seller_restock_transaction_new:
     pattern:  /product/{id}/restock
-    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:RestockTransaction:new }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Seller\RestockTransactionController::newAction }
     requirements:
         _method: GET
         id: \d+
 
 Seller_restock_transaction_create:
     pattern:  /product/{id}/restock
-    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:RestockTransaction:new }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Seller\RestockTransactionController::newAction }
     requirements:
         _method: POST
         id: \d+
@@ -106,64 +106,64 @@ Seller_restock_transaction_create:
 
 Seller_seller_window:
     pattern:  /seller-window
-    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:SellerWindow:index }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Seller\SellerWindowController::indexAction }
     requirements:
         _method: GET
 
 
 Seller_seller_window_new:
     pattern:  /hubs/{id}/seller-window/new
-    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:SellerHubRef:add_seller_window }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Seller\SellerWindowController::add_seller_windowAction }
     requirements:
         _method: GET
 
 Seller_seller_window_create:
     pattern:  /hubs/{id}/new-seller-window
-    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:SellerHubRef:add_seller_window }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Seller\SellerWindowController::add_seller_windowAction }
     requirements:
         _method: POST
 
 
 Seller_window_maker:
     pattern:  /window-maker
-    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:WindowMaker:index }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Seller\WindowMakerController::indexAction }
     requirements:
         _method: GET
 
 Seller_window_maker_create:
     pattern:  /window-maker/new
-    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:WindowMaker:new }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Seller\WindowMakerController::newAction }
     requirements:
         _method: POST
 
 Seller_window_maker_new:
     pattern:  /window-maker/new
-    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:WindowMaker:new }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Seller\WindowMakerController::newAction }
     requirements:
         _method: GET
 
 Seller_window_maker_update:
     pattern:  /window-maker/{id}/edit
-    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:WindowMaker:edit }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Seller\WindowMakerController::editAction }
     requirements:
         _method: POST
 
 Seller_window_maker_edit:
     pattern:  /window-maker/{id}/edit
-    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:WindowMaker:edit }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Seller\WindowMakerController::editAction }
     requirements:
         _method: GET
 
 Seller_window_maker_show:
     pattern:  /window-maker/{id}
-    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:WindowMaker:show }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Seller\WindowMakerController::showAction }
     requirements:
         id: \d+
         _method: GET
 
 Seller_window_maker_make:
     pattern:  /window-maker/{id}/make
-    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:WindowMaker:make }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Seller\WindowMakerController::makeAction }
     requirements:
         id: \d+
         _method: POST

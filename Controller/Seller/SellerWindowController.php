@@ -7,9 +7,9 @@
  * file that was distributed with this source code.
  */
 
-namespace HarvestCloud\MarketPlace\SellerBundle\Controller;
+namespace HarvestCloud\CoreBundle\Controller\Seller;
 
-use HarvestCloud\MarketPlace\SellerBundle\Controller\SellerController as Controller;
+use HarvestCloud\CoreBundle\Controller\Seller\SellerController as Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,7 +35,7 @@ class SellerWindowController extends Controller
             ->findUpcomingForSeller($this->getCurrentProfile())
         ;
 
-        return $this->render('HarvestCloudMarketPlaceSellerBundle:SellerWindow:index.html.twig', array(
+        return $this->render('HarvestCloudCoreBundle:Seller/SellerWindow:index.html.twig', array(
           'windows' => $windows,
         ));
     }

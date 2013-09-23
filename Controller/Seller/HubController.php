@@ -7,9 +7,9 @@
  * file that was distributed with this source code.
  */
 
-namespace HarvestCloud\MarketPlace\SellerBundle\Controller;
+namespace HarvestCloud\CoreBundle\Controller\Seller;
 
-use HarvestCloud\MarketPlace\SellerBundle\Controller\SellerController as Controller;
+use HarvestCloud\CoreBundle\Controller\Seller\SellerController as Controller;
 use HarvestCloud\CoreBundle\Entity\SellerHubRef;
 
 /**
@@ -31,7 +31,7 @@ class HubController extends Controller
         $origin = $this->getUser()->getCurrentProfile()->getDefaultLocation();
         $hubs   = $this->getRepo('Profile')->findNearbyHubs($origin);
 
-        return $this->render('HarvestCloudMarketPlaceSellerBundle:Hub:nearby.html.twig', array(
+        return $this->render('HarvestCloudCoreBundle:Seller/Hub:nearby.html.twig', array(
           'hubs'   => $hubs,
           'origin' => $origin,
         ));
@@ -58,7 +58,7 @@ class HubController extends Controller
 
         $sellerHubRef = $this->getRepo('SellerHubRef')->findOneBySellerAndHub($seller, $hub);
 
-        return $this->render('HarvestCloudMarketPlaceSellerBundle:Hub:show.html.twig', array(
+        return $this->render('HarvestCloudCoreBundle:Seller/Hub:show.html.twig', array(
           'hub'          => $hub,
           'sellerHubRef' => $sellerHubRef,
         ));

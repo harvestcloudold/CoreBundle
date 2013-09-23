@@ -7,9 +7,9 @@
  * file that was distributed with this source code.
  */
 
-namespace HarvestCloud\MarketPlace\SellerBundle\Controller;
+namespace HarvestCloud\CoreBundle\Controller\Seller;
 
-use HarvestCloud\MarketPlace\SellerBundle\Controller\SellerController as Controller;
+use HarvestCloud\CoreBundle\Controller\Seller\SellerController as Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,7 +40,7 @@ class WindowMakerController extends Controller
             ->findForSeller($currentProfile)
         ;
 
-        return $this->render('HarvestCloudMarketPlaceSellerBundle:WindowMaker:index.html.twig', array(
+        return $this->render('HarvestCloudCoreBundle:Seller/WindowMaker:index.html.twig', array(
           'windowMakers' => $windowMakers,
         ));
     }
@@ -58,7 +58,7 @@ class WindowMakerController extends Controller
      */
     public function showAction(SellerWindowMaker $windowMaker)
     {
-        return $this->render('HarvestCloudMarketPlaceSellerBundle:WindowMaker:show.html.twig', array(
+        return $this->render('HarvestCloudCoreBundle:Seller/WindowMaker:show.html.twig', array(
           'windowMaker' => $windowMaker,
         ));
     }
@@ -81,7 +81,7 @@ class WindowMakerController extends Controller
             return $response;
         }
 
-        return $this->render('HarvestCloudMarketPlaceSellerBundle:WindowMaker:new.html.twig', array(
+        return $this->render('HarvestCloudCoreBundle:Seller/WindowMaker:new.html.twig', array(
           'form' => $form->createView(),
         ));
     }
@@ -106,7 +106,7 @@ class WindowMakerController extends Controller
             return $response;
         }
 
-        return $this->render('HarvestCloudMarketPlaceSellerBundle:WindowMaker:edit.html.twig', array(
+        return $this->render('HarvestCloudCoreBundle:Seller/WindowMaker:edit.html.twig', array(
           'form'        => $form->createView(),
           'windowMaker' => $windowMaker,
         ));
