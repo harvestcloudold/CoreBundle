@@ -68,23 +68,23 @@ Seller_hub_add:
 
 Seller_product:
     pattern:  /product
-    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Product:index }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Seller\ProductController::indexAction }
 
 Seller_product_show:
     pattern:  /product/{id}
-    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Product:show }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Seller\ProductController::showAction }
     requirements:
         id: \d+
 
 Seller_product_new:
     pattern:  /product/new
-    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Product:new }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Seller\ProductController::newAction }
     requirements:
         _method: GET
 
 Seller_product_create:
     pattern:  /product/new
-    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Product:new }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Seller\ProductController::newAction }
     requirements:
         _method: POST
 

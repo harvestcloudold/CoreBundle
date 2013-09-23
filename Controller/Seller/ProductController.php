@@ -7,9 +7,9 @@
  * file that was distributed with this source code.
  */
 
-namespace HarvestCloud\MarketPlace\SellerBundle\Controller;
+namespace HarvestCloud\CoreBundle\Controller\Seller;
 
-use HarvestCloud\MarketPlace\SellerBundle\Controller\SellerController as Controller;
+use HarvestCloud\CoreBundle\Controller\Seller\SellerController as Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,7 +37,7 @@ class ProductController extends Controller
             ->findOpenForSeller($this->getCurrentProfile())
         ;
 
-        return $this->render('HarvestCloudMarketPlaceSellerBundle:Product:index.html.twig', array(
+        return $this->render('HarvestCloudCoreBundle:Seller/Product:index.html.twig', array(
           'products' => $products,
         ));
     }
@@ -61,7 +61,7 @@ class ProductController extends Controller
             throw $this->createNotFoundException('No product found for id '.$id);
         }
 
-        return $this->render('HarvestCloudMarketPlaceSellerBundle:Product:show.html.twig', array(
+        return $this->render('HarvestCloudCoreBundle:Seller/Product:show.html.twig', array(
           'product' => $product,
         ));
     }
@@ -106,7 +106,7 @@ class ProductController extends Controller
             }
         }
 
-        return $this->render('HarvestCloudMarketPlaceSellerBundle:Product:new.html.twig', array(
+        return $this->render('HarvestCloudCoreBundle:Seller/Product:new.html.twig', array(
           'form' => $form->createView(),
         ));
     }
