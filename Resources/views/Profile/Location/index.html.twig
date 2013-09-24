@@ -1,0 +1,27 @@
+{% extends 'HarvestCloudCoreBundle::Profile/layout.html.twig' %}
+
+{% block content %}
+    <h1>Locations</h1>
+    <table>
+        <tbody>
+            {% for location in locations %}
+                <tr>
+                    <td><a href="{{ path('Profile_location_show', { 'id' : location.id }) }}">{{ location.name }}</a></td>
+                    <td>
+                      {{ location.addressLine1 }}
+                      {{ location.addressLine2 }}
+                      {{ location.addressLine3 }}
+                    </td>
+                    <td>{{ location.town }}</td>
+                    <td>{{ location.stateCode }}</td>
+                    <td>{{ location.postalCode }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <form action="{{ path('Profile_location_new') }}">
+        <div class="form row">
+            <input type="submit" class="submit button" value="New" />
+        </div><!-- .form.row -->
+    </form>
+{% endblock %}

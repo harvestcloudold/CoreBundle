@@ -1,0 +1,24 @@
+{% extends 'HarvestCloudCoreBundle::Profile/layout.html.twig' %}
+
+{% block content %}
+    <h1>Accounts</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Account</th>
+                <th>Slug</th>
+                <th>Current Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for account in profile.accounts %}
+                <tr>
+                    <td><a href="{{ path('Profile_account_show', { 'slug': account.slug }) }}">{{ account.name }}</a></td>
+                    <td>{{ account.slug }}</td>
+                    <td>{{ account.balance }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

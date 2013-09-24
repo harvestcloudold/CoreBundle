@@ -35,14 +35,14 @@ Buyer_order_show:
 
 Buyer_order_cancel:
     pattern:  /order/{id}/cancel
-    defaults: { _controller: HarvestCloudMarketPlaceBuyerBundle:Order:cancel }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\OrderController::cancelAction }
     requirements:
         id: \d+
         _method: POST
 
 Buyer_order_rate:
     pattern:  /order/{id}/rate/{rating}
-    defaults: { _controller: HarvestCloudMarketPlaceBuyerBundle:Order:rate }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\OrderController::rateAction }
     requirements:
         id: \d+
         rating: '[1-5]'
@@ -85,7 +85,7 @@ Buyer_profile_current:
 
 Buyer_profile:
     pattern:  /profile
-    defaults: { _controller: HarvestCloudMarketPlaceBuyerBundle:Profile:index }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\ProfileController::indexAction }
 
 
 Buyer_cart_add_product:

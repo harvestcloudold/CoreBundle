@@ -32,9 +32,6 @@ class ProfileType extends AbstractType
             ->add('name', 'text', array(
               'attr' => array('size' => 40)
             ))
-            ->add('pay_pal_account', 'text', array(
-              'attr' => array('size' => 50)
-            ))
             ->add('as_seller_display_on_map')
         ;
     }

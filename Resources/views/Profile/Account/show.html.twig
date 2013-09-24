@@ -1,0 +1,28 @@
+{% extends 'HarvestCloudCoreBundle::Profile/layout.html.twig' %}
+
+{% block content %}
+    <h1>{{ account.name }}</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Offset Account</th>
+                <th>Amount</th>
+                <th>Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for posting in postings %}
+
+                <tr>
+                    <td>{{ posting.journal.created|date('Y-m-d H:i') }}</a></td>
+                    <td>{{ posting.journal.description }}</a></td>
+                    <td><a href="{{ path('Profile_account_show', { 'slug': posting.offsetAccount.slug }) }}">{{ posting.offsetAccount.name }}</a></td>
+                    <td>{{ posting.amount }}</a></td>
+                    <td>{{ posting.balanceAfterwards }}</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

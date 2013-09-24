@@ -1,0 +1,44 @@
+{% extends 'HarvestCloudCoreBundle::Profile/layout.html.twig' %}
+
+{% block content %}
+    <h1>{{ profile }}</h1>
+
+    <div class="two_equal_columns">
+        <div class="left column">
+            <h4>Profile Info</h4>
+            <table class="nvp">
+                <tr>
+                    <th>Name</th>
+                    <td>{{ profile.name }}</td>
+                </tr>
+                <tr>
+                    <th>PayPal Account</th>
+                    <td>{{ profile.payPalAccountEmail }}</td>
+                </tr>
+                <tr>
+                    <th>Root Account ID</th>
+                    <td>{% if profile.rootAccount %}{{ profile.rootAccount.id }}{% endif %}</td>
+                </tr>
+            </table><!-- .nvp -->
+        </div><!-- .left.column -->
+        <div class="right column">
+            <h4>Stripe</h4>
+            {% if profile.stripeUserId == false %}
+                <p><a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id={{ stripe_client_id }}&scope=read_write&state={{ profile.id }}"><img src="/images/connect_with_stripe.png" alt="Connect with Stripe" /></a></p>
+            {% endif %}
+        </div><!!-- .right.column -->
+        <div class="clear"></div>
+        <form action="{{ path('Profile_edit') }}">
+            <div class="form row">
+                <input type="submit" class="submit button" value="Edit" />
+            </div><!-- .form.row -->
+        </form>
+        {% if profile.rootAccount is null %}
+            <form action="{{ path('Profile_account_create_set') }}" method="post">
+                <div class="form row">
+                    <input type="submit" class="submit button" value="Create accounts" />
+                </div><!-- .form.row -->
+            </form>
+        {% endif %}
+    </div><!-- .two_equal_columns -->
+{% endblock %}

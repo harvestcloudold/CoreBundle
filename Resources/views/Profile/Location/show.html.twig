@@ -1,0 +1,45 @@
+{% extends 'HarvestCloudCoreBundle::Profile/layout.html.twig' %}
+
+{% block content %}
+    <h1>{{ location.name }}</h1>
+    <div class="two_equal_columns">
+        <div class="left column">
+            <table class="nvp">
+                <tr>
+                    <th>Name</th>
+                    <td>{{ location.name }}</td>
+                </tr>
+                <tr>
+                    <th>Street Address</th>
+                    <td>{{ location.addressLine1 }}</td>
+                </tr>
+                <tr>
+                    <th>Street Address cont.</th>
+                    <td>{{ location.addressLine2 }}</td>
+                </tr>
+                <tr>
+                    <th>Street Address cont.</th>
+                    <td>{{ location.addressLine3 }}</td>
+                </tr>
+                <tr>
+                    <th>Town</th>
+                    <td>{{ location.town }}</td>
+                </tr>
+                <tr>
+                    <th>State</th>
+                    <td>{{ location.stateCode }}</td>
+                </tr>
+                <tr>
+                    <th>Zip</th>
+                    <td>{{ location.postalCode }}</td>
+                </tr>
+            </table><!-- .nvp -->
+        </div><!-- .left.column -->
+        <div class="clear"></div>
+        <form action="{{ path('Profile_location_edit', { 'id': location.id }) }}">
+            <div class="form row">
+                <input type="submit" class="submit button" value="Edit" />
+            </div><!-- .form.row -->
+        </form>
+    </div><!-- .two_equal_columns -->
+{% endblock %}

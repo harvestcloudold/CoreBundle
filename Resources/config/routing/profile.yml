@@ -1,13 +1,13 @@
 Profile_homepage:
     pattern:  /
-    defaults: { _controller: HarvestCloudMarketPlaceProfileBundle:Default:index }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Profile\DefaultController::indexAction }
 
 
 
 
 Profile_stripe_connect:
     pattern:  /stripe/connect
-    defaults: { _controller: HarvestCloudMarketPlaceProfileBundle:Stripe:connect }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Profile\StripeController::connectAction }
     requirements:
         _method: GET
 
@@ -15,13 +15,13 @@ Profile_stripe_connect:
 
 Profile_update:
     pattern:  /edit
-    defaults: { _controller: HarvestCloudMarketPlaceProfileBundle:Default:edit }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Profile\DefaultController::editAction }
     requirements:
         _method: POST
 
 Profile_edit:
     pattern:  /edit
-    defaults: { _controller: HarvestCloudMarketPlaceProfileBundle:Default:edit }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Profile\DefaultController::editAction }
     requirements:
         _method: GET
 
@@ -30,20 +30,20 @@ Profile_edit:
 
 Profile_account:
     pattern:  /account
-    defaults: { _controller: HarvestCloudMarketPlaceProfileBundle:Account:index }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Profile\AccountController::indexAction }
     requirements:
         _method: GET
 
 Profile_account_show:
     pattern:  /account/{slug}
-    defaults: { _controller: HarvestCloudMarketPlaceProfileBundle:Account:show }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Profile\AccountController::showAction }
     requirements:
         slug:    "[a-z0-9-]+"
         _method: GET
 
 Profile_account_create_set:
     pattern:  /account/create-set
-    defaults: { _controller: HarvestCloudMarketPlaceProfileBundle:Account:create_set }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Profile\AccountController::create_setAction }
     requirements:
         _method: POST
 
@@ -53,34 +53,34 @@ Profile_account_create_set:
 
 Profile_location:
     pattern:  /location
-    defaults: { _controller: HarvestCloudMarketPlaceProfileBundle:Location:index }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Profile\LocationController::indexAction }
 
 Profile_location_show:
     pattern:  /location/{id}
-    defaults: { _controller: HarvestCloudMarketPlaceProfileBundle:Location:show }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Profile\LocationController::showAction }
     requirements:
         id: \d+
 
 Profile_location_create:
     pattern:  /location/new
-    defaults: { _controller: HarvestCloudMarketPlaceProfileBundle:Location:new }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Profile\LocationController::newAction }
     requirements:
         _method: POST
 
 Profile_location_new:
     pattern:  /location/new
-    defaults: { _controller: HarvestCloudMarketPlaceProfileBundle:Location:new }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Profile\LocationController::newAction }
     requirements:
         _method: GET
 
 Profile_location_update:
     pattern:  /location/{id}/edit
-    defaults: { _controller: HarvestCloudMarketPlaceProfileBundle:Location:edit }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Profile\LocationController::editAction }
     requirements:
         _method: POST
 
 Profile_location_edit:
     pattern:  /location/{id}/edit
-    defaults: { _controller: HarvestCloudMarketPlaceProfileBundle:Location:edit }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Profile\LocationController::editAction }
     requirements:
         _method: GET

@@ -1,0 +1,12 @@
+{% extends 'HarvestCloudCoreBundle::Profile/layout.html.twig' %}
+{% form_theme form 'HarvestCloudCoreBundle:Form:fields.html.twig' %}
+
+{% block content %}
+    <h1>New Location</h1>
+    <form action="{{ path('Profile_location_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <div class="form row">
+            <input type="submit" class="submit button" value="Save" />
+        </div><!-- .form.row -->
+    </form>
+{% endblock %}
