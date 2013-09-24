@@ -77,7 +77,7 @@ class CheckoutController extends Controller
         $hubWindows = $this->getRepo('HubWindow')
             ->findForSelectWindowForOrderCollection($orderCollection);
 
-        return $this->render('HarvestCloudMarketPlaceBuyerBundle:Checkout:select_pickup_window.html.twig', array(
+        return $this->render('HarvestCloudCoreBundle:Buyer/Checkout:select_pickup_window.html.twig', array(
           'orderCollection' => $orderCollection,
           'hubWindows'      => $hubWindows,
         ));
@@ -96,7 +96,7 @@ class CheckoutController extends Controller
      */
     public function reviewAction()
     {
-        return $this->render('HarvestCloudMarketPlaceBuyerBundle:Checkout:review.html.twig', array(
+        return $this->render('HarvestCloudCoreBundle:Buyer/Checkout:review.html.twig', array(
             'orderCollection' => $this->getOrderCollection(),
         ));
     }
@@ -138,7 +138,7 @@ class CheckoutController extends Controller
         $session = $this->getRequest()->getSession();
         $session->set('cart_id', null);
 
-        return $this->render('HarvestCloudMarketPlaceBuyerBundle:Checkout:receipt.html.twig');
+        return $this->render('HarvestCloudCoreBundle:Buyer/Checkout:receipt.html.twig');
     }
 
     /**

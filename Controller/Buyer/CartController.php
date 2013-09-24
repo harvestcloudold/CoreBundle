@@ -39,7 +39,7 @@ class CartController extends Controller
 
         if ($orderCollection)
         {
-            return $this->render('HarvestCloudMarketPlaceBuyerBundle:Cart:show.html.twig', array(
+            return $this->render('HarvestCloudCoreBundle:Buyer/Cart:show.html.twig', array(
                 'orderCollection'   => $orderCollection,
             ));
         }
@@ -62,7 +62,7 @@ class CartController extends Controller
 
         if ($orderCollection)
         {
-            return $this->render('HarvestCloudMarketPlaceBuyerBundle:Cart:mini.html.twig', array(
+            return $this->render('HarvestCloudCoreBundle:Buyer/Cart:mini.html.twig', array(
                 'orderCollection'   => $orderCollection,
             ));
         }
