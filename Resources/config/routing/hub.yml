@@ -1,34 +1,34 @@
 Hub_homepage:
     pattern:  /
-    defaults: { _controller: HarvestCloudMarketPlaceHubBundle:Default:index }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Hub\DefaultController::indexAction }
 
 
 Hub_register_landing:
     pattern:  /register/landing
-    defaults: { _controller: HarvestCloudMarketPlaceHubBundle:Register:landing }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Hub\RegisterController::landingAction }
 
 
 Hub_order:
     pattern:  /orders
-    defaults: { _controller: HarvestCloudMarketPlaceSellerBundle:Order:index }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Hub\OrderController::indexAction }
 
 Hub_order_receive:
     pattern:  /order/{id}/receive
-    defaults: { _controller: HarvestCloudMarketPlaceHubBundle:Order:receive }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Hub\OrderController::receiveAction }
     requirements:
         id: \d+
         _method: POST
 
 Hub_order_mark_as_ready_to_pickup:
     pattern:  /order/{id}/mark-as-ready-to-pickup
-    defaults: { _controller: HarvestCloudMarketPlaceHubBundle:Order:mark_as_ready_to_pickup }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Hub\OrderController::mark_as_ready_to_pickupAction }
     requirements:
         id: \d+
         _method: POST
 
 Hub_order_release:
     pattern:  /order/{id}/release
-    defaults: { _controller: HarvestCloudMarketPlaceHubBundle:Order:release }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Hub\OrderController::releaseAction }
     requirements:
         id: \d+
         _method: POST
@@ -37,44 +37,44 @@ Hub_order_release:
 
 Hub_window_maker:
     pattern:  /window-maker
-    defaults: { _controller: HarvestCloudMarketPlaceHubBundle:WindowMaker:index }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Hub\WindowMakerController::indexAction }
     requirements:
         _method: GET
 
 Hub_window_maker_create:
     pattern:  /window-maker/new
-    defaults: { _controller: HarvestCloudMarketPlaceHubBundle:WindowMaker:new }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Hub\WindowMakerController::newAction }
     requirements:
         _method: POST
 
 Hub_window_maker_new:
     pattern:  /window-maker/new
-    defaults: { _controller: HarvestCloudMarketPlaceHubBundle:WindowMaker:new }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Hub\WindowMakerController::newAction }
     requirements:
         _method: GET
 
 Hub_window_maker_update:
     pattern:  /window-maker/{id}/edit
-    defaults: { _controller: HarvestCloudMarketPlaceHubBundle:WindowMaker:edit }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Hub\WindowMakerController::editAction }
     requirements:
         _method: POST
 
 Hub_window_maker_edit:
     pattern:  /window-maker/{id}/edit
-    defaults: { _controller: HarvestCloudMarketPlaceHubBundle:WindowMaker:edit }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Hub\WindowMakerController::editAction }
     requirements:
         _method: GET
 
 Hub_window_maker_show:
     pattern:  /window-maker/{id}
-    defaults: { _controller: HarvestCloudMarketPlaceHubBundle:WindowMaker:show }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Hub\WindowMakerController::showAction }
     requirements:
         id: \d+
         _method: GET
 
 Hub_window_maker_make:
     pattern:  /window-maker/{id}/make
-    defaults: { _controller: HarvestCloudMarketPlaceHubBundle:WindowMaker:make }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Hub\WindowMakerController::showAction }
     requirements:
         id: \d+
         _method: POST

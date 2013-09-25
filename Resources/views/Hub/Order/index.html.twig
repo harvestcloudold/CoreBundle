@@ -1,0 +1,22 @@
+{% extends 'HarvestCloudCoreBundle:Hub:layout.html.twig' %}
+
+{% block content %}
+    <h1>Open Orders</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Number</th>
+                <th>Buyer</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+                <tr>
+                  <td>{{ order.id }}</td>
+                  <td>{{ order.buyer.name }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

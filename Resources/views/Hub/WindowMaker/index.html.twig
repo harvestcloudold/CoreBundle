@@ -1,0 +1,71 @@
+{% extends 'HarvestCloudCoreBundle:Hub:layout.html.twig' %}
+
+{% block content %}
+    <h1>My Window Makers</h1>
+
+    <div class="two_equal_columns">
+        <div class="left column">
+            <h3>List View</h3>
+            <table class="standard">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Pickup/Delivery</th>
+                        <th>Days of Week</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for windowMaker in windowMakers %}
+                        <tr>
+                          <td><a href="{{ path('Hub_window_maker_show', { 'id': windowMaker.id }) }}">{{ windowMaker.id }}</a></td>
+                          <td>{{ windowMaker.deliveryType }}</td>
+                          <td>{{ windowMaker.daysOfWeekAsString }}</td>
+                          <td>{{ windowMaker.startTime }}</td>
+                          <td>{{ windowMaker.endTime }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table><!-- .standard -->
+        </div><!-- .left.column -->
+        <div class="right column">
+            <h3>Calendar View</h3>
+            <table class="standard">
+                <thead>
+                    <tr>
+                        <th>Start Time</th>
+                        <th>Mon</th>
+                        <th>Tue</th>
+                        <th>Wed</th>
+                        <th>Thu</th>
+                        <th>Fri</th>
+                        <th>Sat</th>
+                        <th>Sun</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for hour,days in slots %}
+                        <tr>
+                            <td>{{ hour }}</td>
+                            {% for windowMaker in days %}
+                                {% if windowMaker %}
+                                    <td><a href="{{ path('Hub_window_maker_show', { 'id': windowMaker.id }) }}">{{ windowMaker.id }}</a></td>
+                                {%else %}
+                                    <td></td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table><!-- .standard -->
+        </div><!-- .right.column -->
+        <div class="clear"></div>
+    </div><!-- .two_equal_columns -->
+    <div class="clear"></div>
+    <form action="{{ path('Hub_window_maker_new') }}">
+      <div class="form row">
+        <input type="submit" class="submit button" value="Add new Window Maker" />
+      </div><!-- .form.row -->
+    </form>
+{% endblock %}

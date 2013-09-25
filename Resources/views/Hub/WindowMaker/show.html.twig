@@ -1,0 +1,42 @@
+{% extends 'HarvestCloudCoreBundle:Hub:layout.html.twig' %}
+
+{% block content %}
+    <h1>Window Maker #{{ windowMaker.id }}</h1>
+    <div class="two_equal_columns">
+        <div class="left column">
+            <table class="nvp">
+                <tr>
+                    <th>#</th>
+                    <td>{{ windowMaker.id }}</td>
+                </tr>
+                <tr>
+                    <th>Pickup or Delivery</th>
+                    <td>{{ windowMaker.deliveryType }}</td>
+                </tr>
+                <tr>
+                    <th>Days of Week</th>
+                    <td>{{ windowMaker.daysOfWeekAsString }}</td>
+                </tr>
+                <tr>
+                    <th>Start Time</th>
+                    <td>{{ windowMaker.startTime }}</td>
+                </tr>
+                <tr>
+                    <th>End Time Time</th>
+                    <td>{{ windowMaker.endTime }}</td>
+                </tr>
+            </table><!-- .nvp -->
+        </div><!-- .left.column -->
+        <div class="clear"></div>
+        <form action="{{ path('Hub_window_maker_edit', { 'id': windowMaker.id }) }}">
+            <div class="form row">
+                <input type="submit" class="submit button" value="Edit" />
+            </div><!-- .form.row -->
+        </form>
+        <form method="post" action="{{ path('Hub_window_maker_make', { 'id': windowMaker.id }) }}">
+            <div class="form row">
+                <input type="submit" class="submit button" value="Make Windows" />
+            </div><!-- .form.row -->
+        </form>
+    </div><!-- .two_equal_columns -->
+{% endblock %}
