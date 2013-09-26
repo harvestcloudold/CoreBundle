@@ -132,6 +132,14 @@ Buyer_product_show:
         path: ".*"
         id: \d+
 
+
+Buyer_category_show:
+    pattern:  /{path}
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\CategoryController::showAction }
+    requirements:
+        path: ".*"
+
+
 Buyer_browse:
     pattern:  /{path}
     defaults: { _controller: HarvestCloudMarketPlaceBuyerBundle:Default:browse }

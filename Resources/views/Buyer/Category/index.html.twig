@@ -1,0 +1,10 @@
+{% extends 'HarvestCloudCoreBundle:Buyer:layout.html.twig' %}
+
+{% block content %}
+    <h1>Categories</h1>
+    <ul>
+        {% for category in categories %}
+            <li><a href="{{ path('Buyer_category_show', { 'path': category.path }) }}">{{ category.title }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
