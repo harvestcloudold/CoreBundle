@@ -1455,7 +1455,7 @@ class Profile implements Geolocatable
     /**
      * Set costOfGoodsSoldAccount
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-01-30
      *
      * @param HarvestCloud\CoreBundle\Entity\Account $costOfGoodsSoldAccount
@@ -1468,7 +1468,7 @@ class Profile implements Geolocatable
     /**
      * Get costOfGoodsSoldAccount
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-01-30
      *
      * @return HarvestCloud\CoreBundle\Entity\Account
@@ -1481,7 +1481,7 @@ class Profile implements Geolocatable
     /**
      * Set salesAccount
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-01-30
      *
      * @param HarvestCloud\CoreBundle\Entity\Account $salesAccount
@@ -1494,7 +1494,7 @@ class Profile implements Geolocatable
     /**
      * Get salesAccount
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-01-30
      *
      * @return HarvestCloud\CoreBundle\Entity\Account
@@ -1507,7 +1507,7 @@ class Profile implements Geolocatable
     /**
      * Set expenseAccount
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-01-30
      *
      * @param HarvestCloud\CoreBundle\Entity\Account $expenseAccount
@@ -1520,7 +1520,7 @@ class Profile implements Geolocatable
     /**
      * Get expenseAccount
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-01-30
      *
      * @return HarvestCloud\CoreBundle\Entity\Account
@@ -1533,7 +1533,7 @@ class Profile implements Geolocatable
     /**
      * Set accountsReceivableAccount
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-01-30
      *
      * @param HarvestCloud\CoreBundle\Entity\Account $accountsReceivableAccount
@@ -1546,7 +1546,7 @@ class Profile implements Geolocatable
     /**
      * Get accountsReceivableAccount
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-01-30
      *
      * @return HarvestCloud\CoreBundle\Entity\Account
@@ -1559,7 +1559,7 @@ class Profile implements Geolocatable
     /**
      * Set accountsPayableAccount
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-01-30
      *
      * @param HarvestCloud\CoreBundle\Entity\Account $accountsPayableAccount
@@ -1572,7 +1572,7 @@ class Profile implements Geolocatable
     /**
      * Get accountsPayableAccount
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-01-30
      *
      * @return HarvestCloud\CoreBundle\Entity\Account
@@ -1585,7 +1585,7 @@ class Profile implements Geolocatable
     /**
      * Set rootAccount
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-01-30
      *
      * @param HarvestCloud\CoreBundle\Entity\Account $rootAccount
@@ -1598,7 +1598,7 @@ class Profile implements Geolocatable
     /**
      * Get rootAccount
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-01-30
      *
      * @return HarvestCloud\CoreBundle\Entity\Account
@@ -1611,7 +1611,7 @@ class Profile implements Geolocatable
     /**
      * Set purchasesAccount
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-02-09
      *
      * @param  \HarvestCloud\CoreBundle\Entity\Account $purchasesAccount
@@ -1628,7 +1628,7 @@ class Profile implements Geolocatable
     /**
      * Get purchasesAccount
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-02-09
      *
      * @return \HarvestCloud\CoreBundle\Entity\Account
@@ -1641,7 +1641,7 @@ class Profile implements Geolocatable
     /**
      * Set arPrePaymentAccount
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-02-09
      *
      * @param \HarvestCloud\CoreBundle\Entity\Account $arPrePaymentAccount
@@ -1658,7 +1658,7 @@ class Profile implements Geolocatable
     /**
      * Get arPrePaymentAccount
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-02-09
      *
      * @return \HarvestCloud\CoreBundle\Entity\Account
@@ -1671,7 +1671,7 @@ class Profile implements Geolocatable
     /**
      * Set apPrePaymentAccount
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-02-09
      *
      * @param  \HarvestCloud\CoreBundle\Entity\Account $apPrePaymentAccount
@@ -1688,7 +1688,7 @@ class Profile implements Geolocatable
     /**
      * Get apPrePaymentAccount
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-02-09
      *
      * @return \HarvestCloud\CoreBundle\Entity\Account
@@ -1701,7 +1701,7 @@ class Profile implements Geolocatable
     /**
      * Set payPalAccount
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-02-09
      *
      * @param  \HarvestCloud\CoreBundle\Entity\Account $payPalAccount
@@ -1718,7 +1718,7 @@ class Profile implements Geolocatable
     /**
      * Get payPalAccount
      *
-     * @author Tom Haskins-Vaughan <tomhv@janeiredale.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-02-09
      *
      * @return \HarvestCloud\CoreBundle\Entity\Account
