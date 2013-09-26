@@ -2,9 +2,20 @@
 
 {% block content %}
     <h1>Categories</h1>
-    <ul>
-        {% for category in categories %}
-            <li><a href="{{ path('Buyer_category_show', { 'path': category.path }) }}">{{ category.title }}</a></li>
-        {% endfor %}
-    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Number of products</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for category in categories %}
+                <tr>
+                    <td><a href="{{ path('Buyer_category_show', { 'path': category.path }) }}">{{ category.title }}</a></td>
+                    <td>{{ category.numProducts }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

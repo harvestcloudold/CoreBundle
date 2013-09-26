@@ -30,10 +30,16 @@ class CategoryController extends Controller
      */
     public function indexAction()
     {
-        $categories = $this->get('doctrine')
-            ->getRepository('HarvestCloudCoreBundle:Category')
-            ->findAll()
+        $q  = $this->get('doctrine')
+            ->getManager()
+            ->createQuery('
+                SELECT c
+                FROM HarvestCloudCoreBundle:Category c
+                JOIN c.products p
+            ')
         ;
+
+        $categories = $q->getResult();
 
         return $this->render('HarvestCloudCoreBundle:Buyer/Category:index.html.twig', array(
             'categories' => $categories,

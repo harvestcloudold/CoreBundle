@@ -351,6 +351,19 @@ class Category
     }
 
     /**
+     * getNumProducts()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-09-26
+     *
+     * @return int
+     */
+    public function getNumProducts()
+    {
+        return count($this->getProducts());
+    }
+
+    /**
      * Set slug
      *
      * @param string $slug
