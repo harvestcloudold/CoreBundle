@@ -48,6 +48,11 @@ class Profile implements Geolocatable
     protected $id;
 
     /**
+     * @ORM\Column(type="string", unique=true, length=50)
+     */
+    protected $slug;
+
+    /**
      * @ORM\Column(type="string", length=50)
      */
     protected $name;
@@ -365,6 +370,48 @@ class Profile implements Geolocatable
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set slug
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-09-27
+     *
+     * @param  string $slug
+     *
+     * @return Profile
+     */
+    public function setSlug($slug)
+    {
+        if (in_array($slug, array(
+            'buy',
+            'buyer',
+            'sell',
+            'seller',
+            'hub',
+            'profile',
+        )))
+        {
+            throw new \Exception('Protected keyword');
+        }
+
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-09-27
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 
     /**
@@ -1742,6 +1789,12 @@ class Profile implements Geolocatable
         {
             // Create set of accounts
             $this->createSetOfAccounts();
+        }
+
+        // Set slug for Profile
+        if (!$this->slug)
+        {
+            $this->setSlug(\Gedmo\Sluggable\Util\Urlizer::urlize($this->getName()));
         }
     }
 
