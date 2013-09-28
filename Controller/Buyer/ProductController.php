@@ -15,6 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use HarvestCloud\CoreBundle\Entity\Product;
+use HarvestCloud\CoreBundle\Entity\Profile;
 use HarvestCloud\CoreBundle\Form\ProductType;
 
 /**
@@ -31,13 +32,27 @@ class ProductController extends Controller
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-04-07
      *
-     * @Route("/{path}/{id}")
-     * @ParamConverter("product", class="HarvestCloudCoreBundle:Product")
+     * @Route("/{slug}/{product_slug}")
+     * @ParamConverter("seller", class="HarvestCloudCoreBundle:Profile")
      *
-     * @param  Product  $product
+     * @param  Profile  $seller
      */
-    public function showAction(Product $product)
+    public function showAction(Profile $seller, $product_slug)
     {
+        $q  = $this->get('doctrine')
+            ->getManager()
+            ->createQuery('
+                SELECT p
+                FROM HarvestCloudCoreBundle:Product p
+                WHERE p.seller = :seller
+                AND p.slug = :product_slug
+            ')
+            ->setParameter('product_slug', $product_slug)
+            ->setParameter('seller', $seller)
+        ;
+
+        $product = $q->getSingleResult();
+
         return $this->render('HarvestCloudCoreBundle:Buyer/Product:show.html.twig', array(
           'product'          => $product,
           'quantity_in_cart' => $this->getCurrentCart()->getQuantity($product),

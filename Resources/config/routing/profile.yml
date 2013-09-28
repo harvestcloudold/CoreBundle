@@ -29,7 +29,14 @@ Profile_show:
     pattern:  /{slug}
     defaults: { _controller: HarvestCloud\CoreBundle\Controller\Profile\DefaultController::showAction }
     requirements:
-        path: ".*"
+        slug: "[a-z0-9-]+"
+
+Profile_product_show:
+    pattern:  /{slug}/{product_slug}
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\ProductController::showAction }
+    requirements:
+        slug: "[a-z0-9-]+"
+        product_slug: "[a-z0-9-]+"
 
 
 

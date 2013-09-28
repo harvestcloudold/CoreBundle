@@ -125,13 +125,6 @@ Buyer_checkout_receipt:
     pattern:  /checkout/thank-you
     defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\CheckoutController::receiptAction }
 
-Buyer_product_show:
-    pattern:  /{path}/{id}
-    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\ProductController::showAction }
-    requirements:
-        path: ".*"
-        id: \d+
-
 
 Buyer_category_show:
     pattern:  /{path}

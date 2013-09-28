@@ -157,9 +157,9 @@ class CartController extends Controller
             return $this->redirect($this->generateUrl($last_route));
         }
 
-        return $this->redirect($this->generateUrl('Buyer_product_show', array(
-            'id'   => $product->getId(),
-            'path' => $product->getCategoryPath(),
+        return $this->redirect($this->generateUrl('Profile_product_show', array(
+            'product_slug' => $product->getSlug(),
+            'slug'         => $product->getSeller()->getSlug(),
         )));
     }
 }

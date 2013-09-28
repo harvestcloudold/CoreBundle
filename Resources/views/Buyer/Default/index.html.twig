@@ -6,9 +6,9 @@
     <div class="tile container">
         {% for product in products %}
             <div class="product tile">
-                <h3><a href="{{ path('Buyer_product_show', { 'id': product.0.id, 'path': product.0.category.path }) }}">{{ product.0.name }}</a></h3>
+                <h3><a href="{{ path('Profile_product_show', { 'product_slug': product.0.slug, 'slug': product.0.seller.slug }) }}">{{ product.0.name }}</a></h3>
                 <div class="product_picture">
-                    <a href="{{ path('Buyer_product_show', { 'id': product.0.id, 'path': product.0.category.path }) }}">
+                    <a href="{{ path('Profile_product_show', { 'product_slug': product.0.slug, 'slug': product.0.seller.slug }) }}">
                         <img src="/images/sandbox/products/{{ product.0.category.slug }}.jpg" alt="{{ product.0.name }}" title="{{ product.0.name }}" /></a>
                 </div><!-- .product_picture -->
                 <div class="seller">
