@@ -102,7 +102,7 @@
                         <li class="context">
                             <h3><a class="level one" href="{{ path('Buyer_homepage') }}">Context Menu</a></h3>
                             <ul>
-                                <li><a href="{{ path('Profile_homepage') }}">Profile</a></li>
+                                <li><a href="{{ path('Profile_show', { 'slug': app.user.currentProfile.slug }) }}">Profile</a></li>
                                 <li><a href="{{ path('Profile_location') }}">Locations</a></li>
                                 <li><a href="{{ path('Profile_account') }}">Accounts</a></li>
                                 <li><a href="{{ path('fos_user_change_password') }}">Change password</a></li>
