@@ -25,19 +25,6 @@ Profile_edit:
     requirements:
         _method: GET
 
-Profile_show:
-    pattern:  /{slug}
-    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Profile\DefaultController::showAction }
-    requirements:
-        slug: "[a-z0-9-]+"
-
-Profile_product_show:
-    pattern:  /{slug}/{product_slug}
-    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\ProductController::showAction }
-    requirements:
-        slug: "[a-z0-9-]+"
-        product_slug: "[a-z0-9-]+"
-
 
 
 
@@ -97,3 +84,19 @@ Profile_location_edit:
     defaults: { _controller: HarvestCloud\CoreBundle\Controller\Profile\LocationController::editAction }
     requirements:
         _method: GET
+
+
+
+# Let's stick these down here to avoid nasty collisions
+Profile_product_show:
+    pattern:  /{slug}/{product_slug}
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\ProductController::showAction }
+    requirements:
+        slug: "[a-z0-9-]+"
+        product_slug: "[a-z0-9-]+"
+
+Profile_show:
+    pattern:  /{slug}
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Profile\DefaultController::showAction }
+    requirements:
+        slug: "[a-z0-9-]+"
