@@ -25,7 +25,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks()
- * @ORM\Table(name="product")
+ * @ORM\Table(name="product",uniqueConstraints={@ORM\UniqueConstraint(name="slug_seller_idx", columns={"slug", "seller_id"})})
  * @ORM\Entity(repositoryClass="HarvestCloud\CoreBundle\Repository\ProductRepository")
  */
 class Product implements Geolocatable
@@ -36,6 +36,11 @@ class Product implements Geolocatable
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    protected $slug;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
@@ -156,6 +161,36 @@ class Product implements Geolocatable
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set slug
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-09-27
+     *
+     * @param  string $slug
+     *
+     * @return Profile
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-09-27
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 
     /**
@@ -359,6 +394,12 @@ class Product implements Geolocatable
         $stockTransaction->setStatusCode(OrderStockTransaction::STATUS_COMPLETE);
 
         $this->addStockTransaction($stockTransaction);
+
+        // Set slug if none has been set
+        if (!$this->slug)
+        {
+            $this->setSlug(\Gedmo\Sluggable\Util\Urlizer::urlize($this->getName()));
+        }
     }
 
     /**
