@@ -17,7 +17,7 @@
             {% for product in category.products %}
                 <tr>
                     <td><a href="{{ path('Buyer_product_show', { 'id': product.id, 'path': category.path }) }}">{{ product.name }}</a></td>
-                    <td>{{ product.seller.name }}</td>
+                    <td><a href="{{ path('Profile_show', { 'slug': product.seller.slug }) }}">{{ product.seller.name }}</a></td>
                     <td class="location">{{ product.location.cityState }}</td>
                     <td class="price">${{ product.price }}</td>
                     <td class="quantity">{{ product.quantityAvailableForCart }} {{ product.unitAvailableForCart }}</td>

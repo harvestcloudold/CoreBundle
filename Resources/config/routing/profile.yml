@@ -1,5 +1,5 @@
 Profile_homepage:
-    pattern:  /
+    pattern:  /profile
     defaults: { _controller: HarvestCloud\CoreBundle\Controller\Profile\DefaultController::indexAction }
 
 
@@ -24,6 +24,12 @@ Profile_edit:
     defaults: { _controller: HarvestCloud\CoreBundle\Controller\Profile\DefaultController::editAction }
     requirements:
         _method: GET
+
+Profile_show:
+    pattern:  /{slug}
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Profile\DefaultController::showAction }
+    requirements:
+        path: ".*"
 
 
 

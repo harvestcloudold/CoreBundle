@@ -12,6 +12,9 @@ namespace HarvestCloud\CoreBundle\Controller\Profile;
 use HarvestCloud\CoreBundle\Controller\Profile\ProfileController as Controller;
 use Symfony\Component\HttpFoundation\Request;
 use HarvestCloud\CoreBundle\Form\ProfileType;
+use HarvestCloud\CoreBundle\Entity\Profile;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * DefaultController
@@ -54,6 +57,24 @@ class DefaultController extends Controller
         return $this->render('HarvestCloudCoreBundle:Profile/Default:edit.html.twig', array(
           'form'    => $form->createView(),
           'profile' => $this->getCurrentProfile(),
+        ));
+    }
+
+    /**
+     * show
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-09-27
+     *
+     * @Route("/{slug}")
+     * @ParamConverter("profile", class="HarvestCloudCoreBundle:Profile")
+     *
+     * @param  Profile $profile
+     */
+    public function showAction(Profile $profile)
+    {
+        return $this->render('HarvestCloudCoreBundle:Profile/Default:show.html.twig', array(
+          'profile' => $profile,
         ));
     }
 }
