@@ -172,6 +172,7 @@ class LoadSellerData extends AbstractFixture implements OrderedFixtureInterface,
         $profile->setName($user->getFullname());
         $profile->setSystemSellerStatus(Profile::STATUS_ENABLED);
         $profile->setSellerStatus(Profile::STATUS_ACTIVE);
+        $profile->setSlug('joseller');
 
         $user->addProfile($profile);
 
