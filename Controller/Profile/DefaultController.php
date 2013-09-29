@@ -43,15 +43,36 @@ class DefaultController extends Controller
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-11-18
      *
+     * @Route("/{slug}/edit")
+     * @ParamConverter("profile", class="HarvestCloudCoreBundle:Profile")
+     *
      * @param  Request $request
+     * @param  Profile $profile
      */
-    public function editAction(Request $request)
+    public function editAction(Request $request, Profile $profile)
     {
+        if ($profile->getId() != $this->getCurrentProfile()->getId())
+        {
+          throw $this->createNotFoundException('Can only edit current profile');
+        }
+
         $form = $this->createForm(new ProfileType(), $this->getCurrentProfile());
 
-        if ($response = $this->processForm($request, $form, 'Profile_homepage'))
+        if ('POST' == $request->getMethod())
         {
-            return $response;
+            $form->bindRequest($request);
+
+            if ($form->isValid())
+            {
+                $em = $this->get('doctrine')->getEntityManager();
+                $em->persist($form->getData());
+                $em->flush();
+
+                return $this->redirect($this->generateUrl(
+                    'Profile_show',
+                    array('slug' => $profile->getSlug()
+                )));
+            }
         }
 
         return $this->render('HarvestCloudCoreBundle:Profile/Default:edit.html.twig', array(

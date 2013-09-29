@@ -6,18 +6,6 @@ Profile_stripe_connect:
 
 
 
-Profile_update:
-    pattern:  /edit
-    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Profile\DefaultController::editAction }
-    requirements:
-        _method: POST
-
-Profile_edit:
-    pattern:  /edit
-    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Profile\DefaultController::editAction }
-    requirements:
-        _method: GET
-
 
 
 
@@ -78,6 +66,18 @@ Profile_location_edit:
     requirements:
         _method: GET
 
+
+Profile_update:
+    pattern:  /{slug}/edit
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Profile\DefaultController::editAction }
+    requirements:
+        _method: POST
+
+Profile_edit:
+    pattern:  /{slug}/edit
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Profile\DefaultController::editAction }
+    requirements:
+        _method: GET
 
 
 # Let's stick these down here to avoid nasty collisions

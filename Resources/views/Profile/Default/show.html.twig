@@ -2,4 +2,11 @@
 
 {% block content %}
     <h1>{{ profile }}</h1>
+    <p>
+        {% if app.user.currentProfile.id == profile.id %}
+            <form method="get" action="{{ path('Profile_edit', { 'slug': profile.slug }) }}">
+                <input type="submit" value="Edit" />
+            </form>
+        {% endif %}
+    </p>
 {% endblock %}

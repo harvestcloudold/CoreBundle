@@ -3,7 +3,7 @@
 
 {% block content %}
     <h1>Edit {{ profile }}</h1>
-    <form action="{{ path('Profile_update') }}" method="post" {{ form_enctype(form) }}>
+    <form action="" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form) }}
         <div class="form row">
             <input type="submit" class="submit button" value="Save" />
