@@ -1,0 +1,25 @@
+{% extends 'HarvestCloudCoreBundle::Profile/layout.html.twig' %}
+
+{% block content %}
+    <h1>My Orders</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Order</th>
+                <th>Buyer</th>
+                <th>Seller</th>
+                <th>Hub</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+                <tr>
+                    <td><a href="{{ path('Profile_order_show', { 'id': order.id }) }}">{{ order.id }}</a></td>
+                    <td><a href="{{ path('Profile_show', { slug: order.buyer.slug }) }}">{{ order.buyer }}</a></td>
+                    <td><a href="{{ path('Profile_show', { slug: order.seller.slug }) }}">{{ order.seller }}</a></td>
+                    <td><a href="{{ path('Profile_show', { slug: order.hub.slug }) }}">{{ order.hub }}</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -67,6 +67,18 @@ Profile_location_edit:
         _method: GET
 
 
+Profile_order:
+    pattern:  /my-orders
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Profile\OrderController::indexAction }
+
+Profile_order_show:
+    pattern:  /{id}
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Profile\OrderController::indexAction }
+    requirements:
+        id: \d+
+
+
+
 Profile_update:
     pattern:  /{slug}/edit
     defaults: { _controller: HarvestCloud\CoreBundle\Controller\Profile\DefaultController::editAction }
