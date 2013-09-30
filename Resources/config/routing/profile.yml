@@ -75,7 +75,7 @@ Profile_order_show:
     pattern:  /{id}
     defaults: { _controller: HarvestCloud\CoreBundle\Controller\Profile\OrderController::indexAction }
     requirements:
-        id: \d+
+        id: "(\d\d\d)+"
 
 
 

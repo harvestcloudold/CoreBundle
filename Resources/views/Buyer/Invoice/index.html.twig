@@ -17,7 +17,7 @@
                 <tr>
                   <td>{{ invoice.postedAt|date('Y-m-d') }}</td>
                   <td><a href="{{ path('Buyer_invoice_show', { 'id': invoice.id }) }}">Invoice #{{ invoice.id }}</a></td>
-                  <td>{{ invoice.order.number }}</td>
+                  <td>{{ invoice.order.numberForHumans }}</td>
                   <td>${{ invoice.amount|number_format(2) }}</td>
                 </tr>
             {% endfor %}

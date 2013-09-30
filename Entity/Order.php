@@ -1385,22 +1385,53 @@ class Order
     }
 
     /**
-     * getNumber()
+     * getNumberForHumans()
      *
-     * Like the id, but longer
+     * The id formatted for ease of human communication
+     *
+     *   * 026
+     *   * 165-026
+     *   * 043-165-026
+     *   * 087-043-165-026
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-03-19
      *
      * @return string
      */
-    public function getNumber()
+    public function getNumberForHumans()
     {
-        // Make 9 chars long
-        $number  = (string) str_pad($this->getId(), 9, '0', STR_PAD_LEFT);
-        $numbers = str_split($number, 3);
-        $number  = implode('-', $numbers);
+        $segments = str_split($this->getNumberForPath(), 3);
+        $number   = implode('-', $segments);
 
         return $number;
+    }
+
+    /**
+     * getNumberForPath()
+     *
+     * Get id in triplets, for example:
+     *
+     *   * 026
+     *   * 165026
+     *   * 043165026
+     *   * 087043165026
+     *
+     * We do this so that we can restrict the number of "reserved" URLs for
+     * orders
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-09-29
+     *
+     * @return string
+     */
+    public function getNumberForPath()
+    {
+        return str_pad(
+            $this->getId(),
+            ceil(strlen($this->getId())/3) * 3,
+            '0',
+            STR_PAD_LEFT
+        );
     }
 }

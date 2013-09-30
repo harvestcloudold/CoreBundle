@@ -14,7 +14,7 @@
         <tbody>
             {% for order in orders %}
                 <tr>
-                    <td><a href="{{ path('Profile_order_show', { 'id': order.id }) }}">{{ order.id }}</a></td>
+                    <td><a href="{{ path('Profile_order_show', { 'id': order.numberForPath }) }}">{{ order.numberForHumans }}</a></td>
                     <td><a href="{{ path('Profile_show', { slug: order.buyer.slug }) }}">{{ order.buyer }}</a></td>
                     <td><a href="{{ path('Profile_show', { slug: order.seller.slug }) }}">{{ order.seller }}</a></td>
                     <td><a href="{{ path('Profile_show', { slug: order.hub.slug }) }}">{{ order.hub }}</a></td>
