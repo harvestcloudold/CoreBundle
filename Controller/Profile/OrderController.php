@@ -50,4 +50,35 @@ class OrderController extends Controller
             'orders'  => $orders,
         ));
     }
+
+    /**
+     * show
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-09-29
+     *
+     * @param  string $id
+     */
+    public function showAction($id)
+    {
+        $q  = $this->get('doctrine')
+            ->getManager()
+            ->createQuery('
+                SELECT    o
+                FROM      HarvestCloudCoreBundle:Order o
+                LEFT JOIN o.buyer b
+                LEFT JOIN o.seller s
+                LEFT JOIN o.hub h
+                WHERE     o.id = :id
+            ')
+            ->setParameter('id', $id)
+        ;
+
+        $order = $q->getOneOrNullResult();
+
+        return $this->render('HarvestCloudCoreBundle:Profile/Order:show.html.twig', array(
+            'profile' => $this->getCurrentProfile(),
+            'order'   => $order,
+        ));
+    }
 }

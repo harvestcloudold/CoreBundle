@@ -28,9 +28,20 @@ table th
     text-align: left;
 }
 
+.actions
+{
+  margin: 1em 0;
+}
+
 .actions form
 {
     float: left;
+    margin-left: 1em;
+}
+
+.actions form:nth-of-type(1)
+{
+  margin-left: 0;
 }
 
 table.standard tr:nth-of-type(odd) td {
