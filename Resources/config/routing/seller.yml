@@ -18,10 +18,6 @@ Seller_register_landing:
     defaults: { _controller: HarvestCloud\CoreBundle\Controller\Seller\RegisterController::landingAction }
 
 
-Seller_order:
-    pattern:  /orders
-    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Seller\OrderController::indexAction }
-
 
 Seller_hub_add:
     pattern:  /hub/{id}/add

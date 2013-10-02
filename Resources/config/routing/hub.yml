@@ -8,11 +8,6 @@ Hub_register_landing:
     defaults: { _controller: HarvestCloud\CoreBundle\Controller\Hub\RegisterController::landingAction }
 
 
-Hub_order:
-    pattern:  /orders
-    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Hub\OrderController::indexAction }
-
-
 
 Hub_window_maker:
     pattern:  /window-maker

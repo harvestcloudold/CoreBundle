@@ -25,15 +25,6 @@ Buyer_cart_show:
     defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\CartController::showAction }
 
 
-Buyer_order:
-    pattern:  /order
-    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\OrderController::indexAction }
-
-Buyer_order_show:
-    pattern:  /order/{id}
-    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\OrderController::showAction }
-
-
 Buyer_invoice:
     pattern:  /invoice
     defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\InvoiceController::indexAction }
