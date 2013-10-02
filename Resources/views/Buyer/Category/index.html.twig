@@ -5,9 +5,14 @@
 
     <div class="category_panels panels">
         {% for category in categories %}
-          <p class="panel">
-              <a href="{{ path('Buyer_category_show', { 'path': category.path }) }}" title="{{ category.title }}"><img src="/images/sandbox/products/{{ category.slug }}.jpg" alt="{{ category.title }}" /></a>
-          </p><!-- .panel -->
+          <div class="panel">
+              <p class="image">
+                  <a href="{{ path('Buyer_category_show', { 'path': category.path }) }}" title="{{ category.title }}"><img src="/images/sandbox/products/{{ category.slug }}.jpg" alt="{{ category.title }}" /></a>
+              </p><!-- .image -->
+              <p class="label">
+                  <span><a href="{{ path('Buyer_category_show', { 'path': category.path }) }}">{{ category.title }}</a></span>
+              </p><!-- .label -->
+          </div><!-- .panel -->
         {% endfor %}
         <div class="clear"></div>
     </div><!-- .category_panels.panels -->
