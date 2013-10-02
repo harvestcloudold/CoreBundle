@@ -58,48 +58,4 @@ class OrderController extends Controller
           'order' => $order,
         ));
     }
-
-    /**
-     * cancel
-     *
-     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
-     * @since  2012-05-14
-     *
-     * @Route("/order/{id}/cancel")
-     * @ParamConverter("order", class="HarvestCloudCoreBundle:Order")
-     *
-     * @param  Order  $order
-     */
-    public function cancelAction(Order $order)
-    {
-        $order->cancelByBuyer();
-
-        $em = $this->getDoctrine()->getEntityManager();
-        $em->persist($order);
-        $em->flush();
-
-        return $this->redirect($this->generateUrl('Buyer_order'));
-    }
-
-    /**
-     * rate
-     *
-     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
-     * @since  2012-05-28
-     *
-     * @Route("/order/{id}/rate/{rating}")
-     * @ParamConverter("order", class="HarvestCloudCoreBundle:Order")
-     *
-     * @param  Order  $order
-     */
-    public function rateAction(Order $order, $rating)
-    {
-        $order->rate($rating);
-
-        $em = $this->getDoctrine()->getEntityManager();
-        $em->persist($order);
-        $em->flush();
-
-        return $this->redirect($this->generateUrl('Buyer_order'));
-    }
 }

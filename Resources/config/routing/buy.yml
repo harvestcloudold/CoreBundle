@@ -33,21 +33,6 @@ Buyer_order_show:
     pattern:  /order/{id}
     defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\OrderController::showAction }
 
-Buyer_order_cancel:
-    pattern:  /order/{id}/cancel
-    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\OrderController::cancelAction }
-    requirements:
-        id: \d+
-        _method: POST
-
-Buyer_order_rate:
-    pattern:  /order/{id}/rate/{rating}
-    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\OrderController::rateAction }
-    requirements:
-        id: \d+
-        rating: '[1-5]'
-        _method: POST
-
 
 Buyer_invoice:
     pattern:  /invoice

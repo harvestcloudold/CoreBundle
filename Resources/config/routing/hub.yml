@@ -12,27 +12,6 @@ Hub_order:
     pattern:  /orders
     defaults: { _controller: HarvestCloud\CoreBundle\Controller\Hub\OrderController::indexAction }
 
-Hub_order_receive:
-    pattern:  /order/{id}/receive
-    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Hub\OrderController::receiveAction }
-    requirements:
-        id: \d+
-        _method: POST
-
-Hub_order_mark_as_ready_to_pickup:
-    pattern:  /order/{id}/mark-as-ready-to-pickup
-    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Hub\OrderController::mark_as_ready_to_pickupAction }
-    requirements:
-        id: \d+
-        _method: POST
-
-Hub_order_release:
-    pattern:  /order/{id}/release
-    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Hub\OrderController::releaseAction }
-    requirements:
-        id: \d+
-        _method: POST
-
 
 
 Hub_window_maker:

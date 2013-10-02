@@ -7,3 +7,74 @@ Order_show:
     defaults: { _controller: HarvestCloud\CoreBundle\Controller\Order\DefaultController::showAction }
     requirements:
         id: "(\d\d\d)+"
+
+Order_accept:
+    pattern:  /{id}/accept
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Order\DefaultController::acceptAction }
+    requirements:
+        id: "(\d\d\d)+"
+        _method: POST
+
+Order_reject:
+    pattern:  /{id}/reject
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Order\DefaultController::rejectAction }
+    requirements:
+        id: "(\d\d\d)+"
+        _method: POST
+
+Order_pick:
+    pattern:  /{id}/pick
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Order\DefaultController::pickAction }
+    requirements:
+        id: "(\d\d\d)+"
+        _method: POST
+
+Order_mark_ready_for_dispatch:
+    pattern:  /{id}/mark-ready-for-dispatch
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Order\DefaultController::mark_ready_for_dispatchAction }
+    requirements:
+        id: "(\d\d\d)+"
+        _method: POST
+
+Order_dispatch:
+    pattern:  /{id}/dispatch
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Order\DefaultController::dispatchAction }
+    requirements:
+        id: "(\d\d\d)+"
+        _method: POST
+
+Order_cancel:
+    pattern:  /{id}/cancel
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Order\DefaultController::cancelAction }
+    requirements:
+        id: "(\d\d\d)+"
+        _method: POST
+
+Order_rate:
+    pattern:  /{id}/rate/{rating}
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Order\DefaultController::rateAction }
+    requirements:
+        id: "(\d\d\d)+"
+        rating: '[1-5]'
+        _method: POST
+
+Order_receive:
+    pattern:  /{id}/receive
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Order\DefaultController::receiveAction }
+    requirements:
+        id: "(\d\d\d)+"
+        _method: POST
+
+Order_mark_as_ready_to_pickup:
+    pattern:  /{id}/mark-as-ready-to-pickup
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Order\DefaultController::mark_as_ready_to_pickupAction }
+    requirements:
+        id: "(\d\d\d)+"
+        _method: POST
+
+Order_release:
+    pattern:  /{id}/release
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Order\DefaultController::releaseAction }
+    requirements:
+        id: "(\d\d\d)+"
+        _method: POST
