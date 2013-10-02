@@ -8,7 +8,8 @@
         <link href="{{ asset('bundles/harvestcloudcore/css/styles.css') }}" type="text/css" rel="stylesheet" />
         <link href="{{ asset('bundles/harvestcloudcore/css/layout.css') }}" type="text/css" rel="stylesheet" />
         <link href="{{ asset('bundles/harvestcloudcore/css/colors.css') }}" type="text/css" rel="stylesheet" />
-        <link href="{{ asset('bundles/harvestcloudcore/css/tiles.css') }}" type="text/css" rel="stylesheet" />
+        <link href="{{ asset('bundles/harvestcloudcore/css/panels.css') }}" type="text/css" rel="stylesheet" />
+        <link href="{{ asset('bundles/harvestcloudcore/css/category_panels.css') }}" type="text/css" rel="stylesheet" />
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         {% block map_js %}
@@ -37,7 +38,7 @@
                             <a href="{{ path('_welcome') }}"><span>Harvest Cloud</span></a>
                         </div><!-- .main_logo -->
                         <div class="main nav">
-                            <a class="buy" href="{{ path('Buyer_homepage') }}">Buy</a>
+                            <a class="buy" href="{{ path('_welcome') }}">Buy</a>
                             <a class="sell" href="{{ path('Seller_homepage') }}">Sell</a>
                             <a class="hub" href="{{ path('Hub_homepage') }}">Hub</a>
                             <a class="cart" href="{{ path('Buyer_cart_show') }}" class="cart"><span class="hide_sub_tablet_portrait">Cart: </span>{% render "HarvestCloudCoreBundle:Buyer/Cart:sub_total" %}</a>

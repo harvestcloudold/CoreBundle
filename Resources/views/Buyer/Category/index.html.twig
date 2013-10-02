@@ -2,20 +2,13 @@
 
 {% block content %}
     <h1>Categories</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Category</th>
-                <th>Number of products</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for category in categories %}
-                <tr>
-                    <td><a href="{{ path('Buyer_category_show', { 'path': category.path }) }}">{{ category.title }}</a></td>
-                    <td>{{ category.numProducts }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+
+    <div class="category_panels panels">
+        {% for category in categories %}
+          <p class="panel">
+              <a href="{{ path('Buyer_category_show', { 'path': category.path }) }}" title="{{ category.title }}"><img src="/images/sandbox/products/{{ category.slug }}.jpg" alt="{{ category.title }}" /></a>
+          </p><!-- .panel -->
+        {% endfor %}
+        <div class="clear"></div>
+    </div><!-- .category_panels.panels -->
 {% endblock %}

@@ -1,0 +1,58 @@
+/******************************************************************************
+
+category panels
+
+@see panels.css
+
+******************************************************************************/
+
+.category_panels .panel
+{
+    display: block;
+    float: left;
+    width: 19%;
+    margin: 0 0 1.25% 1.25%;
+}
+
+.category_panels .panel:nth-of-type(5n+1)
+{
+    margin-left: 0;
+}
+
+@media only screen and (max-width: 480px)
+{
+    .category_panels .panel:nth-of-type(5n+1),
+    .category_panels .panel
+    {
+        width: 22.75%;
+        margin-left: 3%;
+        margin-bottom: 3%;
+    }
+
+    .category_panels .panel:nth-of-type(4n+1)
+    {
+        margin-left: 0;
+    }
+}
+
+@media only screen and (max-width: 360px)
+{
+    .category_panels .panel:nth-of-type(5n+1),
+    .category_panels .panel:nth-of-type(4n+1),
+    .category_panels .panel
+    {
+        width: 31%;
+        margin-left: 3.5%;
+        margin-bottom: 3.5%;
+    }
+
+    .category_panels .panel:nth-of-type(3n+1)
+    {
+        margin-left: 0;
+    }
+}
+
+.category_panels .panel img
+{
+    width: 100%;
+}
