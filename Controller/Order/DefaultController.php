@@ -7,17 +7,17 @@
  * file that was distributed with this source code.
  */
 
-namespace HarvestCloud\CoreBundle\Controller\Profile;
+namespace HarvestCloud\CoreBundle\Controller\Order;
 
-use HarvestCloud\CoreBundle\Controller\Profile\ProfileController as Controller;
+use HarvestCloud\CoreBundle\Controller\Order\OrderController as Controller;
 
 /**
- * OrderController
+ * DefaultController
  *
  * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
- * @since  2013-09-29
+ * @since  2013-09-30
  */
-class OrderController extends Controller
+class DefaultController extends Controller
 {
     /**
      * index
@@ -45,7 +45,7 @@ class OrderController extends Controller
 
         $orders = $q->getResult();
 
-        return $this->render('HarvestCloudCoreBundle:Profile/Order:index.html.twig', array(
+        return $this->render('HarvestCloudCoreBundle:Order/Default:index.html.twig', array(
             'profile' => $this->getCurrentProfile(),
             'orders'  => $orders,
         ));
@@ -76,7 +76,7 @@ class OrderController extends Controller
 
         $order = $q->getOneOrNullResult();
 
-        return $this->render('HarvestCloudCoreBundle:Profile/Order:show.html.twig', array(
+        return $this->render('HarvestCloudCoreBundle:Order/Default:show.html.twig', array(
             'profile' => $this->getCurrentProfile(),
             'order'   => $order,
         ));

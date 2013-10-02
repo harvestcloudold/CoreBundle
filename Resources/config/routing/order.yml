@@ -1,0 +1,9 @@
+Order_homepage:
+    pattern:  /my-orders
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Order\DefaultController::indexAction }
+
+Order_show:
+    pattern:  /{id}
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Order\DefaultController::showAction }
+    requirements:
+        id: "(\d\d\d)+"

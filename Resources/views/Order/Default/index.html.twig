@@ -1,4 +1,4 @@
-{% extends 'HarvestCloudCoreBundle::Profile/layout.html.twig' %}
+{% extends 'HarvestCloudCoreBundle::Order/layout.html.twig' %}
 
 {% block content %}
     <h1>My Orders</h1>
@@ -14,7 +14,7 @@
         <tbody>
             {% for order in orders %}
                 <tr>
-                    <td><a href="{{ path('Profile_order_show', { 'id': order.numberForPath }) }}">{{ order.numberForHumans }}</a></td>
+                    <td><a href="{{ path('Order_show', { 'id': order.numberForPath }) }}">{{ order.numberForHumans }}</a></td>
                     <td><a href="{{ path('Profile_show', { slug: order.buyer.slug }) }}">{{ order.buyer }}</a></td>
                     <td><a href="{{ path('Profile_show', { slug: order.seller.slug }) }}">{{ order.seller }}</a></td>
                     <td><a href="{{ path('Profile_show', { slug: order.hub.slug }) }}">{{ order.hub }}</a></td>
