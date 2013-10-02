@@ -79,7 +79,6 @@
                             <h3><a class="level one" href="{{ path('Seller_homepage') }}">Sell</a></h3>
                             {% if app.user.currentProfile.hasActiveSellerStatus %}
                                 <ul>
-                                    <li><a href="{{ path('Seller_order') }}">Orders</a></li>
                                     <li><a href="{{ path('Seller_product') }}">Products</a></li>
                                     <li><a href="{{ path('Seller_seller_window') }}">Seller Windows</a></li>
                                     <li><a href="{{ path('Seller_window_maker') }}">Recurring Seller Windows</a></li>
@@ -91,7 +90,6 @@
                             <h3><a class="level one" href="{{ path('Hub_homepage') }}">Hub</a></h3>
                             {% if app.user.currentProfile.hasActiveHubStatus %}
                                 <ul>
-                                    <li><a href="{{ path('Hub_order') }}">Open orders</a></li>
                                     <li><a href="{{ path('Hub_window_maker') }}">Recurring Hub Windows</a></li>
                                 </ul>
                             {% endif %}
