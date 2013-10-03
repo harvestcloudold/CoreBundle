@@ -9,4 +9,27 @@
             </form>
         {% endif %}
     </p>
+    {% if products %}
+        <h4>Currently for sale</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Location</th>
+                    <th>Price</th>
+                    <th>Quantity Available</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td><a href="{{ path('Profile_product_show', { 'product_slug': product.slug, 'slug': product.seller.slug }) }}">{{ product.name }}</a></td>
+                        <td class="location">{{ product.location.cityState }}</td>
+                        <td class="price">${{ product.price }}</td>
+                        <td class="quantity">{{ product.quantityAvailableForCart }} {{ product.unitAvailableForCart }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
 {% endblock %}

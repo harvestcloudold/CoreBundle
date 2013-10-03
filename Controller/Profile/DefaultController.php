@@ -94,8 +94,21 @@ class DefaultController extends Controller
      */
     public function showAction(Profile $profile)
     {
+        $q  = $this->get('doctrine')
+            ->getManager()
+            ->createQuery('
+                SELECT p
+                FROM   HarvestCloudCoreBundle:Product p
+                WHERE  p.seller = :seller
+            ')
+            ->setParameter('seller', $profile)
+        ;
+
+        $products = $q->getResult();
+
         return $this->render('HarvestCloudCoreBundle:Profile/Default:show.html.twig', array(
-          'profile' => $profile,
+          'profile'  => $profile,
+          'products' => $products,
         ));
     }
 }
