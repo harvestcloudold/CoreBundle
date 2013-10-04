@@ -50,6 +50,8 @@ class LoadHubData extends AbstractFixture implements OrderedFixtureInterface, Fi
      */
     public function load(ObjectManager $manager)
     {
+        $geocoder = new \HarvestCloud\GeoBundle\Util\GoogleGeocoder();
+
         $user = new User();
         $user->setEmail('sam.hub@example.com');
         $user->setFirstname('Sam');
@@ -77,7 +79,6 @@ class LoadHubData extends AbstractFixture implements OrderedFixtureInterface, Fi
         $location->setStateCode('MA');
         $location->setPostalCode('01230');
 
-        $geocoder = new \HarvestCloud\GeoBundle\Util\GoogleGeocoder();
         $geocoder->geocode($location);
 
         $profile->addLocation($location);
@@ -115,7 +116,6 @@ class LoadHubData extends AbstractFixture implements OrderedFixtureInterface, Fi
         $location->setStateCode('MA');
         $location->setPostalCode('01262');
 
-        $geocoder = new \HarvestCloud\GeoBundle\Util\GoogleGeocoder();
         $geocoder->geocode($location);
 
         $profile->addLocation($location);
@@ -153,7 +153,6 @@ class LoadHubData extends AbstractFixture implements OrderedFixtureInterface, Fi
         $location->setStateCode('MA');
         $location->setPostalCode('01240');
 
-        $geocoder = new \HarvestCloud\GeoBundle\Util\GoogleGeocoder();
         $geocoder->geocode($location);
 
         $profile->addLocation($location);

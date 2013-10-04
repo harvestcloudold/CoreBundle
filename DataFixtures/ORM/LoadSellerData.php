@@ -50,6 +50,8 @@ class LoadSellerData extends AbstractFixture implements OrderedFixtureInterface,
      */
     public function load(ObjectManager $manager)
     {
+        $geocoder = new \HarvestCloud\GeoBundle\Util\GoogleGeocoder();
+
         $user = new User();
         $user->setEmail('jon.seller@example.com');
         $user->setFirstname('Jon');
@@ -76,6 +78,8 @@ class LoadSellerData extends AbstractFixture implements OrderedFixtureInterface,
         $location->setTown('Lee');
         $location->setStateCode('MA');
         $location->setPostalCode('01238');
+
+        $geocoder->geocode($location);
 
         $profile->addLocation($location);
 
@@ -112,6 +116,8 @@ class LoadSellerData extends AbstractFixture implements OrderedFixtureInterface,
         $location->setStateCode('MA');
         $location->setPostalCode('01230');
 
+        $geocoder->geocode($location);
+
         $profile->addLocation($location);
 
         $manager->persist($user);
@@ -146,6 +152,8 @@ class LoadSellerData extends AbstractFixture implements OrderedFixtureInterface,
         $location->setTown('Lenox');
         $location->setStateCode('MA');
         $location->setPostalCode('01240');
+
+        $geocoder->geocode($location);
 
         $profile->addLocation($location);
 
@@ -183,6 +191,8 @@ class LoadSellerData extends AbstractFixture implements OrderedFixtureInterface,
         $location->setStateCode('MA');
         $location->setPostalCode('01240');
 
+        $geocoder->geocode($location);
+
         $profile->addLocation($location);
 
         $manager->persist($user);
@@ -218,6 +228,8 @@ class LoadSellerData extends AbstractFixture implements OrderedFixtureInterface,
         $location->setStateCode('MA');
         $location->setPostalCode('01240');
 
+        $geocoder->geocode($location);
+
         $profile->addLocation($location);
 
         $manager->persist($user);
@@ -252,6 +264,8 @@ class LoadSellerData extends AbstractFixture implements OrderedFixtureInterface,
         $location->setTown('Lee');
         $location->setStateCode('MA');
         $location->setPostalCode('01238');
+
+        $geocoder->geocode($location);
 
         $profile->addLocation($location);
 

@@ -50,6 +50,8 @@ class LoadBuyerData extends AbstractFixture implements OrderedFixtureInterface, 
      */
     public function load(ObjectManager $manager)
     {
+        $geocoder = new \HarvestCloud\GeoBundle\Util\GoogleGeocoder();
+
         $buyer = new User();
         $buyer->setEmail('harvest.cloud@example.com');
         $buyer->setFirstname('Harvest');
@@ -68,6 +70,8 @@ class LoadBuyerData extends AbstractFixture implements OrderedFixtureInterface, 
         $location->setTown('Great Barrington');
         $location->setStateCode('MA');
         $location->setPostalCode('01230');
+
+        $geocoder->geocode($location);
 
         $buyerProfile->addLocation($location);
 
@@ -105,6 +109,8 @@ class LoadBuyerData extends AbstractFixture implements OrderedFixtureInterface, 
         $location->setStateCode('MA');
         $location->setPostalCode('01230');
 
+        $geocoder->geocode($location);
+
         $buyerProfile->addLocation($location);
 
         $manager->persist($buyer);
@@ -136,6 +142,8 @@ class LoadBuyerData extends AbstractFixture implements OrderedFixtureInterface, 
         $location->setStateCode('MA');
         $location->setPostalCode('01257');
 
+        $geocoder->geocode($location);
+
         $buyerProfile->addLocation($location);
 
         $manager->persist($buyer);
@@ -166,6 +174,8 @@ class LoadBuyerData extends AbstractFixture implements OrderedFixtureInterface, 
         $location->setTown('Lee');
         $location->setStateCode('MA');
         $location->setPostalCode('01238');
+
+        $geocoder->geocode($location);
 
         $buyerProfile->addLocation($location);
 
