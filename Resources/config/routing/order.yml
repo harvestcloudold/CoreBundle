@@ -78,3 +78,7 @@ Order_release:
     requirements:
         id: "(\d\d\d)+"
         _method: POST
+
+Order_Dashboard_open_as_buyer:
+    pattern:  /order/buyer/open
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Order\DashboardController::open_as_buyerAction }

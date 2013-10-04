@@ -1,0 +1,21 @@
+<div class="buyer order table widget">
+    <h3>Stuff I'm buying</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Seller</th>
+                <th>Hub</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+                <tr>
+                    <td><a href="{{ path('Order_show', { 'id': order.numberForPath }) }}">{{ order.numberForHumans }}</a></td>
+                    <td><a href="{{ path('Profile_show', { slug: order.seller.slug }) }}">{{ order.seller }}</a></td>
+                    <td><a href="{{ path('Profile_show', { slug: order.hub.slug }) }}">{{ order.hub }}</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div><!-- .buyer.order.table.widget -->

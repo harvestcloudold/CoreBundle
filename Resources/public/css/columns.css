@@ -1,0 +1,15 @@
+.column
+{
+    float: left;
+}
+
+.three_equal_columns .column
+{
+    width: 31.5%;
+    margin-left: 2.75%;
+}
+
+.three_equal_columns .column:nth-of-type(1)
+{
+    margin-left: 0%;
+}

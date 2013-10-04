@@ -1,0 +1,11 @@
+{% extends 'HarvestCloudCoreBundle::Dashboard/layout.html.twig' %}
+
+{% block content %}
+    <h1>Dashboard</h1>
+    <div class="three_equal_columns">
+        <div class="column">
+            {% render url('Order_Dashboard_open_as_buyer') %}
+        </div><!-- .column -->
+        <div class="clear"></div>
+    </div><!-- .three_equal_columns -->
+{% endblock %}
