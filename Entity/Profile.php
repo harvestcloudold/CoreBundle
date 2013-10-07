@@ -321,6 +321,11 @@ class Profile implements Geolocatable
     protected $savedCreditCards;
 
     /**
+     * @ORM\OneToMany(targetEntity="ProductSubscription", mappedBy="buyer")
+     */
+    protected $productSubscriptionsAsBuyer;
+
+    /**
      * __construct()
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
@@ -328,22 +333,23 @@ class Profile implements Geolocatable
      */
     public function __construct()
     {
-        $this->usersAsDefaultProfile   = new ArrayCollection();
-        $this->users                   = new ArrayCollection();
-        $this->locations               = new ArrayCollection();
-        $this->buyerHubRefsAsBuyer     = new ArrayCollection();
-        $this->buyerHubRefsAsHub       = new ArrayCollection();
-        $this->sellerHubRefsAsSeller   = new ArrayCollection();
-        $this->sellerHubRefsAsHub      = new ArrayCollection();
-        $this->ordersAsBuyer           = new ArrayCollection();
-        $this->ordersAsSeller          = new ArrayCollection();
-        $this->ordersAsHub             = new ArrayCollection();
-        $this->orderCollectionsAsBuyer = new ArrayCollection();
-        $this->productsAsSeller        = new ArrayCollection();
-        $this->accounts                = new ArrayCollection();
-        $this->hubWindows              = new ArrayCollection();
-        $this->hubFeeInvoicesAsHub     = new ArrayCollection();
-        $this->hubFeeInvoicesAsSeller  = new ArrayCollection();
+        $this->usersAsDefaultProfile       = new ArrayCollection();
+        $this->users                       = new ArrayCollection();
+        $this->locations                   = new ArrayCollection();
+        $this->buyerHubRefsAsBuyer         = new ArrayCollection();
+        $this->buyerHubRefsAsHub           = new ArrayCollection();
+        $this->sellerHubRefsAsSeller       = new ArrayCollection();
+        $this->sellerHubRefsAsHub          = new ArrayCollection();
+        $this->ordersAsBuyer               = new ArrayCollection();
+        $this->ordersAsSeller              = new ArrayCollection();
+        $this->ordersAsHub                 = new ArrayCollection();
+        $this->orderCollectionsAsBuyer     = new ArrayCollection();
+        $this->productsAsSeller            = new ArrayCollection();
+        $this->accounts                    = new ArrayCollection();
+        $this->hubWindows                  = new ArrayCollection();
+        $this->hubFeeInvoicesAsHub         = new ArrayCollection();
+        $this->hubFeeInvoicesAsSeller      = new ArrayCollection();
+        $this->productSubscriptionsAsBuyer = new ArrayCollection();
     }
 
     /**
@@ -2118,5 +2124,48 @@ class Profile implements Geolocatable
     public function getActiveSavedCreditCards()
     {
         return $this->savedCreditCards;
+    }
+
+    /**
+     * Add productSubscriptionsAsBuyer
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-10-06
+     *
+     * @param  \HarvestCloud\CoreBundle\Entity\ProductSubscription $productSubscriptionsAsBuyer
+     *
+     * @return Profile
+     */
+    public function addProductSubscriptionsAsBuyer(\HarvestCloud\CoreBundle\Entity\ProductSubscription $productSubscription)
+    {
+        $this->productSubscriptionsAsBuyer[] = $productSubscription;
+
+        return $this;
+    }
+
+    /**
+     * Remove productSubscriptionsAsBuyer
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-10-06
+     *
+     * @param  \HarvestCloud\CoreBundle\Entity\ProductSubscription $productSubscription
+     */
+    public function removeProductSubscriptionsAsBuyer(\HarvestCloud\CoreBundle\Entity\ProductSubscription $productSubscription)
+    {
+        $this->productSubscriptionsAsBuyer->removeElement($productSubscription);
+    }
+
+    /**
+     * Get productSubscriptionsAsBuyer
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-10-06
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProductSubscriptionsAsBuyer()
+    {
+        return $this->productSubscriptionsAsBuyer;
     }
 }

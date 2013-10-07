@@ -139,6 +139,11 @@ class Product implements Geolocatable
     protected $quantity_in_cart = 0;
 
     /**
+     * @ORM\OneToMany(targetEntity="ProductSubscription", mappedBy="product")
+     */
+    protected $subscriptions;
+
+    /**
      * __construct()
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
@@ -148,6 +153,7 @@ class Product implements Geolocatable
     {
         $this->orderLineItems    = new ArrayCollection();
         $this->stockTransactions = new ArrayCollection();
+        $this->subscriptions     = new ArrayCollection();
     }
 
     /**
@@ -794,5 +800,48 @@ class Product implements Geolocatable
     public function getQuantityAvailableForCart()
     {
         return $this->getQuantityAvailable() - $this->getQuantityInCart();
+    }
+
+    /**
+     * Add subscription
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-10-06
+     *
+     * @param  \HarvestCloud\CoreBundle\Entity\ProductSubscription $subscription
+     *
+     * @return Product
+     */
+    public function addSubscription(\HarvestCloud\CoreBundle\Entity\ProductSubscription $subscription)
+    {
+        $this->subscriptions[] = $subscription;
+
+        return $this;
+    }
+
+    /**
+     * Remove subscription
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-10-06
+     *
+     * @param \HarvestCloud\CoreBundle\Entity\ProductSubscription $subscription
+     */
+    public function removeSubscription(\HarvestCloud\CoreBundle\Entity\ProductSubscription $subscription)
+    {
+        $this->subscriptions->removeElement($subscription);
+    }
+
+    /**
+     * Get subscriptions
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-10-06
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSubscriptions()
+    {
+        return $this->subscriptions;
     }
 }
