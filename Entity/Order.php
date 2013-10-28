@@ -426,6 +426,45 @@ class Order
     }
 
     /**
+     * updateProductQuantity()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-10-26
+     *
+     * @param  Product  $product
+     * @param  int      $quantity
+     *
+     * @return LineItem
+     */
+    public function updateProductQuantity(Product $product, $quantity)
+    {
+        $lineItem = $this->getLineItemForProduct($product);
+
+        // Check if there is enough product available
+        if ($quantity > $product->getQuantityAvailable())
+        {
+            throw new \Exception('Not enough product available');
+        }
+
+        // Don't remove more than is in cart
+        if ($quantity < 0)
+        {
+            throw new \Exception('Cannot have negative quantity');
+        }
+
+        // Update quantity
+        $lineItem->setQuantity($quantity);
+
+        // Whenever we add new items, we update the price to the most recent
+        $lineItem->setPrice($product->getPrice());
+
+        // Update Order totals
+        $this->updateTotals();
+
+        return $lineItem;
+    }
+
+    /**
      * place order
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>

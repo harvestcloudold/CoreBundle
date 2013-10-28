@@ -246,6 +246,28 @@ class OrderCollection
     }
 
     /**
+     * updateProductQuantity()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-10-26
+     *
+     * @param  Product  $product
+     * @param  int      $quantity
+     *
+     * @retutn LineItem
+     */
+    public function updateProductQuantity(Product $product, $quantity)
+    {
+        // Find the Order within this OrderCollection for the Product's Seller
+        $order = $this->getOrderForSeller($product->getSeller());
+
+        // Update the Product quantity on the Order
+        $lineItem = $order->updateProductQuantity($product, $quantity);
+
+        return $lineItem;
+    }
+
+    /**
      * getSubTotal()
      *
      * The sum of the Order sub_totals

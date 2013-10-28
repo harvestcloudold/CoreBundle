@@ -82,12 +82,21 @@ Profile_edit:
 
 
 # Let's stick these down here to avoid nasty collisions
+Profile_product_cart_quantity:
+    pattern:  /{slug}/{product_slug}/quantity
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\ProductController::quantityAction }
+    requirements:
+        slug: "[a-z0-9-]+"
+        product_slug: "[a-z0-9-]+"
+        _method: POST
+
 Profile_product_show:
     pattern:  /{slug}/{product_slug}
     defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\ProductController::showAction }
     requirements:
         slug: "[a-z0-9-]+"
         product_slug: "[a-z0-9-]+"
+        _method: GET
 
 Profile_show:
     pattern:  /{slug}

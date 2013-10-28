@@ -844,4 +844,29 @@ class Product implements Geolocatable
     {
         return $this->subscriptions;
     }
+
+    /**
+     * getAddToCartQuantities()
+     *
+     * e.g. array(
+     *          '1' => '1 lb',
+     *          '2' => '2 lbs',
+     *      );
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-10-11
+     *
+     * @return array
+     */
+    public function getAddToCartQuantities()
+    {
+      $quantities = array();
+
+      for ($i = 0; $i < $this->getQuantityAvailable()+1; $i++)
+      {
+          $quantities[$i] = $i.' '.$this->getUnitForNumber($i);;
+      }
+
+      return $quantities;
+    }
 }

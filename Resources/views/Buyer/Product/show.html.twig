@@ -28,21 +28,22 @@
                 {% endif %}
                 <tr>
                     <th><abbr title="Quantity">Qty</abbr> available</th>
-                    <td>{{ product.quantityAvailable }}</td>
+                    <td>{{ product.quantityAvailable }} {{ product.unitAvailable }}</td>
                 </tr>
                 <tr>
                     <th><abbr title="Quantity">Qty</abbr> in cart</th>
-                    <td>{{ quantity_in_cart }}</td>
+                    <td>{{ quantity_in_cart }} {{ product.unitInCart }}</td>
                 </tr>
             </table><!-- .nvp -->
-            <form class="add_to_cart" action="{{ path('Buyer_cart_add_product', { 'id': product.id }) }}" method="post">
+            <form action="{{ path('Profile_product_cart_quantity', { 'product_slug': product.slug, 'slug': product.seller.slug }) }}" method="post" {{ form_enctype(form) }}>
                 <div class="form row">
-                    <input type="text" size="3" name="quantity"  value="1"/><input type="submit"  class="submit button" value="Add to cart" />
-                </div><!-- .form.row -->
-            </form>
-            <form action="{{ path('Buyer_cart_add_product', { 'id': product.id, 'quantity': -1 }) }}" method="post">
-                <div class="form row">
-                    <input type="submit"  class="submit button" value="Remove from cart" />
+                    {{ form_widget(form.quantity) }}
+                    {{ form_rest(form) }}
+                    {% if quantity_in_cart %}
+                        <input type="submit" class="submit button" value="Update cart" />
+                    {% else %}
+                        <input type="submit" class="submit button" value="Add to cart" />
+                    {% endif %}
                 </div><!-- .form.row -->
             </form>
             <form method="get" action="{{ path('Buyer_checkout_pickup_windows') }}">

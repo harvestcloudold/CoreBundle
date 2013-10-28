@@ -235,7 +235,7 @@ input[type="submit"]
     background: rgba(149,135,112, 0.7);
     text-transform: uppercase;
     font-weight: bold;
-    padding: 0.5em 2em;
+    padding: 0.7em 2em;
     border: none;
 }
 
@@ -251,7 +251,7 @@ form[method="post"] input[type="submit"]
 
 input.small.submit.button
 {
-    padding: 0.3em 0.5em;
+    padding: 0.5em 0.5em;
     font-size: 1em;
 }
 
