@@ -59,6 +59,11 @@ class OrderLineItem
     protected $stockTransaction;
 
     /**
+     * @ORM\OneToOne(targetEntity="ProductSubscription", mappedBy="originalLineItem", cascade={"persist"})
+     */
+    protected $productSubscription;
+
+    /**
      * Get id
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
@@ -219,5 +224,35 @@ class OrderLineItem
     public function getUnit()
     {
         return $this->getProduct()->getUnitForNumber($this->getQuantity());
+    }
+
+    /**
+     * Set productSubscription
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-10-28
+     *
+     * @param  \HarvestCloud\CoreBundle\Entity\ProductSubscription $productSubscription
+     *
+     * @return OrderLineItem
+     */
+    public function setProductSubscription(\HarvestCloud\CoreBundle\Entity\ProductSubscription $productSubscription = null)
+    {
+        $this->productSubscription = $productSubscription;
+
+        return $this;
+    }
+
+    /**
+     * Get productSubscription
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-10-28
+     *
+     * @return \HarvestCloud\CoreBundle\Entity\ProductSubscription
+     */
+    public function getProductSubscription()
+    {
+        return $this->productSubscription;
     }
 }

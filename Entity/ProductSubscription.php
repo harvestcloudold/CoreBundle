@@ -59,6 +59,12 @@ class ProductSubscription
     protected $product;
 
     /**
+     * @ORM\OneToOne(targetEntity="OrderLineItem", inversedBy="productSubscription", cascade={"persist"})
+     * @ORM\JoinColumn(name="original_line_item_id", referencedColumnName="id")
+     */
+    protected $originalLineItem;
+
+    /**
      * Get id
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
@@ -219,5 +225,35 @@ class ProductSubscription
     public function getProduct()
     {
         return $this->product;
+    }
+
+    /**
+     * Set originalLineItem
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-10-28
+     *
+     * @param  \HarvestCloud\CoreBundle\Entity\OrderLineItem $originalLineItem
+     *
+     * @return ProductSubscription
+     */
+    public function setOriginalLineItem(\HarvestCloud\CoreBundle\Entity\OrderLineItem $originalLineItem = null)
+    {
+        $this->originalLineItem = $originalLineItem;
+
+        return $this;
+    }
+
+    /**
+     * Get originalLineItem
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-10-28
+     *
+     * @return \HarvestCloud\CoreBundle\Entity\OrderLineItem
+     */
+    public function getOriginalLineItem()
+    {
+        return $this->originalLineItem;
     }
 }
