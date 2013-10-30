@@ -48,7 +48,7 @@ Hub_window_maker_show:
 
 Hub_window_maker_make:
     pattern:  /window-maker/{id}/make
-    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Hub\WindowMakerController::showAction }
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Hub\WindowMakerController::makeAction }
     requirements:
         id: \d+
         _method: POST
