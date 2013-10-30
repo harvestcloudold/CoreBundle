@@ -125,15 +125,15 @@ header
 #header div.main.nav
 {
     text-transform: uppercase;
-    width: 50%;
-    float: left;
+    width: 35%;
+    float: right;
 }
 
 #header div.main.nav a
 {
     display: block;
     padding: 1.8em 0 1.2em 0;
-    width: 25%;
+    width: 50%;
     float: left;
     text-align: center;
     line-height: 100%;
@@ -163,6 +163,7 @@ body.settings #header div.main.nav a.cart
     background: transparent  url(/bundles/harvestcloudcore/images/bg_tab.png) scroll no-repeat center bottom;
 }
 
+body #header div.main.nav a.profile:hover,
 body #header div.main.nav a.buy:hover,
 body #header div.main.nav a.sell:hover,
 body #header div.main.nav a.hub:hover,

@@ -39,9 +39,11 @@
                             <a href="{{ path('_welcome') }}"><span>Harvest Cloud</span></a>
                         </div><!-- .main_logo -->
                         <div class="main nav">
-                            <a class="buy" href="{{ path('_welcome') }}">Buy</a>
-                            <a class="sell" href="{{ path('Seller_homepage') }}">Sell</a>
-                            <a class="hub" href="{{ path('Hub_homepage') }}">Hub</a>
+                            {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+                                <a class="profile" href="{{ path('Profile_show', { 'slug': app.user.currentProfile.slug }) }}">{{ app.user.currentProfile.name }}</a>
+                            {% else %}
+                                <a class="profile" href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                            {% endif %}
                             <a class="cart" href="{{ path('Buyer_cart_show') }}" class="cart"><span class="hide_sub_tablet_portrait">Cart: </span>{% render "HarvestCloudCoreBundle:Buyer/Cart:sub_total" %}</a>
                             <span class="clear"></span>
                         </div><!--.main.nav -->
