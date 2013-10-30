@@ -240,6 +240,8 @@ class OrderLineItem
     {
         $this->productSubscription = $productSubscription;
 
+        $productSubscription->setOriginalLineItem($this);
+
         return $this;
     }
 
@@ -254,5 +256,26 @@ class OrderLineItem
     public function getProductSubscription()
     {
         return $this->productSubscription;
+    }
+
+    /**
+     * createProductSubscription()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-10-29
+     *
+     * @return ProductSubscription
+     */
+    public function subscribe()
+    {
+        $productSubscription = new \HarvestCloud\CoreBundle\Entity\ProductSubscription();
+        $productSubscription->setBuyer($this->getOrder()->getBuyer());
+        $productSubscription->setProduct($this->getProduct());
+        $productSubscription->setQuantity($this->getQuantity());
+        $productSubscription->setPriceAtSubscription($this->getPrice());
+
+        $this->setProductSubscription($productSubscription);
+
+        return $productSubscription;
     }
 }

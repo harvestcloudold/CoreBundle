@@ -470,10 +470,12 @@ class Order
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-04-11
      *
+     * @param  bool $subscribe
+     *
      * @todo   Peform some sanity checks
      * @todo   Refactor the decrement part
      */
-    public function place()
+    public function place($subscribe = false)
     {
         if (self::STATUS_CART != $this->getStatusCode())
         {
@@ -498,6 +500,12 @@ class Order
             $stockTransaction->setStatusCode(OrderStockTransaction::STATUS_PENDING);
 
             $lineItem->setStockTransaction($stockTransaction);
+
+            // Subscribe, if necessary
+            if ($subscribe)
+            {
+                $lineItem->subscribe();
+            }
         }
     }
 
