@@ -1,68 +1,41 @@
 {% extends 'HarvestCloudCoreBundle:Hub:layout.html.twig' %}
 
 {% block content %}
-    <h1>My Window Makers</h1>
+    <h1>Regular Hub Opening Times</h1>
 
-    <div class="two_equal_columns">
-        <div class="left column">
-            <h3>List View</h3>
-            <table class="standard">
-                <thead>
+    <div>
+        <table class="standard week">
+            <thead>
+                <tr>
+                    <th class="time">Start Time</th>
+                    <th class="monday day">Mon</th>
+                    <th class="tuesday day">Tue</th>
+                    <th class="wednesday day">Wed</th>
+                    <th class="thursday day">Thu</th>
+                    <th class="friday day">Fri</th>
+                    <th class="saturday day">Sat</th>
+                    <th class="sunday day">Sun</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for hour,days in slots %}
                     <tr>
-                        <th>#</th>
-                        <th>Pickup/Delivery</th>
-                        <th>Days of Week</th>
-                        <th>Start Time</th>
-                        <th>End Time</th>
+                        <td>{{ hour }}</td>
+                        {% for windowMaker in days %}
+                            {% if windowMaker %}
+                                <td>
+                                    <a href="{{ path('Hub_window_maker_show', { 'id': windowMaker.id }) }}">
+                                        {{ windowMaker.id }}</a>
+                                </td>
+                            {%else %}
+                                <td></td>
+                            {% endif %}
+                        {% endfor %}
                     </tr>
-                </thead>
-                <tbody>
-                    {% for windowMaker in windowMakers %}
-                        <tr>
-                          <td><a href="{{ path('Hub_window_maker_show', { 'id': windowMaker.id }) }}">{{ windowMaker.id }}</a></td>
-                          <td>{{ windowMaker.deliveryType }}</td>
-                          <td>{{ windowMaker.daysOfWeekAsString }}</td>
-                          <td>{{ windowMaker.startTime }}</td>
-                          <td>{{ windowMaker.endTime }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table><!-- .standard -->
-        </div><!-- .left.column -->
-        <div class="right column">
-            <h3>Calendar View</h3>
-            <table class="standard">
-                <thead>
-                    <tr>
-                        <th>Start Time</th>
-                        <th>Mon</th>
-                        <th>Tue</th>
-                        <th>Wed</th>
-                        <th>Thu</th>
-                        <th>Fri</th>
-                        <th>Sat</th>
-                        <th>Sun</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for hour,days in slots %}
-                        <tr>
-                            <td>{{ hour }}</td>
-                            {% for windowMaker in days %}
-                                {% if windowMaker %}
-                                    <td><a href="{{ path('Hub_window_maker_show', { 'id': windowMaker.id }) }}">{{ windowMaker.id }}</a></td>
-                                {%else %}
-                                    <td></td>
-                                {% endif %}
-                            {% endfor %}
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table><!-- .standard -->
-        </div><!-- .right.column -->
-        <div class="clear"></div>
-    </div><!-- .two_equal_columns -->
-    <div class="clear"></div>
+                {% endfor %}
+            </tbody>
+        </table><!-- .standard.calendar -->
+    </div>
     <form action="{{ path('Hub_window_maker_new') }}">
       <div class="form row">
         <input type="submit" class="submit button" value="Add new Window Maker" />

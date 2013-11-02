@@ -1,0 +1,9 @@
+table.week th
+{
+    width: 16%;
+}
+
+table.week th.day
+{
+    width: 12%;
+}
