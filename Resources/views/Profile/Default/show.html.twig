@@ -1,7 +1,12 @@
 {% extends 'HarvestCloudCoreBundle::Profile/layout.html.twig' %}
 
 {% block content %}
-    <h1>{{ profile.name }} ({{ profile.slug }})</h1>
+    <h1>
+        {% if profile.thumbnailPath %}
+          <img src="{{ app.user.currentProfile.thumbnailWebPath }}" />
+        {% endif %}
+        {{ profile.name }} ({{ profile.slug }})
+    </h1>
     <p>
         {% if app.user.currentProfile.id == profile.id %}
             <form method="get" action="{{ path('Profile_edit', { 'slug': profile.slug }) }}">

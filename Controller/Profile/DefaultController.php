@@ -65,6 +65,9 @@ class DefaultController extends Controller
             if ($form->isValid())
             {
                 $em = $this->get('doctrine')->getEntityManager();
+
+                $this->getCurrentProfile()->uploadThumbnail();
+
                 $em->persist($form->getData());
                 $em->flush();
 

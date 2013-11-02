@@ -13,6 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use HarvestCloud\GeoBundle\Util\Geolocatable;
 use HarvestCloud\CoreBundle\Entity\Account;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Profile Entity
@@ -56,6 +58,18 @@ class Profile implements Geolocatable
      * @ORM\Column(type="string", length=50)
      */
     protected $name;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $thumbnail_path;
+
+    /**
+     * @Assert\File(maxSize="6000000")
+     *
+     * @var UploadedFile
+     */
+    protected $thumbnailFile;
 
     /**
      * @ORM\ManyToMany(targetEntity="\HarvestCloud\UserBundle\Entity\User", mappedBy="profiles")
@@ -2167,5 +2181,152 @@ class Profile implements Geolocatable
     public function getProductSubscriptionsAsBuyer()
     {
         return $this->productSubscriptionsAsBuyer;
+    }
+
+    /**
+     * Set thumbnail_path
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-10-06
+     *
+     * @param  string $thumbnail_path
+     *
+     * @return Profile
+     */
+    public function setThumbnailPath($thumbnail_path)
+    {
+        $this->thumbnail_path = $thumbnail_path;
+
+        return $this;
+    }
+
+    /**
+     * Get thumbnail_path
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-10-06
+     *
+     * @return string
+     */
+    public function getThumbnailPath()
+    {
+        return $this->thumbnail_path;
+    }
+
+    /**
+     * getThumbnailAbsolutePath()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-10-31
+     *
+     * @return string
+     */
+    public function getThumbnailAbsolutePath()
+    {
+        if ($this->getThumbnailPath())
+        {
+            return $this->getUploadRootDir().DIRECTORY_SEPARATOR
+                .$this->getThumbnailPath();
+        }
+
+        return null;
+    }
+
+    /**
+     * getThumbnailWebPath()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-10-31
+     *
+     * @return string
+     */
+    public function getThumbnailWebPath()
+    {
+        if ($this->getThumbnailPath())
+        {
+            return $this->getUploadDir().DIRECTORY_SEPARATOR
+                .$this->getThumbnailPath();
+        }
+
+        return null;
+    }
+
+    /**
+     * getUploadRootDir()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-10-31
+     *
+     * @return string
+     */
+    public function getUploadRootDir()
+    {
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+
+    /**
+     * getUploadDir()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-10-31
+     *
+     * @return string
+     */
+    public function getUploadDir()
+    {
+        return 'profile/images';
+    }
+
+    /**
+     * setThumbnailFile()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-10-31
+     *
+     * @param  UploadedFile $thumbnailFile
+     */
+    public function setThumbnailFile(UploadedFile $thumbnailFile)
+    {
+        $this->thumbnailFile = $thumbnailFile;
+    }
+
+    /**
+     * getThumbnailFile()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-10-31
+     *
+     * @return UploadedFile
+     */
+    public function getThumbnailFile()
+    {
+        return $this->thumbnailFile;
+    }
+
+    /**
+     * uploadThumbnail()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-10-31
+     */
+    public function uploadThumbnail()
+    {
+        // If no file was uploaded, do nothing
+        if (null === $this->getThumbnailFile())
+        {
+            return;
+        }
+
+        $filename = $this->getSlug().'.jpg';
+
+        $this->getThumbnailFile()->move(
+            $this->getUploadRootDir(),
+            $filename
+        );
+
+        $this->setThumbnailPath($filename);
+
+        // Clean up $thumbnailFile since we won't need it any more
+        $this->thumbnailFile = null;
     }
 }
