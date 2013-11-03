@@ -60,7 +60,7 @@ class Profile implements Geolocatable
     protected $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $thumbnail_path;
 
