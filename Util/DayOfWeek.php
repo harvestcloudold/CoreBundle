@@ -124,6 +124,19 @@ class DayOfWeek
     }
 
     /**
+     * getClassName()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-11-05
+     *
+     * @return string
+     */
+    public function getClassName()
+    {
+        return strtolower($this->getLongName());
+    }
+
+    /**
      * getChoices()
      *
      * Used for FormTypes

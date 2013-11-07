@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityRepository;
 use HarvestCloud\CoreBundle\Repository\WindowMakerRepository;
 use HarvestCloud\CoreBundle\Entity\Profile;
 use HarvestCloud\CoreBundle\Entity\WindowMaker;
+use HarvestCloud\CoreBundle\Util\WeekView;
 
 /**
  * HubWindowMakerRepository
@@ -39,38 +40,34 @@ class HubWindowMakerRepository extends WindowMakerRepository
     }
 
     /**
-     * getCalendarViewArray()
+     * getWeekView()
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-25
      *
+     * @param  int                                    $startDay
      * @param  HarvestCloud\CoreBundle\Entity\Profile $hub
      */
-    public function getCalendarViewArray(Profile $hub)
+    public function getWeekView($startDay, Profile $hub)
     {
+        $weekView      = new WeekView($startDay);
         $windowMakers  = $this->findForHub($hub);
-        $slots         = WindowMaker::getSlots();
 
         foreach ($windowMakers as $windowMaker)
         {
-            $start_time = $windowMaker->getStartTime();
+            $dayOfWeekNumbers = $windowMaker->getDayOfWeekNumbers();
 
-            foreach (array_keys(WindowMaker::getStartTimeChoices()) as $hour)
+            foreach ($dayOfWeekNumbers as $day_of_week_number)
             {
-                $start_hour = $windowMaker->getStartTimeObject()->format('H');
-                $end_hour   = $windowMaker->getEndTimeObject()->format('H');
-
-                if ($hour >= $start_hour && $hour < $end_hour)
-                {
-                    foreach ($windowMaker->getDayOfWeekNumbers() as $day_of_week_number)
-                    {
-                        $slots[$hour.':00'][$day_of_week_number] = $windowMaker;
-                    }
-                }
+                $weekView->addObject(
+                    $day_of_week_number,
+                    $windowMaker->getStartTimeObject()->format('H:i'),
+                    $windowMaker
+                );
             }
         }
 
-        return $slots;
+        return $weekView;
     }
 
     /**

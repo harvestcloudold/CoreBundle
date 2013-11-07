@@ -14,6 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use HarvestCloud\CoreBundle\Util\Windowable;
 use HarvestCloud\CoreBundle\Util\DayOfWeek;
 use HarvestCloud\CoreBundle\Util\Debug;
+use HarvestCloud\CoreBundle\Util\WeekViewObjectInteface;
 use HarvestCloud\CoreBundle\Entity\HubWindow;
 
 /**
@@ -32,7 +33,7 @@ use HarvestCloud\CoreBundle\Entity\HubWindow;
  * })
  * @ORM\Table(name="window_maker")
  */
-class WindowMaker
+class WindowMaker implements WeekViewObjectInteface
 {
     /**
      * @ORM\Id
@@ -133,6 +134,12 @@ class WindowMaker
         }
 
         $this->start_time = $startTime;
+
+        // Let's go ahead and set the default end_time
+        $end_time = $this->getEndTimeFromStartTime($this->getStartTimeObject())
+            ->format('H:i')
+        ;
+        $this->setEndTime($end_time);
     }
 
     /**
@@ -454,29 +461,6 @@ class WindowMaker
             '19' => '7pm',
             '21' => '9pm',
         );
-    }
-
-    /**
-     * getSlots()
-     *
-     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
-     * @since  2012-10-25
-     *
-     * @return array
-     */
-    public static function getSlots()
-    {
-        $slots = array();
-
-        foreach (array_keys(self::getStartTimeChoices()) as $hour)
-        {
-            for ($i=1; $i<8; $i++)
-            {
-                $slots[$hour.':00'][$i] = null;
-            }
-        }
-
-        return $slots;
     }
 
     /**

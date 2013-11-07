@@ -27,6 +27,12 @@ Hub_window_maker_new:
     requirements:
         _method: GET
 
+Hub_window_maker_quick_add:
+    pattern:  /{slug}/window-maker/{day}/{time}
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Hub\WindowMakerController::quick_addAction }
+    requirements:
+        _method: POST
+
 Hub_window_maker_update:
     pattern:  /window-maker/{id}/edit
     defaults: { _controller: HarvestCloud\CoreBundle\Controller\Hub\WindowMakerController::editAction }

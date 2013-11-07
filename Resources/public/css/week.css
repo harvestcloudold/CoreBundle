@@ -7,3 +7,23 @@ table.week th.day
 {
     width: 12%;
 }
+
+table.week td
+{
+    text-align: center;
+}
+
+table.week td.highlight
+{
+    background: #8bb4e5;
+}
+
+table.week td input[type="submit"]
+{
+    background: transparent;;
+}
+
+table.week td input[type="submit"]:hover
+{
+    background: #8bb4e5;
+}

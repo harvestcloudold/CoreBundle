@@ -14,9 +14,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use HarvestCloud\CoreBundle\Entity\WindowMaker;
+use HarvestCloud\CoreBundle\Entity\HubWindow;
 use HarvestCloud\CoreBundle\Entity\HubWindowMaker;
 use HarvestCloud\CoreBundle\Form\HubWindowMakerType;
 use HarvestCloud\CoreBundle\Util\Debug;
+use HarvestCloud\CoreBundle\Util\WeekView;
+use HarvestCloud\CoreBundle\Util\DayOfWeek;
 use Symfony\Component\Form\Form;
 
 /**
@@ -35,18 +38,11 @@ class WindowMakerController extends Controller
      */
     public function indexAction()
     {
-        $currentProfile = $this->getCurrentProfile();
-
-        $windowMakers = $this->getRepo('HubWindowMaker')
-            ->findForHub($currentProfile)
-        ;
-
-        $slots = $this->getRepo('HubWindowMaker')
-            ->getCalendarViewArray($currentProfile);
+        $weekView = $this->getRepo('HubWindowMaker')
+            ->getWeekView(DayOfWeek::MON, $this->getCurrentProfile());
 
         return $this->render('HarvestCloudCoreBundle:Hub/WindowMaker:index.html.twig', array(
-          'windowMakers' => $windowMakers,
-          'slots'        => $slots,
+          'weekView' => $weekView,
         ));
     }
 
@@ -140,5 +136,30 @@ class WindowMakerController extends Controller
         return $this->redirect($this->generateUrl('Hub_window_maker_show', array(
             'id' => $windowMaker->getId(),
         )));
+    }
+
+    /**
+     * quick_add
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-11-01
+     *
+     * @param  string $slug
+     * @param  string $day
+     * @param  string $time
+     */
+    public function quick_addAction($slug, $day, $time)
+    {
+        $windowMaker = new HubWindowMaker();
+        $windowMaker->setHub($this->getCurrentProfile());
+        $windowMaker->setStartTime($time);
+        $windowMaker->setDayOfWeekNumbers(array($day));
+        $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $em->persist($windowMaker);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('Hub_window_maker'));
     }
 }

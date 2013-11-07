@@ -3,32 +3,34 @@
 {% block content %}
     <h1>Regular Hub Opening Times</h1>
 
+
     <div>
         <table class="standard week">
             <thead>
                 <tr>
                     <th class="time">Start Time</th>
-                    <th class="monday day">Mon</th>
-                    <th class="tuesday day">Tue</th>
-                    <th class="wednesday day">Wed</th>
-                    <th class="thursday day">Thu</th>
-                    <th class="friday day">Fri</th>
-                    <th class="saturday day">Sat</th>
-                    <th class="sunday day">Sun</th>
+                    {% for day in weekView.days %}
+                        <th class="{{ day.class }} day">{{ day.label }}</th>
+                    {% endfor %}
                 </tr>
             </thead>
             <tbody>
-                {% for hour,days in slots %}
+                {% for time in weekView.times %}
                     <tr>
-                        <td>{{ hour }}</td>
-                        {% for windowMaker in days %}
-                            {% if windowMaker %}
-                                <td>
-                                    <a href="{{ path('Hub_window_maker_show', { 'id': windowMaker.id }) }}">
-                                        {{ windowMaker.id }}</a>
+                        <td class="time_label">{{ time.label }}</td>
+                        {% for day in time.days %}
+                            {% if day.objects %}
+                                <td class="highlight">
+                                    {% for object in day.objects %}
+                                        <div><a href="{{ path('Hub_window_maker_show', { 'id': object.id }) }}">$2.05</a></div>
+                                    {% endfor %}
                                 </td>
                             {%else %}
-                                <td></td>
+                                <td>
+                                    <form action="{{ path('Hub_window_maker_quick_add', { 'slug': app.user.currentProfile.slug, 'day': day.day_of_week_number, 'time': time.time_key }) }}" method="post">
+                                        <input type="submit" class="small submit button" value="Add" />
+                                    </form>
+                                </td>
                             {% endif %}
                         {% endfor %}
                     </tr>
@@ -36,9 +38,4 @@
             </tbody>
         </table><!-- .standard.calendar -->
     </div>
-    <form action="{{ path('Hub_window_maker_new') }}">
-      <div class="form row">
-        <input type="submit" class="submit button" value="Add new Window Maker" />
-      </div><!-- .form.row -->
-    </form>
 {% endblock %}
