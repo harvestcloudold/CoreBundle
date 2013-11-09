@@ -71,17 +71,17 @@ Buyer_cart_add_product:
         _method: POST
 
 
-Buyer_checkout_select_pickup_windows_for_collection:
-    pattern:  /checkout/select-window/{id}
-    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\CheckoutController::select_pickup_window_for_collectionAction }
+Buyer_checkout_window:
+    pattern:  /checkout/pickup-windows
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\CheckoutController::windowAction }
     requirements:
         _method: GET
 
-Buyer_checkout_pickup_windows:
-    pattern:  /checkout/pickup-windows
-    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\CheckoutController::pickup_windows_for_collectionAction }
+Buyer_checkout_window_select:
+    pattern:  /checkout/select-window/{id}
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\CheckoutController::windowAction }
     requirements:
-        _method: GET
+        _method: POST
 
 Buyer_checkout_review:
     pattern:  /checkout/review

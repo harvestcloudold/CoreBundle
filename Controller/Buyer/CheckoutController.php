@@ -15,6 +15,7 @@ use HarvestCloud\CoreBundle\Entity\OrderCollection;
 use HarvestCloud\CoreBundle\Entity\HubWindow;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * CheckoutController
@@ -25,9 +26,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 class CheckoutController extends Controller
 {
     /**
-     * pickup_windows_for_collection
-     *
-     * Available pickup windows for Sellers
+     * window
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-05-18
@@ -36,43 +35,32 @@ class CheckoutController extends Controller
      * @Route("/checkout/select-window/{id}")
      * @ParamConverter("hubWindow", class="HarvestCloudCoreBundle:HubWindow")
      *
-     * @param  HubWindow
+     * @param  Request   $request
+     * @param  HubWindow $hubWindow
      *
      * @return Response A Response instance
      */
-    public function select_pickup_window_for_collectionAction(HubWindow $hubWindow)
+    public function windowAction(Request $request, HubWindow $hubWindow = null)
     {
         $orderCollection = $this->getOrderCollection();
 
-        $em = $this->getDoctrine()->getEntityManager();
-
-        try
+        if ($request->getMethod() == 'POST')
         {
-            $orderCollection->setHubWindow($hubWindow);
-            $em->persist($orderCollection);
-            $em->flush();
-        }
-        catch (\Exception $e)
-        {
-            exit('There was a problem assigning pickup windows');
-        }
+            $em = $this->getDoctrine()->getEntityManager();
 
-        return $this->redirect($this->generateUrl('Buyer_checkout_review'));
-    }
+            try
+            {
+                $orderCollection->setHubWindow($hubWindow);
+                $em->persist($orderCollection);
+                $em->flush();
+            }
+            catch (\Exception $e)
+            {
+                exit('There was a problem assigning pickup windows');
+            }
 
-    /**
-     * select_pickup_window_for_collection
-     *
-     * Buyer selects desired PickupWindow
-     *
-     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
-     * @since  2012-05-18
-     *
-     * @return Response A Response instance
-     */
-    public function pickup_windows_for_collectionAction()
-    {
-        $orderCollection = $this->getCurrentCart();
+            return $this->redirect($this->generateUrl('Buyer_checkout_review'));
+        }
 
         $weekView = $this->getRepo('HubWindow')
             ->getWeekViewForOrderCollection($orderCollection);

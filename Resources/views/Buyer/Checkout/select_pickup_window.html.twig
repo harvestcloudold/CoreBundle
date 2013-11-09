@@ -20,7 +20,9 @@
                             {% if day.objects %}
                                 <td>
                                     {% for object in day.objects %}
-                                        <div><a href="{{ path('Buyer_checkout_select_pickup_windows_for_collection', { 'id': object.id }) }}">{{ object.hub.name}} ${{ object.totalHubFeeForOrderCollection|number_format(2) }}</a></div>
+                                        <form method="post" action="{{ path('Buyer_checkout_window_select', { 'id': object.id }) }}">
+                                            <input type="submit" value="{{ object.hub.name}} ${{ object.totalHubFeeForOrderCollection|number_format(2) }}" />
+                                        </form>
                                     {% endfor %}
                                 </td>
                             {%else %}
