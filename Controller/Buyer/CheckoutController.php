@@ -74,12 +74,12 @@ class CheckoutController extends Controller
     {
         $orderCollection = $this->getCurrentCart();
 
-        $hubWindows = $this->getRepo('HubWindow')
-            ->findForSelectWindowForOrderCollection($orderCollection);
+        $weekView = $this->getRepo('HubWindow')
+            ->getWeekViewForOrderCollection($orderCollection);
 
         return $this->render('HarvestCloudCoreBundle:Buyer/Checkout:select_pickup_window.html.twig', array(
           'orderCollection' => $orderCollection,
-          'hubWindows'      => $hubWindows,
+          'weekView'        => $weekView,
         ));
     }
 

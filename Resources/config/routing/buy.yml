@@ -75,7 +75,7 @@ Buyer_checkout_select_pickup_windows_for_collection:
     pattern:  /checkout/select-window/{id}
     defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\CheckoutController::select_pickup_window_for_collectionAction }
     requirements:
-        _method: POST
+        _method: GET
 
 Buyer_checkout_pickup_windows:
     pattern:  /checkout/pickup-windows

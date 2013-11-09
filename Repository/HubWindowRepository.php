@@ -12,6 +12,9 @@ namespace HarvestCloud\CoreBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use HarvestCloud\CoreBundle\Entity\OrderCollection;
 use HarvestCloud\CoreBundle\Entity\HubWindow;
+use HarvestCloud\CoreBundle\Util\WeekView;
+use HarvestCloud\CoreBundle\Util\Debug;
+use HarvestCloud\CoreBundle\Util\DateTime;
 
 /**
  * HubWindowRepository
@@ -48,10 +51,12 @@ class HubWindowRepository extends EntityRepository
                 JOIN     hw.hub           h
                 WHERE    s.id IN (:seller_ids)
                 AND      UNIX_TIMESTAMP(sw.start_time) > :now
+                AND      UNIX_TIMESTAMP(sw.start_time) <= :end_of_week
                 GROUP BY hw.start_time, h.id
                 HAVING   COUNT(sw.id) = :num_sellers
             ')
             ->setParameter('now', time())
+            ->setParameter('end_of_week', DateTime::getForEndOfWeek()->format('U'))
             ->setParameter('seller_ids', $orderCollection->getSellerIds())
             ->setParameter('num_sellers', count($orderCollection->getSellerIds()))
         ;
@@ -65,6 +70,32 @@ class HubWindowRepository extends EntityRepository
         }
 
         return $windows;
+    }
+
+    /**
+     * getWeekViewForOrderCollection()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-11-07
+     *
+     * @return array
+     */
+    public function getWeekViewForOrderCollection(OrderCollection $orderCollection)
+    {
+        $weekView = new WeekView();
+
+        $windows = $this->findForSelectWindowForOrderCollection($orderCollection);
+
+        foreach ($windows as $window)
+        {
+            $weekView->addObject(
+                $window->getStartTime()->format('N'),
+                $window->getStartTime()->format('H:i'),
+                $window
+            );
+        }
+
+        return $weekView;
     }
 
     /**

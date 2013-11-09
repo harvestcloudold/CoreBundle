@@ -2,24 +2,34 @@
 
 {% block buyer_content %}
     <h1>Select Delivery/Pickup</h1>
-    <table class="standard">
-        {% for hubWindow in hubWindows %}
-            <tr>
-                <td>{{ hubWindow.hub.name }}</td>
-                <td>{{ hubWindow.startTime|date('D') }}</td>
-                <td>{{ hubWindow.startTime|date('j F') }}</td>
-                <td>
-                  {{ hubWindow.startTime|date('H:i') }}
-                  -
-                  {{ hubWindow.endTime|date('H:i') }}
-                </td>
-                <td>${{ hubWindow.totalHubFeeForOrderCollection|number_format(2) }}</td>
-                <td>
-                    <form method="post" action="{{ path('Buyer_checkout_select_pickup_windows_for_collection', { 'id': hubWindow.id }) }}">
-                      <input type="submit" class="submit" value="Select" />
-                    </form>
-                </td>
-            </tr>
-        {% endfor %}
-    </table><!-- .standard -->
+    <div>
+        <table class="standard week">
+            <thead>
+                <tr>
+                    <th class="time">Start Time</th>
+                    {% for day in weekView.days %}
+                        <th class="{{ day.class }} day">{{ day.label }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for time in weekView.times %}
+                    <tr>
+                        <td class="time_label">{{ time.label }}</td>
+                        {% for day in time.days %}
+                            {% if day.objects %}
+                                <td>
+                                    {% for object in day.objects %}
+                                        <div><a href="{{ path('Buyer_checkout_select_pickup_windows_for_collection', { 'id': object.id }) }}">{{ object.hub.name}} ${{ object.totalHubFeeForOrderCollection|number_format(2) }}</a></div>
+                                    {% endfor %}
+                                </td>
+                            {%else %}
+                                <td></td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table><!-- .standard.calendar -->
+    </div>
 {% endblock %}

@@ -12,6 +12,7 @@ namespace HarvestCloud\CoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use HarvestCloud\CoreBundle\Util\Windowable;
+use HarvestCloud\CoreBundle\Util\WeekViewObjectInteface;
 
 /**
  * HubWindow Entity
@@ -29,7 +30,7 @@ use HarvestCloud\CoreBundle\Util\Windowable;
  * })
  * @ORM\Table(name="hub_window",uniqueConstraints={@ORM\UniqueConstraint(name="hub_delivery_type_start_time_idx", columns={"hub_id", "delivery_type", "start_time"})})
  */
-class HubWindow implements Windowable
+class HubWindow implements Windowable, WeekViewObjectInteface
 {
     /**
      * Delivery Types
