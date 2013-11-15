@@ -305,4 +305,17 @@ class HubWindow implements Windowable, WeekViewObjectInteface
 
         return $slots;
     }
+
+    /**
+     * getDateTimeForWeekView()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestclou.com>
+     * @since  2013-11-14
+     *
+     * @return \DateTime
+     */
+    public function getDateTimeForWeekView()
+    {
+        return $this->getStartTime();
+    }
 }

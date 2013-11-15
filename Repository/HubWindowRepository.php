@@ -82,17 +82,13 @@ class HubWindowRepository extends EntityRepository
      */
     public function getWeekViewForOrderCollection(OrderCollection $orderCollection)
     {
-        $weekView = new WeekView();
+        $weekView = new WeekView(new \DateTime(), null, 'D d');
 
         $windows = $this->findForSelectWindowForOrderCollection($orderCollection);
 
         foreach ($windows as $window)
         {
-            $weekView->addObject(
-                $window->getStartTime()->format('N'),
-                $window->getStartTime()->format('H:i'),
-                $window
-            );
+            $weekView->addObject($window);
         }
 
         return $weekView;
