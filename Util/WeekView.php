@@ -21,11 +21,18 @@ use HarvestCloud\CoreBundle\Util\WeekViewObjectInteface;
 class WeekView
 {
     /**
-     * first_day_of_week
+     * startDate
      *
-     * @var int
+     * @var \DateTime
      */
-    protected $first_day_of_week;
+    protected $startDate;
+
+    /**
+     * startDate
+     *
+     * @var \DateTime
+     */
+    protected $endDate;
 
     /**
      * slots
@@ -42,17 +49,40 @@ class WeekView
      protected $days = array();
 
     /**
+     * day_format
+     *
+     * @var string
+     */
+    protected $day_format = 'D';
+
+    /**
      * __construct()
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-11-05
      *
-     * @param  mixed $firstDay
+     * @param  \DateTime $startDate
+     * @param  \DateTime $endDate
+     * @param  string    $day_format
      */
-    public function __construct($firstDay = DayOfWeek::MON)
+    public function __construct(\DateTime $startDate, \DateTime $endDate = null, $day_format = 'D')
     {
-        $this->generateDays($firstDay);
-        $this->generateSlots($firstDay);
+        $this->startDate  = $startDate;
+
+        if ($endDate)
+        {
+            $this->endDate = $endDate;
+        }
+        else
+        {
+            $this->endDate = clone $this->startDate;
+            $this->endDate->add(new \DateInterval('P6D'));
+        }
+
+        $this->day_format = $day_format;
+
+        $this->generateDays();
+        $this->generateSlots();
     }
 
     /**
@@ -60,34 +90,24 @@ class WeekView
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-11-06
-     *
-     * @param  mixed $firstDay
      */
-    public function generateDays($firstDay)
+    public function generateDays()
     {
-        // Assume we start on Monday
-        for ($i=1; $i<8; $i++)
+        $interval = $this->startDate->diff($this->endDate);
+
+        $day = clone $this->startDate;
+
+        for ($i=0; $i<$interval->days+1; $i++)
         {
-            $dayOfWeek = new DayOfWeek($i);
+            if ($i)
+            {
+                $day->add(new \DateInterval('P1D'));
+            }
+
             $this->days[] = array(
-                'label' => $dayOfWeek->getShortName(),
-                'class' => $dayOfWeek->getClassName(),
+                'label' => $day->format($this->day_format),
+                'class' => strtolower($day->format('l')),
             );
-        }
-
-        if (is_int($firstDay))
-        {
-            $first_day = $firstDay;
-        }
-        else
-        {
-            $first_day = $firstDay->format('N');
-        }
-
-        // Now, reorder for start day
-        for ($i=1; $i<$first_day; $i++)
-        {
-            array_push($this->days, array_shift($this->days));
         }
     }
 
@@ -96,11 +116,11 @@ class WeekView
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-11-06
-     *
-     * @param  mixed $firstDay
      */
-    public function generateSlots($firstDay)
+    public function generateSlots()
     {
+        $interval = $this->startDate->diff($this->endDate);
+
         foreach (array_keys(WindowMaker::getStartTimeChoices()) as $hour)
         {
             $time = array(
@@ -109,27 +129,19 @@ class WeekView
                 'days'      => array(),
             );
 
-            for ($i=1; $i<8; $i++)
+            $day = new \DateTime($this->startDate->format('Y-m-d '.$time['time_key']));;
+
+            for ($i=0; $i<$interval->days+1; $i++)
             {
+                if ($i)
+                {
+                    $day->add(new \DateInterval('P1D'));
+                }
+
                 $time['days'][] = array(
-                    'day_of_week_number' => $i,
-                    'objects'            => array(),
+                    'dateTime' => clone $day,
+                    'objects'  => array(),
                 );
-            }
-
-            if (is_int($firstDay))
-            {
-                $first_day = $firstDay;
-            }
-            else
-            {
-                $first_day = $firstDay->format('N');
-            }
-
-            // Now, reorder for start day
-            for ($i=1; $i<$first_day; $i++)
-            {
-                array_push($time['days'], array_shift($time['days']));
             }
 
             $this->slots['times'][] = $time;
@@ -144,17 +156,15 @@ class WeekView
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-11-06
      *
-     * @param  int                    $day_of_week_number
-     * @param  string                 $time_key
      * @param  WeekViewObjectInteface $object
      */
-    public function addObject($day_of_week_number, $time_key, WeekViewObjectInteface $object)
+    public function addObject(WeekViewObjectInteface $object)
     {
         foreach ($this->slots['times'] as $i => $time)
         {
             foreach ($time['days'] as $j => $day)
             {
-                if ($time_key == $time['time_key'] && $day_of_week_number == $day['day_of_week_number'])
+                if ($object->getDateTimeForWeekView()->format(\DateTime::ATOM) == $day['dateTime']->format(\DateTime::ATOM))
                 {
                     $this->slots['times'][$i]['days'][$j]['objects'][] = $object;
                 }

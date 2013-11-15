@@ -39,7 +39,7 @@ class WindowMakerController extends Controller
     public function indexAction()
     {
         $weekView = $this->getRepo('HubWindowMaker')
-            ->getWeekView(DayOfWeek::MON, $this->getCurrentProfile());
+            ->getWeekView($this->getCurrentProfile());
 
         return $this->render('HarvestCloudCoreBundle:Hub/WindowMaker:index.html.twig', array(
           'weekView' => $weekView,

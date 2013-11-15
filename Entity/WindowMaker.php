@@ -480,4 +480,26 @@ class WindowMaker implements WeekViewObjectInteface
 
         return $endTime;
     }
+
+    /**
+     * getDateTimeForWeekView()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestclou.com>
+     * @since  2013-11-13
+     *
+     * @return \DateTime
+     */
+    public function getDateTimeForWeekView()
+    {
+        $startTime = new \DateTime('2004-06-28 '.$this->getStartTime().':00');
+
+        $dayOfWeekNumbers = $this->getDayOfWeekNumbers();
+
+        while ($startTime->format('N') < $dayOfWeekNumbers[0])
+        {
+            $startTime->add(new \DateInterval('P1D'));
+        }
+
+        return $startTime;
+    }
 }

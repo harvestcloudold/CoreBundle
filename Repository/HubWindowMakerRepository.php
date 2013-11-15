@@ -45,12 +45,14 @@ class HubWindowMakerRepository extends WindowMakerRepository
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-25
      *
-     * @param  int                                    $startDay
      * @param  HarvestCloud\CoreBundle\Entity\Profile $hub
      */
-    public function getWeekView($startDay, Profile $hub)
+    public function getWeekView(Profile $hub)
     {
-        $weekView      = new WeekView($startDay);
+        $startDate = new \DateTime('2004-06-28');
+        $endDate   = new \DateTime('2004-07-04');
+
+        $weekView      = new WeekView($startDate);
         $windowMakers  = $this->findForHub($hub);
 
         foreach ($windowMakers as $windowMaker)
@@ -59,11 +61,7 @@ class HubWindowMakerRepository extends WindowMakerRepository
 
             foreach ($dayOfWeekNumbers as $day_of_week_number)
             {
-                $weekView->addObject(
-                    $day_of_week_number,
-                    $windowMaker->getStartTimeObject()->format('H:i'),
-                    $windowMaker
-                );
+                $weekView->addObject($windowMaker);
             }
         }
 
