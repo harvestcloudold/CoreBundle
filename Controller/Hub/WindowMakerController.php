@@ -42,7 +42,7 @@ class WindowMakerController extends Controller
             ->getWeekView($this->getCurrentProfile());
 
         return $this->render('HarvestCloudCoreBundle:Hub/WindowMaker:index.html.twig', array(
-          'weekView' => $weekView,
+            'weekView' => $weekView,
         ));
     }
 
@@ -60,7 +60,7 @@ class WindowMakerController extends Controller
     public function showAction($windowMaker)
     {
         return $this->render('HarvestCloudCoreBundle:Hub/WindowMaker:show.html.twig', array(
-          'windowMaker' => $windowMaker,
+            'windowMaker' => $windowMaker,
         ));
     }
 
@@ -84,7 +84,7 @@ class WindowMakerController extends Controller
         }
 
         return $this->render('HarvestCloudCoreBundle:Hub/WindowMaker:new.html.twig', array(
-          'form' => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -109,8 +109,8 @@ class WindowMakerController extends Controller
         }
 
         return $this->render('HarvestCloudCoreBundle:Hub/WindowMaker:edit.html.twig', array(
-          'form'        => $form->createView(),
-          'windowMaker' => $windowMaker,
+            'form'        => $form->createView(),
+            'windowMaker' => $windowMaker,
         ));
     }
 
