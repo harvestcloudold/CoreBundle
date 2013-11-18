@@ -274,7 +274,7 @@ class HubWindow implements Windowable, WeekViewObjectInteface
         {
             $order = $orderCollection->getOrderForSeller($window->getSeller());
 
-            if ($order)
+            if ($order->getId())
             {
                 $this->total_hub_fee_for_order_collection += $window->getTotalHubFeeForOrder($order);
             }

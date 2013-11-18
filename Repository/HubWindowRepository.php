@@ -36,11 +36,19 @@ class HubWindowRepository extends EntityRepository
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-11-02
      *
+     * @param  OrderCollection $orderCollection
+     * @param  \DateTime       $endDate
+     *
      * @return array
      */
-    public function findForSelectWindowForOrderCollection(OrderCollection $orderCollection)
+    public function findForSelectWindowForOrderCollection(OrderCollection $orderCollection, \DateTime $endDate = null)
     {
         $em = $this->getEntityManager();
+
+        if (null === $endDate)
+        {
+            $endDate = DateTime::getForEndOfWeek();
+        }
 
         $q  = $em->createQuery('
                 SELECT   hw
@@ -56,7 +64,7 @@ class HubWindowRepository extends EntityRepository
                 HAVING   COUNT(sw.id) = :num_sellers
             ')
             ->setParameter('now', time())
-            ->setParameter('end_of_week', DateTime::getForEndOfWeek()->format('U'))
+            ->setParameter('end_of_week', $endDate->format('U'))
             ->setParameter('seller_ids', $orderCollection->getSellerIds())
             ->setParameter('num_sellers', count($orderCollection->getSellerIds()))
         ;
@@ -84,7 +92,7 @@ class HubWindowRepository extends EntityRepository
     {
         $weekView = new WeekView(new \DateTime(), null, 'D d');
 
-        $windows = $this->findForSelectWindowForOrderCollection($orderCollection);
+        $windows = $this->findForSelectWindowForOrderCollection($orderCollection, $weekView->getEndDate());
 
         foreach ($windows as $window)
         {

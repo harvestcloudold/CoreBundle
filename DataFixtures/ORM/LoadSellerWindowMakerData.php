@@ -55,13 +55,13 @@ class LoadSellerWindowMakerData extends AbstractFixture implements OrderedFixtur
         $sellerHubRef->setHub($this->getReference('sam-hub'));
         $sellerHubRef->setIsDefault(true);
         $sellerHubRef->setFixedFee(0.5);
-        $sellerHubRef->setVariableFee(0.25);
+        $sellerHubRef->setVariableFee(4);
 
         $windowMaker = new SellerWindowMaker();
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
         $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
-        $windowMaker->setEndTime('13:00');
+        $windowMaker->setEndTime('11:00');
 
         $sellerHubRef->addWindowMaker($windowMaker);
 
@@ -74,13 +74,13 @@ class LoadSellerWindowMakerData extends AbstractFixture implements OrderedFixtur
         $sellerHubRef->setHub($this->getReference('nick-hub'));
         $sellerHubRef->setIsDefault(true);
         $sellerHubRef->setFixedFee(0.6);
-        $sellerHubRef->setVariableFee(0.2);
+        $sellerHubRef->setVariableFee(4);
 
         $windowMaker = new SellerWindowMaker();
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
         $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
-        $windowMaker->setEndTime('13:00');
+        $windowMaker->setEndTime('11:00');
 
         $sellerHubRef->addWindowMaker($windowMaker);
 
@@ -93,13 +93,13 @@ class LoadSellerWindowMakerData extends AbstractFixture implements OrderedFixtur
         $sellerHubRef->setHub($this->getReference('ramon-hub'));
         $sellerHubRef->setIsDefault(true);
         $sellerHubRef->setFixedFee(0.55);
-        $sellerHubRef->setVariableFee(0.25);
+        $sellerHubRef->setVariableFee(4);
 
         $windowMaker = new SellerWindowMaker();
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
         $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
-        $windowMaker->setEndTime('13:00');
+        $windowMaker->setEndTime('11:00');
 
         $sellerHubRef->addWindowMaker($windowMaker);
 
@@ -114,13 +114,13 @@ class LoadSellerWindowMakerData extends AbstractFixture implements OrderedFixtur
         $sellerHubRef->setHub($this->getReference('sam-hub'));
         $sellerHubRef->setIsDefault(true);
         $sellerHubRef->setFixedFee(0.5);
-        $sellerHubRef->setVariableFee(0.25);
+        $sellerHubRef->setVariableFee(4);
 
         $windowMaker = new SellerWindowMaker();
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
         $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
-        $windowMaker->setEndTime('13:00');
+        $windowMaker->setEndTime('11:00');
 
         $sellerHubRef->addWindowMaker($windowMaker);
 
@@ -133,13 +133,13 @@ class LoadSellerWindowMakerData extends AbstractFixture implements OrderedFixtur
         $sellerHubRef->setHub($this->getReference('nick-hub'));
         $sellerHubRef->setIsDefault(true);
         $sellerHubRef->setFixedFee(0.6);
-        $sellerHubRef->setVariableFee(0.2);
+        $sellerHubRef->setVariableFee(4);
 
         $windowMaker = new SellerWindowMaker();
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
         $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
-        $windowMaker->setEndTime('13:00');
+        $windowMaker->setEndTime('11:00');
 
         $sellerHubRef->addWindowMaker($windowMaker);
 
@@ -152,13 +152,13 @@ class LoadSellerWindowMakerData extends AbstractFixture implements OrderedFixtur
         $sellerHubRef->setHub($this->getReference('ramon-hub'));
         $sellerHubRef->setIsDefault(true);
         $sellerHubRef->setFixedFee(0.55);
-        $sellerHubRef->setVariableFee(0.25);
+        $sellerHubRef->setVariableFee(4);
 
         $windowMaker = new SellerWindowMaker();
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
         $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
-        $windowMaker->setEndTime('13:00');
+        $windowMaker->setEndTime('11:00');
 
         $sellerHubRef->addWindowMaker($windowMaker);
 
@@ -173,13 +173,13 @@ class LoadSellerWindowMakerData extends AbstractFixture implements OrderedFixtur
         $sellerHubRef->setHub($this->getReference('sam-hub'));
         $sellerHubRef->setIsDefault(true);
         $sellerHubRef->setFixedFee(0.5);
-        $sellerHubRef->setVariableFee(0.25);
+        $sellerHubRef->setVariableFee(4);
 
         $windowMaker = new SellerWindowMaker();
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
         $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
-        $windowMaker->setEndTime('13:00');
+        $windowMaker->setEndTime('11:00');
 
         $sellerHubRef->addWindowMaker($windowMaker);
 
@@ -192,13 +192,13 @@ class LoadSellerWindowMakerData extends AbstractFixture implements OrderedFixtur
         $sellerHubRef->setHub($this->getReference('nick-hub'));
         $sellerHubRef->setIsDefault(true);
         $sellerHubRef->setFixedFee(0.6);
-        $sellerHubRef->setVariableFee(0.2);
+        $sellerHubRef->setVariableFee(4);
 
         $windowMaker = new SellerWindowMaker();
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
         $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
-        $windowMaker->setEndTime('13:00');
+        $windowMaker->setEndTime('11:00');
 
         $sellerHubRef->addWindowMaker($windowMaker);
 
@@ -211,13 +211,13 @@ class LoadSellerWindowMakerData extends AbstractFixture implements OrderedFixtur
         $sellerHubRef->setHub($this->getReference('ramon-hub'));
         $sellerHubRef->setIsDefault(true);
         $sellerHubRef->setFixedFee(0.55);
-        $sellerHubRef->setVariableFee(0.25);
+        $sellerHubRef->setVariableFee(4);
 
         $windowMaker = new SellerWindowMaker();
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
         $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
-        $windowMaker->setEndTime('13:00');
+        $windowMaker->setEndTime('11:00');
 
         $sellerHubRef->addWindowMaker($windowMaker);
 
@@ -232,13 +232,13 @@ class LoadSellerWindowMakerData extends AbstractFixture implements OrderedFixtur
         $sellerHubRef->setHub($this->getReference('sam-hub'));
         $sellerHubRef->setIsDefault(true);
         $sellerHubRef->setFixedFee(0.5);
-        $sellerHubRef->setVariableFee(0.25);
+        $sellerHubRef->setVariableFee(4);
 
         $windowMaker = new SellerWindowMaker();
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
         $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
-        $windowMaker->setEndTime('13:00');
+        $windowMaker->setEndTime('11:00');
 
         $sellerHubRef->addWindowMaker($windowMaker);
 
@@ -251,13 +251,13 @@ class LoadSellerWindowMakerData extends AbstractFixture implements OrderedFixtur
         $sellerHubRef->setHub($this->getReference('nick-hub'));
         $sellerHubRef->setIsDefault(true);
         $sellerHubRef->setFixedFee(0.6);
-        $sellerHubRef->setVariableFee(0.2);
+        $sellerHubRef->setVariableFee(4);
 
         $windowMaker = new SellerWindowMaker();
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
         $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
-        $windowMaker->setEndTime('13:00');
+        $windowMaker->setEndTime('11:00');
 
         $sellerHubRef->addWindowMaker($windowMaker);
 
@@ -270,13 +270,13 @@ class LoadSellerWindowMakerData extends AbstractFixture implements OrderedFixtur
         $sellerHubRef->setHub($this->getReference('ramon-hub'));
         $sellerHubRef->setIsDefault(true);
         $sellerHubRef->setFixedFee(0.55);
-        $sellerHubRef->setVariableFee(0.25);
+        $sellerHubRef->setVariableFee(4);
 
         $windowMaker = new SellerWindowMaker();
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
         $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
-        $windowMaker->setEndTime('13:00');
+        $windowMaker->setEndTime('11:00');
 
         $sellerHubRef->addWindowMaker($windowMaker);
 
@@ -291,13 +291,13 @@ class LoadSellerWindowMakerData extends AbstractFixture implements OrderedFixtur
         $sellerHubRef->setHub($this->getReference('sam-hub'));
         $sellerHubRef->setIsDefault(true);
         $sellerHubRef->setFixedFee(0.5);
-        $sellerHubRef->setVariableFee(0.25);
+        $sellerHubRef->setVariableFee(4);
 
         $windowMaker = new SellerWindowMaker();
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
         $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
-        $windowMaker->setEndTime('13:00');
+        $windowMaker->setEndTime('11:00');
 
         $sellerHubRef->addWindowMaker($windowMaker);
 
@@ -310,13 +310,13 @@ class LoadSellerWindowMakerData extends AbstractFixture implements OrderedFixtur
         $sellerHubRef->setHub($this->getReference('nick-hub'));
         $sellerHubRef->setIsDefault(true);
         $sellerHubRef->setFixedFee(0.6);
-        $sellerHubRef->setVariableFee(0.2);
+        $sellerHubRef->setVariableFee(4);
 
         $windowMaker = new SellerWindowMaker();
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
         $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
-        $windowMaker->setEndTime('13:00');
+        $windowMaker->setEndTime('11:00');
 
         $sellerHubRef->addWindowMaker($windowMaker);
 
@@ -329,13 +329,13 @@ class LoadSellerWindowMakerData extends AbstractFixture implements OrderedFixtur
         $sellerHubRef->setHub($this->getReference('ramon-hub'));
         $sellerHubRef->setIsDefault(true);
         $sellerHubRef->setFixedFee(0.55);
-        $sellerHubRef->setVariableFee(0.25);
+        $sellerHubRef->setVariableFee(4);
 
         $windowMaker = new SellerWindowMaker();
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
         $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
-        $windowMaker->setEndTime('13:00');
+        $windowMaker->setEndTime('11:00');
 
         $sellerHubRef->addWindowMaker($windowMaker);
 

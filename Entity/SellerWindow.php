@@ -293,6 +293,6 @@ class SellerWindow implements Windowable
      */
     public function getTotalHubFeeForOrder(\HarvestCloud\CoreBundle\Entity\Order $order)
     {
-        return ($order->getLineItemTotal() * $this->getSellerHubRef()->getVariableFee()) + $this->getSellerHubRef()->getFixedFee();
+        return ($order->getLineItemTotal() * $this->getSellerHubRef()->getVariableFee() / 100) + $this->getSellerHubRef()->getFixedFee();
     }
 }

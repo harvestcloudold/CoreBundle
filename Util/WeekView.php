@@ -86,6 +86,19 @@ class WeekView
     }
 
     /**
+     * getEndDate()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-11-17
+     *
+     * @return \DateTime
+     */
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
+
+    /**
      * generateDays()
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
