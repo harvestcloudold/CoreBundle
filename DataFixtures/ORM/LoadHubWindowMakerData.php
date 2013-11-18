@@ -52,8 +52,18 @@ class LoadHubWindowMakerData extends AbstractFixture implements OrderedFixtureIn
         $windowMaker = new HubWindowMaker();
         $windowMaker->setHub($this->getReference('sam-hub'));
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
-        $windowMaker->setDayOfWeekNumbers(array(6));
+        $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
+        $windowMaker->setEndTime('11:00');
+
+        $manager->persist($windowMaker);
+        $manager->flush();
+
+        $windowMaker = new HubWindowMaker();
+        $windowMaker->setHub($this->getReference('sam-hub'));
+        $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
+        $windowMaker->setDayOfWeekNumber(6);
+        $windowMaker->setStartTime('11:00');
         $windowMaker->setEndTime('13:00');
 
         $manager->persist($windowMaker);
@@ -63,8 +73,18 @@ class LoadHubWindowMakerData extends AbstractFixture implements OrderedFixtureIn
         $windowMaker = new HubWindowMaker();
         $windowMaker->setHub($this->getReference('nick-hub'));
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
-        $windowMaker->setDayOfWeekNumbers(array(6));
+        $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
+        $windowMaker->setEndTime('11:00');
+
+        $manager->persist($windowMaker);
+        $manager->flush();
+
+        $windowMaker = new HubWindowMaker();
+        $windowMaker->setHub($this->getReference('nick-hub'));
+        $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
+        $windowMaker->setDayOfWeekNumber(6);
+        $windowMaker->setStartTime('11:00');
         $windowMaker->setEndTime('13:00');
 
         $manager->persist($windowMaker);
@@ -74,8 +94,18 @@ class LoadHubWindowMakerData extends AbstractFixture implements OrderedFixtureIn
         $windowMaker = new HubWindowMaker();
         $windowMaker->setHub($this->getReference('ramon-hub'));
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
-        $windowMaker->setDayOfWeekNumbers(array(6));
+        $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
+        $windowMaker->setEndTime('11:00');
+
+        $manager->persist($windowMaker);
+        $manager->flush();
+
+        $windowMaker = new HubWindowMaker();
+        $windowMaker->setHub($this->getReference('ramon-hub'));
+        $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
+        $windowMaker->setDayOfWeekNumber(6);
+        $windowMaker->setStartTime('11:00');
         $windowMaker->setEndTime('13:00');
 
         $manager->persist($windowMaker);

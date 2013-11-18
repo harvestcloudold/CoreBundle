@@ -57,12 +57,7 @@ class HubWindowMakerRepository extends WindowMakerRepository
 
         foreach ($windowMakers as $windowMaker)
         {
-            $dayOfWeekNumbers = $windowMaker->getDayOfWeekNumbers();
-
-            foreach ($dayOfWeekNumbers as $day_of_week_number)
-            {
-                $weekView->addObject($windowMaker);
-            }
+            $weekView->addObject($windowMaker);
         }
 
         return $weekView;

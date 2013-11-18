@@ -50,9 +50,9 @@ class WindowMaker implements WeekViewObjectInteface
     protected $delivery_type = HubWindow::DELIVERY_TYPE_PICKUP;
 
     /**
-     * @ORM\Column(type="array", name="day_of_week_numbers")
+     * @ORM\Column(type="integer", name="day_of_week_number")
      */
-    protected $dayOfWeekNumbers;
+    protected $day_of_week_number;
 
     /**
      * Start time in format HH:MM
@@ -84,26 +84,6 @@ class WindowMaker implements WeekViewObjectInteface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Get daysOfWeek
-     *
-     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
-     * @since  2012-10-02
-     *
-     * @return array of DayOfWeek objects
-     */
-    public function getDaysOfWeekAsObjects()
-    {
-        $daysOfWeeks = array();
-
-        foreach ($this->getDayOfWeekNumbers() as $day_of_week_number)
-        {
-            $daysOfWeeks[] = new DayOfWeek($day_of_week_number);
-        }
-
-        return $daysOfWeeks;
     }
 
     /**
@@ -269,62 +249,6 @@ class WindowMaker implements WeekViewObjectInteface
     }
 
     /**
-     * Set dayOfWeekNumbers
-     *
-     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
-     * @since  2012-10-02
-     *
-     * @param array $dayOfWeekNumbers
-     */
-    public function setDayOfWeekNumbers($dayOfWeekNumbers)
-    {
-        $this->dayOfWeekNumbers = $dayOfWeekNumbers;
-    }
-
-    /**
-     * Get dayOfWeekNumbers
-     *
-     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
-     * @since  2012-10-02
-     *
-     * @return array
-     */
-    public function getDayOfWeekNumbers()
-    {
-        return $this->dayOfWeekNumbers;
-    }
-
-    /**
-     * getDaysOfWeekAsString()
-     *
-     * e.g. M-T-FS-
-     *
-     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
-     * @since  2012-10-03
-     *
-     * @return string
-     */
-    public function getDaysOfWeekAsString()
-    {
-        $string = '';
-
-        for ($i=1; $i<8; $i++)
-        {
-            if (in_array($i, $this->getDayOfWeekNumbers()))
-            {
-                $dayOfWeek = new DayOfWeek($i);
-                $string .= $dayOfWeek->getFirstLetter();
-            }
-            else
-            {
-                $string .= '-';
-            }
-        }
-
-        return $string;
-    }
-
-    /**
      * getDateAdjustedStartTimes()
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
@@ -343,7 +267,7 @@ class WindowMaker implements WeekViewObjectInteface
         {
             $startDate->add(\DateInterval::createFromDateString('+1 day'));
 
-            if (in_array($startDate->format('N'), $this->getDayOfWeekNumbers()))
+            if ($startDate->format('N') == $this->getDayOfWeekNumber())
             {
                 $dayOfWeek = new DayOfWeek($startDate->format('N'));
 
@@ -484,7 +408,7 @@ class WindowMaker implements WeekViewObjectInteface
     /**
      * getDateTimeForWeekView()
      *
-     * @author Tom Haskins-Vaughan <tom@harvestclou.com>
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-11-13
      *
      * @return \DateTime
@@ -493,13 +417,54 @@ class WindowMaker implements WeekViewObjectInteface
     {
         $startTime = new \DateTime('2004-06-28 '.$this->getStartTime().':00');
 
-        $dayOfWeekNumbers = $this->getDayOfWeekNumbers();
-
-        while ($startTime->format('N') < $dayOfWeekNumbers[0])
+        while ($startTime->format('N') < $this->getDayOfWeekNumber())
         {
             $startTime->add(new \DateInterval('P1D'));
         }
 
         return $startTime;
+    }
+
+    /**
+     * Set day_of_week_number
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-11-17
+     *
+     * @param  integer $dayOfWeekNumber
+     *
+     * @return WindowMaker
+     */
+    public function setDayOfWeekNumber($dayOfWeekNumber)
+    {
+        $this->day_of_week_number = $dayOfWeekNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get day_of_week_number
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-11-17
+     *
+     * @return integer
+     */
+    public function getDayOfWeekNumber()
+    {
+        return $this->day_of_week_number;
+    }
+
+    /**
+     * getDayOfWeek()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-11-17
+     *
+     * @return DayOfWeek
+     */
+    public function getDayOfWeek()
+    {
+        return new DayOfWeek($this->getDayOfWeekNumber());
     }
 }

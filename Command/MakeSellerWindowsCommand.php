@@ -74,7 +74,7 @@ class MakeSellerWindowsCommand extends ContainerAwareCommand
               .$windowMaker->getHub()->getName().' (#'
               .$windowMaker->getHub()->getId().')'
             );
-            $output->writeln('  Days of Week:         '.$windowMaker->getDaysOfWeekAsString());
+            $output->writeln('  Day of Week:          '.$windowMaker->getDayOfWeek()->getShortName());
             $output->writeln('  Time:                 '.$windowMaker->getStartTime().'-'.$windowMaker->getEndTime());
 
             $windows = $windowMaker->makeWindows($input->getOption('num-days'));

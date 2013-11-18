@@ -59,7 +59,7 @@ class LoadSellerWindowMakerData extends AbstractFixture implements OrderedFixtur
 
         $windowMaker = new SellerWindowMaker();
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
-        $windowMaker->setDayOfWeekNumbers(array(6));
+        $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
         $windowMaker->setEndTime('13:00');
 
@@ -78,7 +78,7 @@ class LoadSellerWindowMakerData extends AbstractFixture implements OrderedFixtur
 
         $windowMaker = new SellerWindowMaker();
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
-        $windowMaker->setDayOfWeekNumbers(array(6));
+        $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
         $windowMaker->setEndTime('13:00');
 
@@ -97,7 +97,7 @@ class LoadSellerWindowMakerData extends AbstractFixture implements OrderedFixtur
 
         $windowMaker = new SellerWindowMaker();
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
-        $windowMaker->setDayOfWeekNumbers(array(6));
+        $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
         $windowMaker->setEndTime('13:00');
 
@@ -118,7 +118,7 @@ class LoadSellerWindowMakerData extends AbstractFixture implements OrderedFixtur
 
         $windowMaker = new SellerWindowMaker();
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
-        $windowMaker->setDayOfWeekNumbers(array(6));
+        $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
         $windowMaker->setEndTime('13:00');
 
@@ -137,7 +137,7 @@ class LoadSellerWindowMakerData extends AbstractFixture implements OrderedFixtur
 
         $windowMaker = new SellerWindowMaker();
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
-        $windowMaker->setDayOfWeekNumbers(array(6));
+        $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
         $windowMaker->setEndTime('13:00');
 
@@ -156,7 +156,7 @@ class LoadSellerWindowMakerData extends AbstractFixture implements OrderedFixtur
 
         $windowMaker = new SellerWindowMaker();
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
-        $windowMaker->setDayOfWeekNumbers(array(6));
+        $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
         $windowMaker->setEndTime('13:00');
 
@@ -177,7 +177,7 @@ class LoadSellerWindowMakerData extends AbstractFixture implements OrderedFixtur
 
         $windowMaker = new SellerWindowMaker();
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
-        $windowMaker->setDayOfWeekNumbers(array(6));
+        $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
         $windowMaker->setEndTime('13:00');
 
@@ -196,7 +196,7 @@ class LoadSellerWindowMakerData extends AbstractFixture implements OrderedFixtur
 
         $windowMaker = new SellerWindowMaker();
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
-        $windowMaker->setDayOfWeekNumbers(array(6));
+        $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
         $windowMaker->setEndTime('13:00');
 
@@ -215,7 +215,7 @@ class LoadSellerWindowMakerData extends AbstractFixture implements OrderedFixtur
 
         $windowMaker = new SellerWindowMaker();
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
-        $windowMaker->setDayOfWeekNumbers(array(6));
+        $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
         $windowMaker->setEndTime('13:00');
 
@@ -236,7 +236,7 @@ class LoadSellerWindowMakerData extends AbstractFixture implements OrderedFixtur
 
         $windowMaker = new SellerWindowMaker();
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
-        $windowMaker->setDayOfWeekNumbers(array(6));
+        $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
         $windowMaker->setEndTime('13:00');
 
@@ -255,7 +255,7 @@ class LoadSellerWindowMakerData extends AbstractFixture implements OrderedFixtur
 
         $windowMaker = new SellerWindowMaker();
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
-        $windowMaker->setDayOfWeekNumbers(array(6));
+        $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
         $windowMaker->setEndTime('13:00');
 
@@ -274,7 +274,7 @@ class LoadSellerWindowMakerData extends AbstractFixture implements OrderedFixtur
 
         $windowMaker = new SellerWindowMaker();
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
-        $windowMaker->setDayOfWeekNumbers(array(6));
+        $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
         $windowMaker->setEndTime('13:00');
 
@@ -295,7 +295,7 @@ class LoadSellerWindowMakerData extends AbstractFixture implements OrderedFixtur
 
         $windowMaker = new SellerWindowMaker();
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
-        $windowMaker->setDayOfWeekNumbers(array(6));
+        $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
         $windowMaker->setEndTime('13:00');
 
@@ -314,7 +314,7 @@ class LoadSellerWindowMakerData extends AbstractFixture implements OrderedFixtur
 
         $windowMaker = new SellerWindowMaker();
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
-        $windowMaker->setDayOfWeekNumbers(array(6));
+        $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
         $windowMaker->setEndTime('13:00');
 
@@ -333,7 +333,7 @@ class LoadSellerWindowMakerData extends AbstractFixture implements OrderedFixtur
 
         $windowMaker = new SellerWindowMaker();
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
-        $windowMaker->setDayOfWeekNumbers(array(6));
+        $windowMaker->setDayOfWeekNumber(6);
         $windowMaker->setStartTime('09:00');
         $windowMaker->setEndTime('13:00');
 

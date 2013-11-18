@@ -153,7 +153,7 @@ class WindowMakerController extends Controller
         $windowMaker = new HubWindowMaker();
         $windowMaker->setHub($this->getCurrentProfile());
         $windowMaker->setStartTime($time);
-        $windowMaker->setDayOfWeekNumbers(array($day));
+        $windowMaker->setDayOfWeekNumber($day);
         $windowMaker->setDeliveryType(HubWindow::DELIVERY_TYPE_PICKUP);
 
         $em = $this->getDoctrine()->getEntityManager();
