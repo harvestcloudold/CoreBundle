@@ -10,7 +10,6 @@
 namespace HarvestCloud\CoreBundle\Controller\Hub;
 
 use HarvestCloud\CoreBundle\Controller\Buyer\HubController as Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use HarvestCloud\CoreBundle\Entity\Profile;
@@ -37,7 +36,6 @@ class WindowMakerController extends Controller
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-25
      *
-     * @Route("/{slug}/edit")
      * @ParamConverter("profile", class="HarvestCloudCoreBundle:Profile")
      *
      * @param  Profile $profile
@@ -59,7 +57,6 @@ class WindowMakerController extends Controller
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-25
      *
-     * @Route("/window-maker/{id}")
      * @ParamConverter("windowMaker", class="HarvestCloudCoreBundle:HubWindowMaker")
      *
      * @param  HubWindowMaker  $windowMaker
@@ -101,7 +98,6 @@ class WindowMakerController extends Controller
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-25
      *
-     * @Route("/window-maker/{id}")
      * @ParamConverter("windowMaker", class="HarvestCloudCoreBundle:HubWindowMaker")
      *
      * @param  Request $request
@@ -127,7 +123,6 @@ class WindowMakerController extends Controller
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-27
      *
-     * @Route("/window-maker/{id}/make")
      * @ParamConverter("windowMaker", class="HarvestCloudCoreBundle:HubWindowMaker")
      *
      * @param  HubWindowMaker  $windowMaker
