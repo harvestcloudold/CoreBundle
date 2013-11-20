@@ -12,6 +12,7 @@ namespace HarvestCloud\CoreBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use HarvestCloud\CoreBundle\Entity\OrderCollection;
 use HarvestCloud\CoreBundle\Entity\HubWindow;
+use HarvestCloud\CoreBundle\Entity\Profile;
 use HarvestCloud\CoreBundle\Util\WeekView;
 use HarvestCloud\CoreBundle\Util\Debug;
 use HarvestCloud\CoreBundle\Util\DateTime;
@@ -129,5 +130,63 @@ class HubWindowRepository extends EntityRepository
         // \HarvestCloud\CoreBundle\Util\Debug::show($slots);
 
         return $slots;
+    }
+
+    /**
+     * Find for a given Hub
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-11-19
+     *
+     * @param  Profile   $hub
+     * @param  \DateTime $startDate
+     * @param  \DateTime $endDate
+     */
+    public function findForHub(Profile $hub, \DateTime $startDate, \DateTime $endDate)
+    {
+        $em = $this->getEntityManager();
+
+        $q  = $em->createQuery('
+                SELECT w
+                FROM   HarvestCloudCoreBundle:HubWindow w
+                WHERE  w.hub = :hub
+                AND    w.start_time >= :startDate
+                AND    w.end_time   <= :endDate
+            ')
+            ->setParameter('hub', $hub)
+            ->setParameter('startDate', $startDate)
+            ->setParameter('endDate', $endDate)
+        ;
+
+        return $q->getResult();
+    }
+
+    /**
+     * getWeekViewForHub()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-11-19
+     *
+     * @param  Profile   $hub
+     * @param  \DateTime $startDate
+     * @param  \DateTime $endDate
+     */
+    public function getWeekViewForHub(Profile $hub, \DateTime $startDate, \DateTime $endDate = null)
+    {
+        if (null === $endDate)
+        {
+            $endDate = clone $startDate;
+            $endDate->add(new \DateInterval('P6D'))->setTime(23, 59, 59);
+        }
+
+        $weekView = new WeekView($startDate, $endDate, 'D j');
+        $windows  = $this->findForHub($hub, $startDate, $endDate);
+
+        foreach ($windows as $window)
+        {
+            $weekView->addObject($window);
+        }
+
+        return $weekView;
     }
 }

@@ -1,7 +1,7 @@
 {% extends 'HarvestCloudCoreBundle:Hub:layout.html.twig' %}
 
 {% block content %}
-    <h1>{{ profile }} Recurring Hub Windows</h1>
+    <h1>{{ profile }} Hub Windows ({{ startDate|date('D j M') }} - {{ endDate|date('D j M') }})</h1>
 
     <p>
         <a href="{{ path('Hub_window', { 'slug': profile.slug, 'week': 'this-week' }) }}">This Week</a>
@@ -29,14 +29,8 @@
                             {% if day.objects %}
                                 <td class="highlight">
                                     {% for object in day.objects %}
-                                        <div><a href="{{ path('Hub_window_maker_show', { 'id': object.id }) }}">$2.05</a></div>
+                                        <div>{{ object.id }}</div>
                                     {% endfor %}
-                                </td>
-                            {% elseif profile.id == app.user.currentProfile.id %}
-                                <td>
-                                    <form action="{{ path('Hub_window_maker_quick_add', { 'slug': app.user.currentProfile.slug, 'day': day.dateTime.format('N'), 'time': time.time_key }) }}" method="post">
-                                        <input type="submit" class="small submit button" value="Add" />
-                                    </form>
                                 </td>
                             {% else %}
                                 <td></td>

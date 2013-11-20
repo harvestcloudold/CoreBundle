@@ -11,13 +11,13 @@ Hub_window_maker:
         _method: GET
 
 Hub_window_maker_create:
-    pattern:  /window-maker/new
+    pattern:  /windows/recurring/new
     defaults: { _controller: HarvestCloud\CoreBundle\Controller\Hub\WindowMakerController::newAction }
     requirements:
         _method: POST
 
 Hub_window_maker_new:
-    pattern:  /window-maker/new
+    pattern:  /windows/recurring/new
     defaults: { _controller: HarvestCloud\CoreBundle\Controller\Hub\WindowMakerController::newAction }
     requirements:
         _method: GET
@@ -53,3 +53,11 @@ Hub_window_maker_make:
     requirements:
         id: \d+
         _method: POST
+
+
+
+Hub_window:
+    pattern:  /{slug}/hub-windows/{week}
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Hub\WindowController::indexAction, week: this-week }
+    requirements:
+        _method: GET

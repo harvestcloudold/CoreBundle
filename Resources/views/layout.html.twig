@@ -41,7 +41,7 @@
                         </div><!-- .main_logo -->
                         <div class="main nav">
                             {% if is_granted("IS_AUTHENTICATED_FULLY") %}
-                                <a class="profile" href="{{ path('Profile_show', { 'slug': app.user.currentProfile.slug }) }}">{{ app.user.currentProfile.name }}</a>
+                                <a class="profile" href="{{ path('Profile_show', { 'slug': app.user.currentProfile.slug }) }}">{{ app.user.currentProfile.name }} (#{{ app.user.currentProfile.id }})</a>
                             {% else %}
                                 <a class="profile" href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
                             {% endif %}
