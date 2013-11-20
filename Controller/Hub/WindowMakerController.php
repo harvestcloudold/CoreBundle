@@ -13,6 +13,7 @@ use HarvestCloud\CoreBundle\Controller\Buyer\HubController as Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
+use HarvestCloud\CoreBundle\Entity\Profile;
 use HarvestCloud\CoreBundle\Entity\WindowMaker;
 use HarvestCloud\CoreBundle\Entity\HubWindow;
 use HarvestCloud\CoreBundle\Entity\HubWindowMaker;
@@ -35,14 +36,20 @@ class WindowMakerController extends Controller
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2012-10-25
+     *
+     * @Route("/{slug}/edit")
+     * @ParamConverter("profile", class="HarvestCloudCoreBundle:Profile")
+     *
+     * @param  Profile $profile
      */
-    public function indexAction()
+    public function indexAction(Profile $profile)
     {
         $weekView = $this->getRepo('HubWindowMaker')
-            ->getWeekView($this->getCurrentProfile());
+            ->getWeekView($profile);
 
         return $this->render('HarvestCloudCoreBundle:Hub/WindowMaker:index.html.twig', array(
             'weekView' => $weekView,
+            'profile'  => $profile,
         ));
     }
 
@@ -160,6 +167,8 @@ class WindowMakerController extends Controller
         $em->persist($windowMaker);
         $em->flush();
 
-        return $this->redirect($this->generateUrl('Hub_window_maker'));
+        return $this->redirect($this->generateUrl('Hub_window_maker', array(
+            'slug' => $this->getCurrentProfile()->getSlug(),
+        )));
     }
 }

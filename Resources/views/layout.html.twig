@@ -95,7 +95,7 @@
                             <h3>Hub</h3>
                             {% if app.user.currentProfile.hasActiveHubStatus %}
                                 <ul>
-                                    <li><a href="{{ path('Hub_window_maker') }}">Recurring Hub Windows</a></li>
+                                    <li><a href="{{ path('Hub_window_maker', { 'slug': app.user.currentProfile.slug }) }}">Hub Windows</a></li>
                                 </ul>
                             {% endif %}
                         </li><!-- .hub -->

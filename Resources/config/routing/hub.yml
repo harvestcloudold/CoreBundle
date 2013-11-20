@@ -5,7 +5,7 @@ Hub_register_landing:
 
 
 Hub_window_maker:
-    pattern:  /window-maker
+    pattern:  /{slug}/hub-windows/recurring
     defaults: { _controller: HarvestCloud\CoreBundle\Controller\Hub\WindowMakerController::indexAction }
     requirements:
         _method: GET
