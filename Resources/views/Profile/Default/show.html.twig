@@ -7,6 +7,45 @@
         {% endif %}
         {{ profile.name }} ({{ profile.slug }})
     </h1>
+
+    <div class="two_equal_columns">
+        <div class="left column">
+            <h2>Profile Details</h2>
+            <table class="nvp">
+                <tr>
+                    <th>Name</th>
+                    <td>{{ profile.name }}</td>
+                </tr>
+                <tr>
+                    <th>Address</th>
+                    <td>{{ profile.defaultLocation.address }}</td>
+                </tr>
+            </table><!-- .nvp -->
+        </div><!-- .left.column -->
+        <div class="right column">
+            {% if profile.hasSellerHubRefsAsSeller %}
+                <h2>{{ profile }} delivers to the following hubs</h2>
+                <table>
+                    {% for sellerHubRef in profile.sellerHubRefsAsSeller %}
+                        <tr>
+                            <td><a href="{{ path('Profile_show', { 'slug': sellerHubRef.hub.slug }) }}">{{ sellerHubRef.hub }}</a></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endif %}
+            {% if profile.hasSellerHubRefsAsHub %}
+                <h2>Sellers that deliver to {{ profile }}</h2>
+                <table>
+                    {% for sellerHubRef in profile.sellerHubRefsAsHub %}
+                        <tr>
+                            <td><a href="{{ path('Profile_show', { 'slug': sellerHubRef.seller.slug }) }}">{{ sellerHubRef.seller }}</a></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endif %}
+        </div><!-- .right.column -->
+        <div class="clear"></div>
+    </div><!-- .two_equal_columns -->
     <p>
         {% if app.user.currentProfile.id == profile.id %}
             <form method="get" action="{{ path('Profile_edit', { 'slug': profile.slug }) }}">

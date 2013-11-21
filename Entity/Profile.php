@@ -887,6 +887,19 @@ class Profile implements Geolocatable
     }
 
     /**
+     * hasSellerHubRefsAsSeller()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-11-20
+     *
+     * @return bool
+     */
+    public function hasSellerHubRefsAsSeller()
+    {
+        return (bool) count($this->getSellerHubRefsAsSeller());
+    }
+
+    /**
      * Get sellerHubRefsAsHub
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
@@ -897,6 +910,19 @@ class Profile implements Geolocatable
     public function getSellerHubRefsAsHub()
     {
         return $this->sellerHubRefsAsHub;
+    }
+
+    /**
+     * hasSellerHubRefsAsHub()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-11-20
+     *
+     * @return bool
+     */
+    public function hasSellerHubRefsAsHub()
+    {
+        return (bool) count($this->getSellerHubRefsAsHub());
     }
 
     /**
