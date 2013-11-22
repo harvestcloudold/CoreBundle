@@ -30,6 +30,19 @@ panels
     margin-left: 0;
 }
 
+.two_equal_columns > .column .panels > .panel,
+.two_equal_columns > .column .panels > .panel:nth-of-type(5n+1)
+{
+    width: 32%;
+    margin-left: 2%;
+    margin-bottom: 2%;
+}
+
+.two_equal_columns > .column .panels > .panel:nth-of-type(3n+1)
+{
+    margin-left: 0;
+}
+
 .panels > .panel > .inner
 {
   border: 1px solid #ccc;

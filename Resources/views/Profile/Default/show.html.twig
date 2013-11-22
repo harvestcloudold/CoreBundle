@@ -25,23 +25,51 @@
         <div class="right column">
             {% if profile.hasSellerHubRefsAsSeller %}
                 <h2>{{ profile }} delivers to the following hubs</h2>
-                <table>
+                <div class="panels">
                     {% for sellerHubRef in profile.sellerHubRefsAsSeller %}
-                        <tr>
-                            <td><a href="{{ path('Profile_show', { 'slug': sellerHubRef.hub.slug }) }}">{{ sellerHubRef.hub }}</a></td>
-                        </tr>
+                        <a href="{{ path('Profile_show', { 'slug': sellerHubRef.hub.slug }) }}" class="panel" title="{{ sellerHubRef.hub }}">
+                            <div class="inner">
+                                <div class="thumbnail">
+                                    {% if sellerHubRef.hub.thumbnailPath %}
+                                        <img src="{{ sellerHubRef.hub.thumbnailWebPath }}" />
+                                    {% else %}
+                                        <img src="/images/sandbox/avatars/{{ sellerHubRef.hub.id }}.png" />
+                                    {% endif %}
+                                </div>
+                                <div class="details">
+                                    <h4>{{ sellerHubRef.hub }}</h4>
+                                    <div class="address">{{ sellerHubRef.hub.defaultLocation.cityState }}</div>
+                                </div><!-- .details -->
+                                <div class="clear"></div>
+                            </div><!-- .inner -->
+                        </a><!-- .panel -->
                     {% endfor %}
-                </table>
+                    <div class="clear"></div>
+                </div><!-- .panels -->
             {% endif %}
             {% if profile.hasSellerHubRefsAsHub %}
                 <h2>Sellers that deliver to {{ profile }}</h2>
-                <table>
+                <div class="panels">
                     {% for sellerHubRef in profile.sellerHubRefsAsHub %}
-                        <tr>
-                            <td><a href="{{ path('Profile_show', { 'slug': sellerHubRef.seller.slug }) }}">{{ sellerHubRef.seller }}</a></td>
-                        </tr>
+                        <a href="{{ path('Profile_show', { 'slug': sellerHubRef.seller.slug }) }}" class="panel" title="{{ sellerHubRef.seller }}">
+                            <div class="inner">
+                                <div class="thumbnail">
+                                    {% if sellerHubRef.seller.thumbnailPath %}
+                                        <img src="{{ sellerHubRef.seller.thumbnailWebPath }}" />
+                                    {% else %}
+                                        <img src="/images/sandbox/avatars/{{ sellerHubRef.seller.id }}.png" />
+                                    {% endif %}
+                                </div>
+                                <div class="details">
+                                    <h4>{{ sellerHubRef.seller }}</h4>
+                                    <div class="address">{{ sellerHubRef.seller.defaultLocation.cityState }}</div>
+                                </div><!-- .details -->
+                                <div class="clear"></div>
+                            </div><!-- .inner -->
+                        </a><!-- .panel -->
                     {% endfor %}
-                </table>
+                    <div class="clear"></div>
+                </div><!-- .panels -->
             {% endif %}
         </div><!-- .right.column -->
         <div class="clear"></div>
