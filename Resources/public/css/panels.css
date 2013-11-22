@@ -15,9 +15,47 @@ panels
 
 ******************************************************************************/
 
-.panels .panel
+.panels > .panel
 {
     display: block;
     float: left;
+    width: 21%;
+    margin-left: 1.25%;
+    margin-bottom: 1.25%;
+    font-weight: normal;
+}
+
+.panels > .panel:nth-of-type(5n+1)
+{
+    margin-left: 0;
+}
+
+.panels > .panel > .inner
+{
+  border: 1px solid #ccc;
+  border-radius: 3px;
     background: #fff;
+}
+
+.panels > .panel .thumbnail
+{
+  display: block;
+  float: left;
+  width: 28%;
+  margin: 0 0 0 2%;
+  padding: 2% 0;
+}
+
+.panels > .panel .details
+{
+  display: block;
+  float: left;
+  width: 60%;
+  margin: 0 2% 0 8%;
+}
+
+.panels > .panel .thumbnail img
+{
+    width: 100%;
+    display: block;
 }
