@@ -2270,7 +2270,7 @@ class Profile implements Geolocatable
     {
         if ($this->getThumbnailPath())
         {
-            return $this->getUploadDir().DIRECTORY_SEPARATOR
+            return DIRECTORY_SEPARATOR.$this->getUploadDir().DIRECTORY_SEPARATOR
                 .$this->getThumbnailPath();
         }
 

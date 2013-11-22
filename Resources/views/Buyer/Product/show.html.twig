@@ -5,6 +5,7 @@
     <h1>{{ product.name }}</h1>
     <div class="two_equal_columns">
         <div class="left column">
+            <h2>Product details</h2>
             <table class="nvp">
                 <tr>
                     <th>Name</th>
@@ -52,6 +53,33 @@
                 </div><!-- .form.row -->
             </form>
         </div><!-- .left.column -->
+        <div class="right column">
+            {% if product.seller.hasSellerHubRefsAsSeller %}
+                <h2>{{ product.name }} available from the following hubs</h2>
+                <div class="panels">
+                    {% for sellerHubRef in product.seller.sellerHubRefsAsSeller %}
+                        <a href="{{ path('Profile_show', { 'slug': sellerHubRef.hub.slug }) }}" class="panel" title="{{ sellerHubRef.hub }}">
+                            <div class="inner">
+                                <div class="thumbnail">
+                                    {% if sellerHubRef.hub.thumbnailPath %}
+                                        <img src="{{ sellerHubRef.hub.thumbnailWebPath }}" />
+                                    {% else %}
+                                        <img src="/images/sandbox/avatars/{{ sellerHubRef.hub.id }}.png" />
+                                    {% endif %}
+                                </div>
+                                <div class="details">
+                                    <h4>{{ sellerHubRef.hub }}</h4>
+                                    <div class="address">{{ sellerHubRef.hub.defaultLocation.cityState }}</div>
+                                </div><!-- .details -->
+                                <div class="clear"></div>
+                            </div><!-- .inner -->
+                        </a><!-- .panel -->
+                    {% endfor %}
+                    <div class="clear"></div>
+                </div><!-- .panels -->
+            {% endif %}
+        </div><!-- .right.column -->
+        <div class="clear"></div>
         <div class="clear"></div>
     </div><!-- .two_equal_columns -->
 {% endblock %}
