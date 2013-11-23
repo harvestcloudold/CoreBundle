@@ -48,7 +48,7 @@ class Image
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      */
-    public $sub_directory;
+    public $sub_dir;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
@@ -165,6 +165,14 @@ class Image
     {
         $this->filename = $filename;
 
+        $sub_dir = '';
+        $sub_dir .= substr(0, 2, $filename).DIRECTORY_SEPARATOR;
+        $sub_dir .= substr(2, 2, $filename).DIRECTORY_SEPARATOR;
+        $sub_dir .= substr(4, 2, $filename);
+
+        $this->setSubDir($sub_dir);
+        $this->setPath($sub_dir.DIRECTORY_SEPARATOR.$filename);
+
         return $this;
     }
 
@@ -182,33 +190,33 @@ class Image
     }
 
     /**
-     * Set sub_directory
+     * Set sub_dir
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-11-22
      *
-     * @param  string $subDirectory
+     * @param  string $subDir
      *
      * @return Image
      */
-    public function setSubDirectory($subDirectory)
+    public function setSubDir($subDir)
     {
-        $this->sub_directory = $subDirectory;
+        $this->sub_dir = $subDir;
 
         return $this;
     }
 
     /**
-     * Get sub_directory
+     * Get sub_dir
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-11-22
      *
      * @return string
      */
-    public function getSubDirectory()
+    public function getSubDir()
     {
-        return $this->sub_directory;
+        return $this->sub_dir;
     }
 
     /**
