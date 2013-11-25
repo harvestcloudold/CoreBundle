@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use HarvestCloud\GeoBundle\Util\Geolocatable;
 use HarvestCloud\CoreBundle\Entity\Account;
+use HarvestCloud\CoreBundle\Entity\Image;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -70,6 +71,12 @@ class Profile implements Geolocatable
      * @var UploadedFile
      */
     protected $thumbnailFile;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Image", cascade={"persist"})
+     * @ORM\JoinColumn(name="profile_picture_id", referencedColumnName="id")
+     */
+    private $profilePicture;
 
     /**
      * @ORM\ManyToMany(targetEntity="\HarvestCloud\UserBundle\Entity\User", mappedBy="profiles")
@@ -2343,16 +2350,44 @@ class Profile implements Geolocatable
             return;
         }
 
-        $filename = $this->getSlug().'.jpg';
+        $file = $this->getThumbnailFile();
 
-        $this->getThumbnailFile()->move(
-            $this->getUploadRootDir(),
-            $filename
-        );
+        $image = Image::createFromUploadedFile($file);
+        $file->move($image->getUploadDir(), $image->getFilename());
 
-        $this->setThumbnailPath($filename);
+        $this->setProfilePicture($image);
 
         // Clean up $thumbnailFile since we won't need it any more
         $this->thumbnailFile = null;
+    }
+
+    /**
+     * Set profilePicture
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-11-24
+     *
+     * @param  \HarvestCloud\CoreBundle\Entity\Image $profilePicture
+     *
+     * @return Profile
+     */
+    public function setProfilePicture(\HarvestCloud\CoreBundle\Entity\Image $profilePicture = null)
+    {
+        $this->profilePicture = $profilePicture;
+
+        return $this;
+    }
+
+    /**
+     * Get profilePicture
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-11-24
+     *
+     * @return \HarvestCloud\CoreBundle\Entity\Image
+     */
+    public function getProfilePicture()
+    {
+        return $this->profilePicture;
     }
 }

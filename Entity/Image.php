@@ -11,6 +11,7 @@ namespace HarvestCloud\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Image Entity
@@ -67,14 +68,63 @@ class Image
     public $mime_type;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     public $width;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     public $height;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    public $size;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     */
+    public $original_filename;
+
+    /**
+     * __construct()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-11-23
+     *
+     * @param  string $extension
+     */
+    public function __construct($extension)
+    {
+        $this->setExtension($extension);
+        $this->setFilename(md5(time().rand(0,100000).$extension).'.'.$this->getExtension());
+    }
+
+    /**
+     * createFromUploadedFile()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-11-23
+     *
+     * @param  \Symfony\Component\HttpFoundation\File\UploadedFile $file
+     *
+     * @return \HarvestCloud\CoreBundle\Entity\Image
+     */
+    public static function createFromUploadedFile(UploadedFile $file)
+    {
+        $size = getimagesize($file->getRealPath());
+
+        $image = new Image($file->guessExtension());
+        $image->setOriginalFilename($file->getClientOriginalName());
+        $image->setMimeType($file->getMimeType());
+        $image->setSize(filesize($file->getRealPath()));
+        $image->setWidth($size[0]);
+        $image->setHeight($size[1]);
+
+        return $image;
+    }
 
     /**
      * getUploadPath()
@@ -88,7 +138,22 @@ class Image
      */
     public function getUploadPath()
     {
-        return $this->getUploadBaseDir().'/'.$this->getSubDir().'/'.$this->getFilename();
+        return $this->getUploadDir().'/'.$this->getFilename();
+    }
+
+    /**
+     * getUploadDir()
+     *
+     * e.g. /var/www/www.harvestcloud.com/app/data/media/images/fh/dg/st
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-11-22
+     *
+     * @return string
+     */
+    public function getUploadDir()
+    {
+        return $this->getUploadBaseDir().'/'.$this->getSubDir();
     }
 
     /**
@@ -161,14 +226,14 @@ class Image
      *
      * @return Image
      */
-    public function setFilename($filename)
+    public function setFilename($filename = null)
     {
         $this->filename = $filename;
 
         $sub_dir = '';
-        $sub_dir .= substr(0, 2, $filename).DIRECTORY_SEPARATOR;
-        $sub_dir .= substr(2, 2, $filename).DIRECTORY_SEPARATOR;
-        $sub_dir .= substr(4, 2, $filename);
+        $sub_dir .= substr($filename, 0, 2).DIRECTORY_SEPARATOR;
+        $sub_dir .= substr($filename, 2, 2).DIRECTORY_SEPARATOR;
+        $sub_dir .= substr($filename, 4, 2);
 
         $this->setSubDir($sub_dir);
         $this->setPath($sub_dir.DIRECTORY_SEPARATOR.$filename);
@@ -203,6 +268,12 @@ class Image
     {
         $this->sub_dir = $subDir;
 
+        // ensure directory exists
+        if (!mkdir($this->getUploadDir(), 0755, true))
+        {
+            throw new \Exception('Could not create directory '.$this->getUploadDir());
+        }
+
         return $this;
     }
 
@@ -231,6 +302,11 @@ class Image
      */
     public function setExtension($extension)
     {
+        if ('jpeg' == $extension)
+        {
+            $extension = 'jpg';
+        }
+
         $this->extension = $extension;
 
         return $this;
@@ -367,5 +443,68 @@ class Image
     public function getPath()
     {
         return $this->path;
+    }
+
+    /**
+     * Set size
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-11-23
+     *
+     * @param  integer $size
+     *
+     * @return Image
+     */
+    public function setSize($size)
+    {
+        $this->size = $size;
+
+        return $this;
+    }
+
+    /**
+     * Get size
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-11-23
+     *
+     * @return integer
+     */
+    public function getSize()
+    {
+        return $this->size;
+    }
+
+    /**
+     * Set original_filename
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-11-23
+     *
+     * @param  string $originalFilename
+     *
+     * @return Image
+     */
+    public function setOriginalFilename($originalFilename)
+    {
+        $this->original_filename = $originalFilename;
+
+        // Let's default to the client's filename
+        $this->setName($originalFilename);
+
+        return $this;
+    }
+
+    /**
+     * Get original_filename
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-11-23
+     *
+     * @return string
+     */
+    public function getOriginalFilename()
+    {
+        return $this->original_filename;
     }
 }

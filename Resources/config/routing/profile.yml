@@ -99,7 +99,7 @@ Profile_product_show:
         _method: GET
 
 Profile_show:
-    pattern:  /{slug}
-    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Profile\DefaultController::showAction }
+    pattern:  /{slug}.{_format}
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Profile\DefaultController::showAction, _format: html }
     requirements:
         slug: "[a-z0-9-]+"

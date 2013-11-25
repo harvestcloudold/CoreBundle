@@ -2,8 +2,8 @@
 
 {% block content %}
     <h1>
-        {% if profile.thumbnailPath %}
-          <img src="{{ app.user.currentProfile.thumbnailWebPath }}" />
+        {% if profile.profilePicture %}
+          <img src="{{ profile.slug}}.jpg" />
         {% endif %}
         {{ profile.name }} ({{ profile.slug }})
     </h1>
@@ -30,8 +30,8 @@
                         <a href="{{ path('Profile_show', { 'slug': sellerHubRef.hub.slug }) }}" class="panel" title="{{ sellerHubRef.hub }}">
                             <div class="inner">
                                 <div class="thumbnail">
-                                    {% if sellerHubRef.hub.thumbnailPath %}
-                                        <img src="{{ sellerHubRef.hub.thumbnailWebPath }}" />
+                                    {% if sellerHubRef.hub.profilePicture %}
+                                        <img src="{{ sellerHubRef.hub.slug }}.jpg" />
                                     {% else %}
                                         <img src="/images/sandbox/avatars/{{ sellerHubRef.hub.id }}.png" />
                                     {% endif %}
@@ -54,8 +54,8 @@
                         <a href="{{ path('Profile_show', { 'slug': sellerHubRef.seller.slug }) }}" class="panel" title="{{ sellerHubRef.seller }}">
                             <div class="inner">
                                 <div class="thumbnail">
-                                    {% if sellerHubRef.seller.thumbnailPath %}
-                                        <img src="{{ sellerHubRef.seller.thumbnailWebPath }}" />
+                                    {% if sellerHubRef.seller.profilePicture %}
+                                        <img src="{{ sellerHubRef.seller.slug }}.jpg" />
                                     {% else %}
                                         <img src="/images/sandbox/avatars/{{ sellerHubRef.seller.id }}.png" />
                                     {% endif %}

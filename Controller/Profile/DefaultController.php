@@ -11,6 +11,7 @@ namespace HarvestCloud\CoreBundle\Controller\Profile;
 
 use HarvestCloud\CoreBundle\Controller\Profile\ProfileController as Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use HarvestCloud\CoreBundle\Form\ProfileType;
 use HarvestCloud\CoreBundle\Entity\Profile;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -94,9 +95,21 @@ class DefaultController extends Controller
      * @ParamConverter("profile", class="HarvestCloudCoreBundle:Profile")
      *
      * @param  Profile $profile
+     * @param  Request $request
      */
-    public function showAction(Profile $profile)
+    public function showAction(Profile $profile, Request $request)
     {
+        if ('jpg' == $request->getRequestFormat())
+        {
+            $image = new \Imagick($profile->getProfilePicture()->getUploadPath());
+            $image->cropThumbnailImage(150, 150);
+
+            $response = new Response($image, 200);
+            $response->headers->set('Content-Type', $profile->getProfilePicture()->getMimeType());
+
+            return $response;
+        }
+
         $q  = $this->get('doctrine')
             ->getManager()
             ->createQuery('
