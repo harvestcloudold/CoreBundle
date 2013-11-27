@@ -43,6 +43,60 @@ panels
     margin-left: 0;
 }
 
+
+@media only screen and (max-width: 800px)
+{
+    .panels > .panel:nth-of-type(5n+1),
+    .square_panels > .panel
+    {
+        width: 23.8%;
+        margin-left: 1.6%;
+        margin-bottom: 1.6%;
+    }
+
+    .panels > .panel:nth-of-type(4n+1)
+    {
+        margin-left: 0;
+    }
+}
+
+
+@media only screen and (max-width: 600px)
+{
+    .panels > .panel:nth-of-type(5n+1),
+    .panels > .panel:nth-of-type(4n+1),
+    .square_panels > .panel
+    {
+        width: 32%;
+        margin-left: 2%;
+        margin-bottom: 2%;
+    }
+
+    .panels > .panel:nth-of-type(3n+1)
+    {
+        margin-left: 0;
+    }
+}
+
+
+@media only screen and (max-width: 400px)
+{
+    .panels > .panel:nth-of-type(5n+1),
+    .panels > .panel:nth-of-type(4n+1),
+    .panels > .panel:nth-of-type(3n+1),
+    .square_panels > .panel
+    {
+        width: 49%;
+        margin-left: 2%;
+        margin-bottom: 2%;
+    }
+
+    .panels > .panel:nth-of-type(2n+1)
+    {
+        margin-left: 0;
+    }
+}
+
 .panels > .panel > .inner
 {
     border: 1px solid #ccc;
