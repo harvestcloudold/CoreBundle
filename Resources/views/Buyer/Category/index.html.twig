@@ -3,16 +3,17 @@
 {% block content %}
     <h1>Categories</h1>
 
-    <div class="category_panels panels">
+    <div class="category_panels square_panels panels">
         {% for category in categories %}
-          <div class="panel">
-              <p class="image">
-                  <a href="{{ path('Buyer_category_show', { 'path': category.path }) }}" title="{{ category.title }}"><img src="/images/sandbox/products/{{ category.slug }}.jpg" alt="{{ category.title }}" /></a>
-              </p><!-- .image -->
-              <p class="label">
-                  <span><a href="{{ path('Buyer_category_show', { 'path': category.path }) }}">{{ category.title }}</a></span>
-              </p><!-- .label -->
-          </div><!-- .panel -->
+          <a href="{{ path('Buyer_category_show', { 'path': category.path }) }}" class="panel">
+              <div class="inner">
+                  <div class="thumbnail">
+                      <img src="/images/sandbox/products/{{ category.slug }}.jpg" alt="{{ category.title }}" />
+                      <div class="label">{{ category.title }}</div>
+                  </div><!-- .thumbnail -->
+                  <div class="clear"></div>
+              </div><!-- .inner -->
+          </a><!-- .panel -->
         {% endfor %}
         <div class="clear"></div>
     </div><!-- .category_panels.panels -->

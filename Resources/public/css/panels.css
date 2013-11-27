@@ -19,7 +19,7 @@ panels
 {
     display: block;
     float: left;
-    width: 21%;
+    width: 19%;
     margin-left: 1.25%;
     margin-bottom: 1.25%;
     font-weight: normal;
@@ -45,8 +45,8 @@ panels
 
 .panels > .panel > .inner
 {
-  border: 1px solid #ccc;
-  border-radius: 3px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
     background: #fff;
 }
 
@@ -57,6 +57,12 @@ panels
   width: 28%;
   margin: 0 0 0 2%;
   padding: 2% 0;
+}
+
+.square_panels > .panel .thumbnail
+{
+    width: 96%;
+    margin: 0 2%;
 }
 
 .panels > .panel .details
@@ -71,4 +77,11 @@ panels
 {
     width: 100%;
     display: block;
+}
+
+.panels > .panel .thumbnail .label
+{
+  padding: 0.8em 0 0.5em 0;
+  text-align: center;
+  font-size: 1.2em;
 }
