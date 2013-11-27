@@ -61,22 +61,30 @@ class Profile implements Geolocatable
     protected $name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\File(maxSize="6000000")
+     *
+     * @var UploadedFile
      */
-    protected $thumbnail_path;
+    protected $profilePictureFile;
 
     /**
      * @Assert\File(maxSize="6000000")
      *
      * @var UploadedFile
      */
-    protected $thumbnailFile;
+    protected $profileBannerFile;
 
     /**
      * @ORM\OneToOne(targetEntity="Image", cascade={"persist"})
      * @ORM\JoinColumn(name="profile_picture_id", referencedColumnName="id")
      */
     private $profilePicture;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Image", cascade={"persist"})
+     * @ORM\JoinColumn(name="profile_banner_id", referencedColumnName="id")
+     */
+    private $profileBanner;
 
     /**
      * @ORM\ManyToMany(targetEntity="\HarvestCloud\UserBundle\Entity\User", mappedBy="profiles")
@@ -2217,148 +2225,105 @@ class Profile implements Geolocatable
     }
 
     /**
-     * Set thumbnail_path
-     *
-     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
-     * @since  2013-10-06
-     *
-     * @param  string $thumbnail_path
-     *
-     * @return Profile
-     */
-    public function setThumbnailPath($thumbnail_path)
-    {
-        $this->thumbnail_path = $thumbnail_path;
-
-        return $this;
-    }
-
-    /**
-     * Get thumbnail_path
-     *
-     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
-     * @since  2013-10-06
-     *
-     * @return string
-     */
-    public function getThumbnailPath()
-    {
-        return $this->thumbnail_path;
-    }
-
-    /**
-     * getThumbnailAbsolutePath()
+     * setProfilePictureFile()
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-10-31
      *
-     * @return string
+     * @param  UploadedFile $profilePictureFile
      */
-    public function getThumbnailAbsolutePath()
+    public function setProfilePictureFile(UploadedFile $profilePictureFile)
     {
-        if ($this->getThumbnailPath())
-        {
-            return $this->getUploadRootDir().DIRECTORY_SEPARATOR
-                .$this->getThumbnailPath();
-        }
-
-        return null;
+        $this->profilePictureFile = $profilePictureFile;
     }
 
     /**
-     * getThumbnailWebPath()
-     *
-     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
-     * @since  2013-10-31
-     *
-     * @return string
-     */
-    public function getThumbnailWebPath()
-    {
-        if ($this->getThumbnailPath())
-        {
-            return DIRECTORY_SEPARATOR.$this->getUploadDir().DIRECTORY_SEPARATOR
-                .$this->getThumbnailPath();
-        }
-
-        return null;
-    }
-
-    /**
-     * getUploadRootDir()
-     *
-     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
-     * @since  2013-10-31
-     *
-     * @return string
-     */
-    public function getUploadRootDir()
-    {
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
-    }
-
-    /**
-     * getUploadDir()
-     *
-     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
-     * @since  2013-10-31
-     *
-     * @return string
-     */
-    public function getUploadDir()
-    {
-        return 'profile/images';
-    }
-
-    /**
-     * setThumbnailFile()
-     *
-     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
-     * @since  2013-10-31
-     *
-     * @param  UploadedFile $thumbnailFile
-     */
-    public function setThumbnailFile(UploadedFile $thumbnailFile)
-    {
-        $this->thumbnailFile = $thumbnailFile;
-    }
-
-    /**
-     * getThumbnailFile()
+     * getProfilePictureFile()
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-10-31
      *
      * @return UploadedFile
      */
-    public function getThumbnailFile()
+    public function getProfilePictureFile()
     {
-        return $this->thumbnailFile;
+        return $this->profilePictureFile;
     }
 
     /**
-     * uploadThumbnail()
+     * uploadProfilePicture()
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
      * @since  2013-10-31
      */
-    public function uploadThumbnail()
+    public function uploadProfilePicture()
     {
         // If no file was uploaded, do nothing
-        if (null === $this->getThumbnailFile())
+        if (null === $this->getProfilePictureFile())
         {
             return;
         }
 
-        $file = $this->getThumbnailFile();
+        $file = $this->getProfilePictureFile();
 
         $image = Image::createFromUploadedFile($file);
         $file->move($image->getUploadDir(), $image->getFilename());
 
         $this->setProfilePicture($image);
 
-        // Clean up $thumbnailFile since we won't need it any more
-        $this->thumbnailFile = null;
+        // Clean up $profilePictureFile since we won't need it any more
+        $this->profilePictureFile = null;
+    }
+
+    /**
+     * setProfileBannerFile()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-11-26
+     *
+     * @param  UploadedFile $profileBannerFile
+     */
+    public function setProfileBannerFile(UploadedFile $profileBannerFile)
+    {
+        $this->profileBannerFile = $profileBannerFile;
+    }
+
+    /**
+     * getProfileBannerFile()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-11-26
+     *
+     * @return UploadedFile
+     */
+    public function getProfileBannerFile()
+    {
+        return $this->profileBannerFile;
+    }
+
+    /**
+     * uploadProfileBanner()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-11-26
+     */
+    public function uploadProfileBanner()
+    {
+        // If no file was uploaded, do nothing
+        if (null === $this->getProfileBannerFile())
+        {
+            return;
+        }
+
+        $file = $this->getProfileBannerFile();
+
+        $image = Image::createFromUploadedFile($file);
+        $file->move($image->getUploadDir(), $image->getFilename());
+
+        $this->setProfileBanner($image);
+
+        // Clean up $profileBannerFile since we won't need it any more
+        $this->profileBannerFile = null;
     }
 
     /**
@@ -2389,5 +2354,35 @@ class Profile implements Geolocatable
     public function getProfilePicture()
     {
         return $this->profilePicture;
+    }
+
+    /**
+     * Set profileBanner
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-11-24
+     *
+     * @param  \HarvestCloud\CoreBundle\Entity\Image $profileBanner
+     *
+     * @return Profile
+     */
+    public function setProfileBanner(\HarvestCloud\CoreBundle\Entity\Image $profileBanner = null)
+    {
+        $this->profileBanner = $profileBanner;
+
+        return $this;
+    }
+
+    /**
+     * Get profileBanner
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-11-24
+     *
+     * @return \HarvestCloud\CoreBundle\Entity\Image
+     */
+    public function getProfileBanner()
+    {
+        return $this->profileBanner;
     }
 }

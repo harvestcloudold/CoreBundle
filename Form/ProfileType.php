@@ -33,7 +33,8 @@ class ProfileType extends AbstractType
               'attr' => array('size' => 40)
             ))
             ->add('as_seller_display_on_map')
-            ->add('thumbnailFile')
+            ->add('profilePictureFile')
+            ->add('profileBannerFile')
         ;
     }
 

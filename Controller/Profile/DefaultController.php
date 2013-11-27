@@ -67,7 +67,8 @@ class DefaultController extends Controller
             {
                 $em = $this->get('doctrine')->getEntityManager();
 
-                $this->getCurrentProfile()->uploadThumbnail();
+                $this->getCurrentProfile()->uploadProfilePicture();
+                $this->getCurrentProfile()->uploadProfileBanner();
 
                 $em->persist($form->getData());
                 $em->flush();
