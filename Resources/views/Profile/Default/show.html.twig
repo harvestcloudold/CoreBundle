@@ -1,5 +1,31 @@
 {% extends 'HarvestCloudCoreBundle::Profile/layout.html.twig' %}
 
+{% block map_js %}
+    <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key={{ goole_api_key }}&sensor=false">
+    </script>
+    <script type="text/javascript">
+      function initialize() {
+
+        var hubLatLng = new google.maps.LatLng({{ profile.defaultLocation.latLng }});
+
+        var mapOptions = {
+          center: hubLatLng,
+          zoom: 16
+        };
+        var map = new google.maps.Map(document.getElementById("mapCanvas"),
+            mapOptions);
+
+        var marker = new google.maps.Marker({
+            position: hubLatLng,
+            map: map,
+            title:"{{ profile }}"
+        });
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+{% endblock %}
+
 {% block content %}
     <h1>
         {% if profile.profilePicture %}
@@ -11,16 +37,26 @@
     <div class="two_equal_columns">
         <div class="left column">
             <h2>Profile Details</h2>
-            <table class="nvp">
-                <tr>
-                    <th>Name</th>
-                    <td>{{ profile.name }}</td>
-                </tr>
-                <tr>
-                    <th>Address</th>
-                    <td>{{ profile.defaultLocation.address }}</td>
-                </tr>
-            </table><!-- .nvp -->
+            <div class="panel">
+                <div class="inner">
+                    <table class="nvp">
+                        <tr>
+                            <th>Name</th>
+                            <td>{{ profile.name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Address</th>
+                            <td>{{ profile.defaultLocation.address }}</td>
+                        </tr>
+                    </table><!-- .nvp -->
+                </div><!-- .inner -->
+            </div><!-- .panel -->
+
+            <div class="panel">
+                <div class="inner">
+                    <div style="height: 400px" id="mapCanvas"></div>
+                </div><!-- .inner -->
+            </div><!-- .panel -->
         </div><!-- .left.column -->
         <div class="right column">
             {% if profile.hasSellerHubRefsAsSeller %}

@@ -17,6 +17,7 @@ panels
 
 .panel
 {
+    margin-bottom: 2%;
 }
 
 .panel > .inner
