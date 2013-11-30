@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use HarvestCloud\GeoBundle\Util\Geolocatable;
 use HarvestCloud\GeoBundle\Util\Geocodable;
+use HarvestCloud\GeoBundle\Util\LatLng;
 
 /**
  * Location Entity
@@ -546,5 +547,18 @@ class Location implements Geolocatable, Geocodable
     {
         $geocoder = new \HarvestCloud\GeoBundle\Util\GoogleGeocoder();
         $geocoder->geocode($this);
+    }
+
+    /**
+     * getLatLng()
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2013-11-30
+     *
+     * @return \HarvestCloud\GeoBundle\Util\LatLng
+     */
+    public function getLatLng()
+    {
+        return new LatLng($this->getLatitude(), $this->getLongitude());
     }
 }
