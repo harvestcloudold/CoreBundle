@@ -11,8 +11,8 @@
         <a href="{{ path('Hub_window_maker', { 'slug': profile.slug }) }}">Recurring</a>
     </p>
 
-    <div>
-        <table class="standard week">
+    <div class="panel">
+        <table class="inner standard week">
             <thead>
                 <tr>
                     <th class="time">Start Time</th>
@@ -39,6 +39,6 @@
                     </tr>
                 {% endfor %}
             </tbody>
-        </table><!-- .standard.calendar -->
-    </div>
+        </table><!-- .inner.standard.week -->
+    </div><!-- .panel -->
 {% endblock %}

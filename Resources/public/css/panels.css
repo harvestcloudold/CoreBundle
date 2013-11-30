@@ -15,14 +15,25 @@ panels
 
 ******************************************************************************/
 
+.panel
+{
+}
+
+.panel > .inner
+{
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background: #fff;
+}
+
 .panels > .panel
 {
     display: block;
     float: left;
     width: 19%;
+    font-weight: normal;
     margin-left: 1.25%;
     margin-bottom: 1.25%;
-    font-weight: normal;
 }
 
 .panels > .panel:nth-of-type(5n+1)
@@ -95,13 +106,6 @@ panels
     {
         margin-left: 0;
     }
-}
-
-.panels > .panel > .inner
-{
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    background: #fff;
 }
 
 .panels > .panel .thumbnail
