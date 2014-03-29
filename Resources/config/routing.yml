@@ -1,3 +1,23 @@
+HarvestCloudCoreBundle_Buy:
+    resource: "@HarvestCloudCoreBundle/Resources/config/routing/buy.yml"
+    prefix:   /buy
+
+HarvestCloudCoreBundle_Seller:
+    resource: "@HarvestCloudCoreBundle/Resources/config/routing/seller.yml"
+    prefix:   /seller
+
+HarvestCloudCoreBundle_Hub:
+    resource: "@HarvestCloudCoreBundle/Resources/config/routing/hub.yml"
+    prefix:   /
+
+HarvestCloudCoreBundle_Dashboard:
+    resource: "@HarvestCloudCoreBundle/Resources/config/routing/dashboard.yml"
+    prefix:   /
+
+HarvestCloudCoreBundle_Order:
+    resource: "@HarvestCloudCoreBundle/Resources/config/routing/order.yml"
+    prefix:   /
+
 HarvestCloudCoreBundle_Profile:
     resource: "@HarvestCloudCoreBundle/Resources/config/routing/profile.yml"
     prefix:   /
