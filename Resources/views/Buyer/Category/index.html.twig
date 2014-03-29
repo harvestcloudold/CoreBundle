@@ -1,8 +1,6 @@
 {% extends 'HarvestCloudCoreBundle:Buyer:layout.html.twig' %}
 
 {% block content %}
-    <h1>Categories</h1>
-
     <div class="category_panels square_panels panels">
         {% for category in categories %}
           <a href="{{ path('Buyer_category_show', { 'path': category.path }) }}" class="panel">
@@ -14,6 +12,31 @@
                   <div class="clear"></div>
               </div><!-- .inner -->
           </a><!-- .panel -->
+          <span class="clear_if_needed"></span>
+        {% endfor %}
+        {% for category in categories %}
+          <a href="{{ path('Buyer_category_show', { 'path': category.path }) }}" class="panel">
+              <div class="inner">
+                  <div class="thumbnail">
+                      <img src="/images/sandbox/products/{{ category.slug }}.jpg" alt="{{ category.title }}" />
+                      <div class="label">{{ category.title }}</div>
+                  </div><!-- .thumbnail -->
+                  <div class="clear"></div>
+              </div><!-- .inner -->
+          </a><!-- .panel -->
+          <span class="clear_if_needed"></span>
+        {% endfor %}
+        {% for category in categories %}
+          <a href="{{ path('Buyer_category_show', { 'path': category.path }) }}" class="panel">
+              <div class="inner">
+                  <div class="thumbnail">
+                      <img src="/images/sandbox/products/{{ category.slug }}.jpg" alt="{{ category.title }}" />
+                      <div class="label">{{ category.title }}</div>
+                  </div><!-- .thumbnail -->
+                  <div class="clear"></div>
+              </div><!-- .inner -->
+          </a><!-- .panel -->
+          <span class="clear_if_needed"></span>
         {% endfor %}
         <div class="clear"></div>
     </div><!-- .category_panels.panels -->

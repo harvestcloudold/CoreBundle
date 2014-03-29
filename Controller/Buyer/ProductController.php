@@ -18,6 +18,7 @@ use HarvestCloud\CoreBundle\Entity\Product;
 use HarvestCloud\CoreBundle\Entity\Profile;
 use HarvestCloud\CoreBundle\Form\ProductType;
 use HarvestCloud\CoreBundle\Form\AddToCartType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * ProductController
@@ -62,6 +63,7 @@ class ProductController extends Controller
         return $this->render('HarvestCloudCoreBundle:Buyer/Product:show.html.twig', array(
           'product'          => $product,
           'quantity_in_cart' => $this->getCurrentCart()->getQuantity($product),
+          'lineItem'         => $this->getCurrentCart()->getLineItemForProduct($product),
           'form'             => $form->createView(),
         ));
     }
@@ -114,6 +116,17 @@ class ProductController extends Controller
                 $em = $this->getDoctrine()->getEntityManager();
                 $em->persist($lineItem);
                 $em->flush();
+
+                if ($request->isXmlHttpRequest())
+                {
+                    return new JsonResponse(array(
+                        'cart' => array(
+                            'subtotal' => '$'.number_format($this->getCurrentCart()->getSubTotal(), 2),
+                            'quantity' => $lineItem->getQuantity().' '.$lineItem->getProduct()->getUnitForNumber($lineItem->getQuantity()),
+                            'line_item_id' => $lineItem->getId(),
+                        ),
+                    ));
+                }
 
                 return $this->redirect($this->generateUrl('Profile_product_show', array(
                     'slug'         => $seller->getSlug(),

@@ -18,6 +18,7 @@ use HarvestCloud\CoreBundle\Entity\OrderCollection;
 use HarvestCloud\CoreBundle\Entity\Order;
 use HarvestCloud\CoreBundle\Entity\OrderLineItem;
 use HarvestCloud\CoreBundle\Entity\Product;
+use HarvestCloud\CoreBundle\Entity\SellerWindow;
 
 /**
  * CartController
@@ -160,6 +161,36 @@ class CartController extends Controller
         return $this->redirect($this->generateUrl('Profile_product_show', array(
             'product_slug' => $product->getSlug(),
             'slug'         => $product->getSeller()->getSlug(),
+        )));
+    }
+
+    /**
+     * assignSellerWindowToLine
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2014-03-25
+     *
+     * @ParamConverter("orderLineItem", class="HarvestCloudCoreBundle:OrderLineItem")
+     *
+     * @param  OrderLineItem  $orderLineItem
+     * @param  int            $window_id
+     */
+    public function assignSellerWindowToLineAction(OrderLineItem $orderLineItem, $window_id)
+    {
+        $em = $this->get('doctrine')->getManager();
+
+        $window = $em->getRepository('HarvestCloudCoreBundle:SellerWindow')
+            ->find((int) $window_id)
+        ;
+
+        $orderLineItem->setSellerWindow($window);
+
+        $em->persist($orderLineItem);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('Profile_product_show', array(
+            'product_slug' => $orderLineItem->getProduct()->getSlug(),
+            'slug'         => $orderLineItem->getProduct()->getSeller()->getSlug(),
         )));
     }
 }

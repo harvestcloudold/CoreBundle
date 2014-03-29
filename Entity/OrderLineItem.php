@@ -64,6 +64,12 @@ class OrderLineItem
     protected $productSubscription;
 
     /**
+     * @ORM\ManyToOne(targetEntity="SellerWindow", inversedBy="orderLineItems")
+     * @ORM\JoinColumn(name="seller_window_id", referencedColumnName="id")
+     */
+    protected $sellerWindow;
+
+    /**
      * Get id
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
@@ -277,5 +283,52 @@ class OrderLineItem
         $this->setProductSubscription($productSubscription);
 
         return $productSubscription;
+    }
+
+    /**
+     * Set sellerWindow
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2014-03-25
+     *
+     * @param  SellerWindow $sellerWindow
+     */
+    public function setSellerWindow(\HarvestCloud\CoreBundle\Entity\SellerWindow $sellerWindow)
+    {
+        $this->sellerWindow = $sellerWindow;
+    }
+
+    /**
+     * Get sellerWindow
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2012-05-19
+     *
+     * @return SellerWindow
+     */
+    public function getSellerWindow()
+    {
+        return $this->sellerWindow;
+    }
+
+    /**
+     * getOptionTreeDefault()
+     *
+     * Returns a js array for use with the jQuery optiontree plugin
+     *
+     * e.g. ['Sam Hub', 'Sat 5 Apr', '09:00']
+     *
+     * @author <tom@harvestcloud.com>
+     * @since  2014-03-26
+     *
+     * @return string
+     */
+    public function getOptionTreeDefault()
+    {
+        if ($this->getSellerWindow()) {
+            return $this->getSellerWindow()->getOptionTreeDefault();
+        } else {
+            return '[]';
+        }
     }
 }

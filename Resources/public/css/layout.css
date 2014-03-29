@@ -90,16 +90,6 @@ form div.buttons.form.row
     background: none;
 }
 
-select,
-input[type="number"],
-input[type="text"],
-input[type="email"],
-input[type="password"]
-{
-    max-width: 100%;
-    padding: 0.6em 1em;
-}
-
 /******************************************************************************
 
 columns
@@ -233,8 +223,8 @@ only screen and (max-width: 360px)
     #subnav,
     #footer
     {
-      margin-left: 1em;
-      margin-right: 1em;
+      padding-left: 1em;
+      padding-right: 1em;
     }
 
     .show_sub_phone_portrait
@@ -275,7 +265,6 @@ only screen and (max-width: 360px)
     div.main.nav a
     {
         padding: 1.5em 0;
-        width: 5em;
     }
 
     div.main.nav a:first-of-type

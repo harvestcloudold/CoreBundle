@@ -11,7 +11,7 @@ div.container
 
 /******************************************************************************
 
-panels
+general
 
 ******************************************************************************/
 
@@ -31,35 +31,65 @@ panels
 {
     display: block;
     float: left;
-    width: 19%;
     font-weight: normal;
-    margin-left: 1.25%;
-    margin-bottom: 1.25%;
 }
 
-.panels > .panel:nth-of-type(5n+1)
+.panels > .panel + span.clear_if_needed
 {
-    margin-left: 0;
+    display: none;
 }
 
-.two_equal_columns > .column .panels > .panel,
-.two_equal_columns > .column .panels > .panel:nth-of-type(5n+1)
+/******************************************************************************
+
+6 columns
+
+******************************************************************************/
+
+@media only screen and (min-width: 801px)
 {
-    width: 32%;
-    margin-left: 2%;
-    margin-bottom: 2%;
+    .panels > .panel
+    {
+        width: 19%;
+        margin-left: 1.25%;
+        margin-bottom: 1.25%;
+    }
+
+    .panels > .panel:nth-of-type(5n+1)
+    {
+        margin-left: 0;
+    }
 }
 
-.two_equal_columns > .column .panels > .panel:nth-of-type(3n+1)
+/******************************************************************************
+
+5 columns
+
+******************************************************************************/
+
+@media only screen and (min-width: 701px) and (max-width: 800px)
 {
-    margin-left: 0;
+    .panels > .panel
+    {
+        width: 19%;
+        margin-left: 1.25%;
+        margin-bottom: 1.25%;
+    }
+
+    .panels > .panel:nth-of-type(5n+1)
+    {
+        margin-left: 0;
+    }
 }
 
+/******************************************************************************
 
-@media only screen and (max-width: 800px)
+4 columns
+
+******************************************************************************/
+
+@media only screen and (min-width: 601px) and (max-width: 700px)
 {
-    .panels > .panel:nth-of-type(5n+1),
-    .square_panels > .panel
+    .panels > .panel
     {
         width: 23.8%;
         margin-left: 1.6%;
@@ -72,12 +102,15 @@ panels
     }
 }
 
+/******************************************************************************
 
-@media only screen and (max-width: 600px)
+3 columns
+
+******************************************************************************/
+
+@media only screen and (min-width: 301px) and (max-width: 600px)
 {
-    .panels > .panel:nth-of-type(5n+1),
-    .panels > .panel:nth-of-type(4n+1),
-    .square_panels > .panel
+    .panels > .panel
     {
         width: 32%;
         margin-left: 2%;
@@ -88,15 +121,23 @@ panels
     {
         margin-left: 0;
     }
+
+    .panels > .panel:nth-of-type(3n+0) + span.clear_if_needed
+    {
+        display: block;
+        clear: both;
+    }
 }
 
+/******************************************************************************
 
-@media only screen and (max-width: 400px)
+2 columns
+
+******************************************************************************/
+
+@media only screen and (max-width: 300px)
 {
-    .panels > .panel:nth-of-type(5n+1),
-    .panels > .panel:nth-of-type(4n+1),
-    .panels > .panel:nth-of-type(3n+1),
-    .square_panels > .panel
+    .panels > .panel
     {
         width: 49%;
         margin-left: 2%;
@@ -114,14 +155,14 @@ panels
   display: block;
   float: left;
   width: 28%;
-  margin: 0 0 0 2%;
-  padding: 2% 0;
+  margin: 0;
+  padding: 0;
 }
 
 .square_panels > .panel .thumbnail
 {
-    width: 96%;
-    margin: 0 2%;
+    width: 100%;
+    margin: 0;
 }
 
 .panels > .panel .details
@@ -140,7 +181,6 @@ panels
 
 .panels > .panel .thumbnail .label
 {
-  padding: 0.8em 0 0.5em 0;
+  padding: 0.3em 0 0.1em 0;
   text-align: center;
-  font-size: 1.2em;
 }

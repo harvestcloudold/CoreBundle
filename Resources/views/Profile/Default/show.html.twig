@@ -11,7 +11,8 @@
 
         var mapOptions = {
           center: hubLatLng,
-          zoom: 16
+          zoom: 16,
+          scrollWheel: false
         };
         var map = new google.maps.Map(document.getElementById("mapCanvas"),
             mapOptions);
@@ -31,7 +32,7 @@
         {% if profile.profilePicture %}
           <img src="{{ profile.slug}}.jpg" />
         {% endif %}
-        {{ profile.name }} ({{ profile.slug }})
+        {{ profile.name }} <span class="handle">@{{ profile.slug }}</span>
     </h1>
 
     <div class="two_equal_columns">
@@ -59,6 +60,25 @@
             </div><!-- .panel -->
         </div><!-- .left.column -->
         <div class="right column">
+            {% if products %}
+                <h2>Currently for sale</h2>
+                <div class="panels">
+                    {% for product in products %}
+                        <a href="{{ path('Profile_product_show', { 'product_slug': product.slug, 'slug': product.seller.slug }) }}" class="panel" title="{{ product.name }}">
+                            <div class="inner">
+                                <div class="thumbnail"><img src="/images/sandbox/products/{{ product.category.slug }}.jpg" alt="{{ product.name }}" title="{{ product.name }}" /></div>
+                                <div class="details">
+                                    <h4>{{ product.name }}</h4>
+                                    <div class="price">${{ product.price }}/{{ product.category.unitDescriptionSingular }}</div>
+                                    <div class="quantity">{{ product.quantityAvailableForCart }} {{ product.unitAvailableForCart }} available</div>
+                                </div><!-- .details -->
+                                <div class="clear"></div>
+                            </div><!-- .inner -->
+                        </a><!-- .panel -->
+                    {% endfor %}
+                    <div class="clear"></div>
+                </div><!-- .panels -->
+            {% endif %}
             {% if profile.hasSellerHubRefsAsSeller %}
                 <h2>{{ profile }} delivers to the following hubs</h2>
                 <div class="panels">
@@ -117,23 +137,4 @@
             </form>
         {% endif %}
     </p>
-    {% if products %}
-        <h2>Currently for sale</h2>
-        <div class="panels">
-            {% for product in products %}
-                <a href="{{ path('Profile_product_show', { 'product_slug': product.slug, 'slug': product.seller.slug }) }}" class="panel" title="{{ product.name }}">
-                    <div class="inner">
-                        <div class="thumbnail"><img src="/images/sandbox/products/{{ product.category.slug }}.jpg" alt="{{ product.name }}" title="{{ product.name }}" /></div>
-                        <div class="details">
-                            <h4>{{ product.name }}</h4>
-                            <div class="price">${{ product.price }}/{{ product.category.unitDescriptionSingular }}</div>
-                            <div class="quantity">{{ product.quantityAvailableForCart }} {{ product.unitAvailableForCart }} available</div>
-                        </div><!-- .details -->
-                        <div class="clear"></div>
-                    </div><!-- .inner -->
-                </a><!-- .panel -->
-            {% endfor %}
-            <div class="clear"></div>
-        </div><!-- .panels -->
-    {% endif %}
 {% endblock %}

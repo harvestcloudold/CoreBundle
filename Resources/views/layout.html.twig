@@ -6,12 +6,19 @@
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
         <link href="{{ asset('bundles/harvestcloudcore/css/style.css?v=3') }}" type="text/css" rel="stylesheet" />
         <link href="{{ asset('bundles/harvestcloudcore/css/styles.css') }}" type="text/css" rel="stylesheet" />
+        <link href="{{ asset('bundles/harvestcloudcore/css/typography.css') }}" type="text/css" rel="stylesheet" />
         <link href="{{ asset('bundles/harvestcloudcore/css/layout.css') }}" type="text/css" rel="stylesheet" />
         <link href="{{ asset('bundles/harvestcloudcore/css/colors.css') }}" type="text/css" rel="stylesheet" />
         <link href="{{ asset('bundles/harvestcloudcore/css/panels.css') }}" type="text/css" rel="stylesheet" />
         <link href="{{ asset('bundles/harvestcloudcore/css/category_panels.css') }}" type="text/css" rel="stylesheet" />
         <link href="{{ asset('bundles/harvestcloudcore/css/columns.css') }}" type="text/css" rel="stylesheet" />
         <link href="{{ asset('bundles/harvestcloudcore/css/week.css?v=1') }}" type="text/css" rel="stylesheet" />
+        <link href="{{ asset('bundles/harvestcloudcore/css/category_show.css?v=1') }}" type="text/css" rel="stylesheet" />
+        <link href="{{ asset('bundles/harvestcloudcore/css/product_show.css?v=1') }}" type="text/css" rel="stylesheet" />
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+        {% block exchange_stylesheets %}{% endblock %}
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         {% block map_js %}
@@ -37,15 +44,15 @@
                 <div id="header">
                     <div class="logo_and_main_nav">
                         <div class="main_logo">
-                            <a href="{{ path('_welcome') }}"><span>Harvest Cloud</span></a>
+                            <a href="{{ path('_welcome') }}"><span>{% block exchange_title "Harvest Cloud" %}</span></a>
                         </div><!-- .main_logo -->
                         <div class="main nav">
+                            <a class="cart" href="{{ path('Buyer_cart_show') }}" class="cart"><span class="hide_sub_tablet_portrait">Cart: </span><span id="cartSubtotal">{% render "HarvestCloudCoreBundle:Buyer/Cart:sub_total" %}</span></a>
                             {% if is_granted("IS_AUTHENTICATED_FULLY") %}
                                 <a class="profile" href="{{ path('Profile_show', { 'slug': app.user.currentProfile.slug }) }}">{{ app.user.currentProfile.name }} (#{{ app.user.currentProfile.id }})</a>
                             {% else %}
                                 <a class="profile" href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
                             {% endif %}
-                            <a class="cart" href="{{ path('Buyer_cart_show') }}" class="cart"><span class="hide_sub_tablet_portrait">Cart: </span>{% render "HarvestCloudCoreBundle:Buyer/Cart:sub_total" %}</a>
                             <span class="clear"></span>
                         </div><!--.main.nav -->
                         <div class="clear"></div>
@@ -68,6 +75,7 @@
                 </div><!-- #content -->
             </div><!-- #contentWrapper -->
 
+            {#
             <div id="footerWrapper">
                 <div id="footer">
                     <ul id="mainNav">
@@ -121,6 +129,7 @@
                     <p>{{ exchange_manager.exchange }}</p>
                 </div><!-- #footer -->
             </div><!-- #footerWrapper -->
+            #}
         </div><!-- #page -->
     </body>
 </html>

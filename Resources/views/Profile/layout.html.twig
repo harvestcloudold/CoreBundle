@@ -1,6 +1,6 @@
-{% extends 'HarvestCloudCoreBundle::layout.html.twig' %}
+{% extends '::base.html.twig' %}
 
-{% block body_class %}profile{%endblock%}
+{% block body_class %}{{ parent() }} profile{%endblock%}
 
 {% block content %}
     {% block profile_content %}{% endblock %}

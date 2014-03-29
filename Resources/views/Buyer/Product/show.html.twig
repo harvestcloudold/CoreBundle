@@ -1,85 +1,163 @@
 {% extends 'HarvestCloudCoreBundle:Buyer:layout.html.twig' %}
 
-{% block body_class %}buyer_product_show{% endblock %}
+{% block body_class %}{{ parent() }} buyer_product_show product show{% endblock %}
 {% block buyer_content %}
-    <h1>{{ product.name }}</h1>
-    <div class="two_equal_columns">
-        <div class="left column">
-            <h2>Product details</h2>
-            <table class="nvp">
-                <tr>
-                    <th>Name</th>
-                    <td>{{ product.name }}</td>
-                </tr>
-                {% if is_granted("IS_AUTHENTICATED_FULLY") %}
-                    <tr>
-                        <th>Seller</th>
-                        <td>{{ product.seller.name }}</td>
-                    </tr>
-                {% endif %}
-                <tr>
-                    <th>Location</th>
-                    <td>{{ product.location.cityStateZip }}</td>
-                </tr>
-                {% if is_granted("IS_AUTHENTICATED_FULLY") %}
-                    <tr>
-                        <th>Price</th>
-                        <td>${{ product.price }}</td>
-                    </tr>
-                {% endif %}
-                <tr>
-                    <th><abbr title="Quantity">Qty</abbr> available</th>
-                    <td>{{ product.quantityAvailable }} {{ product.unitAvailable }}</td>
-                </tr>
-                <tr>
-                    <th><abbr title="Quantity">Qty</abbr> in cart</th>
-                    <td>{{ quantity_in_cart }} {{ product.unitInCart }}</td>
-                </tr>
-            </table><!-- .nvp -->
-            <form action="{{ path('Profile_product_cart_quantity', { 'product_slug': product.slug, 'slug': product.seller.slug }) }}" method="post" {{ form_enctype(form) }}>
-                <div class="form row">
-                    {{ form_widget(form.quantity) }}
-                    {{ form_rest(form) }}
-                    {% if quantity_in_cart %}
-                        <input type="submit" class="submit button" value="Update cart" />
-                    {% else %}
-                        <input type="submit" class="submit button" value="Add to cart" />
-                    {% endif %}
-                </div><!-- .form.row -->
-            </form>
-            <form method="get" action="{{ path('Buyer_checkout_window') }}">
-                <div class="form row">
-                    <input type="submit" class="submit button" value="Check out &#187;" />
-                </div><!-- .form.row -->
-            </form>
-        </div><!-- .left.column -->
-        <div class="right column">
-            {% if product.seller.hasSellerHubRefsAsSeller %}
-                <h2>{{ product.name }} available from the following hubs</h2>
-                <div class="panels">
-                    {% for sellerHubRef in product.seller.sellerHubRefsAsSeller %}
-                        <a href="{{ path('Profile_show', { 'slug': sellerHubRef.hub.slug }) }}" class="panel" title="{{ sellerHubRef.hub }}">
-                            <div class="inner">
-                                <div class="thumbnail">
-                                    {% if sellerHubRef.hub.thumbnailPath %}
-                                        <img src="{{ sellerHubRef.hub.thumbnailWebPath }}" />
-                                    {% else %}
-                                        <img src="/images/sandbox/avatars/{{ sellerHubRef.hub.id }}.png" />
-                                    {% endif %}
-                                </div>
-                                <div class="details">
-                                    <h4>{{ sellerHubRef.hub }}</h4>
-                                    <div class="address">{{ sellerHubRef.hub.defaultLocation.cityState }}</div>
-                                </div><!-- .details -->
-                                <div class="clear"></div>
-                            </div><!-- .inner -->
-                        </a><!-- .panel -->
-                    {% endfor %}
-                    <div class="clear"></div>
-                </div><!-- .panels -->
+    <h1>
+        <img src="/images/sandbox/products/{{ product.category.slug }}.jpg" alt="{{ product.category.title }}" />
+        <span class="product name">{{ product.name }}</span>
+        <a href="{{ path('Profile_show', { 'slug': product.seller.slug }) }}"><span class="seller name">{{ product.seller.name }} <span class="handle">@{{ product.seller.slug }}</span></span></a>
+        <div class="clear"></div>
+    </h1>
+
+    <p class="short desciption">
+        These lovely lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non consequat eros. Sed feugiat sit amet nulla vitae cras amet.
+    </p><!-- .short.desciption -->
+
+    <p class="details">
+        <span class="location"><strong>Location:</strong> {{ product.location.cityState }}</span>
+        <span class="quantity available"><strong>Available:</strong> {{ product.quantityAvailable }} {{ product.unitAvailable }}</span>
+        <span class="quantity in_cart"><strong>In cart:</strong> <span id="quantityInCart">{{ quantity_in_cart }} {{ product.unitInCart }}</span></span>
+        <span class="price"><strong>Price:</strong> <span id="price">${{ product.price }}/{{ product.category.unitDescriptionSingular }}</span></span>
+        <div class="clear"></div>
+    </p><!-- .details -->
+
+    <form id="addToCart" action="{{ path('Profile_product_cart_quantity', { 'product_slug': product.slug, 'slug': product.seller.slug }) }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form.quantity) }}
+        {{ form_rest(form) }}
+        {% if quantity_in_cart %}
+            <input type="submit" class="submit button" value="Update cart" />
+        {% else %}
+            <input type="submit" class="submit button" value="Add to cart" />
+        {% endif %}
+    </form><!-- #addToCart -->
+
+    <form id="windowPicker" action="" method="post">
+        <p>Where do you want to pick up your {{ product.name }} from?</p>
+        <div class="window_selector">
+            <input type="hidden" name="window_picker" />
+        </div><!-- .window_selector -->
+
+        <script type="text/javascript" src="/jquery.optionTree.js"></script>
+        <script>
+            var option_tree = {{ product.seller.windowPickerData|raw }};
+
+            {% if lineItem.id %}
+              var line_item_id = {{ lineItem.id }};
+            {% else %}
+              var line_item_id;
             {% endif %}
-        </div><!-- .right.column -->
-        <div class="clear"></div>
-        <div class="clear"></div>
-    </div><!-- .two_equal_columns -->
+
+            var options = {
+                choose: function(level) {
+                    switch (level) {
+                        case 0:
+                            return 'Hub...';
+                        case 1:
+                            return 'Day...';
+                        default:
+                            return 'Time...';
+                    }
+                },
+                preselect: {'window_picker': {{ lineItem.optionTreeDefault|raw }}}
+            };
+
+            $('input[name=window_picker]')
+                .optionTree(option_tree, options)
+                .change(function() {
+                    var request = $.ajax({
+                        url: '/buy/cart/line/window/'+line_item_id+'/'+this.value,
+                        type: "POST"
+                    });
+
+                    console.log(this.value);
+                });
+        </script>
+    </form><!-- #windowPicker -->
+
+    {% if product.seller.hasSellerHubRefsAsSeller %}
+        <div class="hub panels">
+            <h2>{{ product.name }} available from the following hubs</h2>
+            <div class="panels">
+                {% for sellerHubRef in product.seller.sellerHubRefsAsSeller %}
+                    <a href="{{ path('Profile_show', { 'slug': sellerHubRef.hub.slug }) }}" class="panel" title="{{ sellerHubRef.hub }}">
+                        <div class="inner">
+                            <div class="thumbnail">
+                                {% if sellerHubRef.hub.thumbnailPath %}
+                                    <img src="{{ sellerHubRef.hub.thumbnailWebPath }}" />
+                                {% else %}
+                                    <img src="/images/sandbox/avatars/{{ sellerHubRef.hub.id }}.png" />
+                                {% endif %}
+                            </div>
+                            <div class="details">
+                                <h4>{{ sellerHubRef.hub }}</h4>
+                                <div class="address">{{ sellerHubRef.hub.defaultLocation.cityState }}</div>
+                            </div><!-- .details -->
+                            <div class="clear"></div>
+                        </div><!-- .inner -->
+                    </a><!-- .panel -->
+                {% endfor %}
+                <div class="clear"></div>
+            </div><!-- .panels -->
+        </div><!-- .hub.panels -->
+    {% endif %}
+
+    <script>
+        $(function() {
+            {% if quantity_in_cart %}
+                $('#windowPicker').show();
+            {% endif %}
+
+            console.log("ready!");
+            var $form       = $('#addToCart');
+            var $button     = $form.find('input[type="submit"]');
+            var button_text = $button.val();
+            var url         = $form.attr('action');
+
+            console.log(url);
+            console.log(button_text);
+
+            $button.removeAttr('disabled');
+
+            $button.on('click', function() {
+                console.log('clicked addToCart button');
+
+                if ('Add to cart' == button_text) {
+                    $button.val('Adding...');
+                    button_text = 'Update cart';
+                } else {
+                    $button.val('Updating...');
+                }
+
+                $button.attr('disabled', 'disabled');
+
+                var request = $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: $form.serialize()
+                });
+
+                request.done(function(json) {
+
+                    console.log('Done');
+
+                    console.log('Cart sub total:' + json.cart.subtotal);
+
+                    line_item_id = json.cart.line_item_id;
+
+                    $('#cartSubtotal').html(json.cart.subtotal);
+                    $('#quantityInCart').html(json.cart.quantity);
+                    $button.removeAttr('disabled');
+                    $button.val(button_text);
+
+                    $('#windowPicker').slideDown();
+                });
+
+                request.fail(function(jqXHR, textStatus) {
+                  alert("Request failed: " + textStatus);
+                });
+
+                return false;
+            });
+        });
+    </script>
 {% endblock %}

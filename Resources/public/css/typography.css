@@ -1,0 +1,29 @@
+body
+{
+    font-size: 87.5%;
+    font-family: sans-serif;
+    line-height: 1.5;
+}
+
+@media only screen and (max-width: 480px)
+{
+    body
+    {
+        font-size: 80%;
+    }
+}
+
+h1
+{
+    font-weight: normal;
+    font-size: 2.6em;
+    line-height: 1.5;
+}
+
+@media only screen and (max-width: 480px)
+{
+    h1
+    {
+        font-size: 2em;
+    }
+}

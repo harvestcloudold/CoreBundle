@@ -1,8 +1,27 @@
 {% extends 'HarvestCloudCoreBundle:Buyer:layout.html.twig' %}
 
-{% block body_class %}buyer_category_show{% endblock %}
+{% block body_class %}buyer_category_show category show{% endblock %}
 {% block buyer_content %}
-    <h1>{{ category.title }}</h1>
+    <h1>
+        <img src="/images/sandbox/products/{{ category.slug }}.jpg" alt="{{ category.title }}" />
+        {{ category.title }}
+    </h1>
+
+    <table class="category products">
+        <tbody>
+            {% for product in category.products %}
+                <tr id="Product_{{ product.id }}">
+                    <td class="product name"><a href="{{ path('Profile_product_show', { 'product_slug': product.slug, 'slug': product.seller.slug }) }}">{{ product.name }}</a></td>
+                    <td class="seller"><a href="{{ path('Profile_show', { 'slug': product.seller.slug }) }}">{{ product.seller }}</a></td>
+                    <td class="location">{{ product.location.cityState }}</td>
+                    <td class="price">${{ product.price }}/{{ category.unitDescriptionSingular }}</td>
+                    <td class="quantity">{{ product.quantityAvailableForCart }} {{ product.unitAvailableForCart }} available</td>
+                </tr><!-- #Product_{{ product.id }} -->
+            {% endfor %}
+        </tbody>
+    </table><!-- .category.products -->
+{#
+
     <div class="product panels">
         {% for product in category.products %}
             <a class="panel" href="{{ path('Profile_product_show', { 'product_slug': product.slug, 'slug': product.seller.slug }) }}">
@@ -22,4 +41,5 @@
             </a><!--.panel -->
         {% endfor %}
     </div><!-- .product.panels -->
+#}
 {% endblock %}

@@ -2385,4 +2385,27 @@ class Profile implements Geolocatable
     {
         return $this->profileBanner;
     }
+
+    /**
+     * getWindowPickerData()
+     *
+     * Get the Pickup Window data for use with the select box window picker
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2014-03-24
+     *
+     * @return array
+     */
+    public function getWindowPickerData()
+    {
+        $data = array();
+
+        foreach ($this->getSellerHubRefsAsSeller() as $sellerHubRef) {
+            foreach ($sellerHubRef->getSellerWindows() as $window) {
+                $data[$sellerHubRef->getHub()->getName()][$window->getStartTime()->format('D j M')][$window->getStartTime()->format('H:i')] = $window->getId();
+            }
+        }
+
+        return json_encode($data);
+    }
 }

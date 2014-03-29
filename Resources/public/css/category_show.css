@@ -1,0 +1,5 @@
+body.category.show h1 > img
+{
+    vertical-align: middle;
+    width: 1em;
+}

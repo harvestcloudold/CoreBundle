@@ -2,6 +2,14 @@ Buyer_homepage:
     pattern:  /
     defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\DefaultController::indexAction }
 
+Buyer_cart_line_assign_window:
+    pattern:  /cart/line/window/{id}/{window_id}
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\CartController::assignSellerWindowToLineAction }
+    requirements:
+        id: \d+
+        window_id: \d+
+        _method: POST
+
 Buyer_hub_nearby:
     pattern:  /hub/nearby
     defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\HubController::nearbyAction }
@@ -68,6 +76,7 @@ Buyer_cart_add_product:
     pattern:  /cart/add-product/{id}/{quantity}
     defaults: { _controller: HarvestCloud\CoreBundle\Controller\Buyer\CartController::addProductAction, quantity: 1 }
     requirements:
+        id: \d+
         _method: POST
 
 

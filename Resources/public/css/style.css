@@ -26,13 +26,8 @@ general
 
 body
 {
-    font-size: 62.5%;
-    font-family: sans-serif;
-    line-height: 1.5em;
     margin: 0;
     padding: 0;
-    color: #958770;
-    background: #ddd2c3;
 }
 
 a
@@ -42,11 +37,8 @@ a
 
 h1
 {
-    font-weight: normal;
-    font-size: 2.6em;
     margin-top: 0.3em;
     margin-bottom: 0.3em;
-    line-height: 1.5;
 }
 
 h1 > img
@@ -59,7 +51,7 @@ h1 > img
 h2
 {
     font-weight: normal;
-    font-size: 1.8em;
+    font-size: 1.4em;
     color: #555;
     margin: 1em 0 0.7em 0;
 }
@@ -86,9 +78,20 @@ main containers
 #content,
 #footer
 {
-    max-width: 128em;
+    max-width: 64em;
     margin: 0 auto;
     padding: 0 2em;
+}
+
+@media only screen and (max-width: 480px)
+{
+    #header,
+    #content,
+    #footer
+    {
+        padding-left: 1em;
+        padding-right: 1em;
+    }
 }
 
 #headerWrapper
@@ -104,8 +107,17 @@ main containers
 #content
 {
     min-height: 40em;
-    padding-top: 2em;
-    padding-bottom: 2em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+@media only screen and (max-width: 480px)
+{
+    #content
+    {
+        padding-top: 0.5em;
+        padding-top: 0.5em;
+    }
 }
 
 /******************************************************************************
@@ -120,7 +132,7 @@ header
 
 #header div.main_logo
 {
-    width: 50%;
+    width: 35%;
     float: left;
 }
 
@@ -128,10 +140,9 @@ header
 {
     background: transparent url(/bundles/harvestcloudcore/images/header_logo.png) scroll no-repeat left 1px;
     display: block;
-    height: 4.8em;
 }
 
-#header div.main_logo a span
+body.harvestcloud #header div.main_logo a span
 {
     width: 0;
     height: 0;
@@ -142,22 +153,18 @@ header
 #header div.main.nav
 {
     text-transform: uppercase;
-    width: 35%;
+    width: 65%;
     float: right;
 }
 
 #header div.main.nav a
 {
     display: block;
-    padding: 1.8em 0 1.2em 0;
-    width: 50%;
+    padding: 1.5em 0 0.12em 0;
     float: left;
     text-align: center;
     line-height: 100%;
-    font-size: 120%;
     font-weight: bold;
-    text-shadow: 0 1px 1px rgba(255,255,255, 0.4);
-    color: rgba(0,0,0, 0.6);
 }
 
 #header div.main.nav a:first-of-type
@@ -177,28 +184,12 @@ body.hub #header div.main.nav a.hub,
 body.settings #header div.main.nav a.settings,
 body.settings #header div.main.nav a.cart
 {
-    background: transparent  url(/bundles/harvestcloudcore/images/bg_tab.png) scroll no-repeat center bottom;
 }
 
-body #header div.main.nav a.profile:hover,
-body #header div.main.nav a.buy:hover,
-body #header div.main.nav a.sell:hover,
-body #header div.main.nav a.hub:hover,
-body #header div.main.nav a.settings:hover,
-body #header div.main.nav a.cart:hover
-{
-    background: rgba(149,135,112, 0.8)  url(/bundles/harvestcloudcore/images/bg_tab.png) scroll no-repeat center bottom;
-}
-
-#header div.main.nav a.cart,
-#header div.main.nav a.settings
+#header div.main.nav a
 {
     float: right;
-}
-
-#header div.main.nav a.cart
-{
-    margin-right: 0;
+    margin-left: 2em;
 }
 
 #header div.main.nav a.settings img
@@ -219,11 +210,13 @@ body #header div.main.nav a.cart:hover
 
     #header div.main.nav
     {
-        width: 80%;
+        width: 65%;
     }
 
     #header div.main.nav a
     {
+        padding-top: 1.3em;
+        padding-bottom: 1.15em;
         background: none !important;
     }
 }
@@ -250,6 +243,7 @@ form
 input[type="submit"]
 {
     padding: 0.7em 2em;
+    border-radius: 3px;
 }
 
 input[type="submit"],
@@ -272,10 +266,30 @@ form[method="post"] input[type="submit"]
     background: #8bb4e5;
 }
 
+form[method="post"] input[type="submit"][disabled="disabled"]
+{
+    background: #ccc;
+}
+
 input.small.submit.button
 {
     padding: 0.5em 0.5em;
     font-size: 1em;
+}
+
+select
+{
+    -webkit-appearance: listbox;
+}
+
+select,
+input[type="number"],
+input[type="text"],
+input[type="email"],
+input[type="password"]
+{
+    max-width: 100%;
+    padding: 0.3em 0.3em;
 }
 
 /******************************************************************************

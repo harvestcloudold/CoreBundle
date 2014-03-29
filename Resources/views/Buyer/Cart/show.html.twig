@@ -1,6 +1,7 @@
 {% extends 'HarvestCloudCoreBundle:Buyer:layout.html.twig' %}
 
 {% block content %}
+    <script type="text/javascript" src="/jquery.optionTree.js"></script>
     <h1>What's in my Cart</h1>
 
     <table class="standard">
@@ -9,6 +10,7 @@
               <th>Item</th>
               <th>Seller</th>
               <th>Quantity</th>
+              <th>Pickup</th>
               <th>Price</th>
           </tr>
       </thead>
@@ -16,9 +18,43 @@
           {% for order in orderCollection.orders %}
               {% for lineItem in order.lineItems %}
                   <tr>
-                    <td>{{ lineItem.product.name }}</td>
+                    <td><a href="{{ path('Profile_product_show', { 'product_slug': lineItem.product.slug, 'slug': order.seller.slug }) }}">{{ lineItem.product.name }}</a></td>
                     <td>{{ lineItem.product.seller.name }}</td>
                     <td>{{ lineItem.quantity }}</td>
+                    <td>
+                        <form id="windowPicker_{{ lineItem.id }}" action="" method="post">
+                            <input type="hidden" name="window_picker_{{ lineItem.id }}" />
+                            <script>
+                                var option_tree_{{ lineItem.id }} = {{ lineItem.product.seller.windowPickerData|raw }};
+                                var line_item_id = {{ lineItem.id }};
+
+                                var options = {
+                                    choose: function(level) {
+                                        switch (level) {
+                                            case 0:
+                                                return 'Hub...';
+                                            case 1:
+                                                return 'Day...';
+                                            default:
+                                                return 'Time...';
+                                        }
+                                    },
+                                    preselect: {'window_picker_{{ lineItem.id }}': {{ lineItem.optionTreeDefault|raw }}}
+                                };
+
+                                $('input[name=window_picker_{{ lineItem.id }}]')
+                                    .optionTree(option_tree_{{ lineItem.id }}, options)
+                                    .change(function() {
+                                        var request = $.ajax({
+                                            url: '/buy/cart/line/window/'+line_item_id+'/'+this.value,
+                                            type: "POST"
+                                        });
+
+                                        console.log(this.value);
+                                    });
+                            </script>
+                        </form><!-- #windowPicker -->
+                    </td>
                     <td class="price">${{ lineItem.price }}</td>
                   </tr>
               {% endfor %}

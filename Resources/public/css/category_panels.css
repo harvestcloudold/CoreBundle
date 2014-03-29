@@ -6,3 +6,10 @@ category panels
 
 ******************************************************************************/
 
+@media only screen and (max-width: 480px)
+{
+    .panels > .panel .thumbnail .label
+    {
+/*        min-height: 3.1em;*/
+    }
+}

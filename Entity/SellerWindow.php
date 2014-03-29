@@ -60,6 +60,11 @@ class SellerWindow implements Windowable
     protected $orders;
 
     /**
+     * @ORM\OneToMany(targetEntity="OrderLineItem", mappedBy="sellerWindow")
+     */
+    protected $orderLineItems;
+
+    /**
      * @ORM\ManyToOne(targetEntity="HubWindow", inversedBy="sellerWindows")
      * @ORM\JoinColumn(name="hub_window_id", referencedColumnName="id")
      */
@@ -294,5 +299,52 @@ class SellerWindow implements Windowable
     public function getTotalHubFeeForOrder(\HarvestCloud\CoreBundle\Entity\Order $order)
     {
         return ($order->getLineItemTotal() * $this->getSellerHubRef()->getVariableFee() / 100) + $this->getSellerHubRef()->getFixedFee();
+    }
+
+    /**
+     * Add orderLineItems
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2014-03-25
+     *
+     * @param  OrderLineItem $orderLineItem
+     */
+    public function addOrderLineItem(\HarvestCloud\CoreBundle\Entity\OrderLineItem $orderLineItem)
+    {
+        $this->orderLineItems[] = $orderLineItem;
+    }
+
+    /**
+     * Get orderLineItems
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2014-03-25
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getOrderLineItems()
+    {
+        return $this->orderLineItems;
+    }
+
+    /**
+     * getOptionTreeDefault()
+     *
+     * Returns a js array for use with the jQuery optiontree plugin
+     *
+     * e.g. ['Sam Hub', 'Sat 5 Apr', '09:00']
+     *
+     * @author <tom@harvestcloud.com>
+     * @since  2014-03-26
+     *
+     * @return string
+     */
+    public function getOptionTreeDefault()
+    {
+        return sprintf("['%s', '%s', '%s']",
+            $this->getHub()->getName(),
+            $this->getStartTime()->format('D j M'),
+            $this->getStartTime()->format('H:i')
+        );
     }
 }

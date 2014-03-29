@@ -5,10 +5,15 @@
  * file that was distributed with this source code.
  */
 
+body
+{
+    color: #958770;
+    background: #ddd2c3;
+}
+
 a
 {
     color: #677586;
-    font-weight: bold;
 }
 
 /******************************************************************************
@@ -56,15 +61,6 @@ body.settings div.main.nav a.settings,
 body.settings div.main.nav a.cart
 {
 /*    background: rgba(149,135,112, 0.4); */
-}
-
-body div.main.nav a.buy:hover,
-body div.main.nav a.sell:hover,
-body div.main.nav a.hub:hover,
-body div.main.nav a.settings:hover,
-body div.main.nav a.cart:hover
-{
-/*    background: rgba(149,135,112, 0.8); */
 }
 
 /******************************************************************************
