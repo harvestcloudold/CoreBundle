@@ -1,0 +1,3 @@
+HarvestCloudCoreBundle_Profile:
+    resource: "@HarvestCloudCoreBundle/Resources/config/routing/profile.yml"
+    prefix:   /
