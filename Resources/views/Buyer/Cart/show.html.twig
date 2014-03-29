@@ -63,9 +63,9 @@
     </table>
     {% if orderCollection.orders %}
         <p>
-            <form method="get" action="{{ path('Buyer_checkout_window') }}">
+            <form method="post" action="{{ path('Buyer_checkout_place_order') }}">
                 <div class="form row">
-                    <input type="submit" class="submit button" value="Check out" />
+                    <input type="submit" class="submit button" value="Place order" />
                 </div><!-- .form.row -->
             </form>
         </p>
