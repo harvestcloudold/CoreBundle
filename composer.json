@@ -2,6 +2,7 @@
     "name": "harvestcloud/core-bundle",
     "require": {
         "php": ">=5.3.0",
+        "harvestcloud/user-bundle": "dev-master",
         "stof/doctrine-extensions-bundle": "1.1.0"
     },
     "autoload": {
