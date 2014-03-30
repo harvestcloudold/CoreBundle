@@ -99,11 +99,6 @@ main containers
     background: rgba(149,135,112, 0.7);
 }
 
-#contentWrapper
-{
-    background: #fff3e0 url(/bundles/harvestcloudcore/images/bg_body.png) scroll repeat center top;
-}
-
 #content
 {
     min-height: 40em;
@@ -138,7 +133,6 @@ header
 
 #header div.main_logo a
 {
-    background: transparent url(/bundles/harvestcloudcore/images/header_logo.png) scroll no-repeat left 1px;
     display: block;
 }
 
