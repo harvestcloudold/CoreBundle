@@ -18,6 +18,10 @@ HarvestCloudCoreBundle_Order:
     resource: "@HarvestCloudCoreBundle/Resources/config/routing/order.yml"
     prefix:   /
 
+HarvestCloudUserBundle:
+    resource: "@HarvestCloudUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
 HarvestCloudCoreBundle_Profile:
     resource: "@HarvestCloudCoreBundle/Resources/config/routing/profile.yml"
     prefix:   /
