@@ -82,11 +82,7 @@
                     <a href="{{ path('Profile_show', { 'slug': sellerHubRef.hub.slug }) }}" class="panel" title="{{ sellerHubRef.hub }}">
                         <div class="inner">
                             <div class="thumbnail">
-                                {% if sellerHubRef.hub.thumbnailPath %}
-                                    <img src="{{ sellerHubRef.hub.thumbnailWebPath }}" />
-                                {% else %}
-                                    <img src="/images/sandbox/avatars/{{ sellerHubRef.hub.id }}.png" />
-                                {% endif %}
+                                <img src="/images/sandbox/avatars/{{ sellerHubRef.hub.id }}.png" />
                             </div>
                             <div class="details">
                                 <h4>{{ sellerHubRef.hub }}</h4>
