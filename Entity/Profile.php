@@ -11,7 +11,7 @@ namespace HarvestCloud\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use HarvestCloud\GeoBundle\Util\Geolocatable;
+use HarvestCloud\GeoBundle\GeolocatableInterface;
 use HarvestCloud\CoreBundle\Entity\Account;
 use HarvestCloud\CoreBundle\Entity\Image;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -28,7 +28,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="HarvestCloud\CoreBundle\Repository\ProfileRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Profile implements Geolocatable
+class Profile implements GeolocatableInterface
 {
     /**
      * status options

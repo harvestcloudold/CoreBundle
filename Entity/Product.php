@@ -10,7 +10,7 @@
 namespace HarvestCloud\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use HarvestCloud\GeoBundle\Util\Geolocatable;
+use HarvestCloud\GeoBundle\GeolocatableInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -28,7 +28,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Table(name="product",uniqueConstraints={@ORM\UniqueConstraint(name="slug_seller_idx", columns={"slug", "seller_id"})})
  * @ORM\Entity(repositoryClass="HarvestCloud\CoreBundle\Repository\ProductRepository")
  */
-class Product implements Geolocatable
+class Product implements GeolocatableInterface
 {
     /**
      * @ORM\Id

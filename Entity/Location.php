@@ -11,9 +11,9 @@ namespace HarvestCloud\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use HarvestCloud\GeoBundle\Util\Geolocatable;
-use HarvestCloud\GeoBundle\Util\Geocodable;
-use HarvestCloud\GeoBundle\Util\LatLng;
+use HarvestCloud\GeoBundle\GeolocatableInterface;
+use HarvestCloud\GeoBundle\GeocodableInterface;
+use HarvestCloud\GeoBundle\LatLng;
 
 /**
  * Location Entity
@@ -26,7 +26,7 @@ use HarvestCloud\GeoBundle\Util\LatLng;
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="HarvestCloud\CoreBundle\Repository\LocationRepository")
  */
-class Location implements Geolocatable, Geocodable
+class Location implements GeolocatableInterface, GeocodableInterface
 {
     /**
      * @ORM\Id
