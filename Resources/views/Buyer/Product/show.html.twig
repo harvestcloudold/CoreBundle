@@ -3,7 +3,7 @@
 {% block body_class %}{{ parent() }} buyer_product_show product show{% endblock %}
 {% block buyer_content %}
     <h1>
-        <img src="/images/sandbox/products/{{ product.category.slug }}.jpg" alt="{{ product.category.title }}" />
+        <img src="http://harvestcloud.org/demo/images/category/{{ product.category.slug }}.jpg" alt="{{ product.category.title }}" />
         <span class="product name">{{ product.name }}</span>
         <a href="{{ path('Profile_show', { 'slug': product.seller.slug }) }}"><span class="seller name">{{ product.seller.name }} <span class="handle">@{{ product.seller.slug }}</span></span></a>
         <div class="clear"></div>
