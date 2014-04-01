@@ -4,7 +4,8 @@
         "php": ">=5.3.0",
         "harvestcloud/user-bundle": "dev-master",
         "stof/doctrine-extensions-bundle": "1.1.0",
-        "harvestcloud/option-tree-bundle": "dev-master"
+        "harvestcloud/option-tree-bundle": "dev-master",
+        "harvestcloud/geo-bundle": "dev-master"
     },
     "autoload": {
         "psr-0": { "HarvestCloud\\CoreBundle": "" }
