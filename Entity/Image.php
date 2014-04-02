@@ -31,62 +31,62 @@ class Image
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    public $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      */
-    public $name;
+    protected $name;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\NotBlank
      */
-    public $filename;
+    protected $filename;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      */
-    public $sub_dir;
+    protected $sub_dir;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\NotBlank
      */
-    public $path;
+    protected $path;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    public $extension;
+    protected $extension;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    public $mime_type;
+    protected $mime_type;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    public $width;
+    protected $width;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    public $height;
+    protected $height;
 
     /**
      * @ORM\Column(type="integer")
      */
-    public $size;
+    protected $size;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      */
-    public $original_filename;
+    protected $original_filename;
 
     /**
      * __construct()
