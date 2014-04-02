@@ -5,7 +5,8 @@
         "harvestcloud/user-bundle": "dev-master",
         "stof/doctrine-extensions-bundle": "1.1.0",
         "harvestcloud/option-tree-bundle": "dev-master",
-        "harvestcloud/geo-bundle": "dev-master"
+        "harvestcloud/geo-bundle": "dev-master",
+        "friendsofsymfony/user-bundle": "@dev"
     },
     "autoload": {
         "psr-0": { "HarvestCloud\\CoreBundle": "" }
