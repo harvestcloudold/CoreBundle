@@ -296,6 +296,10 @@ class OrderLineItem
     public function setSellerWindow(\HarvestCloud\CoreBundle\Entity\SellerWindow $sellerWindow)
     {
         $this->sellerWindow = $sellerWindow;
+
+        if (!$this->getOrder()->getSellerWindow()) {
+            $this->getOrder()->setSellerWindow($sellerWindow);
+        }
     }
 
     /**

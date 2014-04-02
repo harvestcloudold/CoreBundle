@@ -186,6 +186,7 @@ class CartController extends Controller
         $orderLineItem->setSellerWindow($window);
 
         $em->persist($orderLineItem);
+        $em->persist($orderLineItem->getOrder());
         $em->flush();
 
         return $this->redirect($this->generateUrl('Profile_product_show', array(

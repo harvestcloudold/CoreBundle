@@ -383,6 +383,11 @@ class Order
 
         $this->addLineItem($lineItem);
 
+        // Copy SellerWindow
+        if ($this->getSellerWindow()) {
+            $lineItem->setSellerWindow($this->getSellerWindow());
+        }
+
         return $lineItem;
     }
 
