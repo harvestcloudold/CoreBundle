@@ -83,7 +83,9 @@
 
             <div id="footerWrapper">
                 <div id="footer">
-                    {% include('HarvestCloudDemoBundle::image_attribution.html.twig') %}
+                    {% if 'demo' == app.environment %}
+                        {% include('HarvestCloudDemoBundle::image_credits.html.twig') %}
+                    {% endif %}
                 </div><!-- #footer -->
             </div><!-- #footerWrapper -->
 
