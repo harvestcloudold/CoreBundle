@@ -146,7 +146,6 @@ body.harvestcloud #header div.main_logo a span
 
 #header div.main.nav
 {
-    text-transform: uppercase;
     width: 65%;
     float: right;
 }
@@ -154,11 +153,10 @@ body.harvestcloud #header div.main_logo a span
 #header div.main.nav a
 {
     display: block;
-    padding: 1.5em 0 0.12em 0;
+    padding: 1.3em 0 1em 0;
     float: left;
     text-align: center;
     line-height: 100%;
-    font-weight: bold;
 }
 
 #header div.main.nav a:first-of-type

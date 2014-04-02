@@ -55,9 +55,9 @@
                         <div class="main nav">
                             <a class="cart" href="{{ path('Buyer_cart_show') }}" class="cart"><span class="hide_sub_tablet_portrait">Cart: </span><span id="cartSubtotal">{% render(controller("HarvestCloudCoreBundle:Buyer/Cart:sub_total")) %}</span></a>
                             {% if is_granted("IS_AUTHENTICATED_FULLY") %}
-                                <a class="profile" href="{{ path('Profile_show', { 'slug': app.user.currentProfile.slug }) }}">{{ app.user.currentProfile.name }} (#{{ app.user.currentProfile.id }})</a>
+                                <a class="profile" href="{{ path('Profile_show', { 'slug': app.user.currentProfile.slug }) }}">{{ app.user.currentProfile.handle }}</a>
                             {% else %}
-                                <a class="profile" href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                                <a class="profile" href="{{ path('fos_user_security_login') }}">Login</a>
                             {% endif %}
                             <span class="clear"></span>
                         </div><!--.main.nav -->

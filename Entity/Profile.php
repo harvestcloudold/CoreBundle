@@ -2408,4 +2408,19 @@ class Profile implements GeolocatableInterface
 
         return json_encode($data);
     }
+
+    /**
+     * getHandle()
+     *
+     * e.g. \@tomhv
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2014-04-01
+     *
+     * @return string
+     */
+    public function getHandle()
+    {
+        return '@'.$this->getSlug();
+    }
 }
