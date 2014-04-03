@@ -27,7 +27,13 @@
     </script>
 {% endblock %}
 
+{% block body_class %}{{ parent() }} profile show{% endblock %}
+
 {% block content %}
+    <div class="cover">
+        <img src="http://harvestcloud.org/demo/images/profile/tomhv.jpg" alt="{{ profile.name }}" />
+    </div><!-- .cover -->
+
     <h1>
         {% if profile.profilePicture %}
           <img src="{{ profile.slug}}.jpg" />
@@ -35,50 +41,41 @@
         {{ profile.name }} <span class="handle">@{{ profile.slug }}</span>
     </h1>
 
-    <div class="two_equal_columns">
-        <div class="left column">
-            <h2>Profile Details</h2>
-            <div class="panel">
-                <div class="inner">
-                    <table class="nvp">
-                        <tr>
-                            <th>Name</th>
-                            <td>{{ profile.name }}</td>
-                        </tr>
-                        <tr>
-                            <th>Address</th>
-                            <td>{{ profile.defaultLocation.address }}</td>
-                        </tr>
-                    </table><!-- .nvp -->
-                </div><!-- .inner -->
-            </div><!-- .panel -->
-
-            <div class="panel">
-                <div class="inner">
-                    <div style="height: 400px" id="mapCanvas"></div>
-                </div><!-- .inner -->
-            </div><!-- .panel -->
-        </div><!-- .left.column -->
-        <div class="right column">
-            {% if products %}
-                <h2>Currently for sale</h2>
-                <div class="panels">
-                    {% for product in products %}
-                        <a href="{{ path('Profile_product_show', { 'product_slug': product.slug, 'slug': product.seller.slug }) }}" class="panel" title="{{ product.name }}">
-                            <div class="inner">
-                                <div class="thumbnail"><img src="/images/sandbox/products/{{ product.category.slug }}.jpg" alt="{{ product.name }}" title="{{ product.name }}" /></div>
-                                <div class="details">
-                                    <h4>{{ product.name }}</h4>
-                                    <div class="price">${{ product.price }}/{{ product.category.unitDescriptionSingular }}</div>
-                                    <div class="quantity">{{ product.quantityAvailableForCart }} {{ product.unitAvailableForCart }} available</div>
-                                </div><!-- .details -->
-                                <div class="clear"></div>
-                            </div><!-- .inner -->
-                        </a><!-- .panel -->
-                    {% endfor %}
-                    <div class="clear"></div>
-                </div><!-- .panels -->
+    <div class="main info panel">
+        <div class="inner">
+            {% if profile.isActiveHub %}
+                {{ profile.defaultLocation.address }}
+            {% else %}
+                {{ profile.defaultLocation.cityState }}
             {% endif %}
+        </div><!-- .inner -->
+    </div><!-- .main.info.panel -->
+
+    {% if products %}
+        <div class="square product panels">
+            {% for product in products %}
+              <a href="{{ path('Profile_product_show', { 'product_slug': product.slug, 'slug': product.seller.slug }) }}" class="panel">
+                  <div class="inner">
+                      <div class="thumbnail">
+                          <img src="http://harvestcloud.org/demo/images/category/{{ product.category.slug }}.jpg" alt="{{ product.name }}" />
+                      </div><!-- .thumbnail -->
+                      <div class="details">
+                          <h4>{{ product.name }}</h4>
+                          <div class="price">${{ product.price }}/{{ product.category.unitDescriptionSingular }}</div>
+                          <div class="quantity">{{ product.quantityAvailableForCart }} {{ product.unitAvailableForCart }} available</div>
+                      </div><!-- .details -->
+                      <div class="clear"></div>
+                  </div><!-- .inner -->
+              </a><!-- .panel -->
+              <span class="clear_if_needed"></span>
+            {% endfor %}
+            <div class="clear"></div>
+        </div><!-- .square.product.panels -->
+    {% endif %}
+
+{#
+    <div class="two_equal_columns">
+        <div class="right column">
             {% if profile.hasSellerHubRefsAsSeller %}
                 <h2>{{ profile }} delivers to the following hubs</h2>
                 <div class="panels">
@@ -130,6 +127,7 @@
         </div><!-- .right.column -->
         <div class="clear"></div>
     </div><!-- .two_equal_columns -->
+#}
     <p>
         {% if app.user.currentProfile.id == profile.id %}
             <form method="get" action="{{ path('Profile_edit', { 'slug': profile.slug }) }}">

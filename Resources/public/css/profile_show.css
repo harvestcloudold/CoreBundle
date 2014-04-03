@@ -1,0 +1,10 @@
+body.profile.show div.cover img
+{
+    width: 100%;
+    display: block;
+}
+
+body.profile.show .main.info.panel > .inner
+{
+    padding: 1em;
+}

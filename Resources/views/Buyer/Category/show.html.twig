@@ -7,39 +7,27 @@
         {{ category.title }}
     </h1>
 
-    <table class="category products">
-        <tbody>
+    {% if category.products %}
+        <div class="square product panels">
             {% for product in category.products %}
-                <tr id="Product_{{ product.id }}">
-                    <td class="product name"><a href="{{ path('Profile_product_show', { 'product_slug': product.slug, 'slug': product.seller.slug }) }}">{{ product.name }}</a></td>
-                    <td class="seller"><a href="{{ path('Profile_show', { 'slug': product.seller.slug }) }}">{{ product.seller }}</a></td>
-                    <td class="location">{{ product.location.cityState }}</td>
-                    <td class="price">${{ product.price }}/{{ category.unitDescriptionSingular }}</td>
-                    <td class="quantity">{{ product.quantityAvailableForCart }} {{ product.unitAvailableForCart }} available</td>
-                </tr><!-- #Product_{{ product.id }} -->
+              <a href="{{ path('Profile_product_show', { 'product_slug': product.slug, 'slug': product.seller.slug }) }}" class="panel">
+                  <div class="inner">
+                      <div class="thumbnail">
+                          <img src="http://harvestcloud.org/demo/images/category/{{ product.category.slug }}.jpg" alt="{{ product.name }}" />
+                      </div><!-- .thumbnail -->
+                      <div class="details">
+                          <h4>{{ product.name }}</h4>
+                          <div class="price">${{ product.price }}/{{ product.category.unitDescriptionSingular }}</div>
+                          <div class="quantity">{{ product.quantityAvailableForCart }} {{ product.unitAvailableForCart }} available</div>
+                          <div class="seller">{{ product.seller.handle }}</div>
+                          <div class="location">{{ product.location.cityState }}</div>
+                      </div><!-- .details -->
+                      <div class="clear"></div>
+                  </div><!-- .inner -->
+              </a><!-- .panel -->
+              <span class="clear_if_needed"></span>
             {% endfor %}
-        </tbody>
-    </table><!-- .category.products -->
-{#
-
-    <div class="product panels">
-        {% for product in category.products %}
-            <a class="panel" href="{{ path('Profile_product_show', { 'product_slug': product.slug, 'slug': product.seller.slug }) }}">
-                <div class="inner">
-                    <div class="thumbnail">
-                        <img src="/images/sandbox/products/{{ category.slug }}.jpg" alt="{{ category.title }}" />
-                    </div><!-- .thumbnail -->
-                    <div class="details">
-                        <h4>{{ product.name }}</h4>
-                        <div class="seller">By {{ product.seller }}</div>
-                        <div class="location">In {{ product.location.cityState }}</div>
-                        <div class="price">${{ product.price }}/{{ category.unitDescriptionSingular }}</div>
-                        <div class="quantity">{{ product.quantityAvailableForCart }} {{ product.unitAvailableForCart }} available</div>
-                    </div><!-- .details -->
-                    <div class="clear"></div>
-                </div><!-- .inner -->
-            </a><!--.panel -->
-        {% endfor %}
-    </div><!-- .product.panels -->
-#}
+            <div class="clear"></div>
+        </div><!-- .square.product.panels -->
+    {% endif %}
 {% endblock %}

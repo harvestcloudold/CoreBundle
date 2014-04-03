@@ -159,10 +159,12 @@ general
   padding: 0;
 }
 
-.square_panels > .panel .thumbnail
+.square_panels > .panel .thumbnail,
+.square.panels > .panel .thumbnail
 {
     width: 100%;
     margin: 0;
+    float: none;
 }
 
 .panels > .panel .details
@@ -170,7 +172,18 @@ general
   display: block;
   float: left;
   width: 60%;
-  margin: 0 2% 0 8%;
+}
+
+.square.panels > .panel .details
+{
+  float: none;
+  width: 100%;
+  padding: 0.5em 0 0.3em 0;
+}
+
+.square.panels > .panel .details > *
+{
+    margin: 0 5%;
 }
 
 .panels > .panel .thumbnail img
