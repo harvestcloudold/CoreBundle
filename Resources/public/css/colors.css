@@ -68,21 +68,6 @@ forms
 
 ******************************************************************************/
 
-form div.form.row
-{
-}
-
-form div.buttons.form.row
-{
-    background: none;
-}
-
-form div.form.row label
-{
-    font-weight: bold;
-    text-shadow: 0 1px 1px rgba(255,255,255, 0.7);
-}
-
 select,
 input[type="number"],
 input[type="text"],
@@ -92,15 +77,4 @@ input[type="password"]
     color: rgba(0,0,0, 0.6);
     background: rgba(255,255,255, 0.6);
     border: 1px solid rgba(0,0,0, 0.2);
-    font-weight: bold;
-}
-
-/******************************************************************************
-
-footer
-
-******************************************************************************/
-
-#footer
-{
 }
