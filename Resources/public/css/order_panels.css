@@ -1,0 +1,79 @@
+/******************************************************************************
+
+order_panel
+
+@see panels.css
+
+******************************************************************************/
+
+.order.panels .panel
+{
+    background: #eee;
+    width: 49%;
+    margin-left: 2%;
+}
+
+.order.panels .panel:nth-of-type(2n+1)
+{
+    margin-left: 0;
+}
+
+.order.panels .panel > .inner
+{
+    display: block;
+}
+
+.order.panels .panel .number,
+.order.panels .panel .details
+{
+    display: block;
+    float: left;
+    padding: 0.3em 0.5em 0.1em 0.5em;
+}
+
+.order.panels .panel .number
+{
+    background: #aaa;
+    color: #fff;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    text-align: center;
+}
+
+.order.panels .panel .number > span
+{
+    display: block;
+}
+
+.order.panels .panel .number > .label
+{
+    font-size: 0.8em;
+    text-transform: uppercase;
+}
+
+.order.panels .panel .number > .value
+{
+    font-size: 1.5em;
+}
+
+.order.panels .panel .details
+{
+    width: inherit;
+}
+
+.order.panels .panel .details > span
+{
+    display: block;
+}
+
+.order.panels .panel .details .buyer > .label:after
+{
+    content: ': ';
+}
+
+.order.panels .panel .order_total
+{
+    float: right;
+    font-size: 1.3em;
+    margin-right: 0.3em;
+}
