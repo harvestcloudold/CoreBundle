@@ -60,7 +60,7 @@ class BuyerController extends Controller
         // Buyer will be assigned at login
         if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
             $user = $this->get('security.context')->getToken()->getUser();
-            $orderCollection->setBuyer($user->getCurrentProfile());
+            $orderCollection->setBuyer($this->get('profile_handler')->getCurrent());
         }
 
         return $orderCollection;
