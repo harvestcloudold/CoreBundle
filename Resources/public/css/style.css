@@ -78,7 +78,7 @@ main containers
 #content,
 #footer
 {
-    max-width: 64em;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 2em;
 }
