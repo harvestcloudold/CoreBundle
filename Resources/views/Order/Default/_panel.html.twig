@@ -1,20 +1,20 @@
-<a class="panel" href="">
+<a class="panel" href="{{ path('Order_show', { 'id': order.numberForHumans }) }}">
     <span class="inner">
         <span class="number">
             <span class="label">Order</span>
-            <span class="value">090976</span>
+            <span class="value">{{ order.numberForHumans }}</span>
         </span><!-- .number -->
         <span class="details">
             <span class="buyer">
                 <span class="label">Buyer</span>
-                <span class="value">@tomhv</span>
+                <span class="value">{{ order.buyer.name }}</span>
             </span><!-- .buyer -->
             <span class="hub">
                 <span class="label">Hub</span>
-                <span class="value">@nickhub</span>
+                <span class="value">{{ order.hub.name }}</span>
             </span><!-- .hub -->
         </span><!-- .details -->
-        <div class="order_total">$50.98</div>
+        <div class="order_total">${{ order.total }}</div>
         <span class="clear"></span>
     </span><!-- .inner -->
 </a><!-- .panel -->

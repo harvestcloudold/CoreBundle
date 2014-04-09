@@ -9,8 +9,9 @@ order_panel
 .order.panels .panel
 {
     background: #eee;
-    width: 49%;
-    margin-left: 2%;
+    float: none;
+    width: 100%;
+    margin-left: 0;
 }
 
 .order.panels .panel:nth-of-type(2n+1)
@@ -38,6 +39,7 @@ order_panel
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
     text-align: center;
+    margin: -1px 0 -1px -1px;
 }
 
 .order.panels .panel .number > span
@@ -66,7 +68,8 @@ order_panel
     display: block;
 }
 
-.order.panels .panel .details .buyer > .label:after
+.order.panels .panel .details .buyer > .label:after,
+.order.panels .panel .details .hub > .label:after
 {
     content: ': ';
 }

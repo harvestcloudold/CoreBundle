@@ -21,6 +21,28 @@ use HarvestCloud\CoreBundle\Entity\Order;
 class DashboardController extends Controller
 {
     /**
+     * index
+     *
+     * @author Tom Haskins-Vaughan <tom@harvestcloud.com>
+     * @since  2014-04-06
+     */
+    public function indexAction()
+    {
+        $orders = $this->get('doctrine')
+            ->getRepository('HarvestCloudCoreBundle:Order')
+            ->findAll()
+        ;
+
+        return $this->render(
+            'HarvestCloudCoreBundle:Order/Dashboard:index.html.twig',
+            array(
+                'orders' => $orders,
+                'order'  => $orders[0],
+            )
+        );
+    }
+
+    /**
      * open_as_buyer
      *
      * @author Tom Haskins-Vaughan <tom@harvestcloud.com>

@@ -1,3 +1,7 @@
+Order_dashboard:
+    pattern:  /orders
+    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Order\DashboardController::indexAction }
+
 Order_homepage:
     pattern:  /my-orders
     defaults: { _controller: HarvestCloud\CoreBundle\Controller\Order\DefaultController::indexAction }

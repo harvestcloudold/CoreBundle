@@ -1,0 +1,38 @@
+{% extends 'HarvestCloudCoreBundle:Buyer:layout.html.twig' %}
+
+{% block content %}
+    <div class="order dashboard">
+        <div class="main navigation">
+            <ul>
+                <li>Open</li>
+                <li class="selected">New</li>
+                <li>Open</li>
+                <li>Today</li>
+                <li>Future</li>
+                <li>History</li>
+            </ul>
+        </div><!-- .main.navigation -->
+        <div class="list order panels">
+            {% for order in orders %}
+                {{ include('HarvestCloudCoreBundle:Order/Default:_panel.html.twig', {
+                    'order': order
+                }) }}
+            {% endfor %}
+        </div><!-- .list.order.panels -->
+        <div class="preview">
+            <div class="order panel">
+                <div class="inner">
+                    Order {{ order.numberForHumans }}
+                    <div class="order lines">
+                        {% for line in order.lineItems %}
+                            <div class="line">{{ line.product.name }}</div>
+                        {% endfor %}
+                    </div><!-- .order.lines -->
+                </div><!-- .inner -->
+            </div><!-- .order.panel -->
+        </div><!-- .preview -->
+        <div class="action_pane">
+        </div><!-- .action_pane -->
+        <div class="clear"></div>
+    </div><!-- .order.dashboard -->
+{% endblock %}
