@@ -61,6 +61,7 @@
                             {% if is_granted("IS_AUTHENTICATED_FULLY") %}
                                 <a class="logout" href="{{ path('fos_user_security_logout') }}">Log out</a>
                                 <a class="profile" href="{{ path('Profile_show', { 'slug': profileHandler.current.slug }) }}">{{ profileHandler.current.handle }}</a>
+                                <a class="orders" href="{{ path('Order_dashboard') }}">Orders</a>
                             {% else %}
                                 <a class="profile" href="{{ path('fos_user_security_login') }}">Login</a>
                             {% endif %}

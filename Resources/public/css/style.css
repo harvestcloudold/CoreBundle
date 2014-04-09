@@ -234,7 +234,7 @@ form
 
 input[type="submit"]
 {
-    padding: 0.7em 2em;
+    padding: 0.7em 1em;
     border-radius: 3px;
 }
 
@@ -244,7 +244,6 @@ table.week td input[type="submit"]:hover
     color: rgba(255,255,255, 1);
     background: rgba(149,135,112, 0.7);
     text-transform: uppercase;
-    font-weight: bold;
     border: none;
 }
 

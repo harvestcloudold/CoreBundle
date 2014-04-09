@@ -5,25 +5,39 @@
 {
     min-height: 300px;
     float: left;
-    margin-left: 2%;
+    margin-left: 0.7%;
     width: 28%;
 }
 
 .dashboard > .main.navigation
 {
-    width: 14%;
+    width: 12%;
     margin-left: 0;
 }
 
-.dashboard > .list,
+.dashboard > .list
+{
+    width: 30%;
+}
+
 .dashboard > .preview
 {
-    width: 33%;
+    width: 38%;
 }
 
 .dashboard > .action_pane
 {
-    width: 14%;
+    width: 17.9%;
+}
+
+.dashboard > .action_pane > *
+{
+    margin: 1em 0;
+}
+
+.dashboard > .action_pane > *:first-child
+{
+    margin-top: 0;
 }
 
 .dashboard > .main.navigation > ul
@@ -52,4 +66,21 @@
     border-bottom-right-radius: 0;
     margin-right: -1px;
     background: #fff;
+}
+
+.dashboard > .preview > .panel > .inner
+{
+    padding: 0.5em 1em;
+}
+
+.dashboard > .preview > .panel > .inner h1
+{
+    margin-top: 0;
+}
+
+.dashboard > .preview > .panel > .inner h1 > .status
+{
+    font-size: 0.5em;
+    float: right;
+    margin-top: 1em;
 }

@@ -50,9 +50,16 @@ class DefaultController extends Controller
 
         $orders = $q->getResult();
 
+        // For dev and demo purposes, just get all orders:
+        $orders = $this->get('doctrine')
+            ->getRepository('HarvestCloudCoreBundle:Order')
+            ->findAll()
+        ;
+
         return $this->render('HarvestCloudCoreBundle:Order/Default:index.html.twig', array(
             'profile' => $this->getCurrentProfile(),
             'orders'  => $orders,
+            'order'   => $orders[0],
         ));
     }
 
@@ -81,6 +88,18 @@ class DefaultController extends Controller
 
         $order = $q->getOneOrNullResult();
 
+        // For dev and demo purposes, just get all orders:
+        $orders = $this->get('doctrine')
+            ->getRepository('HarvestCloudCoreBundle:Order')
+            ->findAll()
+        ;
+
+        return $this->render('HarvestCloudCoreBundle:Order/Default:index.html.twig', array(
+            'profile' => $this->getCurrentProfile(),
+            'orders'  => $orders,
+            'order'   => $order,
+        ));
+
         return $this->render('HarvestCloudCoreBundle:Order/Default:show.html.twig', array(
             'profile' => $this->getCurrentProfile(),
             'order'   => $order,
@@ -106,7 +125,7 @@ class DefaultController extends Controller
         $em->persist($order);
         $em->flush();
 
-        $this->get('notifier')->notify(new OrderAcceptedBySellerEvent($order), $this->getUser());
+#        $this->get('notifier')->notify(new OrderAcceptedBySellerEvent($order), $this->getUser());
 
         return $this->redirect($this->generateUrl('Order_show', array(
             'id' => $order->getNumberForPath()

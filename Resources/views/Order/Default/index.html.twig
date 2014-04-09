@@ -1,27 +1,107 @@
-{% extends 'HarvestCloudCoreBundle::Order/layout.html.twig' %}
+{% extends 'HarvestCloudCoreBundle:Buyer:layout.html.twig' %}
 
 {% block content %}
-    <h1>My Orders</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Order</th>
-                <th>Status</th>
-                <th>Buyer</th>
-                <th>Seller</th>
-                <th>Hub</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="order dashboard">
+        <div class="main navigation">
+            <ul>
+                <li>Open</li>
+                <li class="selected">New</li>
+                <li>Open</li>
+                <li>Today</li>
+                <li>Future</li>
+                <li>History</li>
+            </ul>
+        </div><!-- .main.navigation -->
+        <div class="list order panels">
             {% for order in orders %}
-                <tr>
-                    <td><a href="{{ path('Order_show', { 'id': order.numberForPath }) }}">{{ order.numberForHumans }}</a></td>
-                    <td>{{ order.status }}</td>
-                    <td><a href="{{ path('Profile_show', { slug: order.buyer.slug }) }}">{{ order.buyer }}</a></td>
-                    <td><a href="{{ path('Profile_show', { slug: order.seller.slug }) }}">{{ order.seller }}</a></td>
-                    <td><a href="{{ path('Profile_show', { slug: order.hub.slug }) }}">{{ order.hub }}</a></td>
-                </tr>
+                {{ include('HarvestCloudCoreBundle:Order/Default:_panel.html.twig', {
+                    'order': order
+                }) }}
             {% endfor %}
-        </tbody>
-    </table>
+        </div><!-- .list.order.panels -->
+        <div class="preview">
+            <div class="order panel">
+                <div class="inner">
+                    <h1>
+                        <span class="number">Order {{ order.numberForHumans }}</span>
+                        <span class="status">{{ order.status }}</span>
+                        <span class="clear"></span>
+                    </h1>
+                    <div class="details">
+                        <span class="buyer">{{ order.buyer.name }}</span>
+                        <span class="hub">{{ order.hub.name }}</span>
+                    </div><!-- .details -->
+                    <div class="order lines">
+                        <h3>Lines</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for line in order.lineItems %}
+                                    <tr class="order_line_{{ line.id }}">
+                                        <td class="product">{{ line.product.name }}</td>
+                                        <td class="quantity">{{ line.quantity }}</td>
+                                        <td class="price">${{ line.price }}</td>
+                                    </tr><!-- .order_line_{{ line.id }} -->
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div><!-- .order.lines -->
+                </div><!-- .inner -->
+            </div><!-- .order.panel -->
+        </div><!-- .preview -->
+        <div class="action_pane">
+            {% if order.canBeAcceptedBySeller %}
+                <form action="{{ path('Order_accept', { 'id': order.numberForPath }) }}" method="post">
+                    <input type="submit" class="submit button" value="Accept" />
+                </form>
+            {% endif %}
+            {% if order.canBeRejectedBySeller %}
+                <form action="{{ path('Order_reject', { 'id': order.numberForPath }) }}" method="post">
+                    <input type="submit" class="submit button" value="Reject" />
+                </form>
+            {% endif %}
+            {% if order.canBePickedBySeller %}
+                <form action="{{ path('Order_pick', { 'id': order.numberForPath }) }}" method="post">
+                    <input type="submit" class="submit button" value="Pick" />
+                </form>
+            {% endif %}
+            {% if order.canBeMarkedReadyForDispatchedBySeller %}
+                <form action="{{ path('Order_mark_ready_for_dispatch', { 'id': order.numberForPath }) }}" method="post">
+                    <input type="submit" class="submit button" value="Ready for dispatch" />
+                </form>
+            {% endif %}
+            {% if order.canBeDispatchedBySeller %}
+                <form action="{{ path('Order_dispatch', { 'id': order.numberForPath }) }}" method="post">
+                    <input type="submit" class="submit button" value="Dispatch" />
+                </form>
+            {% endif %}
+            {% if order.canBeCanceledByBuyer %}
+                <form action="{{ path('Order_cancel', { 'id': order.numberForPath }) }}" method="post">
+                    <input type="submit" class="submit button" value="Cancel" />
+                </form>
+            {% endif %}
+            {% if order.canBeReceivedByHub %}
+                <form action="{{ path('Order_receive', { 'id': order.numberForPath }) }}" method="post">
+                    <input type="submit" class="submit button" value="Receive" />
+                </form>
+            {% endif %}
+            {% if order.canBeMarkedReadyToBePickedUpFromHub %}
+                <form action="{{ path('Order_mark_as_ready_to_pickup', { 'id': order.numberForPath }) }}" method="post">
+                    <input type="submit" class="submit button" value="Ready to pick up" />
+                </form>
+            {% endif %}
+            {% if order.canBeReleasedByHub %}
+                <form action="{{ path('Order_release', { 'id': order.numberForPath }) }}" method="post">
+                    <input type="submit" class="submit button" value="Release" />
+                </form>
+            {% endif %}
+        </div><!-- .action_pane -->
+        <div class="clear"></div>
+    </div><!-- .order.dashboard -->
 {% endblock %}

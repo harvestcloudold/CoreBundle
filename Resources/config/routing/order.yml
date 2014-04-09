@@ -1,13 +1,9 @@
 Order_dashboard:
-    pattern:  /orders
-    defaults: { _controller: HarvestCloud\CoreBundle\Controller\Order\DashboardController::indexAction }
-
-Order_homepage:
-    pattern:  /my-orders
+    pattern:  /order
     defaults: { _controller: HarvestCloud\CoreBundle\Controller\Order\DefaultController::indexAction }
 
 Order_show:
-    pattern:  /{id}
+    pattern:  /order/{id}
     defaults: { _controller: HarvestCloud\CoreBundle\Controller\Order\DefaultController::showAction }
     requirements:
         id: "(\d\d\d)+"

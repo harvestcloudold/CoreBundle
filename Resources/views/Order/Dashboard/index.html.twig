@@ -32,6 +32,51 @@
             </div><!-- .order.panel -->
         </div><!-- .preview -->
         <div class="action_pane">
+            {% if order.canBeAcceptedBySeller %}
+                <form action="{{ path('Order_accept', { 'id': order.numberForPath }) }}" method="post">
+                    <input type="submit" class="submit button" value="Accept" />
+                </form>
+            {% endif %}
+            {% if order.canBeRejectedBySeller %}
+                <form action="{{ path('Order_reject', { 'id': order.numberForPath }) }}" method="post">
+                    <input type="submit" class="submit button" value="Reject" />
+                </form>
+            {% endif %}
+            {% if order.canBePickedBySeller %}
+                <form action="{{ path('Order_pick', { 'id': order.numberForPath }) }}" method="post">
+                    <input type="submit" class="submit button" value="Pick" />
+                </form>
+            {% endif %}
+            {% if order.canBeMarkedReadyForDispatchedBySeller %}
+                <form action="{{ path('Order_mark_ready_for_dispatch', { 'id': order.numberForPath }) }}" method="post">
+                    <input type="submit" class="submit button" value="Ready for dispatch" />
+                </form>
+            {% endif %}
+            {% if order.canBeDispatchedBySeller %}
+                <form action="{{ path('Order_dispatch', { 'id': order.numberForPath }) }}" method="post">
+                    <input type="submit" class="submit button" value="Dispatch" />
+                </form>
+            {% endif %}
+            {% if order.canBeCanceledByBuyer %}
+                <form action="{{ path('Order_cancel', { 'id': order.numberForPath }) }}" method="post">
+                    <input type="submit" class="submit button" value="Cancel" />
+                </form>
+            {% endif %}
+            {% if order.canBeReceivedByHub %}
+                <form action="{{ path('Order_receive', { 'id': order.numberForPath }) }}" method="post">
+                    <input type="submit" class="submit button" value="Receive" />
+                </form>
+            {% endif %}
+            {% if order.canBeMarkedReadyToBePickedUpFromHub %}
+                <form action="{{ path('Order_mark_as_ready_to_pickup', { 'id': order.numberForPath }) }}" method="post">
+                    <input type="submit" class="submit button" value="Ready to pick up" />
+                </form>
+            {% endif %}
+            {% if order.canBeReleasedByHub %}
+                <form action="{{ path('Order_release', { 'id': order.numberForPath }) }}" method="post">
+                    <input type="submit" class="submit button" value="Release" />
+                </form>
+            {% endif %}
         </div><!-- .action_pane -->
         <div class="clear"></div>
     </div><!-- .order.dashboard -->

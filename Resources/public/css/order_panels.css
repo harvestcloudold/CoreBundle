@@ -12,6 +12,7 @@ order_panel
     float: none;
     width: 100%;
     margin-left: 0;
+    margin-bottom: 2%;
 }
 
 .order.panels .panel:nth-of-type(2n+1)
@@ -66,12 +67,19 @@ order_panel
 .order.panels .panel .details > span
 {
     display: block;
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 20px;
 }
 
-.order.panels .panel .details .buyer > .label:after,
-.order.panels .panel .details .hub > .label:after
+.order.panels .panel .details .buyer
 {
-    content: ': ';
+    background-image: url(../images/icons/12/aaaaaa/buyer.png);
+}
+
+.order.panels .panel .details .hub
+{
+    background-image: url(../images/icons/12/aaaaaa/hub.png);
 }
 
 .order.panels .panel .order_total

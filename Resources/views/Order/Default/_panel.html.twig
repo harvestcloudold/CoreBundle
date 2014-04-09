@@ -5,14 +5,8 @@
             <span class="value">{{ order.numberForHumans }}</span>
         </span><!-- .number -->
         <span class="details">
-            <span class="buyer">
-                <span class="label">Buyer</span>
-                <span class="value">{{ order.buyer.name }}</span>
-            </span><!-- .buyer -->
-            <span class="hub">
-                <span class="label">Hub</span>
-                <span class="value">{{ order.hub.name }}</span>
-            </span><!-- .hub -->
+            <span class="buyer">{{ order.buyer.name }}</span>
+            <span class="hub">{{ order.hub.name }}</span>
         </span><!-- .details -->
         <div class="order_total">${{ order.total }}</div>
         <span class="clear"></span>
